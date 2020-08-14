@@ -9,5 +9,6 @@ namespace QuanLySinhVien.Data.Entities
         public string ID { get; set; }
         public string TenCoSo { get; set; }
         public string SoThuTu { get; set; }
+        public List<LopHocPhan> LopHocPhans { get; set; }
     }
 }

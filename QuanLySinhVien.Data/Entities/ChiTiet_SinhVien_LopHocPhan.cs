@@ -10,5 +10,7 @@ namespace QuanLySinhVien.Data.Entities
         public string ID_LopHocPhan { get; set; }
         public int LanThi { get; set; }
         public float Diem { get; set; }
+        public SinhVien SinhVien { get; set; }
+        public LopHocPhan LopHocPhan { get; set; }
     }
 }

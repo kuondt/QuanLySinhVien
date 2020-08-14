@@ -10,5 +10,7 @@ namespace QuanLySinhVien.Data.Entities
         public int NamHoc { get; set; }
         public DateTime NgayBatDau { get; set; }
         public DateTime NgayKetThuc { get; set; }
+        public List<ChiTiet_ChuongTrinhDaoTao_MonHoc> ChiTiet_ChuongTrinhDaoTao_MonHocs { get; set; }
+        public List<LopHocPhan> LopHocPhans { get; set; }
     }
 }

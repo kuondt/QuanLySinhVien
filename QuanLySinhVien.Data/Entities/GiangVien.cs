@@ -17,5 +17,8 @@ namespace QuanLySinhVien.Data.Entities
         public string DiaChi { get; set; }
         public string ID_Khoa { get; set; }
         public bool IsActive { get; set; }
+        public Khoa Khoa { get; set; }
+        public List<LopBienChe> LopBienChes { get; set; }
+        public List<PhanCong> PhanCongs { get; set; }
     }
 }

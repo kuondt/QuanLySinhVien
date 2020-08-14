@@ -11,11 +11,13 @@ namespace QuanLySinhVien.Data.Entities
         public string Ten { get; set; }
         public string HoTen { get; set; }
         public string NgaySinh { get; set; }
-        public string GioiTinh { get; set; }
+        public bool GioiTinh { get; set; }
         public string SoDienThoai { get; set; }
         public string Email { get; set; }
         public string DiaChi { get; set; }
         public string ID_LopBienChe { get; set; }
         public bool IsActive { get; set; }
+        public LopBienChe LopBienChe { get; set; }
+        public List<ChiTiet_SinhVien_LopHocPhan> ChiTiet_SinhVien_LopHocPhans { get; set; }
     }
 }
