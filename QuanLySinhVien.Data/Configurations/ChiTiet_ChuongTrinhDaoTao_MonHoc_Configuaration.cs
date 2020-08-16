@@ -11,7 +11,7 @@ namespace QuanLySinhVien.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<ChiTiet_ChuongTrinhDaoTao_MonHoc> builder)
         {
-            builder.ToTable("ChiTiet_ChuongTrinhDaoTao_MonHoc");
+            builder.ToTable("ChiTiet_ChuongTrinhDaoTao_MonHocs");
 
             builder.HasKey(x => new { x.ID_ChuongTrinhDaoTao, x.ID_MonHoc, x.HK_HocKy, x.HK_NamHoc });
 

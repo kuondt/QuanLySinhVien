@@ -11,7 +11,7 @@ namespace QuanLySinhVien.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<HocKy_NamHoc> builder)
         {
-            builder.ToTable("HocKy_NamHoc");
+            builder.ToTable("HocKy_NamHocs");
 
             builder.HasKey(x => new { x.HocKy, x.NamHoc });
 

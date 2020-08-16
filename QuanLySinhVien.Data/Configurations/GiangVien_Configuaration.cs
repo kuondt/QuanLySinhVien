@@ -12,7 +12,7 @@ namespace QuanLySinhVien.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<GiangVien> builder)
         {
-            builder.ToTable("GiangVien");
+            builder.ToTable("GiangViens");
 
             builder.HasKey(x => x.ID);
 

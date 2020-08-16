@@ -11,6 +11,8 @@ namespace QuanLySinhVien.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<PhanCong> builder)
         {
+            builder.ToTable("PhanCongs");
+
             builder.HasKey(x => new { x.ID_LopHocPhan, x.ID_GiangVien });
 
             builder.HasOne(x => x.GiangVien).WithMany(x => x.PhanCongs).HasForeignKey(x => x.ID_GiangVien);

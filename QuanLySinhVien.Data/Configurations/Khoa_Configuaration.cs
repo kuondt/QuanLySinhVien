@@ -11,7 +11,7 @@ namespace QuanLySinhVien.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Khoa> builder)
         {
-            builder.ToTable("Khoa");
+            builder.ToTable("Khoas");
             //Set primary Key
             builder.HasKey(x => x.ID);
 

@@ -11,7 +11,7 @@ namespace QuanLySinhVien.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<LopBienChe> builder)
         {
-            builder.ToTable("LopBienChe");
+            builder.ToTable("LopBienChes");
 
             builder.HasKey(x => x.ID);
 

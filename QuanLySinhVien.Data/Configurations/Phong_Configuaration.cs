@@ -11,6 +11,8 @@ namespace QuanLySinhVien.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Phong> builder)
         {
+            builder.ToTable("PhanCongs");
+
             builder.HasKey(x => x.ID);
 
             builder.Property(x => x.TenCoSo).HasMaxLength(100);

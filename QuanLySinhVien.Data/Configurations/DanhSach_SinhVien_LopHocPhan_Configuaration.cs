@@ -11,6 +11,8 @@ namespace QuanLySinhVien.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<DanhSach_SinhVien_LopHocPhan> builder)
         {
+            builder.ToTable("DanhSach_SinhVien_LopHocPhans")
+
             builder.HasKey(x => new { x.ID_SinhVien, x.ID_LopHocPhan });
 
             builder.Property(x => x.LanThi).HasDefaultValue(1);
