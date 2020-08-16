@@ -21,7 +21,6 @@ namespace QuanLySinhVien.Data.EF
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfiguration(new ChiTiet_ChuongTrinhDaoTao_MonHoc_Configuaration());
             modelBuilder.ApplyConfiguration(new DanhSach_SinhVien_LopHocPhan_Configuaration());
-            modelBuilder.ApplyConfiguration(new DanhSach_SinhVien_LopHocPhan_Configuaration());
             modelBuilder.ApplyConfiguration(new ChuongTrinhDaoTao_Configuaration());
             modelBuilder.ApplyConfiguration(new GiangVien_Configuaration());
             modelBuilder.ApplyConfiguration(new HocKy_Configuaration());
@@ -43,29 +42,29 @@ namespace QuanLySinhVien.Data.EF
 
         }
 
-        public DbSet<ChiTiet_ChuongTrinhDaoTao_MonHoc_Configuaration> Products { get; set; }
+        public DbSet<ChiTiet_ChuongTrinhDaoTao_MonHoc> ChiTiet_ChuongTrinhDaoTao_MonHoc { get; set; }
 
-        public DbSet<DanhSach_SinhVien_LopHocPhan> Categories { get; set; }
+        public DbSet<DanhSach_SinhVien_LopHocPhan> DanhSach_SinhVien_LopHocPhan { get; set; }
 
-        public DbSet<ChuongTrinhDaoTao> AppConfigs { get; set; }
+        public DbSet<ChuongTrinhDaoTao> ChuongTrinhDaoTao { get; set; }
 
-        public DbSet<GiangVien> Carts { get; set; }
+        public DbSet<GiangVien> GiangVien { get; set; }
 
-        public DbSet<HocKy_NamHoc> CategoryTranslations { get; set; }
+        public DbSet<HocKy_NamHoc> HocKy_NamHoc { get; set; }
 
-        public DbSet<Khoa> ProductInCategories { get; set; }
+        public DbSet<Khoa> Khoa { get; set; }
 
-        public DbSet<LopBienChe> Contacts { get; set; }
+        public DbSet<LopBienChe> LopBienChe { get; set; }
 
-        public DbSet<LopHocPhan> Languages { get; set; }
+        public DbSet<LopHocPhan> LopHocPhan { get; set; }
 
-        public DbSet<MonHoc> Orders { get; set; }
+        public DbSet<MonHoc> MonHoc { get; set; }
 
-        public DbSet<PhanCong> OrderDetails { get; set; }
+        public DbSet<PhanCong> PhanCong { get; set; }
 
-        public DbSet<Phong> ProductTranslations { get; set; }
+        public DbSet<Phong> Phong { get; set; }
 
-        public DbSet<SinhVien> Promotions { get; set; }
+        public DbSet<SinhVien> SinhVien { get; set; }
 
     }
 }
