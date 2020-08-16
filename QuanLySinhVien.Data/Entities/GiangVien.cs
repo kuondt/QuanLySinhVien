@@ -12,7 +12,7 @@ namespace QuanLySinhVien.Data.Entities
         public string Ten { get; set; }
         public string HoTen { get; set; }
         public DateTime NgaySinh { get; set; }
-        public bool GioiTinh { get; set; }
+        public GioiTinh GioiTinh { get; set; }
         public string SoDienThoai { get; set; }
         public string Email { get; set; }
         public string DiaChi { get; set; }

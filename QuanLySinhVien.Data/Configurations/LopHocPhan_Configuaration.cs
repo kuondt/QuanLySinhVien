@@ -16,7 +16,9 @@ namespace QuanLySinhVien.Data.Configurations
 
             builder.HasKey(x => x.ID);
 
-            builder.Property(x => x.SoTietHoc);
+            builder.Property(x => x.BuoiHoc);
+
+            builder.Property(x => x.NgayHoc);
 
             builder.Property(x => x.IsActive).HasDefaultValue(Status.Active);
 

@@ -11,13 +11,15 @@ namespace QuanLySinhVien.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<DanhSach_SinhVien_LopHocPhan> builder)
         {
-            builder.ToTable("DanhSach_SinhVien_LopHocPhans")
+            builder.ToTable("DanhSach_SinhVien_LopHocPhans");
 
             builder.HasKey(x => new { x.ID_SinhVien, x.ID_LopHocPhan });
 
-            builder.Property(x => x.LanThi).HasDefaultValue(1);
+            builder.Property(x => x.LanThi);
 
-            builder.Property(x => x.Diem).IsRequired();
+            builder.Property(x => x.Diem);
+
+            builder.HasCheckConstraint("CK_Diem_Duoi_10", "Diem <= 10");
 
             builder.HasOne(x => x.SinhVien).WithMany(x => x.ChiTiet_SinhVien_LopHocPhans).HasForeignKey(x => x.ID_SinhVien);
 

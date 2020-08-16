@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using QuanLySinhVien.Data.Configurations;
 using QuanLySinhVien.Data.Entities;
+using QuanLySinhVien.Data.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -40,6 +41,8 @@ namespace QuanLySinhVien.Data.EF
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
 
+            //Database seeding
+            modelBuilder.Seed();
         }
 
         public DbSet<ChiTiet_ChuongTrinhDaoTao_MonHoc> ChiTiet_ChuongTrinhDaoTao_MonHoc { get; set; }

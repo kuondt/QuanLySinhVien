@@ -11,7 +11,7 @@ namespace QuanLySinhVien.Data.Entities
         public string Ho { get; set; }
         public string Ten { get; set; }
         public string HoTen { get; set; }
-        public string NgaySinh { get; set; }
+        public DateTime NgaySinh { get; set; }
         public GioiTinh GioiTinh { get; set; }
         public string SoDienThoai { get; set; }
         public string Email { get; set; }

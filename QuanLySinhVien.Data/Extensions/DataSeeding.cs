@@ -1,98 +1,42 @@
-﻿using QuanLySinhVien.Data.Entities;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using QuanLySinhVien.Data.Entities;
+using QuanLySinhVien.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace QuanLySinhVien.Data.Extensions
 {
-    public class DataSeeding
+    public static class DataSeeding
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            //Data Seeding
             modelBuilder.Entity<AppConfig>().HasData(
-              new AppConfig() { Key = "HomeTitle", Value = "This is home page of eShopSolution" },
-              new AppConfig() { Key = "HomeKeyword", Value = "This is keyword of eShopSolution" },
-              new AppConfig() { Key = "HomeDescription", Value = "This is description of eShopSolution" }
+              new AppConfig() { Key = "HomeTitle", Value = "This is home" },
+              new AppConfig() { Key = "HomeKeyword", Value = "This is keyword" },
+              new AppConfig() { Key = "HomeDescription", Value = "This is description" }
               );
-            modelBuilder.Entity<Language>().HasData(
-                new Language() { Id = "vi-VN", Name = "Tiếng Việt", IsDefault = true },
-                new Language() { Id = "en-US", Name = "English", IsDefault = false });
-
-            modelBuilder.Entity<Category>().HasData(
-                new Category()
-                {
-                    Id = 1,
-                    IsShowOnHome = true,
-                    ParentId = null,
-                    SortOrder = 1,
-                    Status = Status.Active,
-                },
-                 new Category()
-                 {
-                     Id = 2,
-                     IsShowOnHome = true,
-                     ParentId = null,
-                     SortOrder = 2,
-                     Status = Status.Active
-                 });
-
-            modelBuilder.Entity<CategoryTranslation>().HasData(
-                  new CategoryTranslation() { Id = 1, CategoryId = 1, Name = "Áo nam", LanguageId = "vi-VN", SeoAlias = "ao-nam", SeoDescription = "Sản phẩm áo thời trang nam", SeoTitle = "Sản phẩm áo thời trang nam" },
-                  new CategoryTranslation() { Id = 2, CategoryId = 1, Name = "Men Shirt", LanguageId = "en-US", SeoAlias = "men-shirt", SeoDescription = "The shirt products for men", SeoTitle = "The shirt products for men" },
-                  new CategoryTranslation() { Id = 3, CategoryId = 2, Name = "Áo nữ", LanguageId = "vi-VN", SeoAlias = "ao-nu", SeoDescription = "Sản phẩm áo thời trang nữ", SeoTitle = "Sản phẩm áo thời trang women" },
-                  new CategoryTranslation() { Id = 4, CategoryId = 2, Name = "Women Shirt", LanguageId = "en-US", SeoAlias = "women-shirt", SeoDescription = "The shirt products for women", SeoTitle = "The shirt products for women" }
-                    );
-
-            modelBuilder.Entity<Product>().HasData(
-           new Product()
-           {
-               Id = 1,
-               DateCreated = DateTime.Now,
-               OriginalPrice = 100000,
-               Price = 200000,
-               Stock = 0,
-               ViewCount = 0,
-           });
-            modelBuilder.Entity<ProductTranslation>().HasData(
-                 new ProductTranslation()
-                 {
-                     Id = 1,
-                     ProductId = 1,
-                     Name = "Áo sơ mi nam trắng Việt Tiến",
-                     LanguageId = "vi-VN",
-                     SeoAlias = "ao-so-mi-nam-trang-viet-tien",
-                     SeoDescription = "Áo sơ mi nam trắng Việt Tiến",
-                     SeoTitle = "Áo sơ mi nam trắng Việt Tiến",
-                     Details = "Áo sơ mi nam trắng Việt Tiến",
-                     Description = "Áo sơ mi nam trắng Việt Tiến"
-                 },
-                    new ProductTranslation()
-                    {
-                        Id = 2,
-                        ProductId = 1,
-                        Name = "Viet Tien Men T-Shirt",
-                        LanguageId = "en-US",
-                        SeoAlias = "viet-tien-men-t-shirt",
-                        SeoDescription = "Viet Tien Men T-Shirt",
-                        SeoTitle = "Viet Tien Men T-Shirt",
-                        Details = "Viet Tien Men T-Shirt",
-                        Description = "Viet Tien Men T-Shirt"
-                    });
-            modelBuilder.Entity<ProductInCategory>().HasData(
-                new ProductInCategory() { ProductId = 1, CategoryId = 1 }
-                );
-
 
             var roleId = new Guid("7E2DE1EE-B97B-4698-ABE4-C22A0332B2C9");
+            var roleId2 = new Guid("DDCFD40F-0C20-4BBD-AFBF-5936032DDDE5");
             var adminId = new Guid("8DD4E4E7-CBB1-4DB8-8CD8-3024401AFC74");
-            modelBuilder.Entity<AppRole>().HasData(new AppRole
-            {
-                Id = roleId,
-                Name = "admin",
-                NormalizedName = "admin",
-                Description = "Administrator role"
-            });
+            modelBuilder.Entity<AppRole>().HasData(
+                new AppRole
+                {
+                    Id = roleId,
+                    Name = "admin",
+                    NormalizedName = "admin",
+                    Description = "Administrator role"
+                },
+                new AppRole
+                {
+                    Id = roleId2,
+                    Name = "nhanvien",
+                    NormalizedName = "nhanvien",
+                    Description = "Nhân viên"
+                }
+            );
 
             var hasher = new PasswordHasher<AppUser>();
             modelBuilder.Entity<AppUser>().HasData(new AppUser
@@ -103,17 +47,257 @@ namespace QuanLySinhVien.Data.Extensions
                 Email = "cuong.263@gmail.com",
                 NormalizedEmail = "cuong.263@gmail.com",
                 EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "Abc123."),
+                PasswordHash = hasher.HashPassword(null, "Admin@123"),
                 SecurityStamp = string.Empty,
-                FirstName = "Dao",
-                LastName = "Cuong",
-                Dob = new DateTime(1998, 03, 26)
+                Ho = "Dao",
+                Ten = "Cuong",
+                HoTen = "Dao Cuong",
+                NgaySinh = new DateTime(1998, 03, 26)
             });
 
-            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(
+                new IdentityUserRole<Guid>
+                {
+                    RoleId = roleId,
+                    UserId = adminId
+                });
+
+            modelBuilder.Entity<Khoa>().HasData(
+                new Khoa() { ID = "KTCN", TenKhoa = "Kỹ thuật công nghệ" });
+
+            modelBuilder.Entity<ChuongTrinhDaoTao>().HasData(
+                new ChuongTrinhDaoTao() { ID = "HTTT2016", TenChuongTrinh = "Hệ thống thông tin", Nam = 2016, Id_Khoa = "KTCN" });
+
+            modelBuilder.Entity<MonHoc>().HasData(
+                new MonHoc() { ID = "INT001", TenMonHoc = "Kỹ thuật lập trình", SoTiet = 30, SoTinChi = 2, Id_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT002", TenMonHoc = "Cấu trúc dữ liệu và giải thuật", SoTiet = 30, SoTinChi = 2, Id_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT003", TenMonHoc = "Cơ sở dữ liệu", SoTiet = 45, SoTinChi = 3, Id_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT004", TenMonHoc = "Hệ điều hành	", SoTiet = 45, SoTinChi = 3, Id_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT005", TenMonHoc = "Vật lý đại cương", SoTiet = 45, SoTinChi = 3, Id_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT006", TenMonHoc = "Toán cao cấp", SoTiet = 30, SoTinChi = 2, Id_Khoa = "KTCN" }
+                );
+
+            modelBuilder.Entity<GiangVien>().HasData(
+                new GiangVien()
+                {
+                    ID = "GV001",
+                    Ho = "Nguyễn Văn",
+                    Ten = "A",
+                    HoTen = "Nguyễn Văn A",
+                    DiaChi = "624 Âu Cơ",
+                    SoDienThoai = "0987654321",
+                    Email = "nva@vhu.edu.vn",
+                    GioiTinh = GioiTinh.Nam,
+                    ID_Khoa = "KTCN",
+                    IsActive = Status.Active,
+                    NgaySinh = new DateTime(1975, 12, 01)
+                },
+                new GiangVien()
+                {
+                    ID = "GV002",
+                    Ho = "Phạm Văn",
+                    Ten = "B",
+                    HoTen = "Phạm Văn B",
+                    DiaChi = "642 Âu Cơ",
+                    SoDienThoai = "012332123",
+                    Email = "pvb@vhu.edu.vn",
+                    GioiTinh = GioiTinh.Nam,
+                    ID_Khoa = "KTCN",
+                    IsActive = Status.Active,
+                    NgaySinh = new DateTime(1990, 01, 01)
+                });
+
+            modelBuilder.Entity<LopBienChe>().HasData(
+                new LopBienChe() { ID = "161A0101", NamBatDau = 2016, NamKetThuc = 2020, ID_Khoa = "KTCN", ID_GiangVien = "GV001" }
+                );
+
+            modelBuilder.Entity<SinhVien>().HasData(
+                new SinhVien()
+                {
+                    ID = "161A010139",
+                    Ho = "Đào Tuấn",
+                    Ten = "Cường",
+                    HoTen = "Đào Tuấn Cường",
+                    DiaChi = "5/9A Hóc Môn",
+                    SoDienThoai = "0904590481",
+                    Email = "cuong.263@gmail.com",
+                    GioiTinh = GioiTinh.Nam,
+                    IsActive = Status.Active,
+                    NgaySinh = new DateTime(1998, 03, 26),
+                    ID_LopBienChe = "161A0101",
+                },
+                new SinhVien()
+                {
+                    ID = "161A010001",
+                    Ho = "Nguyễn Thị",
+                    Ten = "C",
+                    HoTen = "Nguyễn Thị C",
+                    DiaChi = "TPHCM",
+                    SoDienThoai = "0123456789",
+                    Email = "ntc@gmail.com",
+                    GioiTinh = GioiTinh.Nu,
+                    IsActive = Status.Active,
+                    NgaySinh = new DateTime(1998, 01, 01),
+                    ID_LopBienChe = "161A0101"
+                },
+                new SinhVien()
+                {
+                    ID = "161A010002",
+                    Ho = "Nguyễn Văn",
+                    Ten = "D",
+                    HoTen = "Nguyễn Văn D",
+                    DiaChi = "Hóc Môn",
+                    SoDienThoai = "0321456987",
+                    Email = "nvd@gmail.com",
+                    GioiTinh = GioiTinh.Nam,
+                    IsActive = Status.Active,
+                    NgaySinh = new DateTime(1998, 07, 15),
+                    ID_LopBienChe = "161A0101"
+                }
+            );
+
+            modelBuilder.Entity<HocKy_NamHoc>().HasData(
+                new HocKy_NamHoc() { HocKy = 1, NamHoc = 2016, NgayBatDau = new DateTime(2016, 01, 01), NgayKetThuc = new DateTime(2016, 04, 01) },
+                new HocKy_NamHoc() { HocKy = 2, NamHoc = 2016, NgayBatDau = new DateTime(2016, 05, 01), NgayKetThuc = new DateTime(2016, 08, 01) },
+                new HocKy_NamHoc() { HocKy = 3, NamHoc = 2016, NgayBatDau = new DateTime(2016, 09, 01), NgayKetThuc = new DateTime(2016, 12, 01) }
+                );
+
+            modelBuilder.Entity<Phong>().HasData(
+                new Phong()
+                {
+                    ID = "BPH001",
+                    SoThuTu = "001",
+                    TenCoSo = "624 Âu Cơ"
+                },
+                new Phong()
+                {
+                    ID = "BPH002",
+                    SoThuTu = "002",
+                    TenCoSo = "624 Âu Cơ"
+                },
+                new Phong()
+                {
+                    ID = "BPH003",
+                    SoThuTu = "003",
+                    TenCoSo = "624 Âu Cơ"
+                });
+
+            modelBuilder.Entity<ChiTiet_ChuongTrinhDaoTao_MonHoc>().HasData(
+                new ChiTiet_ChuongTrinhDaoTao_MonHoc()
+                {
+                    ID_ChuongTrinhDaoTao = "HTTT2016",
+                    HK_HocKy = 1,
+                    HK_NamHoc = 2016,
+                    ID_MonHoc = "INT001"
+                }, new ChiTiet_ChuongTrinhDaoTao_MonHoc()
+                {
+                    ID_ChuongTrinhDaoTao = "HTTT2016",
+                    HK_HocKy = 1,
+                    HK_NamHoc = 2016,
+                    ID_MonHoc = "INT005"
+                },
+                new ChiTiet_ChuongTrinhDaoTao_MonHoc()
+                {
+                    ID_ChuongTrinhDaoTao = "HTTT2016",
+                    HK_HocKy = 1,
+                    HK_NamHoc = 2016,
+                    ID_MonHoc = "INT006"
+                });
+
+            modelBuilder.Entity<LopHocPhan>().HasData(
+                new LopHocPhan()
+                {
+                    ID = "161INT001",
+                    HK_HocKy = 1,
+                    HK_NamHoc = 2016,
+                    ID_MonHoc = "INT001",
+                    ID_Phong = "BPH001",
+                    BuoiHoc = BuoiHoc.Sang,
+                    NgayHoc = NgayHoc.Thu2,
+                    IsActive = Status.Active
+                },
+                new LopHocPhan()
+                {
+                    ID = "161INT002",
+                    HK_HocKy = 1,
+                    HK_NamHoc = 2016,
+                    ID_MonHoc = "INT001",
+                    ID_Phong = "BPH002",
+                    BuoiHoc = BuoiHoc.Sang,
+                    NgayHoc = NgayHoc.Thu2,
+                    IsActive = Status.Active
+                },
+                new LopHocPhan()
+                {
+                    ID = "161INT003",
+                    HK_HocKy = 1,
+                    HK_NamHoc = 2016,
+                    ID_MonHoc = "INT005",
+                    ID_Phong = "BPH003",
+                    BuoiHoc = BuoiHoc.Sang,
+                    NgayHoc = NgayHoc.Thu3,
+                    IsActive = Status.Active
+                },
+                new LopHocPhan()
+                {
+                    ID = "161INT004",
+                    HK_HocKy = 1,
+                    HK_NamHoc = 2016,
+                    ID_MonHoc = "INT006",
+                    ID_Phong = "BPH002",
+                    BuoiHoc = BuoiHoc.Sang,
+                    NgayHoc = NgayHoc.Thu4,
+                    IsActive = Status.Active
+                });
+
+            modelBuilder.Entity<PhanCong>().HasData(new PhanCong()
             {
-                RoleId = roleId,
-                UserId = adminId
+                ID_LopHocPhan = "161INT001",
+                ID_GiangVien = "GV001"
+            },
+            new PhanCong()
+            {
+                ID_LopHocPhan = "161INT002",
+                ID_GiangVien = "GV001"
+            },
+            new PhanCong()
+            {
+                ID_LopHocPhan = "161INT003",
+                ID_GiangVien = "GV002"
+            },
+            new PhanCong()
+            {
+                ID_LopHocPhan = "161INT004",
+                ID_GiangVien = "GV002"
+            });
+
+            modelBuilder.Entity<DanhSach_SinhVien_LopHocPhan>().HasData(new DanhSach_SinhVien_LopHocPhan()
+            {
+                ID_LopHocPhan = "161INT001",
+                ID_SinhVien = "161A010001",
+                LanThi = 1,
+                Diem = 8.5f
+            }, 
+            new DanhSach_SinhVien_LopHocPhan()
+            {
+                ID_LopHocPhan = "161INT002",
+                ID_SinhVien = "161A010001",
+                LanThi = 1,
+                Diem = 10f
+            },
+            new DanhSach_SinhVien_LopHocPhan()
+            {
+                ID_LopHocPhan = "161INT001",
+                ID_SinhVien = "161A010002",
+                LanThi = 1,
+                Diem = 7.0f
+            },
+            new DanhSach_SinhVien_LopHocPhan()
+            {
+                ID_LopHocPhan = "161INT001",
+                ID_SinhVien = "161A010139",
+                LanThi = 1,
+                Diem = 10f
             });
         }
     }

@@ -11,7 +11,7 @@ namespace QuanLySinhVien.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Phong> builder)
         {
-            builder.ToTable("PhanCongs");
+            builder.ToTable("Phongs");
 
             builder.HasKey(x => x.ID);
 
