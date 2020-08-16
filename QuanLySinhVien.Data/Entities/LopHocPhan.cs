@@ -12,7 +12,7 @@ namespace QuanLySinhVien.Data.Entities
         public string ID_MonHoc { get; set; }
         public string ID_Phong { get; set; }
         public string SoTietHoc { get; set; }
-        public string IsActive { get; set; }
+        public Status IsActive { get; set; }
         public List<ChiTiet_SinhVien_LopHocPhan> ChiTiet_SinhVien_LopHocPhans { get; set; }
         public PhanCong PhanCong { get; set; }
         public HocKy_NamHoc HocKy_NamHoc { get; set; }
