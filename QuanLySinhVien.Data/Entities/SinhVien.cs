@@ -19,6 +19,6 @@ namespace QuanLySinhVien.Data.Entities
         public string ID_LopBienChe { get; set; }
         public Status IsActive { get; set; }
         public LopBienChe LopBienChe { get; set; }
-        public List<ChiTiet_SinhVien_LopHocPhan> ChiTiet_SinhVien_LopHocPhans { get; set; }
+        public List<DanhSach_SinhVien_LopHocPhan> ChiTiet_SinhVien_LopHocPhans { get; set; }
     }
 }

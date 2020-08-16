@@ -7,7 +7,7 @@ using System.Text;
 
 namespace QuanLySinhVien.Data.Configurations
 {
-    public class LopHocPhanConfiguaration : IEntityTypeConfiguration<LopHocPhan>
+    public class LopHocPhan_Configuaration : IEntityTypeConfiguration<LopHocPhan>
     {
         public void Configure(EntityTypeBuilder<LopHocPhan> builder)
         {

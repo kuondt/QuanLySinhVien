@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QuanLySinhVien.Data.Entities
 {
-    public class ChiTiet_SinhVien_LopHocPhan
+    public class DanhSach_SinhVien_LopHocPhan
     {
         public string ID_SinhVien { get; set; }
         public string ID_LopHocPhan { get; set; }

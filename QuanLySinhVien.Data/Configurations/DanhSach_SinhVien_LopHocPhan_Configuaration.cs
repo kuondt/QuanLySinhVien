@@ -7,9 +7,9 @@ using System.Text;
 
 namespace QuanLySinhVien.Data.Configurations
 {
-    public class ChiTiet_SinhVien_LopHocPhan_Configuaration : IEntityTypeConfiguration<ChiTiet_SinhVien_LopHocPhan>
+    public class DanhSach_SinhVien_LopHocPhan_Configuaration : IEntityTypeConfiguration<DanhSach_SinhVien_LopHocPhan>
     {
-        public void Configure(EntityTypeBuilder<ChiTiet_SinhVien_LopHocPhan> builder)
+        public void Configure(EntityTypeBuilder<DanhSach_SinhVien_LopHocPhan> builder)
         {
             builder.HasKey(x => new { x.ID_SinhVien, x.ID_LopHocPhan });
 
