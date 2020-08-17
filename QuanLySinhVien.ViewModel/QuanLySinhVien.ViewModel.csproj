@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Catalog\" />
+    <Folder Include="Catalog\GiangVien\" />
+    <Folder Include="Catalog\ChuongTrinhDaoTao\" />
+    <Folder Include="Catalog\SinhVien\" />
     <Folder Include="Common\" />
     <Folder Include="Contant\" />
     <Folder Include="Exception\" />

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuanLySinhVien.Data.EF;
 
 namespace QuanLySinhVien.Data.Migrations
 {
     [DbContext(typeof(QLSV_DBContext))]
-    partial class QLSV_DBContextModelSnapshot : ModelSnapshot
+    [Migration("20200817091933_add_table_MonHocs")]
+    partial class add_table_MonHocs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

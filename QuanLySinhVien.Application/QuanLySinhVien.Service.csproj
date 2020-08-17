@@ -15,9 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Catalog\" />
+    <Folder Include="Catalog\Khoa\" />
+    <Folder Include="Catalog\ChuongTrinhDaoTao\" />
+    <Folder Include="Catalog\GiangVien\" />
+    <Folder Include="Catalog\SinhVien\" />
     <Folder Include="Common\" />
-    <Folder Include="System\" />
+    <Folder Include="System\Roles\" />
+    <Folder Include="System\Users\" />
   </ItemGroup>
 
 </Project>

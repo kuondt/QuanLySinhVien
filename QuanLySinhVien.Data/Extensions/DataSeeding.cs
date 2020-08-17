@@ -69,12 +69,12 @@ namespace QuanLySinhVien.Data.Extensions
                 new ChuongTrinhDaoTao() { ID = "HTTT2016", TenChuongTrinh = "Hệ thống thông tin", Nam = 2016, Id_Khoa = "KTCN" });
 
             modelBuilder.Entity<MonHoc>().HasData(
-                new MonHoc() { ID = "INT001", TenMonHoc = "Kỹ thuật lập trình", SoTiet = 30, SoTinChi = 2, Id_Khoa = "KTCN" },
-                new MonHoc() { ID = "INT002", TenMonHoc = "Cấu trúc dữ liệu và giải thuật", SoTiet = 30, SoTinChi = 2, Id_Khoa = "KTCN" },
-                new MonHoc() { ID = "INT003", TenMonHoc = "Cơ sở dữ liệu", SoTiet = 45, SoTinChi = 3, Id_Khoa = "KTCN" },
-                new MonHoc() { ID = "INT004", TenMonHoc = "Hệ điều hành	", SoTiet = 45, SoTinChi = 3, Id_Khoa = "KTCN" },
-                new MonHoc() { ID = "INT005", TenMonHoc = "Vật lý đại cương", SoTiet = 45, SoTinChi = 3, Id_Khoa = "KTCN" },
-                new MonHoc() { ID = "INT006", TenMonHoc = "Toán cao cấp", SoTiet = 30, SoTinChi = 2, Id_Khoa = "KTCN" }
+                new MonHoc() { ID = "INT001", TenMonHoc = "Kỹ thuật lập trình", SoTiet = 30, SoTinChi = 2, ID_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT002", TenMonHoc = "Cấu trúc dữ liệu và giải thuật", SoTiet = 30, SoTinChi = 2, ID_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT003", TenMonHoc = "Cơ sở dữ liệu", SoTiet = 45, SoTinChi = 3, ID_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT004", TenMonHoc = "Hệ điều hành	", SoTiet = 45, SoTinChi = 3, ID_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT005", TenMonHoc = "Vật lý đại cương", SoTiet = 45, SoTinChi = 3, ID_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT006", TenMonHoc = "Toán cao cấp", SoTiet = 30, SoTinChi = 2, ID_Khoa = "KTCN" }
                 );
 
             modelBuilder.Entity<GiangVien>().HasData(

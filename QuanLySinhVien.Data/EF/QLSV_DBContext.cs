@@ -26,6 +26,7 @@ namespace QuanLySinhVien.Data.EF
             modelBuilder.ApplyConfiguration(new GiangVien_Configuaration());
             modelBuilder.ApplyConfiguration(new HocKy_Configuaration());
             modelBuilder.ApplyConfiguration(new Khoa_Configuaration());
+            modelBuilder.ApplyConfiguration(new MonHoc_Configuaration());
             modelBuilder.ApplyConfiguration(new LopBienChe_Configuaration());
             modelBuilder.ApplyConfiguration(new LopHocPhan_Configuaration());
             modelBuilder.ApplyConfiguration(new PhanCong_Configuaration());
