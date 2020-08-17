@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QuanLySinhVien.ViewModel.Catalog.MonHoc
 {
-    public class MonHocViewModel
+    public class MonHoc_CreateRequest
     {
         public string ID { get; set; }
         public string TenMonHoc { get; set; }
