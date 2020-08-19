@@ -17,7 +17,7 @@ namespace QuanLySinhVien.Data.Configurations
 
             builder.Property(x => x.TenCoSo).HasMaxLength(100);
 
-            builder.Property(x => x.SoThuTu).ValueGeneratedOnAdd();
+            builder.Property(x => x.SoThuTu);
         }
     }
 }
