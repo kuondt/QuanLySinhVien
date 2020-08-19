@@ -5,9 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Catalog\GiangViens\" />
-    <Folder Include="Catalog\ChuongTrinhDaoTaos\" />
-    <Folder Include="Catalog\SinhViens\" />
+    <Folder Include="Catalog\GiangVien\" />
+    <Folder Include="Catalog\ChuongTrinhDaoTao\" />
+    <Folder Include="Catalog\SinhVien\" />
+    <Folder Include="Contant\" />
+    <Folder Include="Exception\" />
     <Folder Include="System\" />
   </ItemGroup>
 

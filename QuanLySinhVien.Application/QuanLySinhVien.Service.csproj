@@ -12,14 +12,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QuanLySinhVien.Data\QuanLySinhVien.Data.csproj" />
-    <ProjectReference Include="..\QuanLySinhVien.ViewModel\QuanLySinhVien.ViewModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Catalog\Khoas\" />
-    <Folder Include="Catalog\ChuongTrinhDaoTaos\" />
-    <Folder Include="Catalog\GiangViens\" />
-    <Folder Include="Catalog\SinhViens\" />
+    <Folder Include="Catalog\Khoa\" />
+    <Folder Include="Catalog\ChuongTrinhDaoTao\" />
+    <Folder Include="Catalog\GiangVien\" />
+    <Folder Include="Catalog\SinhVien\" />
     <Folder Include="Common\" />
     <Folder Include="System\Roles\" />
     <Folder Include="System\Users\" />
