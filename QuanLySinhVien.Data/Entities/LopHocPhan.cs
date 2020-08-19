@@ -8,6 +8,7 @@ namespace QuanLySinhVien.Data.Entities
     public class LopHocPhan
     {
         public string ID { get; set; }
+        public int SoThuTu { get; set; }
         public int HK_HocKy { get; set; }
         public int HK_NamHoc { get; set; }
         public string ID_MonHoc { get; set; }

@@ -43,7 +43,7 @@ namespace QuanLySinhVien.Data.EF
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
 
             //Database seeding
-            //modelBuilder.Seed();
+            modelBuilder.Seed();
         }
 
         public DbSet<ChiTiet_ChuongTrinhDaoTao_MonHoc> ChiTiet_ChuongTrinhDaoTao_MonHocs { get; set; }

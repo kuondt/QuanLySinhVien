@@ -66,22 +66,21 @@ namespace QuanLySinhVien.Data.Extensions
                 new Khoa() { ID = "KTCN", TenKhoa = "Kỹ thuật công nghệ" });
 
             modelBuilder.Entity<ChuongTrinhDaoTao>().HasData(
-                new ChuongTrinhDaoTao() { ID = "HTTT2016", TenChuongTrinh = "HTTT2016", Nam = 2016, Id_Khoa = "KTCN" });
+                new ChuongTrinhDaoTao() { ID = "HTTT2016", TenChuongTrinh = "Hệ thống thông tin", Nam = 2016, Id_Khoa = "KTCN" });
 
             modelBuilder.Entity<MonHoc>().HasData(
-                new MonHoc() { ID = "INT001", TenMonHoc = "Kỹ thuật lập trình", SoTiet = 30, SoTinChi = 2, ID_Khoa = "KTCN", SoThuTu = 1 },
-                new MonHoc() { ID = "INT002", TenMonHoc = "Cấu trúc dữ liệu và giải thuật", SoTiet = 30, SoTinChi = 2, ID_Khoa = "KTCN", SoThuTu = 2 },
-                new MonHoc() { ID = "INT003", TenMonHoc = "Cơ sở dữ liệu", SoTiet = 45, SoTinChi = 3, ID_Khoa = "KTCN", SoThuTu = 3 },
-                new MonHoc() { ID = "INT004", TenMonHoc = "Hệ điều hành	", SoTiet = 45, SoTinChi = 3, ID_Khoa = "KTCN", SoThuTu = 4 },
-                new MonHoc() { ID = "INT005", TenMonHoc = "Vật lý đại cương", SoTiet = 45, SoTinChi = 3, ID_Khoa = "KTCN", SoThuTu = 5 },
-                new MonHoc() { ID = "INT006", TenMonHoc = "Toán cao cấp", SoTiet = 30, SoTinChi = 2, ID_Khoa = "KTCN", SoThuTu = 6 }
+                new MonHoc() { ID = "INT001", TenMonHoc = "Kỹ thuật lập trình", SoTiet = 30, SoTinChi = 2, ID_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT002", TenMonHoc = "Cấu trúc dữ liệu và giải thuật", SoTiet = 30, SoTinChi = 2, ID_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT003", TenMonHoc = "Cơ sở dữ liệu", SoTiet = 45, SoTinChi = 3, ID_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT004", TenMonHoc = "Hệ điều hành	", SoTiet = 45, SoTinChi = 3, ID_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT005", TenMonHoc = "Vật lý đại cương", SoTiet = 45, SoTinChi = 3, ID_Khoa = "KTCN" },
+                new MonHoc() { ID = "INT006", TenMonHoc = "Toán cao cấp", SoTiet = 30, SoTinChi = 2, ID_Khoa = "KTCN" }
                 );
 
             modelBuilder.Entity<GiangVien>().HasData(
                 new GiangVien()
                 {
                     ID = "GV001",
-                    SoThuTu = 1,
                     Ho = "Nguyễn Văn",
                     Ten = "A",
                     HoTen = "Nguyễn Văn A",
@@ -96,7 +95,6 @@ namespace QuanLySinhVien.Data.Extensions
                 new GiangVien()
                 {
                     ID = "GV002",
-                    SoThuTu = 2,
                     Ho = "Phạm Văn",
                     Ten = "B",
                     HoTen = "Phạm Văn B",
@@ -110,14 +108,14 @@ namespace QuanLySinhVien.Data.Extensions
                 });
 
             modelBuilder.Entity<LopBienChe>().HasData(
-                new LopBienChe() { ID = "161A01", NamBatDau = 2016, NamKetThuc = 2020, ID_Khoa = "KTCN", ID_GiangVien = "GV001", SoThuTu = 1 }
+                new LopBienChe() { ID = "161A0101", NamBatDau = 2016, NamKetThuc = 2020, ID_Khoa = "KTCN", ID_GiangVien = "GV001" }
                 );
 
-            modelBuilder.Entity<SinhVien>().HasData(               
+            modelBuilder.Entity<SinhVien>().HasData(              
                 new SinhVien()
                 {
                     ID = "161A010001",
-              
+                    Nam = 2016,
                     Ho = "Nguyễn Thị",
                     Ten = "C",
                     HoTen = "Nguyễn Thị C",
@@ -126,13 +124,13 @@ namespace QuanLySinhVien.Data.Extensions
                     Email = "ntc@gmail.com",
                     GioiTinh = GioiTinh.Nu,
                     IsActive = Status.Active,
-                    NgaySinh = new DateTime(1998, 07, 15),
+                    NgaySinh = new DateTime(1998, 01, 01),
                     ID_LopBienChe = "161A0101"
                 },
                 new SinhVien()
                 {
                     ID = "161A010002",
-                  
+                    Nam = 2016,
                     Ho = "Nguyễn Văn",
                     Ten = "D",
                     HoTen = "Nguyễn Văn D",
@@ -141,12 +139,13 @@ namespace QuanLySinhVien.Data.Extensions
                     Email = "nvd@gmail.com",
                     GioiTinh = GioiTinh.Nam,
                     IsActive = Status.Active,
-                    NgaySinh = new DateTime(1998, 09, 21),
+                    NgaySinh = new DateTime(1998, 07, 15),
                     ID_LopBienChe = "161A0101"
-                }, new SinhVien()
+                },
+                new SinhVien()
                 {
                     ID = "161A010003",
-            
+                    Nam = 2016,
                     Ho = "Đào Tuấn",
                     Ten = "Cường",
                     HoTen = "Đào Tuấn Cường",
@@ -170,19 +169,19 @@ namespace QuanLySinhVien.Data.Extensions
                 new Phong()
                 {
                     ID = "BPH001",
-                    SoThuTu = "001",
+                    SoThuTu = 1,
                     TenCoSo = "624 Âu Cơ"
                 },
                 new Phong()
                 {
                     ID = "BPH002",
-                    SoThuTu = "002",
+                    SoThuTu = 2,
                     TenCoSo = "624 Âu Cơ"
                 },
                 new Phong()
                 {
                     ID = "BPH003",
-                    SoThuTu = "003",
+                    SoThuTu = 3,
                     TenCoSo = "624 Âu Cơ"
                 });
 
@@ -212,7 +211,6 @@ namespace QuanLySinhVien.Data.Extensions
                 new LopHocPhan()
                 {
                     ID = "161INT001",
-
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT001",
@@ -224,7 +222,6 @@ namespace QuanLySinhVien.Data.Extensions
                 new LopHocPhan()
                 {
                     ID = "161INT002",
-               
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT001",
@@ -236,7 +233,6 @@ namespace QuanLySinhVien.Data.Extensions
                 new LopHocPhan()
                 {
                     ID = "161INT003",
-                  
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT005",
@@ -248,7 +244,6 @@ namespace QuanLySinhVien.Data.Extensions
                 new LopHocPhan()
                 {
                     ID = "161INT004",
-                 
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT006",
@@ -303,9 +298,9 @@ namespace QuanLySinhVien.Data.Extensions
             new DanhSach_SinhVien_LopHocPhan()
             {
                 ID_LopHocPhan = "161INT001",
-                ID_SinhVien = "161A010139",
+                ID_SinhVien = "161A010003",
                 LanThi = 1,
-                Diem = 10f
+                Diem = 7.0f
             });
         }
     }
