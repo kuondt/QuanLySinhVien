@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuanLySinhVien.AdminApp\QuanLySinhVien.AdminApp.csproj" />
+    <ProjectReference Include="..\QuanLySinhVien.Application\QuanLySinhVien.Service.csproj" />
+    <ProjectReference Include="..\QuanLySinhVien.Data\QuanLySinhVien.Data.csproj" />
+    <ProjectReference Include="..\QuanLySinhVien.ViewModel\QuanLySinhVien.ViewModel.csproj" />
+  </ItemGroup>
+
+</Project>

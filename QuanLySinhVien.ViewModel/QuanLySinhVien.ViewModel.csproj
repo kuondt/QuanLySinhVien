@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Common\" />
-    <Folder Include="Contants\" />
     <Folder Include="System\" />
   </ItemGroup>
 

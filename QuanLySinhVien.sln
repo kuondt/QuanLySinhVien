@@ -14,9 +14,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuanLySinhVien.Service", "Q
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuanLySinhVien.ViewModel", "QuanLySinhVien.ViewModel\QuanLySinhVien.ViewModel.csproj", "{B140A6E3-60B9-4A4F-985D-E98F1EBE3088}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuanLySinhVien.BackedApi", "QuanLySinhVien.BackedApi\QuanLySinhVien.BackedApi.csproj", "{C497DF06-421F-43B0-AAEC-F61A6D9F0727}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuanLySinhVien.AdminApp", "QuanLySinhVien.AdminApp\QuanLySinhVien.AdminApp.csproj", "{268F926B-8072-4296-8086-61586055C739}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLySinhVien.BackendApi", "QuanLySinhVien.BackendApi\QuanLySinhVien.BackendApi.csproj", "{6D323BEA-8067-4D35-9271-2C87DDF34E9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,14 +36,14 @@ Global
 		{B140A6E3-60B9-4A4F-985D-E98F1EBE3088}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B140A6E3-60B9-4A4F-985D-E98F1EBE3088}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B140A6E3-60B9-4A4F-985D-E98F1EBE3088}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C497DF06-421F-43B0-AAEC-F61A6D9F0727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C497DF06-421F-43B0-AAEC-F61A6D9F0727}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C497DF06-421F-43B0-AAEC-F61A6D9F0727}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C497DF06-421F-43B0-AAEC-F61A6D9F0727}.Release|Any CPU.Build.0 = Release|Any CPU
 		{268F926B-8072-4296-8086-61586055C739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{268F926B-8072-4296-8086-61586055C739}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{268F926B-8072-4296-8086-61586055C739}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{268F926B-8072-4296-8086-61586055C739}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D323BEA-8067-4D35-9271-2C87DDF34E9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D323BEA-8067-4D35-9271-2C87DDF34E9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D323BEA-8067-4D35-9271-2C87DDF34E9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D323BEA-8067-4D35-9271-2C87DDF34E9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
