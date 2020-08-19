@@ -27,5 +27,39 @@ namespace QuanLySinhVien.BackendApi.Controllers
             var monHoc = await _monHoc_Service.GetAllPaging(request);
             return Ok(monHoc);
         }
+
+        [HttpGet("{ID_MonHoc}")]
+        public async Task<IActionResult> GetById(string ID_MonHoc)
+        {
+            var monHoc = await _monHoc_Service.GetById(ID_MonHoc);
+            if (monHoc == null)
+                return BadRequest("Can not find");
+            return Ok(monHoc);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody]MonHoc_CreateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var ID_MonHoc = await _monHoc_Service.Create(request);
+            if (ID_MonHoc == null)
+                return BadRequest();
+
+            var product = await _monHoc_Service.GetById(ID_MonHoc);
+
+            return CreatedAtAction(nameof(GetById), new { id = ID_MonHoc }, product);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromForm] MonHoc_UpdateRequest request)
+        {
+            var affectedResult = await _monHoc_Service.Update(request);
+            if (affectedResult == 0)
+                return BadRequest();
+            return Ok();
+        }
     }
 }

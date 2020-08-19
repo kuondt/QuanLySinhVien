@@ -434,8 +434,8 @@ namespace QuanLySinhVien.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("7e2de1ee-b97b-4698-abe4-c22a0332b2c9"), "b42649b9-2fe7-41f2-b6d1-14f7cac84f3f", "Administrator role", "admin", "admin" },
-                    { new Guid("ddcfd40f-0c20-4bbd-afbf-5936032ddde5"), "bb6d21dc-bad4-47ee-b2b9-ea4ccade00d0", "Nhân viên", "nhanvien", "nhanvien" }
+                    { new Guid("7e2de1ee-b97b-4698-abe4-c22a0332b2c9"), "fac01151-eea0-4539-b405-959c3b3a018a", "Administrator role", "admin", "admin" },
+                    { new Guid("ddcfd40f-0c20-4bbd-afbf-5936032ddde5"), "6303cdb4-2bea-4d93-be09-ed2159772945", "Nhân viên", "nhanvien", "nhanvien" }
                 });
 
             migrationBuilder.InsertData(
@@ -446,7 +446,7 @@ namespace QuanLySinhVien.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AppUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "Ho", "HoTen", "LockoutEnabled", "LockoutEnd", "NgaySinh", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Ten", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("8dd4e4e7-cbb1-4db8-8cd8-3024401afc74"), 0, "3631be09-6a73-4f03-8669-907a110f5fc3", "cuong.263@gmail.com", true, "Dao", "Dao Cuong", false, null, new DateTime(1998, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "cuong.263@gmail.com", "admin", "AQAAAAEAACcQAAAAEEUccSgr7ukJTJmd8opimZu85uoqsMEHW7yHfeQwPHAN36zlxbBQh0zhkxLSAGPdJA==", null, false, "", "Cuong", false, "admin" });
+                values: new object[] { new Guid("8dd4e4e7-cbb1-4db8-8cd8-3024401afc74"), 0, "2d531b35-f083-4c09-8546-e3190c05d00d", "cuong.263@gmail.com", true, "Dao", "Dao Cuong", false, null, new DateTime(1998, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "cuong.263@gmail.com", "admin", "AQAAAAEAACcQAAAAEBckQSCmcH2ZFL+YA50YH9LEG4dddb4brFRQ4eEjKmDtW+n0oPsHjVDgKbcb8JZSPA==", null, false, "", "Cuong", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "HocKy_NamHocs",
@@ -520,10 +520,10 @@ namespace QuanLySinhVien.Data.Migrations
                 columns: new[] { "ID", "BuoiHoc", "HK_HocKy", "HK_NamHoc", "ID_MonHoc", "ID_Phong", "IsActive", "NgayHoc", "SoThuTu" },
                 values: new object[,]
                 {
-                    { "161INT001", 1, 1, 2016, "INT001", "BPH001", 1, 2, 0 },
-                    { "161INT002", 2, 1, 2016, "INT001", "BPH002", 1, 2, 0 },
-                    { "161INT003", 3, 1, 2016, "INT005", "BPH003", 1, 3, 0 },
-                    { "161INT004", 1, 1, 2016, "INT006", "BPH002", 1, 4, 0 }
+                    { "161INT001", 1, 1, 2016, "INT001", "BPH001", 1, 2, 1 },
+                    { "161INT002", 2, 1, 2016, "INT001", "BPH002", 1, 2, 2 },
+                    { "161INT003", 3, 1, 2016, "INT005", "BPH003", 1, 3, 3 },
+                    { "161INT004", 1, 1, 2016, "INT006", "BPH002", 1, 4, 4 }
                 });
 
             migrationBuilder.InsertData(

@@ -8,7 +8,6 @@ namespace QuanLySinhVien.ViewModel.Catalog.MonHocs
     {
         public string ID { get; set; }
         public string TenMonHoc { get; set; }
-        public int SoTiet { get; set; }
         public int SoTinChi { get; set; }
     }
 }

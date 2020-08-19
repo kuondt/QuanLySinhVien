@@ -24,6 +24,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
         {
             //Chọn STT cuối và cộng thêm 1
             int soThuTu_MonHoc = _context.MonHocs.OrderBy(monHoc => monHoc.ID).ToList().Last().SoThuTu + 1;
+            //Ghép chuỗi tạo ID Môn học
             string ID_MonHoc = "INT" + soThuTu_MonHoc.ToString().PadLeft(3,'0');
 
             var monHoc = new MonHoc()
@@ -32,8 +33,8 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
                 SoThuTu = soThuTu_MonHoc,
                 TenMonHoc = request.TenMonHoc,
                 SoTinChi = request.SoTinChi,
-                SoTiet = request.SoTiet,
-                ID_Khoa = request.ID_Khoa
+                SoTiet = request.SoTinChi * 15, //2 tín chỉ = 30 tiết
+                ID_Khoa = "KTCN"
             };
             _context.MonHocs.Add(monHoc);
             await _context.SaveChangesAsync();
@@ -66,8 +67,8 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
             }
 
             monHoc.TenMonHoc = request.TenMonHoc;
-            monHoc.SoTiet = request.SoTiet;
             monHoc.SoTinChi = request.SoTinChi;
+            monHoc.SoTiet = request.SoTinChi * 15;
 
             return await _context.SaveChangesAsync();
         }
@@ -85,6 +86,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
                 .Select(x => new MonHoc_ViewModel()
                 {
                     ID = x.mh.ID,
+                    SoThuTu = x.mh.SoThuTu,
                     TenMonHoc = x.mh.TenMonHoc,
                     SoTiet = x.mh.SoTiet,
                     SoTinChi = x.mh.SoTinChi

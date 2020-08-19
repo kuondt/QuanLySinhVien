@@ -178,7 +178,7 @@ namespace QuanLySinhVien.Data.Migrations
                         new
                         {
                             Id = new Guid("7e2de1ee-b97b-4698-abe4-c22a0332b2c9"),
-                            ConcurrencyStamp = "b42649b9-2fe7-41f2-b6d1-14f7cac84f3f",
+                            ConcurrencyStamp = "fac01151-eea0-4539-b405-959c3b3a018a",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -186,7 +186,7 @@ namespace QuanLySinhVien.Data.Migrations
                         new
                         {
                             Id = new Guid("ddcfd40f-0c20-4bbd-afbf-5936032ddde5"),
-                            ConcurrencyStamp = "bb6d21dc-bad4-47ee-b2b9-ea4ccade00d0",
+                            ConcurrencyStamp = "6303cdb4-2bea-4d93-be09-ed2159772945",
                             Description = "Nhân viên",
                             Name = "nhanvien",
                             NormalizedName = "nhanvien"
@@ -268,7 +268,7 @@ namespace QuanLySinhVien.Data.Migrations
                         {
                             Id = new Guid("8dd4e4e7-cbb1-4db8-8cd8-3024401afc74"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3631be09-6a73-4f03-8669-907a110f5fc3",
+                            ConcurrencyStamp = "2d531b35-f083-4c09-8546-e3190c05d00d",
                             Email = "cuong.263@gmail.com",
                             EmailConfirmed = true,
                             Ho = "Dao",
@@ -277,7 +277,7 @@ namespace QuanLySinhVien.Data.Migrations
                             NgaySinh = new DateTime(1998, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NormalizedEmail = "cuong.263@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEUccSgr7ukJTJmd8opimZu85uoqsMEHW7yHfeQwPHAN36zlxbBQh0zhkxLSAGPdJA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBckQSCmcH2ZFL+YA50YH9LEG4dddb4brFRQ4eEjKmDtW+n0oPsHjVDgKbcb8JZSPA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             Ten = "Cuong",
@@ -661,7 +661,7 @@ namespace QuanLySinhVien.Data.Migrations
                             ID_Phong = "BPH001",
                             IsActive = 1,
                             NgayHoc = 2,
-                            SoThuTu = 0
+                            SoThuTu = 1
                         },
                         new
                         {
@@ -673,7 +673,7 @@ namespace QuanLySinhVien.Data.Migrations
                             ID_Phong = "BPH002",
                             IsActive = 1,
                             NgayHoc = 2,
-                            SoThuTu = 0
+                            SoThuTu = 2
                         },
                         new
                         {
@@ -685,7 +685,7 @@ namespace QuanLySinhVien.Data.Migrations
                             ID_Phong = "BPH003",
                             IsActive = 1,
                             NgayHoc = 3,
-                            SoThuTu = 0
+                            SoThuTu = 3
                         },
                         new
                         {
@@ -697,7 +697,7 @@ namespace QuanLySinhVien.Data.Migrations
                             ID_Phong = "BPH002",
                             IsActive = 1,
                             NgayHoc = 4,
-                            SoThuTu = 0
+                            SoThuTu = 4
                         });
                 });
 

@@ -216,6 +216,7 @@ namespace QuanLySinhVien.Data.Extensions
                 new LopHocPhan()
                 {
                     ID = "161INT001",
+                    SoThuTu = 1,
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT001",
@@ -227,6 +228,7 @@ namespace QuanLySinhVien.Data.Extensions
                 new LopHocPhan()
                 {
                     ID = "161INT002",
+                    SoThuTu = 2,
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT001",
@@ -238,6 +240,7 @@ namespace QuanLySinhVien.Data.Extensions
                 new LopHocPhan()
                 {
                     ID = "161INT003",
+                    SoThuTu = 3,
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT005",
@@ -249,6 +252,7 @@ namespace QuanLySinhVien.Data.Extensions
                 new LopHocPhan()
                 {
                     ID = "161INT004",
+                    SoThuTu = 4,
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT006",
