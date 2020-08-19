@@ -16,6 +16,8 @@ namespace QuanLySinhVien.Data.Configurations
 
             builder.HasKey(x => x.ID);
 
+            builder.Property(x => x.SoThuTu).ValueGeneratedOnAdd();
+
             builder.Property(x => x.BuoiHoc);
 
             builder.Property(x => x.NgayHoc);

@@ -7,6 +7,7 @@ namespace QuanLySinhVien.Data.Entities
     public class MonHoc
     {
         public string ID { get; set; }
+        public int SoThuTu { get; set; }
         public string TenMonHoc { get; set; }
         public int SoTiet { get; set; }
         public int SoTinChi { get; set; }

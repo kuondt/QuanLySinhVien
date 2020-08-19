@@ -8,6 +8,7 @@ namespace QuanLySinhVien.Data.Entities
     public class GiangVien
     {
         public string ID { get; set; }
+        public int SoThuTu { get; set; }
         public string Ho { get; set; }
         public string Ten { get; set; }
         public string HoTen { get; set; }
