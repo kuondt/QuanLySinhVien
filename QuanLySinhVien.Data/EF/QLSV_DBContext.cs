@@ -46,29 +46,29 @@ namespace QuanLySinhVien.Data.EF
             modelBuilder.Seed();
         }
 
-        public DbSet<ChiTiet_ChuongTrinhDaoTao_MonHoc> ChiTiet_ChuongTrinhDaoTao_MonHoc { get; set; }
+        public DbSet<ChiTiet_ChuongTrinhDaoTao_MonHoc> ChiTiet_ChuongTrinhDaoTao_MonHocs { get; set; }
 
-        public DbSet<DanhSach_SinhVien_LopHocPhan> DanhSach_SinhVien_LopHocPhan { get; set; }
+        public DbSet<DanhSach_SinhVien_LopHocPhan> DanhSach_SinhVien_LopHocPhans{ get; set; }
 
-        public DbSet<ChuongTrinhDaoTao> ChuongTrinhDaoTao { get; set; }
+        public DbSet<ChuongTrinhDaoTao> ChuongTrinhDaoTaos { get; set; }
 
-        public DbSet<GiangVien> GiangVien { get; set; }
+        public DbSet<GiangVien> GiangViens { get; set; }
 
-        public DbSet<HocKy_NamHoc> HocKy_NamHoc { get; set; }
+        public DbSet<HocKy_NamHoc> HocKy_NamHocs { get; set; }
 
-        public DbSet<Khoa> Khoa { get; set; }
+        public DbSet<Khoa> Khoas { get; set; }
 
-        public DbSet<LopBienChe> LopBienChe { get; set; }
+        public DbSet<LopBienChe> LopBienChes { get; set; }
 
-        public DbSet<LopHocPhan> LopHocPhan { get; set; }
+        public DbSet<LopHocPhan> LopHocPhans { get; set; }
 
-        public DbSet<MonHoc> MonHoc { get; set; }
+        public DbSet<MonHoc> MonHocs { get; set; }
 
-        public DbSet<PhanCong> PhanCong { get; set; }
+        public DbSet<PhanCong> PhanCongs { get; set; }
 
-        public DbSet<Phong> Phong { get; set; }
+        public DbSet<Phong> Phongs { get; set; }
 
-        public DbSet<SinhVien> SinhVien { get; set; }
+        public DbSet<SinhVien> SinhViens { get; set; }
 
     }
 }

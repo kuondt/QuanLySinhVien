@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QuanLySinhVien.ViewModel.Catalog.MonHoc
+namespace QuanLySinhVien.ViewModel.Catalog.MonHocs
 {
-    public class MonHoc_UpdatRequest
+    public class MonHoc_ViewModel
     {
         public string ID { get; set; }
         public string TenMonHoc { get; set; }
