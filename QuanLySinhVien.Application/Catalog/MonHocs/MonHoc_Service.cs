@@ -1,6 +1,8 @@
-﻿using QuanLySinhVien.Data.EF;
+﻿using Microsoft.EntityFrameworkCore;
+using QuanLySinhVien.Data.EF;
 using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.ViewModel.Catalog.MonHocs;
+using QuanLySinhVien.ViewModel.Common;
 using QuanLySinhVien.ViewModel.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -20,12 +22,14 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
 
         public async Task<string> Create(MonHoc_CreateRequest request)
         {
-            var soThuTu_MonHoc = _context.MonHocs.OrderBy(monHoc => monHoc.ID).ToList().Last().ID + 1;
+            //Chọn STT cuối và cộng thêm 1
+            int soThuTu_MonHoc = _context.MonHocs.OrderBy(monHoc => monHoc.ID).ToList().Last().SoThuTu + 1;
             string ID_MonHoc = "INT" + soThuTu_MonHoc.ToString().PadLeft(3,'0');
 
             var monHoc = new MonHoc()
             {
                 ID = ID_MonHoc,
+                SoThuTu = soThuTu_MonHoc,
                 TenMonHoc = request.TenMonHoc,
                 SoTinChi = request.SoTinChi,
                 SoTiet = request.SoTiet,
@@ -35,6 +39,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
             await _context.SaveChangesAsync();
             return monHoc.ID;
         }
+
 
         public async Task<MonHoc_ViewModel> GetById(string ID_MonHoc)
         {
@@ -57,7 +62,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
 
             if (monHoc == null)
             {
-                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy mã: {request.ID}");
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {request.ID}");
             }
 
             monHoc.TenMonHoc = request.TenMonHoc;
@@ -65,6 +70,32 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
             monHoc.SoTinChi = request.SoTinChi;
 
             return await _context.SaveChangesAsync();
+        }
+
+        public async Task<PagedResult<MonHoc_ViewModel>> GetAllPaging(MonHoc_ManagePagingRequest request)
+        {
+            var query = from mh 
+                        in _context.MonHocs                     
+                        select new { mh };            
+
+            int totalRow = await query.CountAsync();
+
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(x => new MonHoc_ViewModel()
+                {
+                    ID = x.mh.ID,
+                    TenMonHoc = x.mh.TenMonHoc,
+                    SoTiet = x.mh.SoTiet,
+                    SoTinChi = x.mh.SoTinChi
+                }).ToListAsync();
+
+            var pagedResult = new PagedResult<MonHoc_ViewModel>()
+            {
+                TotalRecords = totalRow,
+                Items = data
+            };
+            return pagedResult;
         }
     }
 }

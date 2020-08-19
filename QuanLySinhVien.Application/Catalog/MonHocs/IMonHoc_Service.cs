@@ -1,4 +1,5 @@
 ﻿using QuanLySinhVien.ViewModel.Catalog.MonHocs;
+using QuanLySinhVien.ViewModel.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,5 +14,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
         Task<MonHoc_ViewModel> GetById(string ID_MonHoc);
 
         Task<int> Update(MonHoc_UpdateRequest request);
+
+        Task<PagedResult<MonHoc_ViewModel>> GetAllPaging(MonHoc_ManagePagingRequest request);
     }
 }
