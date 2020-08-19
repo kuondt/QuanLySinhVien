@@ -20,8 +20,8 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
 
         public async Task<string> Create(MonHoc_CreateRequest request)
         {
-            var lastID_MonHoc = _context.MonHocs.OrderBy(monHoc => monHoc.ID).ToList().Last().ID + 1;
-            string ID_MonHoc = "INT" + lastID_MonHoc.ToString().PadLeft(3,'0');
+            var soThuTu_MonHoc = _context.MonHocs.OrderBy(monHoc => monHoc.ID).ToList().Last().ID + 1;
+            string ID_MonHoc = "INT" + soThuTu_MonHoc.ToString().PadLeft(3,'0');
 
             var monHoc = new MonHoc()
             {

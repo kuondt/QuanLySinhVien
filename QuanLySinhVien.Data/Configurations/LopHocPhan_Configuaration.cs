@@ -18,6 +18,8 @@ namespace QuanLySinhVien.Data.Configurations
 
             builder.Property(x => x.SoThuTu).ValueGeneratedOnAdd();
 
+            builder.Property(x => x.Nam).IsRequired();
+
             builder.Property(x => x.BuoiHoc);
 
             builder.Property(x => x.NgayHoc);
