@@ -10,8 +10,8 @@ using QuanLySinhVien.Data.EF;
 namespace QuanLySinhVien.Data.Migrations
 {
     [DbContext(typeof(QLSV_DBContext))]
-    [Migration("20200816111139_Initial")]
-    partial class Initial
+    [Migration("20200819105609_Add_SoThuTu_field")]
+    partial class Add_SoThuTu_field
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -94,6 +94,13 @@ namespace QuanLySinhVien.Data.Migrations
                     b.HasKey("UserId", "RoleId");
 
                     b.ToTable("AppUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("8dd4e4e7-cbb1-4db8-8cd8-3024401afc74"),
+                            RoleId = new Guid("7e2de1ee-b97b-4698-abe4-c22a0332b2c9")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -128,6 +135,23 @@ namespace QuanLySinhVien.Data.Migrations
                     b.HasKey("Key");
 
                     b.ToTable("AppConfig");
+
+                    b.HasData(
+                        new
+                        {
+                            Key = "HomeTitle",
+                            Value = "This is home"
+                        },
+                        new
+                        {
+                            Key = "HomeKeyword",
+                            Value = "This is keyword"
+                        },
+                        new
+                        {
+                            Key = "HomeDescription",
+                            Value = "This is description"
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.AppRole", b =>
@@ -151,6 +175,24 @@ namespace QuanLySinhVien.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("7e2de1ee-b97b-4698-abe4-c22a0332b2c9"),
+                            ConcurrencyStamp = "b42649b9-2fe7-41f2-b6d1-14f7cac84f3f",
+                            Description = "Administrator role",
+                            Name = "admin",
+                            NormalizedName = "admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("ddcfd40f-0c20-4bbd-afbf-5936032ddde5"),
+                            ConcurrencyStamp = "bb6d21dc-bad4-47ee-b2b9-ea4ccade00d0",
+                            Description = "Nhân viên",
+                            Name = "nhanvien",
+                            NormalizedName = "nhanvien"
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.AppUser", b =>
@@ -222,15 +264,37 @@ namespace QuanLySinhVien.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8dd4e4e7-cbb1-4db8-8cd8-3024401afc74"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3631be09-6a73-4f03-8669-907a110f5fc3",
+                            Email = "cuong.263@gmail.com",
+                            EmailConfirmed = true,
+                            Ho = "Dao",
+                            HoTen = "Dao Cuong",
+                            LockoutEnabled = false,
+                            NgaySinh = new DateTime(1998, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NormalizedEmail = "cuong.263@gmail.com",
+                            NormalizedUserName = "admin",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEUccSgr7ukJTJmd8opimZu85uoqsMEHW7yHfeQwPHAN36zlxbBQh0zhkxLSAGPdJA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            Ten = "Cuong",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.ChiTiet_ChuongTrinhDaoTao_MonHoc", b =>
                 {
                     b.Property<string>("ID_ChuongTrinhDaoTao")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("ID_MonHoc")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("HK_HocKy")
                         .HasColumnType("int");
@@ -244,19 +308,43 @@ namespace QuanLySinhVien.Data.Migrations
 
                     b.HasIndex("HK_HocKy", "HK_NamHoc");
 
-                    b.ToTable("ChiTiet_ChuongTrinhDaoTao_MonHoc");
+                    b.ToTable("ChiTiet_ChuongTrinhDaoTao_MonHocs");
+
+                    b.HasData(
+                        new
+                        {
+                            ID_ChuongTrinhDaoTao = "HTTT2016",
+                            ID_MonHoc = "INT001",
+                            HK_HocKy = 1,
+                            HK_NamHoc = 2016
+                        },
+                        new
+                        {
+                            ID_ChuongTrinhDaoTao = "HTTT2016",
+                            ID_MonHoc = "INT005",
+                            HK_HocKy = 1,
+                            HK_NamHoc = 2016
+                        },
+                        new
+                        {
+                            ID_ChuongTrinhDaoTao = "HTTT2016",
+                            ID_MonHoc = "INT006",
+                            HK_HocKy = 1,
+                            HK_NamHoc = 2016
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.ChuongTrinhDaoTao", b =>
                 {
                     b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<string>("Id_Khoa")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("Nam")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Nam")
+                        .HasColumnType("int");
 
                     b.Property<string>("TenChuongTrinh")
                         .HasColumnType("nvarchar(200)")
@@ -266,36 +354,76 @@ namespace QuanLySinhVien.Data.Migrations
 
                     b.HasIndex("Id_Khoa");
 
-                    b.ToTable("ChuongTrinhDaoTao");
+                    b.ToTable("ChuongTrinhDaoTaos");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "HTTT2016",
+                            Id_Khoa = "KTCN",
+                            Nam = 2016,
+                            TenChuongTrinh = "HTTT"
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.DanhSach_SinhVien_LopHocPhan", b =>
                 {
                     b.Property<string>("ID_SinhVien")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("ID_LopHocPhan")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<float>("Diem")
                         .HasColumnType("real");
 
                     b.Property<int>("LanThi")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(1);
+                        .HasColumnType("int");
 
                     b.HasKey("ID_SinhVien", "ID_LopHocPhan");
 
                     b.HasIndex("ID_LopHocPhan");
 
-                    b.ToTable("DanhSach_SinhVien_LopHocPhan");
+                    b.ToTable("DanhSach_SinhVien_LopHocPhans");
+
+                    b.HasCheckConstraint("CK_Diem_Duoi_10", "Diem <= 10");
+
+                    b.HasData(
+                        new
+                        {
+                            ID_SinhVien = "161A010001",
+                            ID_LopHocPhan = "161INT001",
+                            Diem = 8.5f,
+                            LanThi = 1
+                        },
+                        new
+                        {
+                            ID_SinhVien = "161A010001",
+                            ID_LopHocPhan = "161INT002",
+                            Diem = 10f,
+                            LanThi = 1
+                        },
+                        new
+                        {
+                            ID_SinhVien = "161A010002",
+                            ID_LopHocPhan = "161INT001",
+                            Diem = 7f,
+                            LanThi = 1
+                        },
+                        new
+                        {
+                            ID_SinhVien = "161A010003",
+                            ID_LopHocPhan = "161INT001",
+                            Diem = 7f,
+                            LanThi = 1
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.GiangVien", b =>
                 {
                     b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<string>("DiaChi")
                         .HasColumnType("nvarchar(500)")
@@ -305,8 +433,8 @@ namespace QuanLySinhVien.Data.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<bool>("GioiTinh")
-                        .HasColumnType("bit");
+                    b.Property<int>("GioiTinh")
+                        .HasColumnType("int");
 
                     b.Property<string>("Ho")
                         .HasColumnType("nvarchar(50)")
@@ -317,7 +445,7 @@ namespace QuanLySinhVien.Data.Migrations
                         .HasMaxLength(100);
 
                     b.Property<string>("ID_Khoa")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -330,6 +458,9 @@ namespace QuanLySinhVien.Data.Migrations
                     b.Property<string>("SoDienThoai")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SoThuTu")
+                        .HasColumnType("int");
+
                     b.Property<string>("Ten")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
@@ -338,7 +469,39 @@ namespace QuanLySinhVien.Data.Migrations
 
                     b.HasIndex("ID_Khoa");
 
-                    b.ToTable("GiangVien");
+                    b.ToTable("GiangViens");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "GV001",
+                            DiaChi = "624 Âu Cơ",
+                            Email = "nva@vhu.edu.vn",
+                            GioiTinh = 1,
+                            Ho = "Nguyễn Văn",
+                            HoTen = "Nguyễn Văn A",
+                            ID_Khoa = "KTCN",
+                            IsActive = 1,
+                            NgaySinh = new DateTime(1975, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SoDienThoai = "0987654321",
+                            SoThuTu = 1,
+                            Ten = "A"
+                        },
+                        new
+                        {
+                            ID = "GV002",
+                            DiaChi = "642 Âu Cơ",
+                            Email = "pvb@vhu.edu.vn",
+                            GioiTinh = 1,
+                            Ho = "Phạm Văn",
+                            HoTen = "Phạm Văn B",
+                            ID_Khoa = "KTCN",
+                            IsActive = 1,
+                            NgaySinh = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SoDienThoai = "012332123",
+                            SoThuTu = 2,
+                            Ten = "B"
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.HocKy_NamHoc", b =>
@@ -357,13 +520,37 @@ namespace QuanLySinhVien.Data.Migrations
 
                     b.HasKey("HocKy", "NamHoc");
 
-                    b.ToTable("HocKy_NamHoc");
+                    b.ToTable("HocKy_NamHocs");
+
+                    b.HasData(
+                        new
+                        {
+                            HocKy = 1,
+                            NamHoc = 2016,
+                            NgayBatDau = new DateTime(2016, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayKetThuc = new DateTime(2016, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            HocKy = 2,
+                            NamHoc = 2016,
+                            NgayBatDau = new DateTime(2016, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayKetThuc = new DateTime(2016, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            HocKy = 3,
+                            NamHoc = 2016,
+                            NgayBatDau = new DateTime(2016, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayKetThuc = new DateTime(2016, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.Khoa", b =>
                 {
                     b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<string>("TenKhoa")
                         .IsRequired()
@@ -372,24 +559,35 @@ namespace QuanLySinhVien.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Khoa");
+                    b.ToTable("Khoas");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "KTCN",
+                            TenKhoa = "Kỹ thuật công nghệ"
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.LopBienChe", b =>
                 {
                     b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<string>("ID_GiangVien")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("ID_Khoa")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("NamBatDau")
                         .HasColumnType("int");
 
                     b.Property<int>("NamKetThuc")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SoThuTu")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -398,13 +596,28 @@ namespace QuanLySinhVien.Data.Migrations
 
                     b.HasIndex("ID_Khoa");
 
-                    b.ToTable("LopBienChe");
+                    b.ToTable("LopBienChes");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "161A0101",
+                            ID_GiangVien = "GV001",
+                            ID_Khoa = "KTCN",
+                            NamBatDau = 2016,
+                            NamKetThuc = 2020,
+                            SoThuTu = 1
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.LopHocPhan", b =>
                 {
                     b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
+
+                    b.Property<int>("BuoiHoc")
+                        .HasColumnType("int");
 
                     b.Property<int>("HK_HocKy")
                         .HasColumnType("int");
@@ -413,18 +626,21 @@ namespace QuanLySinhVien.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ID_MonHoc")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("ID_Phong")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1);
 
-                    b.Property<string>("SoTietHoc")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("NgayHoc")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SoThuTu")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -434,19 +650,70 @@ namespace QuanLySinhVien.Data.Migrations
 
                     b.HasIndex("HK_HocKy", "HK_NamHoc");
 
-                    b.ToTable("LopHocPhan");
+                    b.ToTable("LopHocPhans");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "161INT001",
+                            BuoiHoc = 1,
+                            HK_HocKy = 1,
+                            HK_NamHoc = 2016,
+                            ID_MonHoc = "INT001",
+                            ID_Phong = "BPH001",
+                            IsActive = 1,
+                            NgayHoc = 2,
+                            SoThuTu = 0
+                        },
+                        new
+                        {
+                            ID = "161INT002",
+                            BuoiHoc = 2,
+                            HK_HocKy = 1,
+                            HK_NamHoc = 2016,
+                            ID_MonHoc = "INT001",
+                            ID_Phong = "BPH002",
+                            IsActive = 1,
+                            NgayHoc = 2,
+                            SoThuTu = 0
+                        },
+                        new
+                        {
+                            ID = "161INT003",
+                            BuoiHoc = 3,
+                            HK_HocKy = 1,
+                            HK_NamHoc = 2016,
+                            ID_MonHoc = "INT005",
+                            ID_Phong = "BPH003",
+                            IsActive = 1,
+                            NgayHoc = 3,
+                            SoThuTu = 0
+                        },
+                        new
+                        {
+                            ID = "161INT004",
+                            BuoiHoc = 1,
+                            HK_HocKy = 1,
+                            HK_NamHoc = 2016,
+                            ID_MonHoc = "INT006",
+                            ID_Phong = "BPH002",
+                            IsActive = 1,
+                            NgayHoc = 4,
+                            SoThuTu = 0
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.MonHoc", b =>
                 {
                     b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
-                    b.Property<string>("Id_Khoa")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ID_Khoa")
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("KhoaID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("SoThuTu")
+                        .HasColumnType("int");
 
                     b.Property<int>("SoTiet")
                         .HasColumnType("int");
@@ -455,22 +722,79 @@ namespace QuanLySinhVien.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TenMonHoc")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("KhoaID");
+                    b.HasIndex("ID_Khoa");
 
-                    b.ToTable("MonHoc");
+                    b.ToTable("MonHocs");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "INT001",
+                            ID_Khoa = "KTCN",
+                            SoThuTu = 1,
+                            SoTiet = 30,
+                            SoTinChi = 2,
+                            TenMonHoc = "Kỹ thuật lập trình"
+                        },
+                        new
+                        {
+                            ID = "INT002",
+                            ID_Khoa = "KTCN",
+                            SoThuTu = 2,
+                            SoTiet = 30,
+                            SoTinChi = 2,
+                            TenMonHoc = "Cấu trúc dữ liệu và giải thuật"
+                        },
+                        new
+                        {
+                            ID = "INT003",
+                            ID_Khoa = "KTCN",
+                            SoThuTu = 3,
+                            SoTiet = 45,
+                            SoTinChi = 3,
+                            TenMonHoc = "Cơ sở dữ liệu"
+                        },
+                        new
+                        {
+                            ID = "INT004",
+                            ID_Khoa = "KTCN",
+                            SoThuTu = 4,
+                            SoTiet = 45,
+                            SoTinChi = 3,
+                            TenMonHoc = "Hệ điều hành	"
+                        },
+                        new
+                        {
+                            ID = "INT005",
+                            ID_Khoa = "KTCN",
+                            SoThuTu = 5,
+                            SoTiet = 45,
+                            SoTinChi = 3,
+                            TenMonHoc = "Vật lý đại cương"
+                        },
+                        new
+                        {
+                            ID = "INT006",
+                            ID_Khoa = "KTCN",
+                            SoThuTu = 6,
+                            SoTiet = 30,
+                            SoTinChi = 2,
+                            TenMonHoc = "Toán cao cấp"
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.PhanCong", b =>
                 {
                     b.Property<string>("ID_LopHocPhan")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("ID_GiangVien")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("ID_LopHocPhan", "ID_GiangVien");
 
@@ -479,16 +803,39 @@ namespace QuanLySinhVien.Data.Migrations
                     b.HasIndex("ID_LopHocPhan")
                         .IsUnique();
 
-                    b.ToTable("PhanCong");
+                    b.ToTable("PhanCongs");
+
+                    b.HasData(
+                        new
+                        {
+                            ID_LopHocPhan = "161INT001",
+                            ID_GiangVien = "GV001"
+                        },
+                        new
+                        {
+                            ID_LopHocPhan = "161INT002",
+                            ID_GiangVien = "GV001"
+                        },
+                        new
+                        {
+                            ID_LopHocPhan = "161INT003",
+                            ID_GiangVien = "GV002"
+                        },
+                        new
+                        {
+                            ID_LopHocPhan = "161INT004",
+                            ID_GiangVien = "GV002"
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.Phong", b =>
                 {
                     b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
-                    b.Property<string>("SoThuTu")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SoThuTu")
+                        .HasColumnType("int");
 
                     b.Property<string>("TenCoSo")
                         .HasColumnType("nvarchar(100)")
@@ -496,13 +843,34 @@ namespace QuanLySinhVien.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Phong");
+                    b.ToTable("Phongs");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "BPH001",
+                            SoThuTu = 1,
+                            TenCoSo = "624 Âu Cơ"
+                        },
+                        new
+                        {
+                            ID = "BPH002",
+                            SoThuTu = 2,
+                            TenCoSo = "624 Âu Cơ"
+                        },
+                        new
+                        {
+                            ID = "BPH003",
+                            SoThuTu = 3,
+                            TenCoSo = "624 Âu Cơ"
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.SinhVien", b =>
                 {
                     b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<string>("DiaChi")
                         .HasColumnType("nvarchar(500)")
@@ -524,18 +892,24 @@ namespace QuanLySinhVien.Data.Migrations
                         .HasMaxLength(100);
 
                     b.Property<string>("ID_LopBienChe")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1);
 
-                    b.Property<string>("NgaySinh")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Nam")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("NgaySinh")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SoDienThoai")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SoThuTu")
+                        .HasColumnType("int");
 
                     b.Property<string>("Ten")
                         .HasColumnType("nvarchar(50)")
@@ -545,7 +919,57 @@ namespace QuanLySinhVien.Data.Migrations
 
                     b.HasIndex("ID_LopBienChe");
 
-                    b.ToTable("SinhVien");
+                    b.ToTable("SinhViens");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "161A010001",
+                            DiaChi = "TPHCM",
+                            Email = "ntc@gmail.com",
+                            GioiTinh = 0,
+                            Ho = "Nguyễn Thị",
+                            HoTen = "Nguyễn Thị C",
+                            ID_LopBienChe = "161A0101",
+                            IsActive = 1,
+                            Nam = 2016,
+                            NgaySinh = new DateTime(1998, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SoDienThoai = "0123456789",
+                            SoThuTu = 1,
+                            Ten = "C"
+                        },
+                        new
+                        {
+                            ID = "161A010002",
+                            DiaChi = "Hóc Môn",
+                            Email = "nvd@gmail.com",
+                            GioiTinh = 1,
+                            Ho = "Nguyễn Văn",
+                            HoTen = "Nguyễn Văn D",
+                            ID_LopBienChe = "161A0101",
+                            IsActive = 1,
+                            Nam = 2016,
+                            NgaySinh = new DateTime(1998, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SoDienThoai = "0321456987",
+                            SoThuTu = 2,
+                            Ten = "D"
+                        },
+                        new
+                        {
+                            ID = "161A010003",
+                            DiaChi = "5/9A Hóc Môn",
+                            Email = "cuong.263@gmail.com",
+                            GioiTinh = 1,
+                            Ho = "Đào Tuấn",
+                            HoTen = "Đào Tuấn Cường",
+                            ID_LopBienChe = "161A0101",
+                            IsActive = 1,
+                            Nam = 2016,
+                            NgaySinh = new DateTime(1998, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SoDienThoai = "0904590481",
+                            SoThuTu = 3,
+                            Ten = "Cường"
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.ChiTiet_ChuongTrinhDaoTao_MonHoc", b =>
@@ -630,7 +1054,7 @@ namespace QuanLySinhVien.Data.Migrations
                 {
                     b.HasOne("QuanLySinhVien.Data.Entities.Khoa", "Khoa")
                         .WithMany("MonHocs")
-                        .HasForeignKey("KhoaID");
+                        .HasForeignKey("ID_Khoa");
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.PhanCong", b =>

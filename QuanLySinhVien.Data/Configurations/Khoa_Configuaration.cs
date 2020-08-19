@@ -15,6 +15,8 @@ namespace QuanLySinhVien.Data.Configurations
             //Set primary Key
             builder.HasKey(x => x.ID);
 
+            builder.Property(x => x.ID).HasMaxLength(10);
+
             builder.Property(x => x.TenKhoa).IsRequired().HasMaxLength(100);
         }
     }

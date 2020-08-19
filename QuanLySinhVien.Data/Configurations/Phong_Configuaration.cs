@@ -15,6 +15,8 @@ namespace QuanLySinhVien.Data.Configurations
 
             builder.HasKey(x => x.ID);
 
+            builder.Property(x => x.ID).HasMaxLength(10);
+
             builder.Property(x => x.TenCoSo).HasMaxLength(100);
 
             builder.Property(x => x.SoThuTu);

@@ -15,7 +15,9 @@ namespace QuanLySinhVien.Data.Configurations
 
             builder.HasKey(x => x.ID);
 
-            builder.Property(x => x.SoThuTu);
+            builder.Property(x => x.ID).HasMaxLength(10);
+
+            builder.Property(x => x.SoThuTu).IsRequired();
 
             builder.Property(x=> x.TenMonHoc).IsRequired();
 
