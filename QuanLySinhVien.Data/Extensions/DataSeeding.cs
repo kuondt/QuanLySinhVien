@@ -117,8 +117,7 @@ namespace QuanLySinhVien.Data.Extensions
                 new SinhVien()
                 {
                     ID = "161A010001",
-                    SoThuTu = 1,
-                    Nam = 2016,
+              
                     Ho = "Nguyễn Thị",
                     Ten = "C",
                     HoTen = "Nguyễn Thị C",
@@ -133,8 +132,7 @@ namespace QuanLySinhVien.Data.Extensions
                 new SinhVien()
                 {
                     ID = "161A010002",
-                    SoThuTu = 2,
-                    Nam = 2016,
+                  
                     Ho = "Nguyễn Văn",
                     Ten = "D",
                     HoTen = "Nguyễn Văn D",
@@ -148,8 +146,7 @@ namespace QuanLySinhVien.Data.Extensions
                 }, new SinhVien()
                 {
                     ID = "161A010003",
-                    SoThuTu = 3,
-                    Nam = 2016,
+            
                     Ho = "Đào Tuấn",
                     Ten = "Cường",
                     HoTen = "Đào Tuấn Cường",
@@ -215,8 +212,7 @@ namespace QuanLySinhVien.Data.Extensions
                 new LopHocPhan()
                 {
                     ID = "161INT001",
-                    SoThuTu = 1,
-                    Nam = 2016,
+
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT001",
@@ -228,8 +224,7 @@ namespace QuanLySinhVien.Data.Extensions
                 new LopHocPhan()
                 {
                     ID = "161INT002",
-                    SoThuTu = 2,
-                    Nam = 2016,
+               
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT001",
@@ -241,8 +236,7 @@ namespace QuanLySinhVien.Data.Extensions
                 new LopHocPhan()
                 {
                     ID = "161INT003",
-                    SoThuTu = 3,
-                    Nam = 2016,
+                  
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT005",
@@ -254,8 +248,7 @@ namespace QuanLySinhVien.Data.Extensions
                 new LopHocPhan()
                 {
                     ID = "161INT004",
-                    SoThuTu = 4,
-                    Nam = 2016,
+                 
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT006",

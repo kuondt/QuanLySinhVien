@@ -5,9 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Catalog\GiangVien\" />
-    <Folder Include="Catalog\ChuongTrinhDaoTao\" />
-    <Folder Include="Catalog\SinhVien\" />
+    <Compile Remove="Catalog\ChuongTrinhDaoTao\**" />
+    <Compile Remove="Catalog\GiangVien\**" />
+    <Compile Remove="Catalog\SinhVien\**" />
+    <EmbeddedResource Remove="Catalog\ChuongTrinhDaoTao\**" />
+    <EmbeddedResource Remove="Catalog\GiangVien\**" />
+    <EmbeddedResource Remove="Catalog\SinhVien\**" />
+    <None Remove="Catalog\ChuongTrinhDaoTao\**" />
+    <None Remove="Catalog\GiangVien\**" />
+    <None Remove="Catalog\SinhVien\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Contant\" />
     <Folder Include="Exception\" />
     <Folder Include="System\" />

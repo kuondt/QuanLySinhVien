@@ -5,6 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Catalog\ChuongTrinhDaoTao\**" />
+    <Compile Remove="Catalog\GiangVien\**" />
+    <Compile Remove="Catalog\Khoa\**" />
+    <Compile Remove="Catalog\SinhVien\**" />
+    <EmbeddedResource Remove="Catalog\ChuongTrinhDaoTao\**" />
+    <EmbeddedResource Remove="Catalog\GiangVien\**" />
+    <EmbeddedResource Remove="Catalog\Khoa\**" />
+    <EmbeddedResource Remove="Catalog\SinhVien\**" />
+    <None Remove="Catalog\ChuongTrinhDaoTao\**" />
+    <None Remove="Catalog\GiangVien\**" />
+    <None Remove="Catalog\Khoa\**" />
+    <None Remove="Catalog\SinhVien\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.7.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" />
@@ -12,13 +27,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QuanLySinhVien.Data\QuanLySinhVien.Data.csproj" />
+    <ProjectReference Include="..\QuanLySinhVien.ViewModel\QuanLySinhVien.ViewModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Catalog\Khoa\" />
-    <Folder Include="Catalog\ChuongTrinhDaoTao\" />
-    <Folder Include="Catalog\GiangVien\" />
-    <Folder Include="Catalog\SinhVien\" />
     <Folder Include="Common\" />
     <Folder Include="System\Roles\" />
     <Folder Include="System\Users\" />
