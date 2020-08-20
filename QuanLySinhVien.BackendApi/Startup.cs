@@ -5,13 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using QuanLySinhVien.Data.EF;
+using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.Service.Catalog.MonHocs;
+using QuanLySinhVien.Service.System.Users;
 using QuanLySinhVien.ViewModel.Contants;
 
 namespace QuanLySinhVien.BackendApi
@@ -31,9 +34,17 @@ namespace QuanLySinhVien.BackendApi
             services.AddDbContext<QLSV_DBContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString(SystemContants.MainConnectString)));
 
+            services.AddIdentity<AppUser, AppRole>()
+                .AddEntityFrameworkStores<QLSV_DBContext>()
+                .AddDefaultTokenProviders();
+
             //Declare DI
             services.AddTransient<IMonHoc_Service, MonHoc_Service>();
-          
+            services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+            services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+            services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<IUserService, UserService>();
+
 
             services.AddControllersWithViews();
 
