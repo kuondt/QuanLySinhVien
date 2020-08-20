@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Common\" />
-    <Folder Include="System\" />
+    <Folder Include="System\Roles\" />
   </ItemGroup>
 
 </Project>
