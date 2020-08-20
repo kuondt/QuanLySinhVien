@@ -21,4 +21,8 @@
     <Folder Include="System\Roles\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.1.3" />
+  </ItemGroup>
+
 </Project>

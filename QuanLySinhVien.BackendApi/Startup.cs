@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,6 +20,7 @@ using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.Service.Catalog.MonHocs;
 using QuanLySinhVien.Service.System.Users;
 using QuanLySinhVien.ViewModel.Contants;
+using QuanLySinhVien.ViewModel.System.Users;
 
 namespace QuanLySinhVien.BackendApi
 {
@@ -46,9 +49,9 @@ namespace QuanLySinhVien.BackendApi
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
 
-
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>()); ;
 
             services.AddSwaggerGen(c =>
             {
