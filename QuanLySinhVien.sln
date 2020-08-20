@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuanLySinhVien.ViewModel", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuanLySinhVien.AdminApp", "QuanLySinhVien.AdminApp\QuanLySinhVien.AdminApp.csproj", "{268F926B-8072-4296-8086-61586055C739}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLySinhVien.BackendApi", "QuanLySinhVien.BackendApi\QuanLySinhVien.BackendApi.csproj", "{6D323BEA-8067-4D35-9271-2C87DDF34E9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuanLySinhVien.BackendApi", "QuanLySinhVien.BackendApi\QuanLySinhVien.BackendApi.csproj", "{6D323BEA-8067-4D35-9271-2C87DDF34E9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
