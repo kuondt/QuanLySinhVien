@@ -15,6 +15,12 @@ namespace QuanLySinhVien.ViewModel.System.Users
         [Display(Name = "Tên")]
         public string Ten { get; set; }
 
+        [Display(Name = "Họ Tên")]
+        public string HoTen { get; set; }
+
+        [Display(Name = "Tài khoản")]
+        public string UserName { get; set; }
+
         [Display(Name = "Ngày sinh")]
         [DataType(DataType.Date)]
         public DateTime NgaySinh { get; set; }
@@ -24,9 +30,6 @@ namespace QuanLySinhVien.ViewModel.System.Users
 
         [Display(Name = "Số điện thoại")]
         public string SoDienThoai { get; set; }
-
-        [Display(Name = "Tình trạng")]
-        public bool Status { get; set; }
 
         public IList<string> Roles { get; set; }
     }
