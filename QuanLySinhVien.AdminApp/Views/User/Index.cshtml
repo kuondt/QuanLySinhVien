@@ -1,0 +1,117 @@
+﻿@using QuanLySinhVien.ViewModel.Common
+@using QuanLySinhVien.ViewModel.System.Users
+@model PagedResult<UserViewModel>
+
+@{
+    ViewData["Title"] = "Danh sách user";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $("#msgAlert").fadeOut('slow');
+        }, 2000);
+    </script>
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Danh sách user</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="user-topbar">
+                <div class="float-left">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <a class="btn btn-success" asp-action="Create" asp-controller="User">Tạo mới user</a>
+                    </h6>
+                </div>
+                <div class=" float-lg-right">
+                    <form asp-action="Index" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100">
+                        <div class="input-group">
+                            <input value="@ViewBag.keyword" type="text" name="keyword" class="form-control bg-white" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            @if (ViewBag.SuccessMessage != null)
+            {
+                <div id="msgAlert" class="alert alert-success" role="alert">
+                    @ViewBag.SuccessMessage
+                </div>
+            }
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Tên
+                                </th>
+                                <th>
+                                    Họ
+                                </th>
+                                <th>
+                                    SĐT
+                                </th>
+                                <th>
+                                    Tên tài khoản
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Items)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Ho)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Ten)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SoDienThoai)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
+                                        @Html.ActionLink("Phân quyền", "RoleAssign", new { id = item.Id })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            @*@await Component.InvokeAsync("Pager", Model)*@
+        </div>
+    </div>
+
+</div>

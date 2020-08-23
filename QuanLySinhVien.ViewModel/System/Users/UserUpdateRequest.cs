@@ -15,6 +15,9 @@ namespace QuanLySinhVien.ViewModel.System.Users
         [Display(Name = "Tên")]
         public string Ten { get; set; }
 
+        [Display(Name = "Họ Tên")]
+        public string HoTen { get; set; }
+
         [Display(Name = "Ngày sinh")]
         [DataType(DataType.Date)]
         public DateTime NgaySinh { get; set; }
