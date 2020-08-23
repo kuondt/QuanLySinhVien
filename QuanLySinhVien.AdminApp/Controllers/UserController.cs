@@ -5,14 +5,43 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using QuanLySinhVien.AdminApp.Services;
+using QuanLySinhVien.ViewModel.System.Users;
 
 namespace QuanLySinhVien.AdminApp.Controllers
 {
     public class UserController : BaseController
     {
-        public IActionResult Index()
+        private readonly IConfiguration _configuration;
+        private readonly IUserApiClient _userApiClient;
+        private readonly IRoleApiClient _roleApiClient;
+
+        public UserController(IUserApiClient userApiClient, IConfiguration configuration, IRoleApiClient roleApiClient)
         {
-            return View();
+            _userApiClient = userApiClient;
+            _configuration = configuration;
+            _roleApiClient = roleApiClient;
+        }
+
+        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
+        {
+            var request = new GetUserPagingRequest()
+            {
+                Keyword = keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            };
+            var data = await _userApiClient.GetUsersPaging(request);
+
+            ViewBag.Keyword = keyword;
+
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["result"];
+            }
+
+            return View(data.ResultObj);
         }
 
         [HttpPost]
