@@ -5,10 +5,8 @@ using System.Text;
 
 namespace QuanLySinhVien.ViewModel.System.Users
 {
-    public class RoleAssignRequest
+    public class GetUserPagingRequest : PagingRequestBase
     {
-        public Guid Id { get; set; }
-
-        public List<SelectItem> Roles { get; set; } = new List<SelectItem>();
+        public string Keyword { get; set; }
     }
 }
