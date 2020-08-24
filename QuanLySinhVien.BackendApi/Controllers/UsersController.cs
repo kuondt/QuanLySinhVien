@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuanLySinhVien.Service.System.Users;
 using QuanLySinhVien.ViewModel.System.Users;
+using System;
+using System.Threading.Tasks;
 
 namespace QuanLySinhVien.BackendApi.Controllers
 {
@@ -48,7 +45,7 @@ namespace QuanLySinhVien.BackendApi.Controllers
             var result = await _userService.Register(request);
             if (!result.IsSuccessed)
             {
-                return BadRequest(result.Message);
+                return BadRequest(result);
             }
             return Ok(result);
         }

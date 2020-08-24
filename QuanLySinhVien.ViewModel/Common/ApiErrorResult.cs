@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,9 @@ namespace QuanLySinhVien.ViewModel.Common
 {
     public class ApiErrorResult<T> : ApiResult<T>
     {
-        public string[] ValidationErrors { get; set; }
+        private IEnumerable<IdentityError> errors;
+
+        public T ValidationErrors { get; set; }
 
         public ApiErrorResult()
         {
@@ -18,10 +21,11 @@ namespace QuanLySinhVien.ViewModel.Common
             Message = message;
         }
 
-        public ApiErrorResult(string[] validationErrors)
+        public ApiErrorResult(T validationErrors)
         {
             IsSuccessed = false;
             ValidationErrors = validationErrors;
         }
+
     }
 }

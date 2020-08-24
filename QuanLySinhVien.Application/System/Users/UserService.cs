@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.ViewModel.Common;
 using QuanLySinhVien.ViewModel.System.Users;
@@ -37,13 +38,13 @@ namespace QuanLySinhVien.Service.System.Users
             {
                 return new ApiErrorResult<string>("Tài khoản không tồn tại");
             }
-            
+
             //Đăng nhập bằng username & password
             var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
 
             if (!result.Succeeded)
             {
-                return new ApiErrorResult<string>("Đăng nhập không đúng");
+                return new ApiErrorResult<string>("Sai mật khẩu");
             }
 
             var roles = await _userManager.GetRolesAsync(user);
@@ -99,7 +100,12 @@ namespace QuanLySinhVien.Service.System.Users
             {
                 return new ApiSuccessResult<bool>();
             }
-            return new ApiErrorResult<bool>("Đăng ký không thành công");
+
+            //return error list
+            var errors = result.Errors;
+            var errorMessage = errors.Select(x => x.Description);
+            string listErrors = string.Join(" ", errorMessage);
+            return new ApiErrorResult<bool>(listErrors);
         }
 
         public async Task<ApiResult<UserViewModel>> GetById(Guid id)
@@ -214,7 +220,12 @@ namespace QuanLySinhVien.Service.System.Users
             {
                 return new ApiSuccessResult<bool>();
             }
-            return new ApiErrorResult<bool>("Cập nhật không thành công");
+            //return error list
+            var errors = result.Errors;
+            var errorMessage = errors.Select(x => x.Description);
+            string listErrors = string.Join(" ", errorMessage);
+            return new ApiErrorResult<bool>(listErrors);
+            //return new ApiErrorResult<bool>(result.ToString());
         }
     }
 }
