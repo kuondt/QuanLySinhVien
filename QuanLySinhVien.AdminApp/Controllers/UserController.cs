@@ -77,7 +77,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
                 var user = result.ResultObj;
                 var updateRequest = new UserUpdateRequest()
                 {
-                    Ho = user.Ten,
+                    Ho = user.Ho,
                     Ten = user.Ten,
                     HoTen = user.Ho + user.Ten,
                     Email = user.Email,

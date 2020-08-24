@@ -1,0 +1,38 @@
+﻿@model QuanLySinhVien.ViewModel.System.Users.RoleAssignRequest
+
+@{
+    ViewData["Title"] = "Phân quyền";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary"><a class="btn btn-success" asp-action="Index" asp-controller="User">Danh sách user</a></h6>
+            </div>
+            <form asp-action="RoleAssign">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @for (var i = 0; i < Model.Roles.Count; i++)
+                {
+                    <div class="form-group">
+                        <label>
+                            @Model.Roles[i].Name
+                            <input type="checkbox" asp-for="Roles[i].Selected" />
+                            <input type="hidden" asp-for="Roles[i].Id" />
+                            <input type="hidden" asp-for="Roles[i].Name" />
+                        </label>
+                    </div>
+                }
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" readonly />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
