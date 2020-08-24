@@ -18,6 +18,7 @@ using Microsoft.OpenApi.Models;
 using QuanLySinhVien.Data.EF;
 using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.Service.Catalog.MonHocs;
+using QuanLySinhVien.Service.System.Roles;
 using QuanLySinhVien.Service.System.Users;
 using QuanLySinhVien.ViewModel.Contants;
 using QuanLySinhVien.ViewModel.System.Users;
@@ -49,7 +50,7 @@ namespace QuanLySinhVien.BackendApi
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserService, UserService>();
-
+            services.AddTransient<IRoleService, RoleService>();
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
 
             services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>()); ;
