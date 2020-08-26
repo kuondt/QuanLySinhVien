@@ -49,6 +49,12 @@ namespace QuanLySinhVien.Service.System.Users
 
             var roles = await _userManager.GetRolesAsync(user);
 
+            //Only role == admin can be login
+            if(!roles.Contains("admin"))
+            {
+                return new ApiErrorResult<string>("Tài khoản không thể truy cập");
+            }
+
             var claims = new[]
             {
                 new Claim(ClaimTypes.Email,user.Email),
