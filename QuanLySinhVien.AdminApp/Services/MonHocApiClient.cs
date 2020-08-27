@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using QuanLySinhVien.ViewModel.Catalog.MonHocs;
 using QuanLySinhVien.ViewModel.Common;
+using QuanLySinhVien.ViewModel.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,22 +27,25 @@ namespace QuanLySinhVien.AdminApp.Services
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<ApiResult<bool>> Create(MonHoc_CreateRequest request)
+        public async Task<bool> Create(MonHoc_CreateRequest request)
         {
+            var sessions = _httpContextAccessor
+                .HttpContext
+                .Session
+                .GetString(SystemConstants.AppSettings.Token);
+
             var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
-            var json = JsonConvert.SerializeObject(request);
-            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            var jsonString = JsonConvert.SerializeObject(request);
+            var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync($"/api/users", httpContent);
 
-            var result = await response.Content.ReadAsStringAsync();
+            var response = await client.PostAsync($"/api/monhocs/", content);
 
-            if (response.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+                return response.IsSuccessStatusCode;
 
-            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
 
         public async Task<PagedResult<MonHoc_ViewModel>> GetAllPaging(MonHoc_ManagePagingRequest request)

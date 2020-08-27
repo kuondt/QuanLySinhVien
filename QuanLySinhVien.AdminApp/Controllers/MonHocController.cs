@@ -41,5 +41,27 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return View(data);
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromForm] MonHoc_CreateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View(request);
+
+            var result = await _monHocApiClient.Create(request);
+            if (result)
+            {
+                TempData["result"] = "Thêm mới thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Thêm mới thất bại");
+            return View(request);
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace QuanLySinhVien.AdminApp.Services
 {
     public interface IMonHocApiClient
     {
-        Task<ApiResult<bool>> Create(MonHoc_CreateRequest request);
+        Task<bool> Create(MonHoc_CreateRequest request);
 
         Task<MonHoc_ViewModel> GetById(string ID_MonHoc);
 

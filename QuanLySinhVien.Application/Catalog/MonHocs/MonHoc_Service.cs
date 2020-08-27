@@ -94,7 +94,8 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
                     SoThuTu = x.mh.SoThuTu,
                     TenMonHoc = x.mh.TenMonHoc,
                     SoTiet = x.mh.SoTiet,
-                    SoTinChi = x.mh.SoTinChi
+                    SoTinChi = x.mh.SoTinChi,
+                    ID_Khoa = x.mh.ID_Khoa
                 }).ToListAsync();
 
             var pagedResult = new PagedResult<MonHoc_ViewModel>()
