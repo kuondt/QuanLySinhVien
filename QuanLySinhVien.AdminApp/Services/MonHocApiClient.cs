@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace QuanLySinhVien.AdminApp.Services
 {
-    public class MonHocApiClient : BaseApiClient, IMonHocApiClient
+    public class MonHocApiClient :  IMonHocApiClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public MonHocApiClient(IHttpClientFactory httpClientFactory, IConfiguration configuration, IHttpContextAccessor httpContextAccessor) : base(httpClientFactory, httpContextAccessor, configuration)
+        public MonHocApiClient(IHttpClientFactory httpClientFactory, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
@@ -44,14 +44,19 @@ namespace QuanLySinhVien.AdminApp.Services
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
 
-        public async Task<PagedResult<MonHoc_ViewModel>> GetAllPaging(MonHoc_ManagePagingRequest request)
+        public async Task<ApiResult<PagedResult<MonHoc_ViewModel>>> GetAllPaging(MonHoc_ManagePagingRequest request)
         {
-            var data = await GetAsync<PagedResult<MonHoc_ViewModel>>(
-                $"/api/MonHocs?pageIndex={request.PageIndex}" +
-                $"&pageSize={request.PageSize}" +
-                $"&keyword={request.Keyword}");
+            var client = _httpClientFactory.CreateClient();
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
 
-            return data;
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/monhocs/paging?pageIndex=" +
+                $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
+
+            var body = await response.Content.ReadAsStringAsync();
+            var mh = JsonConvert.DeserializeObject<ApiSuccessResult<PagedResult<MonHoc_ViewModel>>>(body);
+            return mh;
         }
 
         public Task<MonHoc_ViewModel> GetById(string ID_MonHoc)

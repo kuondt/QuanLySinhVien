@@ -15,6 +15,6 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
 
         Task<int> Update(MonHoc_UpdateRequest request);
 
-        Task<PagedResult<MonHoc_ViewModel>> GetAllPaging(MonHoc_ManagePagingRequest request);
+        Task<ApiResult<PagedResult<MonHoc_ViewModel>>> GetAllPaging(MonHoc_ManagePagingRequest request);
     }
 }

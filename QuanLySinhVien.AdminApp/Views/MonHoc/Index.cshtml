@@ -1,7 +1,9 @@
-﻿@model IEnumerable<QuanLySinhVien.ViewModel.Catalog.MonHocs.MonHoc_ViewModel>
+﻿@using QuanLySinhVien.ViewModel.Catalog.MonHocs;
+@using QuanLySinhVien.ViewModel.Common
+@model PagedResult<MonHoc_ViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Môn học";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -17,7 +19,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Danh sách user</h1>
+    <h1 class="h3 mb-2 text-gray-800">Danh sách môn học</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -25,7 +27,7 @@
             <div class="user-topbar">
                 <div class="float-left">
                     <h6 class="m-0 font-weight-bold text-primary">
-                        <a class="btn btn-success" asp-action="Create" asp-controller="User">Tạo mới user</a>
+                        <a class="btn btn-success" asp-action="Create" asp-controller="MonHoc">Tạo mới</a>
                     </h6>
                 </div>
                 <div class=" float-lg-right">
@@ -53,28 +55,28 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.ID)
+                            ID
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.SoThuTu)
+                            STT
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.TenMonHoc)
+                            Tên môn học
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.SoTiet)
+                            Số tiết
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.SoTinChi)
+                            Số tín chỉ
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ID_Khoa)
+                            ID Khoa
                         </th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Items)
                     {
                         <tr>
                             <td>
@@ -104,7 +106,7 @@
                     }
                 </tbody>
             </table>
-            @*@await Component.InvokeAsync("Pager", Model)*@
+            @await Component.InvokeAsync("Pager", Model)
         </div>
     </div>
 

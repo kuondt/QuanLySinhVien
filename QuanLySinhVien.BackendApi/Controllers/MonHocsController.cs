@@ -23,7 +23,7 @@ namespace QuanLySinhVien.BackendApi.Controllers
             _monHoc_Service = monHoc_Service;
         }
 
-        [HttpGet]
+        [HttpGet("paging")]
         public async Task<IActionResult> GetAllPaging([FromQuery] MonHoc_ManagePagingRequest request)
         {
             var monHoc = await _monHoc_Service.GetAllPaging(request);

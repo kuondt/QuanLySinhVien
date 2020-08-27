@@ -73,11 +73,16 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<PagedResult<MonHoc_ViewModel>> GetAllPaging(MonHoc_ManagePagingRequest request)
+        public async Task<ApiResult<PagedResult<MonHoc_ViewModel>>> GetAllPaging(MonHoc_ManagePagingRequest request)
         {
             var query = from mh 
                         in _context.MonHocs                     
-                        select new { mh };            
+                        select new { mh };
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.mh.TenMonHoc.Contains(request.Keyword));
+            }
 
             int totalRow = await query.CountAsync();
 
@@ -95,9 +100,11 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
             var pagedResult = new PagedResult<MonHoc_ViewModel>()
             {
                 TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
                 Items = data
             };
-            return pagedResult;
+            return new ApiSuccessResult<PagedResult<MonHoc_ViewModel>>(pagedResult);
         }
     }
 }
