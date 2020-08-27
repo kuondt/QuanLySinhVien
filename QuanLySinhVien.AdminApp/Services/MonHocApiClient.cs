@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace QuanLySinhVien.AdminApp.Services
 {
-    public class MonHocApiClient :  IMonHocApiClient
+    public class MonHocApiClient : BaseApiClient, IMonHocApiClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public MonHocApiClient(IHttpClientFactory httpClientFactory, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public MonHocApiClient(IHttpClientFactory httpClientFactory, IConfiguration configuration, IHttpContextAccessor httpContextAccessor) : base(httpClientFactory, httpContextAccessor, configuration)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
@@ -46,17 +46,11 @@ namespace QuanLySinhVien.AdminApp.Services
 
         public async Task<PagedResult<MonHoc_ViewModel>> GetAllPaging(MonHoc_ManagePagingRequest request)
         {
-            var client = _httpClientFactory.CreateClient();
-            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
-
-            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-            var response = await client.GetAsync($"/api/monhocs/paging?pageIndex=" +
-                $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
-
-            var body = await response.Content.ReadAsStringAsync();
-            var mh = JsonConvert.DeserializeObject<PagedResult<MonHoc_ViewModel>>(body);
-            return mh;
+            var monHocs = await GetAsync<PagedResult<MonHoc_ViewModel>>(
+                $"/api/monhocs/paging?pageIndex={request.PageIndex}" +
+                $"&pageSize={request.PageSize}" +
+                $"&keyword={request.Keyword}");
+            return monHocs;
         }
 
         public Task<MonHoc_ViewModel> GetById(string ID_MonHoc)
