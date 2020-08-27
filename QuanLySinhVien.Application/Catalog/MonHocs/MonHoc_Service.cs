@@ -20,7 +20,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
             _context = context;
         }
 
-        public async Task<string> Create(MonHoc_CreateRequest request)
+        public async Task<string> Create(MonHocCreateRequest request)
         {
             //Chọn STT cuối và cộng thêm 1
             int soThuTu_MonHoc = _context.MonHocs.OrderBy(monHoc => monHoc.ID).ToList().Last().SoThuTu + 1;
@@ -42,11 +42,11 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
         }
 
 
-        public async Task<MonHoc_ViewModel> GetById(string ID_MonHoc)
+        public async Task<MonHocViewModel> GetById(string ID_MonHoc)
         {
             var monHoc = await _context.MonHocs.FindAsync(ID_MonHoc);          
 
-            var monHocViewModel = new MonHoc_ViewModel()
+            var monHocViewModel = new MonHocViewModel()
             {
                 ID = monHoc.ID,
                 TenMonHoc = monHoc.TenMonHoc,
@@ -57,13 +57,13 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
             return monHocViewModel;
         }
 
-        public async Task<int> Update(MonHoc_UpdateRequest request)
+        public async Task<int> Update(string ID, MonHocUpdateRequest request)
         {
-            var monHoc = await _context.MonHocs.FindAsync(request.ID);
+            var monHoc = await _context.MonHocs.FindAsync(ID);
 
             if (monHoc == null)
             {
-                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {request.ID}");
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {ID}");
             }
 
             monHoc.TenMonHoc = request.TenMonHoc;
@@ -73,7 +73,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<PagedResult<MonHoc_ViewModel>> GetAllPaging(MonHoc_ManagePagingRequest request)
+        public async Task<PagedResult<MonHocViewModel>> GetAllPaging(MonHocManagePagingRequest request)
         {
             var query = from mh 
                         in _context.MonHocs                     
@@ -88,7 +88,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
 
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
-                .Select(x => new MonHoc_ViewModel()
+                .Select(x => new MonHocViewModel()
                 {
                     ID = x.mh.ID,
                     SoThuTu = x.mh.SoThuTu,
@@ -98,7 +98,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
                     ID_Khoa = x.mh.ID_Khoa
                 }).ToListAsync();
 
-            var pagedResult = new PagedResult<MonHoc_ViewModel>()
+            var pagedResult = new PagedResult<MonHocViewModel>()
             {
                 TotalRecords = totalRow,
                 PageIndex = request.PageIndex,

@@ -1,6 +1,6 @@
 ﻿@using QuanLySinhVien.ViewModel.Catalog.MonHocs;
 @using QuanLySinhVien.ViewModel.Common
-@model PagedResult<MonHoc_ViewModel>
+@model PagedResult<MonHocViewModel>
 
 @{
     ViewData["Title"] = "Môn học";
@@ -92,8 +92,8 @@
                                 @Html.DisplayFor(modelItem => item.SoTinChi)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |                              
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
                             </td>
                         </tr>
                     }

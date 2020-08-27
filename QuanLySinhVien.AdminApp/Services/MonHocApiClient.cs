@@ -27,7 +27,7 @@ namespace QuanLySinhVien.AdminApp.Services
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<bool> Create(MonHoc_CreateRequest request)
+        public async Task<bool> Create(MonHocCreateRequest request)
         {
             var sessions = _httpContextAccessor
                 .HttpContext
@@ -48,23 +48,34 @@ namespace QuanLySinhVien.AdminApp.Services
 
         }
 
-        public async Task<PagedResult<MonHoc_ViewModel>> GetAllPaging(MonHoc_ManagePagingRequest request)
+        public async Task<PagedResult<MonHocViewModel>> GetAllPaging(MonHocManagePagingRequest request)
         {
-            var monHocs = await GetAsync<PagedResult<MonHoc_ViewModel>>(
+            var monHocs = await GetAsync<PagedResult<MonHocViewModel>>(
                 $"/api/monhocs/paging?pageIndex={request.PageIndex}" +
                 $"&pageSize={request.PageSize}" +
                 $"&keyword={request.Keyword}");
             return monHocs;
         }
 
-        public Task<MonHoc_ViewModel> GetById(string ID_MonHoc)
+        public Task<MonHocViewModel> GetById(string ID_MonHoc)
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> Update(MonHoc_UpdateRequest request)
+        public async Task<bool> Update(string id, MonHocUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync($"/api/monhocs/{id}", httpContent);
+            var result = await response.Content.ReadAsStringAsync();
+            return response.IsSuccessStatusCode;            
         }
 
     }

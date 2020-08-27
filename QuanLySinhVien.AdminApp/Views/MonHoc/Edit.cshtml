@@ -1,15 +1,17 @@
-﻿@model QuanLySinhVien.ViewModel.Catalog.MonHocs.MonHocCreateRequest
+﻿@model QuanLySinhVien.ViewModel.Catalog.MonHocs.MonHocUpdateRequest
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Cập nhật";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Create">
+            <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
                 <div class="form-group">
                     <label asp-for="TenMonHoc" class="control-label"></label>
                     <input asp-for="TenMonHoc" class="form-control" />
@@ -21,7 +23,7 @@
                     <span asp-validation-for="SoTinChi" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <button type="submit" value="Create" class="btn btn-primary" >Đồng ý</button>
+                    <button type="submit" value="Save" class="btn btn-primary" >Đồng ý</button>
                 </div>
             </form>
         </div>

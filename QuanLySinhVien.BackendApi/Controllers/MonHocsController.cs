@@ -24,7 +24,7 @@ namespace QuanLySinhVien.BackendApi.Controllers
         }
 
         [HttpGet("paging")]
-        public async Task<IActionResult> GetAllPaging([FromQuery] MonHoc_ManagePagingRequest request)
+        public async Task<IActionResult> GetAllPaging([FromQuery] MonHocManagePagingRequest request)
         {
             var monHoc = await _monHoc_Service.GetAllPaging(request);
             return Ok(monHoc);
@@ -40,7 +40,7 @@ namespace QuanLySinhVien.BackendApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]MonHoc_CreateRequest request)
+        public async Task<IActionResult> Create([FromBody]MonHocCreateRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -56,9 +56,9 @@ namespace QuanLySinhVien.BackendApi.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromForm] MonHoc_UpdateRequest request)
+        public async Task<IActionResult> Update([FromQuery] string ID, [FromForm] MonHocUpdateRequest request)
         {
-            var affectedResult = await _monHoc_Service.Update(request);
+            var affectedResult = await _monHoc_Service.Update(ID, request);
             if (affectedResult == 0)
                 return BadRequest();
             return Ok();

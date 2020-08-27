@@ -23,7 +23,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
 
         public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 3)
         {
-            var request = new MonHoc_ManagePagingRequest()
+            var request = new MonHocManagePagingRequest()
             {
                 Keyword = keyword,
                 PageIndex = pageIndex,
@@ -48,7 +48,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm] MonHoc_CreateRequest request)
+        public async Task<IActionResult> Create([FromForm] MonHocCreateRequest request)
         {
             if (!ModelState.IsValid)
                 return View(request);
@@ -63,5 +63,30 @@ namespace QuanLySinhVien.AdminApp.Controllers
             ModelState.AddModelError("", "Thêm mới thất bại");
             return View(request);
         }
+
+        [HttpGet]
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(MonHocUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _monHocApiClient.Update(request.ID, request);
+            if (result)
+            {
+                TempData["result"] = "Cập nhật thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Cập nhật không thành công");
+            return View(request);
+        }
+
+
     }
 }

@@ -5,8 +5,7 @@ using System.Text;
 
 namespace QuanLySinhVien.ViewModel.Catalog.MonHocs
 {
-    public class MonHoc_ManagePagingRequest : PagingRequestBase
+    public class MonHocPublicPagingRequest : PagingRequestBase
     {
-        public string Keyword { get; set; }
     }
 }

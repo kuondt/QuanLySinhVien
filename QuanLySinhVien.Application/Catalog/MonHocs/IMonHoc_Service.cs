@@ -9,12 +9,12 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
 {
     public interface IMonHoc_Service
     {
-        Task<string> Create(MonHoc_CreateRequest request);
+        Task<string> Create(MonHocCreateRequest request);
 
-        Task<MonHoc_ViewModel> GetById(string ID_MonHoc);
+        Task<MonHocViewModel> GetById(string ID_MonHoc);
 
-        Task<int> Update(MonHoc_UpdateRequest request);
+        Task<int> Update(string ID, MonHocUpdateRequest request);
 
-        Task<PagedResult<MonHoc_ViewModel>> GetAllPaging(MonHoc_ManagePagingRequest request);
+        Task<PagedResult<MonHocViewModel>> GetAllPaging(MonHocManagePagingRequest request);
     }
 }
