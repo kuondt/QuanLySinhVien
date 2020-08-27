@@ -107,7 +107,7 @@ namespace QuanLySinhVien.Service.System.Users
                 return new ApiSuccessResult<bool>();
             }
 
-            //return error list
+            //return error list if register request conflict with rule of Idenity
             var errors = result.Errors;
             var errorMessage = errors.Select(x => x.Description);
             string listErrors = string.Join(" ", errorMessage);

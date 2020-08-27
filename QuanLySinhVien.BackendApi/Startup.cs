@@ -20,7 +20,7 @@ using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.Service.Catalog.MonHocs;
 using QuanLySinhVien.Service.System.Roles;
 using QuanLySinhVien.Service.System.Users;
-using QuanLySinhVien.ViewModel.Contants;
+using QuanLySinhVien.ViewModel.Constants;
 using QuanLySinhVien.ViewModel.System.Users;
 
 namespace QuanLySinhVien.BackendApi
@@ -38,7 +38,7 @@ namespace QuanLySinhVien.BackendApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<QLSV_DBContext>(options =>
-        options.UseSqlServer(Configuration.GetConnectionString(SystemContants.MainConnectString)));
+        options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectString)));
 
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<QLSV_DBContext>()
