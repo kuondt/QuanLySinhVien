@@ -44,7 +44,7 @@ namespace QuanLySinhVien.AdminApp.Services
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
 
-        public async Task<ApiResult<PagedResult<MonHoc_ViewModel>>> GetAllPaging(MonHoc_ManagePagingRequest request)
+        public async Task<PagedResult<MonHoc_ViewModel>> GetAllPaging(MonHoc_ManagePagingRequest request)
         {
             var client = _httpClientFactory.CreateClient();
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
@@ -55,7 +55,7 @@ namespace QuanLySinhVien.AdminApp.Services
                 $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
 
             var body = await response.Content.ReadAsStringAsync();
-            var mh = JsonConvert.DeserializeObject<ApiSuccessResult<PagedResult<MonHoc_ViewModel>>>(body);
+            var mh = JsonConvert.DeserializeObject<PagedResult<MonHoc_ViewModel>>(body);
             return mh;
         }
 

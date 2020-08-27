@@ -73,7 +73,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<ApiResult<PagedResult<MonHoc_ViewModel>>> GetAllPaging(MonHoc_ManagePagingRequest request)
+        public async Task<PagedResult<MonHoc_ViewModel>> GetAllPaging(MonHoc_ManagePagingRequest request)
         {
             var query = from mh 
                         in _context.MonHocs                     
@@ -104,7 +104,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
                 PageSize = request.PageSize,
                 Items = data
             };
-            return new ApiSuccessResult<PagedResult<MonHoc_ViewModel>>(pagedResult);
+            return pagedResult;
         }
     }
 }

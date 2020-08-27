@@ -38,7 +38,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
                 ViewBag.SuccessMessage = TempData["result"];
             }
 
-            return View(data.ResultObj);
+            return View(data);
         }
 
     }
