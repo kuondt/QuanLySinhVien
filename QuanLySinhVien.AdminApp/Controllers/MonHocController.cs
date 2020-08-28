@@ -98,6 +98,23 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return View(request);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            var monHoc = await _monHocApiClient.GetById(id);
+            if (monHoc != null)
+            {
+                var monHocViewModel = new MonHocViewModel()
+                {
+                    ID = monHoc.ID,
+                    TenMonHoc = monHoc.TenMonHoc,
+                    SoTiet = monHoc.SoTiet,
+                    SoTinChi = monHoc.SoTinChi
+                };
+                return View(monHocViewModel);
+            }
+            return RedirectToAction("Error", "Home");
+        }
 
     }
 }
