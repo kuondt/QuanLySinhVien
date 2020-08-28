@@ -4,6 +4,7 @@ using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.Data.Enums;
 using QuanLySinhVien.ViewModel.Catalog.GiangViens;
 using QuanLySinhVien.ViewModel.Common;
+using QuanLySinhVien.ViewModel.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,14 +88,48 @@ namespace QuanLySinhVien.Service.Catalog.GiangViens
             return pagedResult;
         }
 
-        public Task<GiangVienViewModel> GetById(string id)
+        public async Task<GiangVienViewModel> GetById(string id)
         {
-            throw new NotImplementedException();
+            var monHoc = await _context.GiangViens.FindAsync(id);
+
+            var monHocViewModel = new GiangVienViewModel()
+            {
+                ID = monHoc.ID,
+                SoThuTu = monHoc.SoThuTu,
+                Ho = monHoc.Ho,
+                Ten = monHoc.Ten,
+                HoTen = monHoc.Ho + monHoc.Ten,
+                DiaChi = monHoc.DiaChi,
+                Email = monHoc.Email,
+                SoDienThoai = monHoc.SoDienThoai,
+                GioiTinh = monHoc.GioiTinh,
+                NgaySinh = monHoc.NgaySinh,
+                IsActive = monHoc.IsActive,
+            };
+            return monHocViewModel;
         }
 
-        public Task<int> Update(string id, GiangVienUpdateRequest request)
+        public async Task<int> Update(string id, GiangVienUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var monHoc = await _context.GiangViens.FindAsync(id);
+
+            if (monHoc == null)
+            {
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
+            }
+
+            monHoc.ID = request.ID;
+            monHoc.Ho = request.Ho;
+            monHoc.Ten = request.Ten;
+            monHoc.HoTen = request.Ho + request.Ten;
+            monHoc.DiaChi = request.DiaChi;
+            monHoc.Email = request.Email;
+            monHoc.SoDienThoai = request.SoDienThoai;
+            monHoc.GioiTinh = request.GioiTinh;
+            monHoc.NgaySinh = request.NgaySinh;
+            monHoc.IsActive = request.IsActive;
+
+            return await _context.SaveChangesAsync();
         }
     }
 }
