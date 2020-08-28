@@ -20,4 +20,9 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.1.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Catalog\ChuongTrinhDaoTaos\" />
+    <Folder Include="Catalog\SinhViens\" />
+  </ItemGroup>
+
 </Project>
