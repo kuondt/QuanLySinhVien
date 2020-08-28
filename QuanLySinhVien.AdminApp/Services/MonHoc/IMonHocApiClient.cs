@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuanLySinhVien.AdminApp.Services
+namespace QuanLySinhVien.AdminApp.Services.MonHoc
 {
     public interface IMonHocApiClient
     {

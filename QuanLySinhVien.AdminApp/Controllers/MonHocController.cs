@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using QuanLySinhVien.AdminApp.Services;
+using QuanLySinhVien.AdminApp.Services.MonHoc;
 using QuanLySinhVien.ViewModel.Catalog.MonHocs;
 
 namespace QuanLySinhVien.AdminApp.Controllers

@@ -13,7 +13,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuanLySinhVien.AdminApp.Services
+namespace QuanLySinhVien.AdminApp.Services.MonHoc
 {
     public class MonHocApiClient : BaseApiClient, IMonHocApiClient
     {
@@ -45,7 +45,7 @@ namespace QuanLySinhVien.AdminApp.Services
 
             var response = await client.PostAsync($"/api/monhocs/", content);
 
-                return response.IsSuccessStatusCode;
+            return response.IsSuccessStatusCode;
 
         }
 
@@ -78,7 +78,7 @@ namespace QuanLySinhVien.AdminApp.Services
 
             var response = await client.PutAsync($"/api/monhocs/{id}", httpContent);
 
-            return response.IsSuccessStatusCode;            
+            return response.IsSuccessStatusCode;
         }
 
     }

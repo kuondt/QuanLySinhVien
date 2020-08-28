@@ -71,6 +71,76 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGiangVien" aria-expanded="true" aria-controls="collapseGiangVien">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Giảng viên</span>
+                </a>
+                <div id="collapseGiangVien" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-controller="GiangVien" asp-action="Index">Danh sách</a>
+                        <a class="collapse-item" asp-controller="GiangVien" asp-action="Create">Thêm mới</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-controller="SinhVien" asp-action="Index">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Sinh viên</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-controller="LopBienChe" asp-action="Index">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Lớp biên chế</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-controller="Phong" asp-action="Index">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Phòng</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-controller="PhanCong" asp-action="Index">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Phân Công</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-controller="SinhVienLopHocPhan" asp-action="Index">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Danh sách sinh viên LHP</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-controller="SinhVienLopHocPhan" asp-action="Index">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Học kỳ</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-controller="LopHocPhan" asp-action="Index">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Lớp học phần</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true" aria-controls="collapseUser">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Người dùng</span>
@@ -335,7 +405,7 @@
                                 <div class="ml-3">
                                     <form method="POST" asp-controller="User" asp-action="Logout">
                                         <button type="submit" class="btn btn-outline-dark" value="Logout">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                             Đăng xuất
                                         </button>
                                     </form>

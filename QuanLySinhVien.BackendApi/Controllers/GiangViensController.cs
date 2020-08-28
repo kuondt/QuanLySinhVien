@@ -67,17 +67,17 @@ namespace QuanLySinhVien.BackendApi.Controllers
 
         }
 
-        [HttpPut("isactive/{id}")]
-        public async Task<IActionResult> IsActiveUpdate(string id)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+        //[HttpPut("isactive/{id}")]
+        //public async Task<IActionResult> IsActiveUpdate(string id)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
 
-            var affectedResult = await _giangVienService.IsActiveUpdate(id);
-            if (affectedResult == 0)
-                return BadRequest();
-            return Ok();
+        //    var affectedResult = await _giangVienService.IsActiveUpdate(id);
+        //    if (affectedResult == 0)
+        //        return BadRequest();
+        //    return Ok();
 
-        }
+        //}
     }
 }

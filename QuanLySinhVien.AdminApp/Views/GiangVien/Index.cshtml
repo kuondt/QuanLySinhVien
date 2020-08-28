@@ -1,0 +1,96 @@
+﻿@using QuanLySinhVien.ViewModel.Catalog.GiangViens;
+@using QuanLySinhVien.ViewModel.Common
+@model PagedResult<GiangVienViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    STT
+                </th>
+                <th>
+                    HO
+                </th>
+                <th>
+                    Tên
+                </th>
+                <th>
+                    Họ Tên
+                </th>
+                <th>
+                    Ngày sinh
+                </th>
+                <th>
+                    GioiTinh
+                </th>
+                <th>
+                    SĐT
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+                <th>
+                    Tình trạng
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoThuTu)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ho)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ten)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoTen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgaySinh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GioiTinh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoDienThoai)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaChi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
