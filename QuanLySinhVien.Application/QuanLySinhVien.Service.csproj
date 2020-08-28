@@ -32,6 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Catalog\ChuongTrinhDaoTaos\" />
+    <Folder Include="Catalog\Khoas\" />
+    <Folder Include="Catalog\SinhViens\" />
     <Folder Include="Common\" />
   </ItemGroup>
 

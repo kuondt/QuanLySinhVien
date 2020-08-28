@@ -11,7 +11,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
     {
         Task<string> Create(MonHocCreateRequest request);
 
-        Task<MonHocViewModel> GetById(string ID_MonHoc);
+        Task<MonHocViewModel> GetById(string id);
 
         Task<int> Update(string id, MonHocUpdateRequest request);
 
