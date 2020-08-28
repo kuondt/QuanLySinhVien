@@ -34,7 +34,7 @@ namespace QuanLySinhVien.Service.Catalog.GiangViens
                 SoThuTu = soThuTu_GiangVien,
                 Ho = request.Ho,
                 Ten = request.Ten,
-                HoTen = request.Ho + request.Ten,
+                HoTen = request.Ho + " " + request.Ten,
                 ID_Khoa = "KTCN",
                 DiaChi = request.DiaChi,
                 Email = request.Email,
@@ -69,7 +69,7 @@ namespace QuanLySinhVien.Service.Catalog.GiangViens
                     SoThuTu = x.gv.SoThuTu,
                     Ho = x.gv.Ho,
                     Ten = x.gv.Ten,
-                    HoTen = x.gv.Ho + x.gv.Ten,
+                    HoTen = x.gv.HoTen,
                     DiaChi = x.gv.DiaChi,
                     Email = x.gv.Email,
                     SoDienThoai = x.gv.SoDienThoai,
@@ -90,44 +90,43 @@ namespace QuanLySinhVien.Service.Catalog.GiangViens
 
         public async Task<GiangVienViewModel> GetById(string id)
         {
-            var monHoc = await _context.GiangViens.FindAsync(id);
+            var giangVien = await _context.GiangViens.FindAsync(id);
 
-            var monHocViewModel = new GiangVienViewModel()
+            var giangVienViewModel = new GiangVienViewModel()
             {
-                ID = monHoc.ID,
-                SoThuTu = monHoc.SoThuTu,
-                Ho = monHoc.Ho,
-                Ten = monHoc.Ten,
-                HoTen = monHoc.Ho + monHoc.Ten,
-                DiaChi = monHoc.DiaChi,
-                Email = monHoc.Email,
-                SoDienThoai = monHoc.SoDienThoai,
-                GioiTinh = monHoc.GioiTinh,
-                NgaySinh = monHoc.NgaySinh,
-                IsActive = monHoc.IsActive,
+                ID = giangVien.ID,
+                SoThuTu = giangVien.SoThuTu,
+                Ho = giangVien.Ho,
+                Ten = giangVien.Ten,
+                HoTen = giangVien.HoTen,
+                DiaChi = giangVien.DiaChi,
+                Email = giangVien.Email,
+                SoDienThoai = giangVien.SoDienThoai,
+                GioiTinh = giangVien.GioiTinh,
+                NgaySinh = giangVien.NgaySinh,
+                IsActive = giangVien.IsActive,
             };
-            return monHocViewModel;
+            return giangVienViewModel;
         }
 
         public async Task<int> Update(string id, GiangVienUpdateRequest request)
         {
-            var monHoc = await _context.GiangViens.FindAsync(id);
+            var giangVien = await _context.GiangViens.FindAsync(id);
 
-            if (monHoc == null)
+            if (giangVien == null)
             {
                 throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
             }
 
-            monHoc.ID = request.ID;
-            monHoc.Ho = request.Ho;
-            monHoc.Ten = request.Ten;
-            monHoc.HoTen = request.Ho + request.Ten;
-            monHoc.DiaChi = request.DiaChi;
-            monHoc.Email = request.Email;
-            monHoc.SoDienThoai = request.SoDienThoai;
-            monHoc.GioiTinh = request.GioiTinh;
-            monHoc.NgaySinh = request.NgaySinh;
-            monHoc.IsActive = request.IsActive;
+            giangVien.Ho = request.Ho;
+            giangVien.Ten = request.Ten;
+            giangVien.HoTen = request.Ho + " " + request.Ten;
+            giangVien.DiaChi = request.DiaChi;
+            giangVien.Email = request.Email;
+            giangVien.SoDienThoai = request.SoDienThoai;
+            giangVien.GioiTinh = request.GioiTinh;
+            giangVien.NgaySinh = request.NgaySinh;
+            giangVien.IsActive = request.IsActive;
 
             return await _context.SaveChangesAsync();
         }

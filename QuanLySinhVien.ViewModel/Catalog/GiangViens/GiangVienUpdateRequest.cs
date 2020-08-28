@@ -16,7 +16,6 @@ namespace QuanLySinhVien.ViewModel.Catalog.GiangViens
         public string SoDienThoai { get; set; }
         public string Email { get; set; }
         public string DiaChi { get; set; }
-        public string ID_Khoa { get; set; }
         public Status IsActive { get; set; }
     }
 }

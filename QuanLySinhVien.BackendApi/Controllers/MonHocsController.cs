@@ -50,9 +50,9 @@ namespace QuanLySinhVien.BackendApi.Controllers
             if (ID_MonHoc == null)
                 return BadRequest();
 
-            var product = await _monHoc_Service.GetById(ID_MonHoc);
+            var monHoc = await _monHoc_Service.GetById(ID_MonHoc);
 
-            return CreatedAtAction(nameof(GetById), new { id = ID_MonHoc }, product);
+            return CreatedAtAction(nameof(GetById), new { id = ID_MonHoc }, monHoc);
         }
 
         [HttpPut("{id}")]

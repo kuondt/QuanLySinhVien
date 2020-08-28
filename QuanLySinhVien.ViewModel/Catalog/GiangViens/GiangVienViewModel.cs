@@ -20,6 +20,5 @@ namespace QuanLySinhVien.ViewModel.Catalog.GiangViens
         public string DiaChi { get; set; }
         public string ID_Khoa { get; set; }
         public Status IsActive { get; set; }
-        public Khoa Khoa { get; set; }
     }
 }
