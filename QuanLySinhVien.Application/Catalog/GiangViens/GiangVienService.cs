@@ -92,6 +92,11 @@ namespace QuanLySinhVien.Service.Catalog.GiangViens
         {
             var giangVien = await _context.GiangViens.FindAsync(id);
 
+            if (giangVien == null)
+            {
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
+            }
+
             var giangVienViewModel = new GiangVienViewModel()
             {
                 ID = giangVien.ID,
@@ -107,6 +112,26 @@ namespace QuanLySinhVien.Service.Catalog.GiangViens
                 IsActive = giangVien.IsActive,
             };
             return giangVienViewModel;
+        }
+
+        public async Task<int> IsActiveUpdate(string id)
+        {
+            var giangVien = await _context.GiangViens.FindAsync(id);
+
+            if (giangVien == null)
+            {
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
+            }
+            if(giangVien.IsActive == Status.Active)
+            {
+                giangVien.IsActive = Status.InActive;
+            }
+            else
+            {
+                giangVien.IsActive = Status.Active;
+            }
+
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<int> Update(string id, GiangVienUpdateRequest request)
@@ -126,7 +151,6 @@ namespace QuanLySinhVien.Service.Catalog.GiangViens
             giangVien.SoDienThoai = request.SoDienThoai;
             giangVien.GioiTinh = request.GioiTinh;
             giangVien.NgaySinh = request.NgaySinh;
-            giangVien.IsActive = request.IsActive;
 
             return await _context.SaveChangesAsync();
         }

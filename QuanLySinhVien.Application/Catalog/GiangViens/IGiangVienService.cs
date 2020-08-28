@@ -14,6 +14,8 @@ namespace QuanLySinhVien.Service.Catalog.GiangViens
 
         Task<int> Update(string id, GiangVienUpdateRequest request);
 
+        Task<int> IsActiveUpdate(string id);
+
         Task<GiangVienViewModel> GetById(string id);
 
         Task<PagedResult<GiangVienViewModel>> GetAllPaging(GiangVienManagePagingRequest request);
