@@ -25,4 +25,8 @@
     <Folder Include="Catalog\SinhViens\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QuanLySinhVien.Data\QuanLySinhVien.Data.csproj" />
+  </ItemGroup>
+
 </Project>
