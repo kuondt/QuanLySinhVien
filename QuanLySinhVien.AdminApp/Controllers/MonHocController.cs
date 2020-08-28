@@ -65,18 +65,29 @@ namespace QuanLySinhVien.AdminApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            var monHoc = await _monHocApiClient.GetById(id);
+            if (monHoc != null)
+            {
+                var updateRequest = new MonHocUpdateRequest()
+                {
+                    ID = monHoc.ID,
+                    TenMonHoc = monHoc.TenMonHoc,
+                    SoTinChi = monHoc.SoTinChi
+                };
+                return View(updateRequest);
+            }
+            return RedirectToAction("Error", "Home");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(MonHocUpdateRequest request)
+        public async Task<IActionResult> Edit(string id, MonHocUpdateRequest request)
         {
             if (!ModelState.IsValid)
                 return View();
 
-            var result = await _monHocApiClient.Update(request.ID, request);
+            var result = await _monHocApiClient.Update(id, request);
             if (result)
             {
                 TempData["result"] = "Cập nhật thành công";

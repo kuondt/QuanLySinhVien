@@ -13,7 +13,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
 
         Task<MonHocViewModel> GetById(string ID_MonHoc);
 
-        Task<int> Update(string ID, MonHocUpdateRequest request);
+        Task<int> Update(string id, MonHocUpdateRequest request);
 
         Task<PagedResult<MonHocViewModel>> GetAllPaging(MonHocManagePagingRequest request);
     }

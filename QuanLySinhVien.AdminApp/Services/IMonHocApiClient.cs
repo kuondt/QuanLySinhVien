@@ -11,7 +11,7 @@ namespace QuanLySinhVien.AdminApp.Services
     {
         Task<bool> Create(MonHocCreateRequest request);
 
-        Task<MonHocViewModel> GetById(string ID_MonHoc);
+        Task<MonHocViewModel> GetById(string id);
 
         Task<bool> Update(string id, MonHocUpdateRequest request);
 

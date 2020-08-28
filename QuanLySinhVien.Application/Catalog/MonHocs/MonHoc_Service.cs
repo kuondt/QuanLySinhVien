@@ -57,13 +57,13 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
             return monHocViewModel;
         }
 
-        public async Task<int> Update(string ID, MonHocUpdateRequest request)
+        public async Task<int> Update(string id, MonHocUpdateRequest request)
         {
-            var monHoc = await _context.MonHocs.FindAsync(ID);
+            var monHoc = await _context.MonHocs.FindAsync(request.ID);
 
             if (monHoc == null)
             {
-                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {ID}");
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {request.ID}");
             }
 
             monHoc.TenMonHoc = request.TenMonHoc;

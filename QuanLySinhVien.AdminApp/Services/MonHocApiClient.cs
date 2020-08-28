@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using QuanLySinhVien.ViewModel.Catalog.MonHocs;
 using QuanLySinhVien.ViewModel.Common;
 using QuanLySinhVien.ViewModel.Constants;
+using QuanLySinhVien.ViewModel.System.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,9 +58,11 @@ namespace QuanLySinhVien.AdminApp.Services
             return monHocs;
         }
 
-        public Task<MonHocViewModel> GetById(string ID_MonHoc)
+        public async Task<MonHocViewModel> GetById(string id)
         {
-            throw new NotImplementedException();
+            var monHocs = await GetAsync<MonHocViewModel>(
+                 $"/api/monhocs/{id}");
+            return monHocs;
         }
 
         public async Task<bool> Update(string id, MonHocUpdateRequest request)
@@ -74,7 +77,7 @@ namespace QuanLySinhVien.AdminApp.Services
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await client.PutAsync($"/api/monhocs/{id}", httpContent);
-            var result = await response.Content.ReadAsStringAsync();
+
             return response.IsSuccessStatusCode;            
         }
 

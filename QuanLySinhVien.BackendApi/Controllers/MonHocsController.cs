@@ -30,17 +30,17 @@ namespace QuanLySinhVien.BackendApi.Controllers
             return Ok(monHoc);
         }
 
-        [HttpGet("{ID_MonHoc}")]
-        public async Task<IActionResult> GetById(string ID_MonHoc)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
         {
-            var monHoc = await _monHoc_Service.GetById(ID_MonHoc);
+            var monHoc = await _monHoc_Service.GetById(id);
             if (monHoc == null)
                 return BadRequest("Can not find");
             return Ok(monHoc);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]MonHocCreateRequest request)
+        public async Task<IActionResult> Create([FromBody] MonHocCreateRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -55,13 +55,17 @@ namespace QuanLySinhVien.BackendApi.Controllers
             return CreatedAtAction(nameof(GetById), new { id = ID_MonHoc }, product);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update([FromQuery] string ID, [FromForm] MonHocUpdateRequest request)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(string id, [FromBody] MonHocUpdateRequest request)
         {
-            var affectedResult = await _monHoc_Service.Update(ID, request);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var affectedResult = await _monHoc_Service.Update(id, request);
             if (affectedResult == 0)
                 return BadRequest();
             return Ok();
+
         }
     }
 }
