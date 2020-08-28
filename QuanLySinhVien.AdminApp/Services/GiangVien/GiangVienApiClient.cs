@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using QuanLySinhVien.ViewModel.Catalog.GiangViens;
 using QuanLySinhVien.ViewModel.Common;
+using QuanLySinhVien.ViewModel.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace QuanLySinhVien.AdminApp.Services.GiangVien
@@ -23,9 +27,24 @@ namespace QuanLySinhVien.AdminApp.Services.GiangVien
             _httpClientFactory = httpClientFactory;
         }
 
-        public Task<bool> Create(GiangVienCreateRequest request)
+        public async Task<bool> Create(GiangVienCreateRequest request)
         {
-            throw new NotImplementedException();
+            var sessions = _httpContextAccessor
+                 .HttpContext
+                 .Session
+                 .GetString(SystemConstants.AppSettings.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var jsonString = JsonConvert.SerializeObject(request);
+            var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+
+            var response = await client.PostAsync($"/api/giangviens/", content);
+
+            return response.IsSuccessStatusCode;
         }
 
         public async Task<PagedResult<GiangVienViewModel>> GetAllPaging(GiangVienManagePagingRequest request)
