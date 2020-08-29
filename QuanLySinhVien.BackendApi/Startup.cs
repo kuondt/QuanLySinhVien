@@ -18,6 +18,7 @@ using Microsoft.OpenApi.Models;
 using QuanLySinhVien.Data.EF;
 using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.Service.Catalog.GiangViens;
+using QuanLySinhVien.Service.Catalog.LopBienChes;
 using QuanLySinhVien.Service.Catalog.MonHocs;
 using QuanLySinhVien.Service.System.Roles;
 using QuanLySinhVien.Service.System.Users;
@@ -53,6 +54,7 @@ namespace QuanLySinhVien.BackendApi
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IGiangVienService, GiangVienService>();
+            services.AddTransient<ILopBienCheService, LopBienCheService>();
 
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
 
