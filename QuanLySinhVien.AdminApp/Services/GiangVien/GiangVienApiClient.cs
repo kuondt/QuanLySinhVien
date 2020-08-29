@@ -56,14 +56,27 @@ namespace QuanLySinhVien.AdminApp.Services.GiangVien
             return giangViens;
         }
 
-        public Task<GiangVienViewModel> GetById(string id)
+        public async Task<GiangVienViewModel> GetById(string id)
         {
-            throw new NotImplementedException();
+            var giangVien = await GetAsync<GiangVienViewModel>(
+                $"/api/giangviens/{id}");
+            return giangVien;
         }
 
-        public Task<bool> Update(string id, GiangVienUpdateRequest request)
+        public async Task<bool> Update(string id, GiangVienUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync($"/api/giangviens/{id}", httpContent);
+
+            return response.IsSuccessStatusCode;
         }
     }
 }

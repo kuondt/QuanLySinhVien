@@ -1,0 +1,95 @@
+﻿@model QuanLySinhVien.ViewModel.Catalog.GiangViens.GiangVienUpdateRequest;
+@using QuanLySinhVien.Data.Enums;
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Ho" class="control-label"></label>
+                    <input asp-for="Ho" class="form-control" />
+                    <span asp-validation-for="Ho" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Ten" class="control-label"></label>
+                    <input asp-for="Ten" class="form-control" />
+                    <span asp-validation-for="Ten" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NgaySinh" class="control-label"></label>
+                    <input asp-for="NgaySinh" class="form-control" />
+                    <span asp-validation-for="NgaySinh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GioiTinh" class="control-label"></label>
+                    <br />
+                    @{
+                        //Checked input == GioiTinh.Nam
+                        if (Model.GioiTinh == GioiTinh.Nam)
+                        {
+                            <input type="radio" value="@GioiTinh.Nam" asp-for="GioiTinh" checked class="custom-checkbox" />
+                            <label class="control-label">Nam</label>
+                            <input type="radio" value="@GioiTinh.Nu" asp-for="GioiTinh" class="custom-checkbox" />
+                            <label class="control-label">Nữ</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="@GioiTinh.Nam" asp-for="GioiTinh" class="custom-checkbox" />
+                            <label class="control-label">Nam</label>
+                            <input type="radio" value="@GioiTinh.Nu" asp-for="GioiTinh" checked class="custom-checkbox" />
+                            <label class="control-label">Nữ</label>
+                        }
+                    }
+                    <span asp-validation-for="GioiTinh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SoDienThoai" class="control-label"></label>
+                    <input asp-for="SoDienThoai" class="form-control" />
+                    <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DiaChi" class="control-label"></label>
+                    <input asp-for="DiaChi" class="form-control" />
+                    <span asp-validation-for="DiaChi" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IsActive" class="control-label">Tình trạng</label>
+                    <br />
+                    @{
+                        //Checked input == active
+                        if (Model.IsActive == Status.Active)
+                        {
+                            <input type="radio" value="@Status.Active" asp-for="IsActive" checked class="custom-checkbox" />
+                            <label class="control-label">Active</label>
+                            <input type="radio" value="@Status.InActive" asp-for="IsActive" class="custom-checkbox" />
+                            <label class="control-label">Inactive</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="@Status.Active" asp-for="IsActive" class="custom-checkbox" />
+                            <label class="control-label">Active</label>
+                            <input type="radio" value="@Status.InActive" asp-for="IsActive" checked class="custom-checkbox" />
+                            <label class="control-label">Inactive</label>
+                        }
+                    }
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" value="Save" class="btn btn-primary">Đồng ý</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using QuanLySinhVien.AdminApp.Services.GiangVien;
+using QuanLySinhVien.Data.Enums;
 using QuanLySinhVien.ViewModel.Catalog.GiangViens;
 
 namespace QuanLySinhVien.AdminApp.Controllers
@@ -61,6 +62,70 @@ namespace QuanLySinhVien.AdminApp.Controllers
 
             ModelState.AddModelError("", "Thêm mới thất bại");
             return View(request);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            var giangVien = await _giangVienApiClient.GetById(id);
+
+            if (giangVien != null)
+            {
+                var updateRequest = new GiangVienUpdateRequest()
+                {
+                    Ho = giangVien.Ho,
+                    Ten = giangVien.Ten,
+                    DiaChi = giangVien.DiaChi,
+                    Email = giangVien.Email,
+                    SoDienThoai = giangVien.SoDienThoai,
+                    GioiTinh = giangVien.GioiTinh,
+                    NgaySinh = giangVien.NgaySinh,
+                    IsActive = giangVien.IsActive
+                };
+                return View(updateRequest);
+            }
+            return RedirectToAction("Error", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, GiangVienUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _giangVienApiClient.Update(id, request);
+            if (result)
+            {
+                TempData["result"] = "Cập nhật thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Cập nhật không thành công");
+            return View(request);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            var giangVien = await _giangVienApiClient.GetById(id);
+            if (giangVien != null)
+            {
+                var monHocViewModel = new GiangVienViewModel()
+                {
+                    ID = giangVien.ID,
+                    Ho = giangVien.Ho,
+                    Ten = giangVien.Ten,
+                    HoTen = giangVien.HoTen,
+                    DiaChi = giangVien.DiaChi,
+                    Email = giangVien.Email,
+                    SoDienThoai = giangVien.SoDienThoai,
+                    GioiTinh = giangVien.GioiTinh,
+                    NgaySinh = giangVien.NgaySinh,
+                    IsActive = giangVien.IsActive
+                };
+                return View(monHocViewModel);
+            }
+            return RedirectToAction("Error", "Home");
         }
     }
 }

@@ -57,30 +57,18 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMonHoc" aria-expanded="true" aria-controls="collapseMonHoc">
+                <a class="nav-link collapsed" asp-controller="MonHoc" asp-action="Index">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Môn học</span>
                 </a>
-                <div id="collapseMonHoc" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-controller="MonHoc" asp-action="Index">Danh sách</a>
-                        <a class="collapse-item" asp-controller="MonHoc" asp-action="Create">Thêm mới</a>
-                    </div>
-                </div>
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGiangVien" aria-expanded="true" aria-controls="collapseGiangVien">
+                <a class="nav-link collapsed" asp-controller="GiangVien" asp-action="Index">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Giảng viên</span>
                 </a>
-                <div id="collapseGiangVien" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-controller="GiangVien" asp-action="Index">Danh sách</a>
-                        <a class="collapse-item" asp-controller="GiangVien" asp-action="Create">Thêm mới</a>
-                    </div>
-                </div>
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
