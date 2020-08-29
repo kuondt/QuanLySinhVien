@@ -5,7 +5,7 @@ using System.Text;
 
 namespace QuanLySinhVien.ViewModel.Catalog.LopBienChe
 {
-    class LopBienCheManagePagingRequest : PagingRequestBase
+    public class LopBienCheManagePagingRequest : PagingRequestBase
     {
         public string Keyword { get; set; }
     }

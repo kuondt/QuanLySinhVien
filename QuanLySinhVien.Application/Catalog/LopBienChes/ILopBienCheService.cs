@@ -1,10 +1,20 @@
-﻿using System;
+﻿using QuanLySinhVien.ViewModel.Catalog.LopBienChe;
+using QuanLySinhVien.ViewModel.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace QuanLySinhVien.Service.Catalog.LopBienChes
 {
-    interface ILopBienCheService
+    public interface ILopBienCheService
     {
+        Task<string> Create(LopBienCheCreateRequest request);
+
+        Task<int> Update(string id, LopBienCheUpdateRequest request);
+
+        Task<LopBienCheViewModel> GetById(string id);
+
+        Task<PagedResult<LopBienCheViewModel>> GetAllPaging(LopBienCheManagePagingRequest request);
     }
 }
