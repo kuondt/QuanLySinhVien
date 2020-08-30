@@ -95,9 +95,20 @@ namespace QuanLySinhVien.AdminApp.Services.LopBienChe
             return lopBienChe;
         }
 
-        public Task<bool> Update(string id, LopBienCheUpdateRequest request)
+        public async Task<bool> Update(string id, LopBienCheUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync($"/api/lopbienches/{id}", httpContent);
+
+            return response.IsSuccessStatusCode;
         }
     }
 }
