@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuanLySinhVien.AdminApp.Services;
 using QuanLySinhVien.AdminApp.Services.GiangVien;
+using QuanLySinhVien.AdminApp.Services.LopBienChe;
 using QuanLySinhVien.AdminApp.Services.MonHoc;
 using QuanLySinhVien.ViewModel.System.Users;
 
@@ -51,6 +52,7 @@ namespace QuanLySinhVien.AdminApp
             services.AddTransient<IRoleApiClient, RoleApiClient>();
             services.AddTransient<IMonHocApiClient, MonHocApiClient>();
             services.AddTransient<IGiangVienApiClient, GiangVienApiClient>();
+            services.AddTransient<ILopBienCheApiClient, LopBienCheApiClient>();
 
             IMvcBuilder builder = services.AddRazorPages();
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
