@@ -91,14 +91,13 @@ namespace QuanLySinhVien.AdminApp.Controllers
         {
             var lopBienChe = await _lopBienCheApiClient.GetById(id);
 
-            var request = new GiangVienManagePagingRequest()
+            //Get list giang vien
+            var requestGiangVien = new GiangVienManagePagingRequest()
             {
                 PageIndex = 1,
                 PageSize = 100
             };
-
-            var giangViens = await _giangVienApiClient.GetAllPaging(request);
-
+            var giangViens = await _giangVienApiClient.GetAllPaging(requestGiangVien);
             ViewBag.giangViens = giangViens.Items;
 
             if (lopBienChe != null)

@@ -12,16 +12,16 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="ID_GiangVien" class="control-label">Giảng viên</label>
-                    @if (ViewBag.giangViens != null)
-                    {
-                        <select asp-for="ID_GiangVien" class="form-control">
-                            <option value="">Giảng viên</option>
+                    <select asp-for="ID_GiangVien" class="form-control">
+                        <option value="">Giảng viên</option>
+                        @if (ViewBag.giangViens != null)
+                        {
                             @foreach (var giangvien in ViewBag.giangViens)
                             {
-                        <option value="@giangvien.ID">@giangvien.ID @giangvien.Ho @giangvien.Ten</option>
+                                <option value="@giangvien.ID">@giangvien.ID @giangvien.Ho @giangvien.Ten</option>
                             }
-                        </select>
-                    }
+                        }
+                    </select>
                     <span asp-validation-for="ID_GiangVien" class="text-danger"></span>
                 </div>
                 <div class="form-group">
