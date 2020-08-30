@@ -136,5 +136,37 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return View(request);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var lopBienChe = await _lopBienCheApiClient.GetById(id);
+
+            if (lopBienChe != null)
+            {
+                var updateRequest = new LopBienCheUpdateRequest()
+                {
+                    ID = lopBienChe.ID
+                };
+                return View(updateRequest);
+            }
+            return RedirectToAction("Error", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id, LopBienCheUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _lopBienCheApiClient.Delete(id);
+            if (result)
+            {
+                TempData["result"] = "Xóa thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Xóa không thành công");
+            return View(request);
+        }
     }
 }

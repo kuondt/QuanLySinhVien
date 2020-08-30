@@ -46,9 +46,17 @@ namespace QuanLySinhVien.AdminApp.Services.LopBienChe
             return response.IsSuccessStatusCode;
         }
 
-        public Task<bool> Delete(string id)
+        public async Task<bool> Delete(string id)
         {
-            throw new NotImplementedException();
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+           
+            var response = await client.DeleteAsync($"/api/lopbienches/{id}");
+
+            return response.IsSuccessStatusCode;
         }
 
         public async Task<PagedResult<LopBienCheViewModel>> GetAllPaging(LopBienCheManagePagingRequest request)
