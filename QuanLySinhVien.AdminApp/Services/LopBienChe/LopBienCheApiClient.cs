@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace QuanLySinhVien.AdminApp.Services.LopBienChe
@@ -26,9 +27,23 @@ namespace QuanLySinhVien.AdminApp.Services.LopBienChe
             _httpClientFactory = httpClientFactory;
         }
 
-        public Task<bool> Create(LopBienCheCreateRequest request)
+        public async Task<bool> Create(LopBienCheCreateRequest request)
         {
-            throw new NotImplementedException();
+            var sessions = _httpContextAccessor
+                            .HttpContext
+                            .Session
+                            .GetString(SystemConstants.AppSettings.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var jsonString = JsonConvert.SerializeObject(request);
+            var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync($"/api/lopbienches/", content);
+
+            return response.IsSuccessStatusCode;
         }
 
         public Task<bool> Delete(string id)

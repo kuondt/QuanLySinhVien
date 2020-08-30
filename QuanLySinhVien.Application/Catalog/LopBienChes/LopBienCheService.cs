@@ -23,12 +23,20 @@ namespace QuanLySinhVien.Service.Catalog.LopBienChes
 
         public async Task<string> Create(LopBienCheCreateRequest request)
         {
-            //Chọn STT cuối của năm và cộng thêm 1
-            int soThuTu_LopBienChe = _context.LopBienChes.OrderBy(LopBienChe => LopBienChe.NamBatDau).ThenBy(x => x.SoThuTu).ToList().Last().SoThuTu + 1;
+            //STT lớp biên chế mặc định là 1
+            //STT lớp biên chế = số lượng lớp biên chế đã tồn tại cũa năm đó + 1
+            int soThuTu_LopBienChe = 1;           
+            var soLuongLopBienChe_CuaNam = _context.LopBienChes
+                        .Where(x => x.NamBatDau == request.NamBatDau)
+                        .Count();
+            soThuTu_LopBienChe += soLuongLopBienChe_CuaNam;
+
+
             //Lấy năm hiện tại
-            DateTime dateNow = DateTime.Now;
+            string year = request.NamBatDau.ToString();
             //Lấy 2 số cuối của năm
-            string lastTwoDigitsOfYear = dateNow.ToString("yy");
+            string lastTwoDigitsOfYear = year.Substring(year.Length - 2); ;
+
             //Ghép chuỗi tạo ID
             string ID_LopBienChe = lastTwoDigitsOfYear + "1A01" + soThuTu_LopBienChe.ToString().PadLeft(2, '0');
 
@@ -36,8 +44,8 @@ namespace QuanLySinhVien.Service.Catalog.LopBienChes
             {
                 ID = ID_LopBienChe,
                 SoThuTu = soThuTu_LopBienChe,
-                NamBatDau = DateTime.Now.Year,
-                NamKetThuc = DateTime.Now.Year + 4,
+                NamBatDau = request.NamBatDau,
+                NamKetThuc = request.NamBatDau + 4,
                 ID_GiangVien = request.ID_GiangVien,
                 ID_Khoa = request.ID_Khoa,
             };
@@ -141,7 +149,7 @@ namespace QuanLySinhVien.Service.Catalog.LopBienChes
             {
                 throw new QuanLySinhVien_Exceptions($"Không thể xóa: {id}");
             }
-            
+
         }
     }
 }
