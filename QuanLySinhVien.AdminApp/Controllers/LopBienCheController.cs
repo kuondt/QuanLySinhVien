@@ -62,5 +62,24 @@ namespace QuanLySinhVien.AdminApp.Controllers
             ModelState.AddModelError("", "Thêm mới thất bại");
             return View(request);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            var lopBienChe = await _lopBienCheApiClient.GetById(id);
+            if (lopBienChe != null)
+            {
+                var monHocViewModel = new LopBienCheViewModel()
+                {
+                    ID = lopBienChe.ID,
+                    NamBatDau = lopBienChe.NamBatDau,
+                    NamKetThuc = lopBienChe.NamBatDau,
+                    ID_Khoa = lopBienChe.ID_Khoa,
+                    ID_GiangVien = lopBienChe.ID_GiangVien,
+                };
+                return View(monHocViewModel);
+            }
+            return RedirectToAction("Error", "Home");
+        }
     }
 }

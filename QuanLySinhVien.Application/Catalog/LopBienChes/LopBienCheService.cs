@@ -24,13 +24,14 @@ namespace QuanLySinhVien.Service.Catalog.LopBienChes
         public async Task<string> Create(LopBienCheCreateRequest request)
         {
             //STT lớp biên chế mặc định là 1
-            //STT lớp biên chế = số lượng lớp biên chế đã tồn tại cũa năm đó + 1
-            int soThuTu_LopBienChe = 1;           
-            var soLuongLopBienChe_CuaNam = _context.LopBienChes
-                        .Where(x => x.NamBatDau == request.NamBatDau)
-                        .Count();
-            soThuTu_LopBienChe += soLuongLopBienChe_CuaNam;
-
+            //STT lớp biên chế = số thứ tự cuối cùng của lớp năm được tạo + 1
+            int soThuTu_LopBienChe = 1;
+            var sttCuoiCung_LopBienChe_CuaNam = _context.LopBienChes
+                                            .Where(x => x.NamBatDau == request.NamBatDau)
+                                            .Select(x => x.SoThuTu)
+                                            .ToArray()
+                                            .LastOrDefault();
+            soThuTu_LopBienChe += sttCuoiCung_LopBienChe_CuaNam;
 
             //Lấy năm hiện tại
             string year = request.NamBatDau.ToString();

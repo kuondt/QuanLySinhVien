@@ -12,7 +12,6 @@ namespace QuanLySinhVien.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class LopBienChesController : ControllerBase
     {
         private readonly ILopBienCheService _lopBienCheService;

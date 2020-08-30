@@ -74,9 +74,25 @@ namespace QuanLySinhVien.AdminApp.Services.LopBienChe
             return lopBienChe;
         }
 
-        public Task<LopBienCheViewModel> GetById(string id)
+        public async Task<LopBienCheViewModel> GetById(string id)
         {
-            throw new NotImplementedException();
+            var sessions = _httpContextAccessor
+                            .HttpContext
+                            .Session
+                            .GetString(SystemConstants.AppSettings.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.GetAsync(
+                $"/api/lopbienches/{id}"
+                );
+
+            var body = await response.Content.ReadAsStringAsync();
+            var lopBienChe = JsonConvert.DeserializeObject<LopBienCheViewModel>(body);
+
+            return lopBienChe;
         }
 
         public Task<bool> Update(string id, LopBienCheUpdateRequest request)
