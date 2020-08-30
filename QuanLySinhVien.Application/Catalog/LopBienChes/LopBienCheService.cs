@@ -58,7 +58,7 @@ namespace QuanLySinhVien.Service.Catalog.LopBienChes
         public async Task<PagedResult<LopBienCheViewModel>> GetAllPaging(LopBienCheManagePagingRequest request)
         {
             var query = from lbc
-                         in _context.LopBienChes
+                        in _context.LopBienChes
                         select new { lbc };
 
             if (!string.IsNullOrEmpty(request.Keyword))
@@ -99,6 +99,11 @@ namespace QuanLySinhVien.Service.Catalog.LopBienChes
                 throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
             }
 
+            var sinhViens = from sv in _context.SinhViens
+                            where sv.ID_LopBienChe == id
+                            select sv;
+            var listSinhVien = sinhViens.ToList();
+
             var lopBienCheViewModel = new LopBienCheViewModel()
             {
                 ID = lopBienChe.ID,
@@ -106,7 +111,8 @@ namespace QuanLySinhVien.Service.Catalog.LopBienChes
                 NamBatDau = lopBienChe.NamBatDau,
                 NamKetThuc = lopBienChe.NamKetThuc,
                 ID_Khoa = lopBienChe.ID_Khoa,
-                ID_GiangVien = lopBienChe.ID_GiangVien
+                ID_GiangVien = lopBienChe.ID_GiangVien,
+                SinhViens = listSinhVien
             };
             return lopBienCheViewModel;
         }

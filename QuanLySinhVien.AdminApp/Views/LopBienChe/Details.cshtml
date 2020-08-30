@@ -8,41 +8,76 @@
 
 <div class="container-fluid">
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ID)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ID)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoThuTu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoThuTu)
-        </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.NamBatDau)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NamBatDau)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.NamKetThuc)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NamKetThuc)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ID_Khoa)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ID_Khoa)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ID_GiangVien)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ID_GiangVien)
         </dd>
+        <hr />
+        <h4>Danh sách sinh viên</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID Sinh viên</th>
+                    <th scope="col">Họ</th>
+                    <th scope="col">Tên</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.SinhViens != null)
+                {
+                    @foreach (var sv in Model.SinhViens)
+                    {
+                        <tr>
+                            <th>
+                                @sv.ID
+                            </th>
+                            <td>
+                                @sv.Ho
+                            </td>
+                            <td>
+                                @sv.Ten
+                            </td>
+                            <td>
+                                @sv.Email
+                            </td>
+                            <td>
+                                @sv.SoDienThoai
+                            </td>
+                            <td>
+                                <a class="btn btn-success"  asp-controller="SinhVien" asp-action="Details" asp-route-id="@sv.ID">Chi tiết</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
     </dl>
 </div>

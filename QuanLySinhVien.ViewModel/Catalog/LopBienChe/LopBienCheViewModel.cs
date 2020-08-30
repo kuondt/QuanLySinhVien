@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLySinhVien.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,5 +13,6 @@ namespace QuanLySinhVien.ViewModel.Catalog.LopBienChe
         public int NamKetThuc { get; set; }
         public string ID_Khoa { get; set; }
         public string ID_GiangVien { get; set; }
+        public List<SinhVien> SinhViens { get; set; }
     }
 }
