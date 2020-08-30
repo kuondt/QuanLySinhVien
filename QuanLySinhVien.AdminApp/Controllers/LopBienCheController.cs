@@ -88,6 +88,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
                     NamKetThuc = lopBienChe.NamKetThuc,
                     ID_Khoa = lopBienChe.ID_Khoa,
                     ID_GiangVien = lopBienChe.ID_GiangVien,
+                    GiangVien = lopBienChe.GiangVien,
                     SinhViens = lopBienChe.SinhViens
                 };
                 return View(monHocViewModel);

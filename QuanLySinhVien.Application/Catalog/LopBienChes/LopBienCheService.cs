@@ -99,10 +99,19 @@ namespace QuanLySinhVien.Service.Catalog.LopBienChes
                 throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
             }
 
-            var sinhViens = from sv in _context.SinhViens
-                            where sv.ID_LopBienChe == id
-                            select sv;
+            //var sinhViens = from sv in _context.SinhViens
+            //                where sv.ID_LopBienChe == id
+            //                select sv;
+            var sinhViens = _context.SinhViens
+                        .Where(x => x.ID_LopBienChe == id)
+                        .OrderBy(x => x.ID);
             var listSinhVien = sinhViens.ToList();
+
+            var giangVien = _context.GiangViens
+                        .Where(x => x.ID == lopBienChe.ID_GiangVien)
+                        .FirstOrDefault();
+
+
 
             var lopBienCheViewModel = new LopBienCheViewModel()
             {
@@ -112,6 +121,7 @@ namespace QuanLySinhVien.Service.Catalog.LopBienChes
                 NamKetThuc = lopBienChe.NamKetThuc,
                 ID_Khoa = lopBienChe.ID_Khoa,
                 ID_GiangVien = lopBienChe.ID_GiangVien,
+                GiangVien = giangVien,
                 SinhViens = listSinhVien
             };
             return lopBienCheViewModel;
