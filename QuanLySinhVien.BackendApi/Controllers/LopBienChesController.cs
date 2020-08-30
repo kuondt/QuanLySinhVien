@@ -65,5 +65,18 @@ namespace QuanLySinhVien.BackendApi.Controllers
             return Ok();
 
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var affectedResult = await _lopBienCheService.Delete(id);
+            if (affectedResult == 0)
+                return BadRequest();
+            return Ok();
+
+        }
     }
 }
