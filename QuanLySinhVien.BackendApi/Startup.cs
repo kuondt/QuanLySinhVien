@@ -20,6 +20,7 @@ using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.Service.Catalog.GiangViens;
 using QuanLySinhVien.Service.Catalog.LopBienChes;
 using QuanLySinhVien.Service.Catalog.MonHocs;
+using QuanLySinhVien.Service.Catalog.SinhViens;
 using QuanLySinhVien.Service.System.Roles;
 using QuanLySinhVien.Service.System.Users;
 using QuanLySinhVien.ViewModel.Constants;
@@ -55,6 +56,7 @@ namespace QuanLySinhVien.BackendApi
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IGiangVienService, GiangVienService>();
             services.AddTransient<ILopBienCheService, LopBienCheService>();
+            services.AddTransient<ISinhVienService, SinhVienService>();
 
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
 

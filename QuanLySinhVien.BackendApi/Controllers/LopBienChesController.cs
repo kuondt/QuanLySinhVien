@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QuanLySinhVien.Service.Catalog.LopBienChes;
-using QuanLySinhVien.ViewModel.Catalog.LopBienChe;
+using QuanLySinhVien.ViewModel.Catalog.LopBienChes;
 
 namespace QuanLySinhVien.BackendApi.Controllers
 {
