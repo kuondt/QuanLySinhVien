@@ -45,8 +45,16 @@ namespace QuanLySinhVien.AdminApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
+            //Get list giang vien
+            var requestGiangVien = new GiangVienManagePagingRequest()
+            {
+                PageIndex = 1,
+                PageSize = 100
+            };
+            var giangViens = await _giangVienApiClient.GetAllPaging(requestGiangVien);
+            ViewBag.giangViens = giangViens.Items;
             return View();
         }
 
@@ -115,7 +123,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
         public async Task<IActionResult> Edit(string id, LopBienCheUpdateRequest request)
         {
             if (!ModelState.IsValid)
-                return View();
+                return View();        
 
             var result = await _lopBienCheApiClient.Update(id, request);
             if (result)
