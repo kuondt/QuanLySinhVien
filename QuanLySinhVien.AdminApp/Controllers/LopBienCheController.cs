@@ -99,6 +99,8 @@ namespace QuanLySinhVien.AdminApp.Controllers
 
             var giangViens = await _giangVienApiClient.GetAllPaging(request);
 
+            ViewBag.giangViens = giangViens.Items;
+
             if (lopBienChe != null)
             {
                 var updateRequest = new LopBienCheUpdateRequest()
