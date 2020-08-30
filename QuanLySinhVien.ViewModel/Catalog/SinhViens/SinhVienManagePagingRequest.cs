@@ -5,7 +5,7 @@ using System.Text;
 
 namespace QuanLySinhVien.ViewModel.Catalog.SinhViens
 {
-    public class SinhVienMangePagingRequest : PagingRequestBase
+    public class SinhVienManagePagingRequest : PagingRequestBase
     {
         public string Keyword { get; set; }
     }
