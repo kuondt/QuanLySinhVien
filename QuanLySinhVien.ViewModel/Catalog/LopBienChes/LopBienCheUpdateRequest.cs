@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QuanLySinhVien.ViewModel.Catalog.LopBienChe
+namespace QuanLySinhVien.ViewModel.Catalog.LopBienChes
 {
     public class LopBienCheUpdateRequest
     {

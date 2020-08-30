@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Catalog\ChuongTrinhDaoTaos\" />
-    <Folder Include="Catalog\SinhViens\" />
   </ItemGroup>
 
   <ItemGroup>

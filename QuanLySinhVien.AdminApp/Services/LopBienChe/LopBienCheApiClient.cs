@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using QuanLySinhVien.ViewModel.Catalog.LopBienChe;
+using QuanLySinhVien.ViewModel.Catalog.LopBienChes;
 using QuanLySinhVien.ViewModel.Common;
 using QuanLySinhVien.ViewModel.Constants;
 using System;

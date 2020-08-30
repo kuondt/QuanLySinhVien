@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using QuanLySinhVien.Data.Entities;
-using QuanLySinhVien.ViewModel.Catalog.LopBienChe;
+using QuanLySinhVien.ViewModel.Catalog.LopBienChes;
 using QuanLySinhVien.ViewModel.Common;
 using System;
 using System.Collections.Generic;

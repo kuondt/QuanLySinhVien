@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using QuanLySinhVien.AdminApp.Services.GiangVien;
 using QuanLySinhVien.AdminApp.Services.LopBienChe;
 using QuanLySinhVien.ViewModel.Catalog.GiangViens;
-using QuanLySinhVien.ViewModel.Catalog.LopBienChe;
+using QuanLySinhVien.ViewModel.Catalog.LopBienChes;
 
 namespace QuanLySinhVien.AdminApp.Controllers
 {

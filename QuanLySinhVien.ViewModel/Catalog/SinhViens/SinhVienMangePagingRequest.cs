@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace QuanLySinhVien.ViewModel.Catalog.LopBienChe
+namespace QuanLySinhVien.ViewModel.Catalog.SinhViens
 {
-    public class LopBienCheManagePagingRequest : PagingRequestBase
+    public class SinhVienMangePagingRequest : PagingRequestBase
     {
         public string Keyword { get; set; }
     }
