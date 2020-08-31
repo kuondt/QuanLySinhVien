@@ -1,4 +1,4 @@
-﻿@model QuanLySinhVien.ViewModel.Catalog.LopBienChe.LopBienCheCreateRequest
+﻿@model QuanLySinhVien.ViewModel.Catalog.LopBienChes.LopBienCheCreateRequest
 
 @{
     ViewData["Title"] = "Create";
@@ -22,8 +22,8 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="ID_GiangVien" class="control-label"></label>
-                    <select asp-for="ID_GiangVien" class="form-control">
-                        <option value="">Giảng viên</option>
+                    <input asp-for="ID_GiangVien" class="form-control" list="listGiangVien" placeholder="Giảng viên..." />
+                    <datalist id="listGiangVien">
                         @if (ViewBag.giangViens != null)
                         {
                             @foreach (var giangvien in ViewBag.giangViens)
@@ -31,7 +31,7 @@
                                 <option value="@giangvien.ID">@giangvien.ID @giangvien.Ho @giangvien.Ten</option>
                             }
                         }
-                    </select>
+                    </datalist>
                     <span asp-validation-for="ID_GiangVien" class="text-danger"></span>
                 </div>
                 <div class="form-group">
