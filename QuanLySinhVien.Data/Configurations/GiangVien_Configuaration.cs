@@ -20,11 +20,11 @@ namespace QuanLySinhVien.Data.Configurations
 
             builder.Property(x => x.SoThuTu);
 
-            builder.Property(x => x.Ho).HasMaxLength(50);
+            builder.Property(x => x.Ho).IsRequired().HasMaxLength(50);
 
-            builder.Property(x => x.Ten).HasMaxLength(50);
+            builder.Property(x => x.Ten).IsRequired().HasMaxLength(50);
 
-            builder.Property(x => x.HoTen).HasMaxLength(100);
+            builder.Property(x => x.HoTen).IsRequired().HasMaxLength(100);
 
             builder.Property(x => x.NgaySinh);
 

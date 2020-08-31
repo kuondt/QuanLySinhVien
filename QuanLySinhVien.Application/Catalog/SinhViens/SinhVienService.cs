@@ -56,7 +56,7 @@ namespace QuanLySinhVien.Service.Catalog.SinhViens
                 NgaySinh = request.NgaySinh,
                 IsActive = Status.Active,
                 Nam = request.Nam,
-                
+
             };
 
             _context.SinhViens.Add(sinhVien);
@@ -114,6 +114,12 @@ namespace QuanLySinhVien.Service.Catalog.SinhViens
                 throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
             }
 
+            var lopBienChe = _context.LopBienChes
+                                    .Where(x => x.ID.Contains(sinhVien.ID_LopBienChe))
+                                    .FirstOrDefault();
+
+
+
             var sinhVienViewModel = new SinhVienViewModel()
             {
                 ID = sinhVien.ID,
@@ -127,6 +133,9 @@ namespace QuanLySinhVien.Service.Catalog.SinhViens
                 GioiTinh = sinhVien.GioiTinh,
                 NgaySinh = sinhVien.NgaySinh,
                 IsActive = sinhVien.IsActive,
+                ID_LopBienChe = sinhVien.ID_LopBienChe,
+                Nam = sinhVien.Nam,
+                LopBienChe = lopBienChe
             };
             return sinhVienViewModel;
         }
@@ -139,7 +148,6 @@ namespace QuanLySinhVien.Service.Catalog.SinhViens
             {
                 throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
             }
-
             sinhVien.Ho = request.Ho;
             sinhVien.Ten = request.Ten;
             sinhVien.HoTen = request.Ho + " " + request.Ten;
@@ -151,7 +159,8 @@ namespace QuanLySinhVien.Service.Catalog.SinhViens
             sinhVien.IsActive = request.IsActive;
             sinhVien.ID_LopBienChe = request.ID_LopBienChe;
 
-            if(request.IsActive == Status.InActive)
+
+            if (request.IsActive == Status.InActive)
             {
                 sinhVien.ID_LopBienChe = null;
             }

@@ -27,5 +27,42 @@ namespace QuanLySinhVien.BackendApi.Controllers
             return Ok(sinhVien);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var sinhVien = await _sinhVienService.GetById(id);
+            if (sinhVien == null)
+                return BadRequest("Not found");
+            return Ok(sinhVien);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] SinhVienCreateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var ID_sinhVien = await _sinhVienService.Create(request);
+            if (ID_sinhVien == null)
+                return BadRequest();
+
+            var sinhVien = await _sinhVienService.GetById(ID_sinhVien);
+
+            return CreatedAtAction(nameof(GetById), new { id = ID_sinhVien }, sinhVien);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(string id, [FromBody] SinhVienUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var affectedResult = await _sinhVienService.Update(id, request);
+            if (affectedResult == 0)
+                return BadRequest();
+            return Ok();
+
+        }
     }
 }
