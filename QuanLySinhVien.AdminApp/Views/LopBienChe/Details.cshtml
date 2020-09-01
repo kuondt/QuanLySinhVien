@@ -75,7 +75,10 @@
                                 @sv.SoDienThoai
                             </td>
                             <td>
-                                <a class="btn btn-success" asp-controller="SinhVien" asp-action="Details" asp-route-id="@sv.ID">Chi tiết</a>
+                                <div class="btn-group">
+                                    <a class="btn btn-success" asp-controller="SinhVien" asp-action="Details" asp-route-id="@sv.ID">Chi tiết</a>
+                                    <a class="btn btn-danger" asp-controller="SinhVien" asp-action="Edit" asp-route-id="@sv.ID">Chỉnh sửa</a>
+                                </div>
                             </td>
                         </tr>
                     }
