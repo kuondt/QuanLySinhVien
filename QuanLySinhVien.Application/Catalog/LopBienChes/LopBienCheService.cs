@@ -36,7 +36,7 @@ namespace QuanLySinhVien.Service.Catalog.LopBienChes
             //Lấy năm hiện tại
             string year = request.NamBatDau.ToString();
             //Lấy 2 số cuối của năm
-            string lastTwoDigitsOfYear = year.Substring(year.Length - 2); ;
+            string lastTwoDigitsOfYear = year.Substring(year.Length - 2);
 
             //Ghép chuỗi tạo ID
             string ID_LopBienChe = lastTwoDigitsOfYear + "1A01" + soThuTu_LopBienChe.ToString().PadLeft(2, '0');

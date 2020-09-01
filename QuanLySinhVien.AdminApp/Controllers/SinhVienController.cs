@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using QuanLySinhVien.AdminApp.Services.LopBienChe;
 using QuanLySinhVien.AdminApp.Services.SinhVien;
+using QuanLySinhVien.ViewModel.Catalog.LopBienChes;
 using QuanLySinhVien.ViewModel.Catalog.SinhViens;
 
 namespace QuanLySinhVien.AdminApp.Controllers
@@ -13,11 +15,13 @@ namespace QuanLySinhVien.AdminApp.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly ISinhVienApiClient _sinhVienApiClient;
+        private readonly ILopBienCheApiClient _lopBienCheApiClient;
 
-        public SinhVienController(IConfiguration configuration, ISinhVienApiClient sinhVienApiClient)
+        public SinhVienController(IConfiguration configuration, ISinhVienApiClient sinhVienApiClient, ILopBienCheApiClient lopBienCheApiClient)
         {
             _sinhVienApiClient = sinhVienApiClient;
             _configuration = configuration;
+            _lopBienCheApiClient = lopBienCheApiClient;
         }
 
         public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 3)
@@ -41,8 +45,24 @@ namespace QuanLySinhVien.AdminApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
+            //Lấy năm hiện tại
+            string year = DateTime.Now.Year.ToString();
+            //Lấy 2 số cuối của năm
+            string lastTwoDigitsOfYear = year.Substring(year.Length - 2);
+
+            //Get list giang vien
+            var requestLopBienChe = new LopBienCheManagePagingRequest()
+            {
+                Keyword = lastTwoDigitsOfYear,
+                PageIndex = 1,
+                PageSize = 100
+            };
+
+            var lopBienChes = await _lopBienCheApiClient.GetAllPaging(requestLopBienChe);
+            ViewBag.lopBienChes = lopBienChes.Items;
+
             return View();
         }
 

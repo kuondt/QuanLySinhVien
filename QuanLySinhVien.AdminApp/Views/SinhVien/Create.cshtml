@@ -1,0 +1,83 @@
+﻿@using QuanLySinhVien.Data.Enums
+@model QuanLySinhVien.ViewModel.Catalog.SinhViens.SinhVienCreateRequest
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Ho" class="control-label">Họ</label>
+                    <input asp-for="Ho" class="form-control" />
+                    <span asp-validation-for="Ho" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Ten" class="control-label">Tên</label>
+                    <input asp-for="Ten" class="form-control" />
+                    <span asp-validation-for="Ten" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nam" class="control-label">Khóa</label>
+                    <input asp-for="Nam" value="@DateTime.Now.Year" class="form-control" readonly />
+                    <span asp-validation-for="Nam" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NgaySinh" class="control-label">Ngày sinh</label>
+                    <input asp-for="NgaySinh" class="form-control" />
+                    <span asp-validation-for="NgaySinh" class="text-danger"></span>
+                </div>
+                <label asp-for="GioiTinh" class="control-label">Giới tính</label>
+                <br />
+                <div class="form-group form-check-inline">
+                    <input asp-for="GioiTinh" class="form-check-input" type="radio" id="exampleRadios2" value="@GioiTinh.Nam" checked>
+                    <label class="form-check-label" for="exampleRadios2">
+                        Nam
+                    </label>
+                </div>
+                <div class="form-group form-check-inline">
+                    <input asp-for="GioiTinh" class="form-check-input" type="radio" id="exampleRadios2" value="@GioiTinh.Nu">
+                    <label class="form-check-label" for="exampleRadios2">
+                        Nữ
+                    </label>
+                    <span asp-validation-for="GioiTinh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SoDienThoai" class="control-label">Số điện thoại</label>
+                    <input asp-for="SoDienThoai" class="form-control" />
+                    <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DiaChi" class="control-label">Địa chỉ</label>
+                    <input asp-for="DiaChi" class="form-control" />
+                    <span asp-validation-for="DiaChi" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ID_LopBienChe" class="control-label">Lớp biên chế</label>
+  
+                    <select id="listGiangVien" asp-for="ID_LopBienChe" class="form-control" >
+                        @if (ViewBag.lopBienChes != null)
+                        {
+                            @foreach (var lopBienChe in ViewBag.lopBienChes)
+                            {
+                                <option value="@lopBienChe.ID">@lopBienChe.ID</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="ID_LopBienChe" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" value="Create" class="btn btn-primary">Đồng ý</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

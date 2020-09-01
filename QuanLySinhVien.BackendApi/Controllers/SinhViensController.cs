@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QuanLySinhVien.Service.Catalog.SinhViens;
@@ -11,6 +12,7 @@ namespace QuanLySinhVien.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SinhViensController : ControllerBase
     {
         private readonly ISinhVienService _sinhVienService;
