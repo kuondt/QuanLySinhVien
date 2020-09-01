@@ -88,6 +88,22 @@ namespace QuanLySinhVien.AdminApp.Controllers
         {
             var sinhVien = await _sinhVienApiClient.GetById(id);
 
+            //Lấy năm của sv
+            string year = sinhVien.Nam.ToString();
+            //Lấy 2 số cuối của năm
+            string lastTwoDigitsOfYear = year.Substring(year.Length - 2);
+
+            //Get list giang vien
+            var requestLopBienChe = new LopBienCheManagePagingRequest()
+            {
+                Keyword = lastTwoDigitsOfYear,
+                PageIndex = 1,
+                PageSize = 100
+            };
+
+            var lopBienChes = await _lopBienCheApiClient.GetAllPaging(requestLopBienChe);
+            ViewBag.lopBienChes = lopBienChes.Items;
+
             if (sinhVien != null)
             {
                 var updateRequest = new SinhVienUpdateRequest()
@@ -100,9 +116,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
                     GioiTinh = sinhVien.GioiTinh,
                     NgaySinh = sinhVien.NgaySinh,
                     IsActive = sinhVien.IsActive,
-                    ID_LopBienChe = sinhVien.ID_LopBienChe,
-                    Nam = sinhVien.Nam,
-        
+                    ID_LopBienChe = sinhVien.ID_LopBienChe,        
                 };
                 return View(updateRequest);
             }
