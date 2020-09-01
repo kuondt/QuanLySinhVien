@@ -93,6 +93,9 @@ namespace QuanLySinhVien.Service.Catalog.SinhViens
                     GioiTinh = x.sv.GioiTinh,
                     NgaySinh = x.sv.NgaySinh,
                     IsActive = x.sv.IsActive,
+                    Nam = x.sv.Nam,
+                    ID_LopBienChe = x.sv.ID_LopBienChe,
+                    
                 }).ToListAsync();
 
             var pagedResult = new PagedResult<SinhVienViewModel>()
