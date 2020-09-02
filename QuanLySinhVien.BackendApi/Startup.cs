@@ -26,6 +26,7 @@ using QuanLySinhVien.Service.System.Roles;
 using QuanLySinhVien.Service.System.Users;
 using QuanLySinhVien.ViewModel.Constants;
 using QuanLySinhVien.ViewModel.System.Users;
+using QuanLySinhVien.Service.Catalog.HocKyNamHocs;
 
 namespace QuanLySinhVien.BackendApi
 {
@@ -59,6 +60,7 @@ namespace QuanLySinhVien.BackendApi
             services.AddTransient<ILopBienCheService, LopBienCheService>();
             services.AddTransient<ISinhVienService, SinhVienService>();
             services.AddTransient<IPhongService, PhongService>();
+            services.AddTransient<IHocKyNamHocService, HocKyNamHocService>();
 
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
 

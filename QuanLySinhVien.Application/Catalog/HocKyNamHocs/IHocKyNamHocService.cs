@@ -9,7 +9,7 @@ namespace QuanLySinhVien.Service.Catalog.HocKyNamHocs
 {
     public interface IHocKyNamHocService
     {
-        Task<string> Create(HocKyNamHocCreateRequest request);
+        Task<Tuple<int, int>> Create(HocKyNamHocCreateRequest request);
 
         Task<int> Update(int hocky, int namhoc, HocKyNamHocUpdateRequest request);
 

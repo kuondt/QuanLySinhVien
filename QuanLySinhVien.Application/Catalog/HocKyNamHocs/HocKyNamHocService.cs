@@ -22,7 +22,7 @@ namespace QuanLySinhVien.Service.Catalog.HocKyNamHocs
         }
 
 
-        public async Task<string> Create(HocKyNamHocCreateRequest request)
+        public async Task<Tuple<int, int>> Create(HocKyNamHocCreateRequest request)
         {          
             var hocKyNamHoc = new HocKy_NamHoc()
             {
@@ -35,7 +35,8 @@ namespace QuanLySinhVien.Service.Catalog.HocKyNamHocs
             _context.HocKy_NamHocs.Add(hocKyNamHoc);
             await _context.SaveChangesAsync();
 
-            return hocKyNamHoc.HocKy.ToString() + " " + hocKyNamHoc.NamHoc.ToString();
+            //Tạo dữ liệu tuple để trả về 2 giá trị
+            return Tuple.Create(hocKyNamHoc.HocKy, hocKyNamHoc.NamHoc);
         }
 
         public async Task<PagedResult<HocKyNamHocViewModel>> GetAllPaging(HocKyNamHocManagePagingRequest request)
@@ -78,7 +79,7 @@ namespace QuanLySinhVien.Service.Catalog.HocKyNamHocs
 
             if (hocKyNamHoc == null)
             {
-                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy");
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy {hocky}, {namhoc}");
             }
 
             var hocKyNamHocViewModel = new HocKyNamHocViewModel()
@@ -99,7 +100,7 @@ namespace QuanLySinhVien.Service.Catalog.HocKyNamHocs
 
             if (hocKyNamHoc == null)
             {
-                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy");
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy {hocky}, {namhoc}");
             }
 
             hocKyNamHoc.NgayBatDau = request.NgayBatDau;
