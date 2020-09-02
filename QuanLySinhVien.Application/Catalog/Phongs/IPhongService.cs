@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuanLyPhong.Service.Catalog.Phongs
+namespace QuanLySinhVien.Service.Catalog.Phongs
 {
     public interface IPhongService
     {

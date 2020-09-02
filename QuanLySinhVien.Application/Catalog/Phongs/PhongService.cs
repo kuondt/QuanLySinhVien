@@ -8,7 +8,7 @@ using QuanLySinhVien.ViewModel.Common;
 using Microsoft.EntityFrameworkCore;
 using QuanLySinhVien.ViewModel.Exceptions;
 
-namespace QuanLyPhong.Service.Catalog.Phongs
+namespace QuanLySinhVien.Service.Catalog.Phongs
 {
     public class PhongService : IPhongService
     {
@@ -29,7 +29,6 @@ namespace QuanLyPhong.Service.Catalog.Phongs
                                             .ToArray()
                                             .LastOrDefault();
             soThuTu_Phong += sttCuoiCung_Phong;
-
 
             //Ghép chuỗi tạo ID
             string ID_Phong = "PH" + soThuTu_Phong.ToString().PadLeft(3, '0');
