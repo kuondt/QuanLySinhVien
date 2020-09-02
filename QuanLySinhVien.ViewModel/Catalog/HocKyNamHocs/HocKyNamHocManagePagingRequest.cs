@@ -5,7 +5,7 @@ using QuanLySinhVien.ViewModel.Common;
 
 namespace QuanLySinhVien.ViewModel.Catalog.HocKyNamHocs
 {
-    public class HocKyNamHocMangePagingRequest : PagingRequestBase
+    public class HocKyNamHocManagePagingRequest : PagingRequestBase
     {
         public string Keyword { get; set; }
     }
