@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using QuanLyPhong.Service.Catalog.Phongs;
 using QuanLySinhVien.Data.EF;
 using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.Service.Catalog.GiangViens;
@@ -57,6 +58,7 @@ namespace QuanLySinhVien.BackendApi
             services.AddTransient<IGiangVienService, GiangVienService>();
             services.AddTransient<ILopBienCheService, LopBienCheService>();
             services.AddTransient<ISinhVienService, SinhVienService>();
+            services.AddTransient<IPhongService, PhongService>();
 
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
 

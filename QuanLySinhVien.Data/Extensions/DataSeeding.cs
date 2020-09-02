@@ -173,19 +173,19 @@ namespace QuanLySinhVien.Data.Extensions
             modelBuilder.Entity<Phong>().HasData(
                 new Phong()
                 {
-                    ID = "BPH001",
+                    ID = "PH001",
                     SoThuTu = 1,
                     TenCoSo = "624 Âu Cơ"
                 },
                 new Phong()
                 {
-                    ID = "BPH002",
+                    ID = "PH002",
                     SoThuTu = 2,
                     TenCoSo = "624 Âu Cơ"
                 },
                 new Phong()
                 {
-                    ID = "BPH003",
+                    ID = "PH003",
                     SoThuTu = 3,
                     TenCoSo = "624 Âu Cơ"
                 });
@@ -220,7 +220,7 @@ namespace QuanLySinhVien.Data.Extensions
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT001",
-                    ID_Phong = "BPH001",
+                    ID_Phong = "PH001",
                     BuoiHoc = BuoiHoc.Sang,
                     NgayHoc = NgayHoc.Thu2,
                     IsActive = Status.Active
@@ -232,7 +232,7 @@ namespace QuanLySinhVien.Data.Extensions
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT001",
-                    ID_Phong = "BPH002",
+                    ID_Phong = "PH002",
                     BuoiHoc = BuoiHoc.Chieu,
                     NgayHoc = NgayHoc.Thu2,
                     IsActive = Status.Active
@@ -244,7 +244,7 @@ namespace QuanLySinhVien.Data.Extensions
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT005",
-                    ID_Phong = "BPH003",
+                    ID_Phong = "PH003",
                     BuoiHoc = BuoiHoc.Toi,
                     NgayHoc = NgayHoc.Thu3,
                     IsActive = Status.Active
@@ -256,7 +256,7 @@ namespace QuanLySinhVien.Data.Extensions
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT006",
-                    ID_Phong = "BPH002",
+                    ID_Phong = "PH002",
                     BuoiHoc = BuoiHoc.Sang,
                     NgayHoc = NgayHoc.Thu4,
                     IsActive = Status.Active

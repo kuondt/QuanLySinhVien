@@ -94,7 +94,7 @@ namespace QuanLyPhong.Service.Catalog.Phongs
                 ID = phong.ID,
                 SoThuTu = phong.SoThuTu,
                 TenCoSo = phong.TenCoSo,
-
+                
             };
             return sinhVienViewModel;
         }
