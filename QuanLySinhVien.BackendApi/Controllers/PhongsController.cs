@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using QuanLyPhong.Service.Catalog.Phongs;
+using QuanLySinhVien.Service.Catalog.Phongs;
 using QuanLySinhVien.ViewModel.Catalog.Phongs;
 
 namespace QuanLyPhong.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PhongsController : ControllerBase
     {
         private readonly IPhongService _phongService;
