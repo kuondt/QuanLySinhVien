@@ -42,7 +42,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
 
         [HttpGet]
         public IActionResult Create()
-        {           
+        {
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
         //public async Task<IActionResult> Edit(string id)
         //{
         //    var phong = await _phongApiClient.GetById(id);
-        
+
         //    if (phong != null)
         //    {
         //        var updateRequest = new PhongUpdateRequest()
@@ -96,20 +96,20 @@ namespace QuanLySinhVien.AdminApp.Controllers
         //    return View(request);
         //}
 
-        [HttpGet]
-        public async Task<IActionResult> Details(string id)
-        {
-            var phong = await _phongApiClient.GetById(id);
-            if (phong != null)
-            {
-                var monHocViewModel = new PhongViewModel()
-                {
-                    ID = phong.ID,
-                    TenCoSo = phong.TenCoSo
-                };
-                return View(monHocViewModel);
-            }
-            return RedirectToAction("Error", "Home");
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> Details(string id)
+        //{
+        //    var phong = await _phongApiClient.GetById(id);
+        //    if (phong != null)
+        //    {
+        //        var monHocViewModel = new PhongViewModel()
+        //        {
+        //            ID = phong.ID,
+        //            TenCoSo = phong.TenCoSo
+        //        };
+        //        return View(monHocViewModel);
+        //    }
+        //    return RedirectToAction("Error", "Home");
+        //}
     }
 }
