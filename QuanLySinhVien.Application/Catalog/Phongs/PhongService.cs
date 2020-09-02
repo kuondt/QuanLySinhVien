@@ -89,14 +89,14 @@ namespace QuanLyPhong.Service.Catalog.Phongs
                 throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
             }
 
-            var sinhVienViewModel = new PhongViewModel()
+            var phongViewModel = new PhongViewModel()
             {
                 ID = phong.ID,
                 SoThuTu = phong.SoThuTu,
                 TenCoSo = phong.TenCoSo,
                 
             };
-            return sinhVienViewModel;
+            return phongViewModel;
         }
 
         public async Task<int> Update(string id, PhongUpdateRequest request)

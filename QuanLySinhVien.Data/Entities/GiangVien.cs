@@ -1,10 +1,12 @@
-﻿using QuanLySinhVien.Data.Enums;
+﻿using Newtonsoft.Json;
+using QuanLySinhVien.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace QuanLySinhVien.Data.Entities
 {
+    [JsonObject(IsReference = true)]
     public class GiangVien
     {
         public string ID { get; set; }
@@ -20,7 +22,9 @@ namespace QuanLySinhVien.Data.Entities
         public string ID_Khoa { get; set; }
         public Status IsActive { get; set; }
         public Khoa Khoa { get; set; }
+        [JsonIgnore]
         public List<LopBienChe> LopBienChes { get; set; }
+        [JsonIgnore]
         public List<PhanCong> PhanCongs { get; set; }
     }
 }
