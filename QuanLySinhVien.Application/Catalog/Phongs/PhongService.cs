@@ -5,6 +5,8 @@ using QuanLySinhVien.Data.EF;
 using System.Linq;
 using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.ViewModel.Common;
+using Microsoft.EntityFrameworkCore;
+using QuanLySinhVien.ViewModel.Exceptions;
 
 namespace QuanLyPhong.Service.Catalog.Phongs
 {
@@ -20,17 +22,17 @@ namespace QuanLyPhong.Service.Catalog.Phongs
         public async Task<string> Create(PhongCreateRequest request)
         {
             //STT mặc định là 1
-            //STT = số thứ tự cuối cùng của năm đó + 1
+            //STT = số thứ tự cuối cùng + 1
             int soThuTu_Phong = 1;
-            var sttCuoiCung_Phong_CuaNam = _context.Phongs
-                                                .Select(x => x.SoThuTu)
-                                                .ToArray()
-                                                .LastOrDefault();
-            soThuTu_Phong += sttCuoiCung_Phong_CuaNam;
+            var sttCuoiCung_Phong = _context.Phongs
+                                            .Select(x => x.SoThuTu)
+                                            .ToArray()
+                                            .LastOrDefault();
+            soThuTu_Phong += sttCuoiCung_Phong;
 
 
             //Ghép chuỗi tạo ID
-            string ID_Phong =  "PH" + soThuTu_Phong.ToString().PadLeft(3, '0');
+            string ID_Phong = "PH" + soThuTu_Phong.ToString().PadLeft(3, '0');
 
             var phong = new Phong()
             {
@@ -45,19 +47,70 @@ namespace QuanLyPhong.Service.Catalog.Phongs
             return phong.ID;
         }
 
-        public Task<PagedResult<PhongViewModel>> GetAllPaging(PhongManagePagingRequest request)
+        public async Task<PagedResult<PhongViewModel>> GetAllPaging(PhongManagePagingRequest request)
         {
-            throw new NotImplementedException();
+            var query = from phong
+                        in _context.Phongs
+                        select new { phong };
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.phong.ID.Contains(request.Keyword));
+            }
+
+            int totalRow = await query.CountAsync();
+
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(x => new PhongViewModel()
+                {
+                    ID = x.phong.ID,
+                    SoThuTu = x.phong.SoThuTu,
+                    TenCoSo = x.phong.TenCoSo
+
+                }).ToListAsync();
+
+            var pagedResult = new PagedResult<PhongViewModel>()
+            {
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = data
+            };
+            return pagedResult;
         }
 
-        public Task<PhongViewModel> GetById(string id)
+        public async Task<PhongViewModel> GetById(string id)
         {
-            throw new NotImplementedException();
+            var phong = await _context.Phongs.FindAsync(id);
+
+            if (phong == null)
+            {
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
+            }
+
+            var sinhVienViewModel = new PhongViewModel()
+            {
+                ID = phong.ID,
+                SoThuTu = phong.SoThuTu,
+                TenCoSo = phong.TenCoSo,
+
+            };
+            return sinhVienViewModel;
         }
 
-        public Task<int> Update(string id, PhongUpdateRequest request)
+        public async Task<int> Update(string id, PhongUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var phong = await _context.Phongs.FindAsync(id);
+
+            if (phong == null)
+            {
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
+            }
+
+            phong.TenCoSo = request.TenCoSo;
+
+            return await _context.SaveChangesAsync();
         }
     }
 }
