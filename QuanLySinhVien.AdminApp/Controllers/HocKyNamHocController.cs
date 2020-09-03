@@ -57,7 +57,11 @@ namespace QuanLySinhVien.AdminApp.Controllers
             for (int i = 1; i <= 3; i++)
             {
                 request.HocKy = i;
+                request.NgayBatDau = new DateTime(request.NamHoc, 1, 1);
+                request.NgayKetThuc = new DateTime(request.NamHoc, 1, 1);
+
                 var result = await _hocKyNamHocApiClient.Create(request);
+
                 if (result)
                 {
                     TempData["result"] = "Thêm mới thành công";

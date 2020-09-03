@@ -34,6 +34,11 @@ namespace QuanLySinhVien.Service.Catalog.HocKyNamHocs
                                             .LastOrDefault();
             soThuTu_HocKy += sttCuoiCung_HocKy_CuaNam;
 
+            if(soThuTu_HocKy > 3)
+            {
+                throw new QuanLySinhVien_Exceptions("Học kỳ không thể lớn hơn 3");
+            }
+
             var hocKyNamHoc = new HocKy_NamHoc()
             {
                 HocKy = soThuTu_HocKy,
@@ -53,7 +58,7 @@ namespace QuanLySinhVien.Service.Catalog.HocKyNamHocs
         {
             var query = from hocKyNamHoc
                         in _context.HocKy_NamHocs
-                        orderby hocKyNamHoc.NamHoc
+                        orderby hocKyNamHoc.NamHoc, hocKyNamHoc.HocKy
                         select new { hocKyNamHoc };
 
             if (!string.IsNullOrEmpty(request.Keyword))

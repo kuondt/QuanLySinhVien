@@ -1,0 +1,27 @@
+﻿@model QuanLySinhVien.ViewModel.Catalog.HocKyNamHocs.HocKyNamHocCreateRequest
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="NamHoc" class="control-label">Năm học</label>
+                    <p>Nhập năm và tạo 3 học kỳ của năm đó</p>
+                    <input asp-for="NamHoc" value="@DateTime.Now.Year" class="form-control" />
+                    <span asp-validation-for="NamHoc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" value="Create" class="btn btn-primary">Đồng ý</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
