@@ -113,22 +113,22 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return View(request);
         }
 
-        [HttpGet("HocKyNamHoc/{hocky}/{namhoc}")]
-        public async Task<IActionResult> Details(int hocky, int namhoc)
-        {
-            var hocKyNamHoc = await _hocKyNamHocApiClient.GetById(hocky, namhoc);
-            if (hocKyNamHoc != null)
-            {
-                var monHocViewModel = new HocKyNamHocViewModel()
-                {
-                    HocKy = hocKyNamHoc.HocKy,
-                    NamHoc = hocKyNamHoc.NamHoc,
-                    NgayBatDau = hocKyNamHoc.NgayBatDau,
-                    NgayKetThuc = hocKyNamHoc.NgayKetThuc
-                };
-                return View(monHocViewModel);
-            }
-            return RedirectToAction("Error", "Home");
-        }
+        //[HttpGet("HocKyNamHoc/{hocky}/{namhoc}")]
+        //public async Task<IActionResult> Details(int hocky, int namhoc)
+        //{
+        //    var hocKyNamHoc = await _hocKyNamHocApiClient.GetById(hocky, namhoc);
+        //    if (hocKyNamHoc != null)
+        //    {
+        //        var monHocViewModel = new HocKyNamHocViewModel()
+        //        {
+        //            HocKy = hocKyNamHoc.HocKy,
+        //            NamHoc = hocKyNamHoc.NamHoc,
+        //            NgayBatDau = hocKyNamHoc.NgayBatDau,
+        //            NgayKetThuc = hocKyNamHoc.NgayKetThuc
+        //        };
+        //        return View(monHocViewModel);
+        //    }
+        //    return RedirectToAction("Error", "Home");
+        //}
     }
 }

@@ -1,0 +1,36 @@
+﻿@model QuanLySinhVien.ViewModel.Catalog.HocKyNamHocs.HocKyNamHocViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Học kỳ
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HocKy)
+        </dd>
+        <dt class = "col-sm-2">
+            Năm học
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NamHoc)
+        </dd>
+        <dt class = "col-sm-2">
+            Ngày bắt đầu
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NgayBatDau)
+        </dd>
+        <dt class = "col-sm-2">
+            Ngày kết thúc
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NgayKetThuc)
+        </dd>
+    </dl>
+</div>
+
