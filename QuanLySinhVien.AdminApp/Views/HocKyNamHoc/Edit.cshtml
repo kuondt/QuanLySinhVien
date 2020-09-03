@@ -1,0 +1,40 @@
+﻿@model QuanLySinhVien.ViewModel.Catalog.HocKyNamHocs.HocKyNamHocUpdateRequest
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="HocKy" class="control-label"></label>
+                    <input asp-for="HocKy" class="form-control" disabled />
+                    <span asp-validation-for="HocKy" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NamHoc" class="control-label"></label>
+                    <input asp-for="NamHoc" class="form-control" disabled />
+                    <span asp-validation-for="NamHoc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NgayBatDau" class="control-label"></label>
+                    <input asp-for="NgayBatDau" class="form-control" />
+                    <span asp-validation-for="NgayBatDau" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NgayKetThuc" class="control-label"></label>
+                    <input asp-for="NgayKetThuc" class="form-control" />
+                    <span asp-validation-for="NgayKetThuc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" value="Save" class="btn btn-primary">Đồng ý</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

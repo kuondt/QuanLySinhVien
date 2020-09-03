@@ -77,21 +77,17 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return View(request);
         }
 
-        [HttpGet]
+        [HttpGet("HocKyNamHoc/{hocky}/{namhoc}")]
         public async Task<IActionResult> Edit(int hocky, int namhoc)
         {
             var hocKyNamHoc = await _hocKyNamHocApiClient.GetById(hocky, namhoc);
-
-            //Lấy năm
-            string year = hocKyNamHoc.NamHoc.ToString();
-            //Lấy 2 số cuối của năm
-            string lastTwoDigitsOfYear = year.Substring(year.Length - 2);
-       
 
             if (hocKyNamHoc != null)
             {
                 var updateRequest = new HocKyNamHocUpdateRequest()
                 {
+                    HocKy = hocKyNamHoc.HocKy,
+                    NamHoc = hocKyNamHoc.NamHoc,
                     NgayBatDau = hocKyNamHoc.NgayBatDau,
                     NgayKetThuc = hocKyNamHoc.NgayKetThuc
                 };
@@ -100,7 +96,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return RedirectToAction("Error", "Home");
         }
 
-        [HttpPost]
+        [HttpPost("HocKyNamHoc/{hocky}/{namhoc}")]
         public async Task<IActionResult> Edit(int hocky, int namhoc, HocKyNamHocUpdateRequest request)
         {
             if (!ModelState.IsValid)
@@ -117,7 +113,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return View(request);
         }
 
-        [HttpGet]
+        [HttpGet("HocKyNamHoc/{hocky}/{namhoc}")]
         public async Task<IActionResult> Details(int hocky, int namhoc)
         {
             var hocKyNamHoc = await _hocKyNamHocApiClient.GetById(hocky, namhoc);
