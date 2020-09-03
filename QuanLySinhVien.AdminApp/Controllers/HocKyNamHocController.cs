@@ -54,7 +54,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
                 return View(request);
 
             //Lặp 3 lần tạo 3 học kỳ
-            for (int i = 0; i <= 3; i++)
+            for (int i = 1; i <= 3; i++)
             {
                 request.HocKy = i;
                 var result = await _hocKyNamHocApiClient.Create(request);

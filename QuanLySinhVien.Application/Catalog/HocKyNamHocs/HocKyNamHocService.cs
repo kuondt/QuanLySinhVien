@@ -53,6 +53,7 @@ namespace QuanLySinhVien.Service.Catalog.HocKyNamHocs
         {
             var query = from hocKyNamHoc
                         in _context.HocKy_NamHocs
+                        orderby hocKyNamHoc.NamHoc
                         select new { hocKyNamHoc };
 
             if (!string.IsNullOrEmpty(request.Keyword))
