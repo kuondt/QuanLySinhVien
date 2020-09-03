@@ -23,10 +23,20 @@ namespace QuanLySinhVien.Service.Catalog.HocKyNamHocs
 
 
         public async Task<Tuple<int, int>> Create(HocKyNamHocCreateRequest request)
-        {          
+        {
+            //Học kỳ mặc định là 1
+            //Học kỳ tạo mới = Học kì cuối cùng của năm đó + 1
+            int soThuTu_HocKy = 1;
+            var sttCuoiCung_HocKy_CuaNam = _context.HocKy_NamHocs
+                                            .Where(x => x.NamHoc == request.NamHoc)
+                                            .Select(x => x.HocKy)
+                                            .ToArray()
+                                            .LastOrDefault();
+            soThuTu_HocKy += sttCuoiCung_HocKy_CuaNam;
+
             var hocKyNamHoc = new HocKy_NamHoc()
             {
-                HocKy = request.HocKy,
+                HocKy = soThuTu_HocKy,
                 NamHoc = request.NamHoc,
                 NgayBatDau = request.NgayBatDau,
                 NgayKetThuc = request.NgayKetThuc
@@ -59,7 +69,7 @@ namespace QuanLySinhVien.Service.Catalog.HocKyNamHocs
                     HocKy = x.hocKyNamHoc.HocKy,
                     NamHoc = x.hocKyNamHoc.NamHoc,
                     NgayBatDau = x.hocKyNamHoc.NgayBatDau,
-                    NgayKetThuc = x.hocKyNamHoc.NgayKetThuc                   
+                    NgayKetThuc = x.hocKyNamHoc.NgayKetThuc
 
                 }).ToListAsync();
 
