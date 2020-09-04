@@ -21,6 +21,8 @@ namespace QuanLySinhVien.Data.Configurations
 
             builder.Property(x => x.Nam);
 
+            builder.Property(x => x.SoThuTu);
+
             builder.HasOne(x => x.Khoa).WithMany(x => x.ChuongTrinhDaoTaos).HasForeignKey(x=> x.Id_Khoa);
         }
     }
