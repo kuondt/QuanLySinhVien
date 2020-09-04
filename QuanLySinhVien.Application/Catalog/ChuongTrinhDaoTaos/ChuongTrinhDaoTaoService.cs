@@ -21,7 +21,7 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
             _context = context;
         }
 
-        public async Task<string> Create(ChuongTrinhDaoTaoViewModel request)
+        public async Task<string> Create(ChuongTrinhDaoTaoCreateRequest request)
         {
             //STT mặc định là 1
             //STT = số thứ tự cuối cùng năm đó + 1
@@ -45,6 +45,7 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
                 SoThuTu = soThuTu,               
                 Nam = request.Nam,
                 Id_Khoa = request.Id_Khoa,
+                TenChuongTrinh = request.TenChuongTrinh
                 
             };
 
@@ -99,9 +100,8 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
 
             //Lấy danh sách chi tiet CTDT
             var chiTiet_ChuongTrinhDaoTao = _context.ChiTiet_ChuongTrinhDaoTao_MonHocs
-                                    .Where(x => x.ID_ChuongTrinhDaoTao == chuongTrinhDaoTao.ID)
-                                    .ToListAsync();
-
+                                    .Where(x => x.ID_ChuongTrinhDaoTao == id)
+                                    .ToList();
                                     
             var sinhVienViewModel = new ChuongTrinhDaoTaoViewModel()
             {
@@ -109,12 +109,12 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
                 SoThuTu = chuongTrinhDaoTao.SoThuTu,
                 TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh,
                 Nam = chuongTrinhDaoTao.Nam,
-                ChiTiet_ChuongTrinhDaoTao_MonHocs = await chiTiet_ChuongTrinhDaoTao
+                ChiTiet_ChuongTrinhDaoTao_MonHocs = chiTiet_ChuongTrinhDaoTao
             };
             return sinhVienViewModel;
         }
 
-        public async Task<int> Update(string id, ChuongTrinhDaoTaoViewModel request)
+        public async Task<int> Update(string id, ChuongTrinhDaoTaoUpdateRequest request)
         {
             var ctdt = await _context.ChuongTrinhDaoTaos.FindAsync(id);
 

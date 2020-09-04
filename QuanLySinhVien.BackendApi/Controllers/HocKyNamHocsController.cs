@@ -12,6 +12,7 @@ namespace QuanLySinhVien.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class HocKyNamHocsController : ControllerBase
     {
         private readonly IHocKyNamHocService _hocKyNamHocService;

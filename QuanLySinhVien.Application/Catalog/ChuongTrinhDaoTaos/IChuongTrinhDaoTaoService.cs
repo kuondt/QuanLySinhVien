@@ -9,9 +9,9 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
 {
     public interface IChuongTrinhDaoTaoService
     {
-        Task<string> Create(ChuongTrinhDaoTaoViewModel request);
+        Task<string> Create(ChuongTrinhDaoTaoCreateRequest request);
 
-        Task<int> Update(string id, ChuongTrinhDaoTaoViewModel request);
+        Task<int> Update(string id, ChuongTrinhDaoTaoUpdateRequest request);
 
         Task<ChuongTrinhDaoTaoViewModel> GetById(string id);
 
