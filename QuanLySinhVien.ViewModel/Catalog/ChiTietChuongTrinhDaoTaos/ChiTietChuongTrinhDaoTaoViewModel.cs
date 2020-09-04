@@ -5,7 +5,7 @@ using QuanLySinhVien.Data.Entities;
 
 namespace QuanLySinhVien.ViewModel.Catalog.ChiTietChuongTrinhDaoTaos
 {
-    public class ChiTietChuongTrinhDaoTao
+    public class ChiTietChuongTrinhDaoTaoViewModel
     {
         public string ID_ChuongTrinhDaoTao { get; set; }
         public int HK_HocKy { get; set; }
