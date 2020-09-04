@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using QuanLySinhVien.ViewModel.Catalog.ChuongTrinhDaoTaos;
 using System.Linq;
 using QuanLySinhVien.Data.EF;
+using QuanLySinhVien.Data.Entities;
 
 namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
 {
@@ -35,7 +36,7 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
             //Ghép chuỗi tạo ID
             string Id = year + "CNTT" + soThuTu.ToString().PadLeft(2, '0');
 
-            var sinhVien = new ChuongTrinhDaoTaoViewModel()
+            var chuongTrinhDaoTao = new ChuongTrinhDaoTao()
             {
                 ID = Id,
                 SoThuTu = soThuTu,               
@@ -44,10 +45,10 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
                 
             };
 
-            _context.SinhViens.Add(sinhVien);
+            _context.ChuongTrinhDaoTaos.Add(chuongTrinhDaoTao);
             await _context.SaveChangesAsync();
 
-            return sinhVien.ID;
+            return chuongTrinhDaoTao.ID;
         }
 
         public async Task<PagedResult<ChuongTrinhDaoTaoViewModel>> GetAllPaging(ChuongTrinhDaoTaoViewModel request)
