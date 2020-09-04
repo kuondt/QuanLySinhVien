@@ -22,13 +22,13 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
         }
 
         public async Task<Tuple<string, string, int, int>> Create(ChiTietChuongTrinhDaoTaoCreateRequest request)
-        {        
+        {
             var chiTiet_CTDT = new ChiTiet_ChuongTrinhDaoTao_MonHoc()
             {
-               ID_ChuongTrinhDaoTao = request.ID_ChuongTrinhDaoTao,
-               ID_MonHoc = request.ID_MonHoc,
-               HK_HocKy = request.HK_HocKy,
-               HK_NamHoc = request.HK_NamHoc               
+                ID_ChuongTrinhDaoTao = request.ID_ChuongTrinhDaoTao,
+                ID_MonHoc = request.ID_MonHoc,
+                HK_HocKy = request.HK_HocKy,
+                HK_NamHoc = request.HK_NamHoc
             };
 
             _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.Add(chiTiet_CTDT);
@@ -37,9 +37,19 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
             return Tuple.Create(chiTiet_CTDT.ID_ChuongTrinhDaoTao, chiTiet_CTDT.ID_MonHoc, chiTiet_CTDT.HK_HocKy, chiTiet_CTDT.HK_NamHoc);
         }
 
-        public Task<int> Delete(string id_MonHoc, string id_CTDT, int hocKy, int nam)
+        public async Task<int> Delete(string id_MonHoc, string id_CTDT, int hocKy, int namHoc)
         {
-            throw new NotImplementedException();
+            var chiTiet_CTDT = await _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.FindAsync(id_CTDT, id_MonHoc, hocKy, namHoc);
+
+
+            if (chiTiet_CTDT == null)
+            {
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy");
+            }
+
+            _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.Remove(chiTiet_CTDT);
+            return await _context.SaveChangesAsync();
+
         }
 
         public async Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAllPaging(ChiTietChuongTrinhDaoTaoPagingRequest request)
@@ -51,11 +61,11 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
 
             if (!string.IsNullOrEmpty(request.Keyword))
             {
-                query = query.Where(x => 
-                    x.ct_ctdt.HK_NamHoc.ToString().Contains(request.Keyword) 
-                ||  x.ct_ctdt.HK_HocKy.ToString().Contains(request.Keyword) 
-                ||  x.ct_ctdt.ID_MonHoc.ToString().Contains(request.Keyword)
-                ||  x.ct_ctdt.ID_ChuongTrinhDaoTao.ToString().Contains(request.Keyword));
+                query = query.Where(x =>
+                    x.ct_ctdt.HK_NamHoc.ToString().Contains(request.Keyword)
+                || x.ct_ctdt.HK_HocKy.ToString().Contains(request.Keyword)
+                || x.ct_ctdt.ID_MonHoc.ToString().Contains(request.Keyword)
+                || x.ct_ctdt.ID_ChuongTrinhDaoTao.ToString().Contains(request.Keyword));
             }
 
             int totalRow = await query.CountAsync();
@@ -81,9 +91,9 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
             return pagedResult;
         }
 
-        public async Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_MonHoc, string id_CTDT, int hocKy, int nam)
+        public async Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_MonHoc, string id_CTDT, int hocKy, int namHoc)
         {
-            var chiTiet_CTDT = await _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.FindAsync(id_CTDT, id_MonHoc, hocKy, nam);
+            var chiTiet_CTDT = await _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.FindAsync(id_CTDT, id_MonHoc, hocKy, namHoc);
 
             if (chiTiet_CTDT == null)
             {
@@ -95,7 +105,7 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
                 HK_HocKy = chiTiet_CTDT.HK_HocKy,
                 HK_NamHoc = chiTiet_CTDT.HK_NamHoc,
                 ID_ChuongTrinhDaoTao = chiTiet_CTDT.ID_ChuongTrinhDaoTao,
-                ID_MonHoc = chiTiet_CTDT.ID_MonHoc              
+                ID_MonHoc = chiTiet_CTDT.ID_MonHoc
 
             };
             return hocKyNamHocViewModel;
