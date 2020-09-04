@@ -44,7 +44,7 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
                 ID = Id,
                 SoThuTu = soThuTu,               
                 Nam = request.Nam,
-                Id_Khoa = request.Id_Khoa,
+                Id_Khoa = request.Id_Khoa ?? "CNTT",
                 TenChuongTrinh = request.TenChuongTrinh
                 
             };
