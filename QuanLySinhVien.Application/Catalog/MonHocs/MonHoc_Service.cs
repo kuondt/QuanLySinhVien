@@ -34,7 +34,7 @@ namespace QuanLySinhVien.Service.Catalog.MonHocs
                 TenMonHoc = request.TenMonHoc,
                 SoTinChi = request.SoTinChi,
                 SoTiet = request.SoTinChi * 15, //2 tín chỉ = 30 tiết
-                ID_Khoa = "KTCN"
+                ID_Khoa = request.ID_Khoa ?? "CNTT"
             };
             _context.MonHocs.Add(monHoc);
             await _context.SaveChangesAsync();

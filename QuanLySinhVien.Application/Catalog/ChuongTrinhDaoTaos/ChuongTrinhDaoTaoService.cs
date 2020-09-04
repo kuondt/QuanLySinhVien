@@ -24,33 +24,24 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
             int soThuTu = 1;
             var sttCuoiCung_CuaNam = _context.ChuongTrinhDaoTaos
                                                 .Where(x => x.Nam == request.Nam)
-                                                .Count();
+                                                .Select(x => x.SoThuTu)
+                                                .ToArray()
+                                                .LastOrDefault();
             soThuTu += sttCuoiCung_CuaNam;
 
             //Lấy năm hiện tại
             string year = request.Nam.ToString();
-            //Lấy 2 số cuối của năm
-            string lastTwoDigitsOfYear = year.Substring(year.Length - 2);
 
             //Ghép chuỗi tạo ID
-            string ID_SinhVien = year + "1A01" + soThuTu_SinhVien.ToString().PadLeft(4, '0');
+            string Id = year + "CNTT" + soThuTu.ToString().PadLeft(2, '0');
 
             var sinhVien = new ChuongTrinhDaoTaoViewModel()
             {
-                ID = ID_SinhVien,
-                SoThuTu = soThuTu_SinhVien,
-                Ho = request.Ho,
-                Ten = request.Ten,
-                HoTen = request.Ho + " " + request.Ten,
-                ID_LopBienChe = request.ID_LopBienChe,
-                DiaChi = request.DiaChi,
-                Email = request.Email,
-                SoDienThoai = request.SoDienThoai,
-                GioiTinh = request.GioiTinh,
-                NgaySinh = request.NgaySinh,
-                IsActive = Status.Active,
+                ID = Id,
+                SoThuTu = soThuTu,               
                 Nam = request.Nam,
-
+                Id_Khoa = request.Id_Khoa,
+                
             };
 
             _context.SinhViens.Add(sinhVien);

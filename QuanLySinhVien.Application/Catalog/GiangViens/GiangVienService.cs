@@ -35,7 +35,7 @@ namespace QuanLySinhVien.Service.Catalog.GiangViens
                 Ho = request.Ho,
                 Ten = request.Ten,
                 HoTen = request.Ho + " " + request.Ten,
-                ID_Khoa = "KTCN",
+                ID_Khoa = request.ID_Khoa ?? "CNTT",
                 DiaChi = request.DiaChi,
                 Email = request.Email,
                 SoDienThoai = request.SoDienThoai,
