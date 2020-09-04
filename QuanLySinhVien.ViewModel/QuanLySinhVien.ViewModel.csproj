@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Catalog\ChuongTrinhDaoTaos\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\QuanLySinhVien.Data\QuanLySinhVien.Data.csproj" />
   </ItemGroup>
 
