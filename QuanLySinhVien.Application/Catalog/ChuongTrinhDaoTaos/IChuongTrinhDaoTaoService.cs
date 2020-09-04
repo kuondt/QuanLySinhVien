@@ -15,6 +15,6 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
 
         Task<ChuongTrinhDaoTaoViewModel> GetById(string id);
 
-        Task<PagedResult<ChuongTrinhDaoTaoViewModel>> GetAllPaging(ChuongTrinhDaoTaoViewModel request);
+        Task<PagedResult<ChuongTrinhDaoTaoViewModel>> GetAllPaging(ChuongTrinhDaoTaoPagingRequest request);
     }
 }

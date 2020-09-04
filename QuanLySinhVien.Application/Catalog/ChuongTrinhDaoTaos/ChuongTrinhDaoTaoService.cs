@@ -116,28 +116,15 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
 
         public async Task<int> Update(string id, ChuongTrinhDaoTaoViewModel request)
         {
-            var sinhVien = await _context.SinhViens.FindAsync(id);
+            var ctdt = await _context.ChuongTrinhDaoTaos.FindAsync(id);
 
-            if (sinhVien == null)
+            if (ctdt == null)
             {
                 throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
             }
-            sinhVien.Ho = request.Ho;
-            sinhVien.Ten = request.Ten;
-            sinhVien.HoTen = request.Ho + " " + request.Ten;
-            sinhVien.DiaChi = request.DiaChi;
-            sinhVien.Email = request.Email;
-            sinhVien.SoDienThoai = request.SoDienThoai;
-            sinhVien.GioiTinh = request.GioiTinh;
-            sinhVien.NgaySinh = request.NgaySinh;
-            sinhVien.IsActive = request.IsActive;
-            sinhVien.ID_LopBienChe = request.ID_LopBienChe;
 
+            ctdt.TenChuongTrinh = request.TenChuongTrinh;          
 
-            if (request.IsActive == Status.InActive)
-            {
-                sinhVien.ID_LopBienChe = null;
-            }
             return await _context.SaveChangesAsync();
         }
     }
