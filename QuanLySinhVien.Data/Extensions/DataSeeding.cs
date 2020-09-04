@@ -66,7 +66,7 @@ namespace QuanLySinhVien.Data.Extensions
                 new Khoa() { ID = "KTCN", TenKhoa = "Kỹ thuật công nghệ" });
 
             modelBuilder.Entity<ChuongTrinhDaoTao>().HasData(
-                new ChuongTrinhDaoTao() { ID = "HTTT2016", TenChuongTrinh = "HTTT", Nam = 2016, Id_Khoa = "KTCN" });
+                new ChuongTrinhDaoTao() { ID = "2016CNTT01", TenChuongTrinh = "Hệ thống thông tin", Nam = 2016, Id_Khoa = "KTCN", SoThuTu = 1 });
 
             modelBuilder.Entity<MonHoc>().HasData(
                 new MonHoc() { ID = "INT001", SoThuTu = 1, TenMonHoc = "Kỹ thuật lập trình", SoTiet = 30, SoTinChi = 2, ID_Khoa = "KTCN" },
@@ -193,20 +193,20 @@ namespace QuanLySinhVien.Data.Extensions
             modelBuilder.Entity<ChiTiet_ChuongTrinhDaoTao_MonHoc>().HasData(
                 new ChiTiet_ChuongTrinhDaoTao_MonHoc()
                 {
-                    ID_ChuongTrinhDaoTao = "HTTT2016",
+                    ID_ChuongTrinhDaoTao = "2016CNTT01",
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT001"
                 }, new ChiTiet_ChuongTrinhDaoTao_MonHoc()
                 {
-                    ID_ChuongTrinhDaoTao = "HTTT2016",
+                    ID_ChuongTrinhDaoTao = "2016CNTT01",
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT005"
                 },
                 new ChiTiet_ChuongTrinhDaoTao_MonHoc()
                 {
-                    ID_ChuongTrinhDaoTao = "HTTT2016",
+                    ID_ChuongTrinhDaoTao = "2016CNTT01",
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT006"
