@@ -8,6 +8,7 @@ using QuanLySinhVien.ViewModel.Catalog.ChiTietChuongTrinhDaoTaos;
 using QuanLySinhVien.ViewModel.Common;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using QuanLySinhVien.ViewModel.Exceptions;
 
 namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
 {
@@ -80,14 +81,40 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
             return pagedResult;
         }
 
-        public Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_MonHoc, string id_CTDT, int hocKy, int nam)
+        public async Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_MonHoc, string id_CTDT, int hocKy, int nam)
         {
-            throw new NotImplementedException();
+            var chiTiet_CTDT = await _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.FindAsync(id_CTDT, id_MonHoc, hocKy, nam);
+
+            if (chiTiet_CTDT == null)
+            {
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy");
+            }
+
+            var hocKyNamHocViewModel = new ChiTietChuongTrinhDaoTaoViewModel()
+            {
+                HK_HocKy = chiTiet_CTDT.HK_HocKy,
+                HK_NamHoc = chiTiet_CTDT.HK_NamHoc,
+                ID_ChuongTrinhDaoTao = chiTiet_CTDT.ID_ChuongTrinhDaoTao,
+                ID_MonHoc = chiTiet_CTDT.ID_MonHoc              
+
+            };
+            return hocKyNamHocViewModel;
         }
 
-        public Task<int> Update(string id_MonHoc, string id_CTDT, int hocKy, int nam, ChiTietChuongTrinhDaoTaoUpdateRequest request)
+        public async Task<int> Update(string id_MonHoc, string id_CTDT, int hocKy, int namHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var chiTiet_CTDT = await _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.FindAsync(id_MonHoc, id_CTDT, hocKy, namHoc);
+
+            if (chiTiet_CTDT == null)
+            {
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy");
+            }
+
+            chiTiet_CTDT.HK_HocKy = request.HK_HocKy;
+            chiTiet_CTDT.HK_NamHoc = request.HK_NamHoc;
+            chiTiet_CTDT.ID_MonHoc = request.ID_MonHoc ?? chiTiet_CTDT.ID_MonHoc;
+
+            return await _context.SaveChangesAsync();
         }
     }
 }

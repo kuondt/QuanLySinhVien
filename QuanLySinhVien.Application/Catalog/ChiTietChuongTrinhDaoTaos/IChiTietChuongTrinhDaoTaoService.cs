@@ -11,12 +11,12 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
     {
         Task<Tuple<string, string, int, int>> Create(ChiTietChuongTrinhDaoTaoCreateRequest request);
 
-        Task<int> Update(string id_MonHoc, string id_CTDT, int hocKy, int nam, ChiTietChuongTrinhDaoTaoUpdateRequest request);
+        Task<int> Update(string id_MonHoc, string id_CTDT, int hocKy, int namHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request);
 
-        Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_MonHoc, string id_CTDT, int hocKy, int nam);
+        Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_MonHoc, string id_CTDT, int hocKy, int namHoc);
 
         Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAllPaging(ChiTietChuongTrinhDaoTaoPagingRequest request);
 
-        Task<int> Delete(string id_MonHoc, string id_CTDT, int hocKy, int nam);
+        Task<int> Delete(string id_MonHoc, string id_CTDT, int hocKy, int namHoc);
     }
 }
