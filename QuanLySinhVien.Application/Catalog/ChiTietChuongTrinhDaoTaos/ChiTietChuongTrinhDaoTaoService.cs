@@ -37,7 +37,7 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
             return Tuple.Create(chiTiet_CTDT.ID_ChuongTrinhDaoTao, chiTiet_CTDT.ID_MonHoc, chiTiet_CTDT.HK_HocKy, chiTiet_CTDT.HK_NamHoc);
         }
 
-        public async Task<int> Delete(string id_MonHoc, string id_CTDT, int hocKy, int namHoc)
+        public async Task<int> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc)
         {
             var chiTiet_CTDT = await _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.FindAsync(id_CTDT, id_MonHoc, hocKy, namHoc);
 
@@ -91,7 +91,7 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
             return pagedResult;
         }
 
-        public async Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_MonHoc, string id_CTDT, int hocKy, int namHoc)
+        public async Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_CTDT, string id_MonHoc, int hocKy, int namHoc)
         {
             var chiTiet_CTDT = await _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.FindAsync(id_CTDT, id_MonHoc, hocKy, namHoc);
 
@@ -111,7 +111,7 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
             return hocKyNamHocViewModel;
         }
 
-        public async Task<int> Update(string id_MonHoc, string id_CTDT, int hocKy, int namHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request)
+        public async Task<int> Update(string id_CTDT, string id_MonHoc, int hocKy, int namHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request)
         {
             var chiTiet_CTDT = await _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.FindAsync(id_MonHoc, id_CTDT, hocKy, namHoc);
 
