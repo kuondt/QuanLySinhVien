@@ -90,35 +90,26 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
 
         public async Task<ChuongTrinhDaoTaoViewModel> GetById(string id)
         {
-            var sinhVien = await _context.SinhViens.FindAsync(id);
+            var chuongTrinhDaoTao = await _context.ChuongTrinhDaoTaos.FindAsync(id);
 
-            if (sinhVien == null)
+            if (chuongTrinhDaoTao == null)
             {
                 throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
             }
 
-            var lopBienChe = _context.LopBienChes
-                                    .Where(x => x.ID.Contains(sinhVien.ID_LopBienChe))
-                                    .FirstOrDefault();
+            //Lấy danh sách chi tiet CTDT
+            var chiTiet_ChuongTrinhDaoTao = _context.ChiTiet_ChuongTrinhDaoTao_MonHocs
+                                    .Where(x => x.ID_ChuongTrinhDaoTao == chuongTrinhDaoTao.ID)
+                                    .ToListAsync();
 
-
-
+                                    
             var sinhVienViewModel = new ChuongTrinhDaoTaoViewModel()
             {
-                ID = sinhVien.ID,
-                SoThuTu = sinhVien.SoThuTu,
-                Ho = sinhVien.Ho,
-                Ten = sinhVien.Ten,
-                HoTen = sinhVien.HoTen,
-                DiaChi = sinhVien.DiaChi,
-                Email = sinhVien.Email,
-                SoDienThoai = sinhVien.SoDienThoai,
-                GioiTinh = sinhVien.GioiTinh,
-                NgaySinh = sinhVien.NgaySinh,
-                IsActive = sinhVien.IsActive,
-                ID_LopBienChe = sinhVien.ID_LopBienChe,
-                Nam = sinhVien.Nam,
-                LopBienChe = lopBienChe
+                ID = chuongTrinhDaoTao.ID,
+                SoThuTu = chuongTrinhDaoTao.SoThuTu,
+                TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh,
+                Nam = chuongTrinhDaoTao.Nam,
+                ChiTiet_ChuongTrinhDaoTao_MonHocs = await chiTiet_ChuongTrinhDaoTao
             };
             return sinhVienViewModel;
         }
