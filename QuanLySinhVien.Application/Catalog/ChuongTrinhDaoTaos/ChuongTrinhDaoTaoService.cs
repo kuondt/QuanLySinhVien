@@ -99,17 +99,27 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
             }
 
             //Lấy danh sách chi tiet CTDT
-            var chiTiet_ChuongTrinhDaoTao = _context.ChiTiet_ChuongTrinhDaoTao_MonHocs
-                                    .Where(x => x.ID_ChuongTrinhDaoTao == id)
-                                    .ToList();
-                                    
+            //var chiTiet_ChuongTrinhDaoTao = _context.ChiTiet_ChuongTrinhDaoTao_MonHocs
+            //                        .Join(_context.MonHocs, chiTiet => chiTiet.ID_MonHoc, monHoc => monHoc.ID, (chiTiet, monHoc) => new { id_MonHoc = chiTiet.ID_MonHoc, tenMonHoc = monHoc.TenMonHoc})
+            //                        .ToList();
+            var CTDTs = _context.ChuongTrinhDaoTaos;
+            var ChiTiet_CTDTs = _context.ChiTiet_ChuongTrinhDaoTao_MonHocs;
+            var MonHocs = _context.MonHocs;
+            var chiTiet_ChuongTrinhDaoTao = from ctdt in CTDTs
+                                            join ct_ctdt in ChiTiet_CTDTs on ctdt.ID equals ct_ctdt.ID_ChuongTrinhDaoTao
+                                            join mh in MonHocs on ct_ctdt.ID_MonHoc equals mh.ID
+                                            where ctdt.ID == id
+                                            select ct_ctdt;
+
+            var listCTDT = chiTiet_ChuongTrinhDaoTao.ToList();
+
             var sinhVienViewModel = new ChuongTrinhDaoTaoViewModel()
             {
                 ID = chuongTrinhDaoTao.ID,
                 SoThuTu = chuongTrinhDaoTao.SoThuTu,
                 TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh,
                 Nam = chuongTrinhDaoTao.Nam,
-                ChiTiet_ChuongTrinhDaoTao_MonHocs = chiTiet_ChuongTrinhDaoTao
+                ChiTiet_ChuongTrinhDaoTao_MonHocs = listCTDT
             };
             return sinhVienViewModel;
         }
