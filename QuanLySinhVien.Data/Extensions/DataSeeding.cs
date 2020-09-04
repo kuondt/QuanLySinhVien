@@ -63,18 +63,18 @@ namespace QuanLySinhVien.Data.Extensions
                 });
 
             modelBuilder.Entity<Khoa>().HasData(
-                new Khoa() { ID = "KTCN", TenKhoa = "Kỹ thuật công nghệ" });
+                new Khoa() { ID = "CNTT", TenKhoa = "Kỹ thuật công nghệ" });
 
             modelBuilder.Entity<ChuongTrinhDaoTao>().HasData(
-                new ChuongTrinhDaoTao() { ID = "2016CNTT01", TenChuongTrinh = "Hệ thống thông tin", Nam = 2016, Id_Khoa = "KTCN", SoThuTu = 1 });
+                new ChuongTrinhDaoTao() { ID = "2016CNTT01", TenChuongTrinh = "Hệ thống thông tin", Nam = 2016, Id_Khoa = "CNTT", SoThuTu = 1 });
 
             modelBuilder.Entity<MonHoc>().HasData(
-                new MonHoc() { ID = "INT001", SoThuTu = 1, TenMonHoc = "Kỹ thuật lập trình", SoTiet = 30, SoTinChi = 2, ID_Khoa = "KTCN" },
-                new MonHoc() { ID = "INT002", SoThuTu = 2, TenMonHoc = "Cấu trúc dữ liệu và giải thuật", SoTiet = 30, SoTinChi = 2, ID_Khoa = "KTCN" },
-                new MonHoc() { ID = "INT003", TenMonHoc = "Cơ sở dữ liệu", SoTiet = 45, SoTinChi = 3, ID_Khoa = "KTCN", SoThuTu = 3 },
-                new MonHoc() { ID = "INT004", TenMonHoc = "Hệ điều hành	", SoTiet = 45, SoTinChi = 3, ID_Khoa = "KTCN", SoThuTu = 4 },
-                new MonHoc() { ID = "INT005", TenMonHoc = "Vật lý đại cương", SoTiet = 45, SoTinChi = 3, ID_Khoa = "KTCN", SoThuTu = 5 },
-                new MonHoc() { ID = "INT006", TenMonHoc = "Toán cao cấp", SoTiet = 30, SoTinChi = 2, ID_Khoa = "KTCN", SoThuTu = 6 }
+                new MonHoc() { ID = "INT001", SoThuTu = 1, TenMonHoc = "Kỹ thuật lập trình", SoTiet = 30, SoTinChi = 2, ID_Khoa = "CNTT" },
+                new MonHoc() { ID = "INT002", SoThuTu = 2, TenMonHoc = "Cấu trúc dữ liệu và giải thuật", SoTiet = 30, SoTinChi = 2, ID_Khoa = "CNTT" },
+                new MonHoc() { ID = "INT003", TenMonHoc = "Cơ sở dữ liệu", SoTiet = 45, SoTinChi = 3, ID_Khoa = "CNTT", SoThuTu = 3 },
+                new MonHoc() { ID = "INT004", TenMonHoc = "Hệ điều hành	", SoTiet = 45, SoTinChi = 3, ID_Khoa = "CNTT", SoThuTu = 4 },
+                new MonHoc() { ID = "INT005", TenMonHoc = "Vật lý đại cương", SoTiet = 45, SoTinChi = 3, ID_Khoa = "CNTT", SoThuTu = 5 },
+                new MonHoc() { ID = "INT006", TenMonHoc = "Toán cao cấp", SoTiet = 30, SoTinChi = 2, ID_Khoa = "CNTT", SoThuTu = 6 }
                 );
 
             modelBuilder.Entity<GiangVien>().HasData(
@@ -89,7 +89,7 @@ namespace QuanLySinhVien.Data.Extensions
                     SoDienThoai = "0987654321",
                     Email = "nva@vhu.edu.vn",
                     GioiTinh = GioiTinh.Nam,
-                    ID_Khoa = "KTCN",
+                    ID_Khoa = "CNTT",
                     IsActive = Status.Active,
                     NgaySinh = new DateTime(1975, 12, 01)
                 },
@@ -104,13 +104,13 @@ namespace QuanLySinhVien.Data.Extensions
                     SoDienThoai = "012332123",
                     Email = "pvb@vhu.edu.vn",
                     GioiTinh = GioiTinh.Nam,
-                    ID_Khoa = "KTCN",
+                    ID_Khoa = "CNTT",
                     IsActive = Status.Active,
                     NgaySinh = new DateTime(1990, 01, 01)
                 });
 
             modelBuilder.Entity<LopBienChe>().HasData(
-                new LopBienChe() { ID = "161A0101", NamBatDau = 2016, NamKetThuc = 2020, ID_Khoa = "KTCN", ID_GiangVien = "GV001", SoThuTu = 1 }
+                new LopBienChe() { ID = "161A0101", NamBatDau = 2016, NamKetThuc = 2020, ID_Khoa = "CNTT", ID_GiangVien = "GV001", SoThuTu = 1 }
                 );
 
             modelBuilder.Entity<SinhVien>().HasData(
