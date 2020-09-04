@@ -28,6 +28,7 @@ using QuanLySinhVien.ViewModel.Constants;
 using QuanLySinhVien.ViewModel.System.Users;
 using QuanLySinhVien.Service.Catalog.HocKyNamHocs;
 using QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos;
+using QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos;
 
 namespace QuanLySinhVien.BackendApi
 {
@@ -63,6 +64,7 @@ namespace QuanLySinhVien.BackendApi
             services.AddTransient<IPhongService, PhongService>();
             services.AddTransient<IHocKyNamHocService, HocKyNamHocService>();
             services.AddTransient<IChuongTrinhDaoTaoService, ChuongTrinhDaoTaoService>();
+            services.AddTransient<IChiTietChuongTrinhDaoTaoService, ChiTietChuongTrinhDaoTaoService>();
 
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
 
