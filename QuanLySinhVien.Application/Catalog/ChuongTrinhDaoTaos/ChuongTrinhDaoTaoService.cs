@@ -6,6 +6,9 @@ using QuanLySinhVien.ViewModel.Catalog.ChuongTrinhDaoTaos;
 using System.Linq;
 using QuanLySinhVien.Data.EF;
 using QuanLySinhVien.Data.Entities;
+using QuanLySinhVien.ViewModel.Common;
+using Microsoft.EntityFrameworkCore;
+using QuanLySinhVien.ViewModel.Exceptions;
 
 namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
 {
@@ -51,36 +54,27 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
             return chuongTrinhDaoTao.ID;
         }
 
-        public async Task<PagedResult<ChuongTrinhDaoTaoViewModel>> GetAllPaging(ChuongTrinhDaoTaoViewModel request)
+        public async Task<PagedResult<ChuongTrinhDaoTaoViewModel>> GetAllPaging(ChuongTrinhDaoTaoPagingRequest request)
         {
-            var query = from sv
-                        in _context.SinhViens
-                        select new { sv };
+            var query = from ctdt
+                        in _context.ChuongTrinhDaoTaos
+                        select new { ctdt };
 
             if (!string.IsNullOrEmpty(request.Keyword))
             {
-                query = query.Where(x => x.sv.HoTen.Contains(request.Keyword) || x.sv.ID.Contains(request.Keyword));
+                query = query.Where(x => x.ctdt.ID.Contains(request.Keyword) || x.ctdt.TenChuongTrinh.Contains(request.Keyword));
             }
 
             int totalRow = await query.CountAsync();
 
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
-                .Select(x => new SinhVienViewModel()
+                .Select(x => new ChuongTrinhDaoTaoViewModel()
                 {
-                    ID = x.sv.ID,
-                    SoThuTu = x.sv.SoThuTu,
-                    Ho = x.sv.Ho,
-                    Ten = x.sv.Ten,
-                    HoTen = x.sv.HoTen,
-                    DiaChi = x.sv.DiaChi,
-                    Email = x.sv.Email,
-                    SoDienThoai = x.sv.SoDienThoai,
-                    GioiTinh = x.sv.GioiTinh,
-                    NgaySinh = x.sv.NgaySinh,
-                    IsActive = x.sv.IsActive,
-                    Nam = x.sv.Nam,
-                    ID_LopBienChe = x.sv.ID_LopBienChe,
+                    ID = x.ctdt.ID,
+                    SoThuTu = x.ctdt.SoThuTu,                
+                    Nam = x.ctdt.Nam,
+                    TenChuongTrinh = x.ctdt.TenChuongTrinh
 
                 }).ToListAsync();
 
