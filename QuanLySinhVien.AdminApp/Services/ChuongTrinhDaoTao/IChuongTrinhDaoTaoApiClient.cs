@@ -9,9 +9,9 @@ namespace QuanLySinhVien.AdminApp.Services.ChuongTrinhDaoTao
 {
     public interface IChuongTrinhDaoTaoApiClient
     {
-        Task<string> Create(ChuongTrinhDaoTaoCreateRequest request);
+        Task<bool> Create(ChuongTrinhDaoTaoCreateRequest request);
 
-        Task<int> Update(string id, ChuongTrinhDaoTaoUpdateRequest request);
+        Task<bool> Update(string id, ChuongTrinhDaoTaoUpdateRequest request);
 
         Task<ChuongTrinhDaoTaoViewModel> GetById(string id);
 
