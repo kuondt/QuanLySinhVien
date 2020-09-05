@@ -42,7 +42,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
 
         [HttpGet]
         public IActionResult Create()
-        {          
+        {
             string khoa = "CNTT";
             ViewBag.lopBienChes = khoa;
             return View();
@@ -62,6 +62,35 @@ namespace QuanLySinhVien.AdminApp.Controllers
             }
 
             ModelState.AddModelError("", "Thêm mới thất bại");
+            return View(request);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            var chuongTrinhDaoTao = await _chuongTrinhDaoTaoApiClient.GetById(id);
+
+            var updateRequest = new ChuongTrinhDaoTaoUpdateRequest()
+            {
+                TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh
+            };
+            return View(updateRequest);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, ChuongTrinhDaoTaoUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _chuongTrinhDaoTaoApiClient.Update(id, request);
+            if (result)
+            {
+                TempData["result"] = "Cập nhật thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Cập nhật không thành công");
             return View(request);
         }
     }
