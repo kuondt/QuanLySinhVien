@@ -93,5 +93,24 @@ namespace QuanLySinhVien.AdminApp.Controllers
             ModelState.AddModelError("", "Cập nhật không thành công");
             return View(request);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            var chuongTrinhDaoTao = await _chuongTrinhDaoTaoApiClient.GetById(id);
+            if (chuongTrinhDaoTao != null)
+            {
+                var monHocViewModel = new ChuongTrinhDaoTaoViewModel()
+                {
+                    ID = chuongTrinhDaoTao.ID,
+                    Id_Khoa = chuongTrinhDaoTao.Id_Khoa,
+                    Nam = chuongTrinhDaoTao.Nam,
+                    TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh,                   
+
+                };
+                return View(monHocViewModel);
+            }
+            return RedirectToAction("Error", "Home");
+        }
     }
 }

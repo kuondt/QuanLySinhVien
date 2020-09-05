@@ -120,6 +120,7 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
                 SoThuTu = chuongTrinhDaoTao.SoThuTu,
                 TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh,
                 Nam = chuongTrinhDaoTao.Nam,
+                Id_Khoa = chuongTrinhDaoTao.Id_Khoa,   
                 ChiTiet_ChuongTrinhDaoTao_MonHocs = listCTDT
             };
             return sinhVienViewModel;
