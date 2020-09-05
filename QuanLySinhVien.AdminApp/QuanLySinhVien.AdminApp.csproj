@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\ChiTietChuongTrinhDaoTao\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
