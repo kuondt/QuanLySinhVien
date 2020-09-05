@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao;
 using QuanLySinhVien.AdminApp.Services.ChuongTrinhDaoTao;
 using QuanLySinhVien.ViewModel.Catalog.ChuongTrinhDaoTaos;
 
@@ -12,12 +13,14 @@ namespace QuanLySinhVien.AdminApp.Controllers
     public class ChuongTrinhDaoTaoController : Controller
     {
         private readonly IConfiguration _configuration;
-        private readonly IChuongTrinhDaoTaoApiClient _chuongTrinhDaoTaoApiClient;
+        private readonly IChuongTrinhDaoTaoApiClient _chuongTrinhDaoTao;
+        private readonly IChiTietChuongTrinhDaoTaoApiClient _chiTietCTDT;
 
-        public ChuongTrinhDaoTaoController(IConfiguration configuration, IChuongTrinhDaoTaoApiClient chuongTrinhDaoTaoApiClient)
+        public ChuongTrinhDaoTaoController(IConfiguration configuration, IChuongTrinhDaoTaoApiClient chuongTrinhDaoTaoApiClient, IChiTietChuongTrinhDaoTaoApiClient chiTietChuongTrinhDaoTaoApiClient)
         {
             _configuration = configuration;
-            _chuongTrinhDaoTaoApiClient = chuongTrinhDaoTaoApiClient;
+            _chuongTrinhDaoTao = chuongTrinhDaoTaoApiClient;
+            _chiTietCTDT = chiTietChuongTrinhDaoTaoApiClient;
         }
 
         public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 3)
@@ -28,7 +31,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
-            var data = await _chuongTrinhDaoTaoApiClient.GetAllPaging(request);
+            var data = await _chuongTrinhDaoTao.GetAllPaging(request);
 
             ViewBag.Keyword = keyword;
 
@@ -54,7 +57,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             if (!ModelState.IsValid)
                 return View(request);
 
-            var result = await _chuongTrinhDaoTaoApiClient.Create(request);
+            var result = await _chuongTrinhDaoTao.Create(request);
             if (result)
             {
                 TempData["result"] = "Thêm mới thành công";
@@ -68,7 +71,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            var chuongTrinhDaoTao = await _chuongTrinhDaoTaoApiClient.GetById(id);
+            var chuongTrinhDaoTao = await _chuongTrinhDaoTao.GetById(id);
 
             var updateRequest = new ChuongTrinhDaoTaoUpdateRequest()
             {
@@ -83,7 +86,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            var result = await _chuongTrinhDaoTaoApiClient.Update(id, request);
+            var result = await _chuongTrinhDaoTao.Update(id, request);
             if (result)
             {
                 TempData["result"] = "Cập nhật thành công";
@@ -97,7 +100,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
-            var chuongTrinhDaoTao = await _chuongTrinhDaoTaoApiClient.GetById(id);
+            var chuongTrinhDaoTao = await _chuongTrinhDaoTao.GetById(id);
             if (chuongTrinhDaoTao != null)
             {
                 var monHocViewModel = new ChuongTrinhDaoTaoViewModel()
