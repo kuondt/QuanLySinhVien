@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao;
 using QuanLySinhVien.AdminApp.Services.ChuongTrinhDaoTao;
+using QuanLySinhVien.ViewModel.Catalog.ChiTietChuongTrinhDaoTaos;
 using QuanLySinhVien.ViewModel.Catalog.ChuongTrinhDaoTaos;
 
 namespace QuanLySinhVien.AdminApp.Controllers
@@ -101,6 +102,16 @@ namespace QuanLySinhVien.AdminApp.Controllers
         public async Task<IActionResult> Details(string id)
         {
             var chuongTrinhDaoTao = await _chuongTrinhDaoTao.GetById(id);
+
+            //Lấy danh sách môn học
+            var requestChiTietCTDT = new ChiTietChuongTrinhDaoTaoPagingRequest()
+            {    
+                Keyword = id,
+                PageIndex = 1,
+                PageSize = 100
+            };
+            var listChiTietCTDT = await _chiTietCTDT.GetAllPaging(requestChiTietCTDT);
+
             if (chuongTrinhDaoTao != null)
             {
                 var monHocViewModel = new ChuongTrinhDaoTaoViewModel()
@@ -109,6 +120,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
                     Id_Khoa = chuongTrinhDaoTao.Id_Khoa,
                     Nam = chuongTrinhDaoTao.Nam,
                     TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh,                   
+                    ChiTiet_ChuongTrinhDaoTao_MonHocs = chuongTrinhDaoTao.ChiTiet_ChuongTrinhDaoTao_MonHocs
                     
                 };
                 return View(monHocViewModel);

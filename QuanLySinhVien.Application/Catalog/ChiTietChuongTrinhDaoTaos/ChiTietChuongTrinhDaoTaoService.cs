@@ -95,6 +95,9 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
         {
             var chiTiet_CTDT = await _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.FindAsync(id_CTDT, id_MonHoc, hocKy, namHoc);
 
+            var monHoc = await _context.MonHocs.FindAsync(id_MonHoc);
+
+
             if (chiTiet_CTDT == null)
             {
                 throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy");
@@ -105,8 +108,8 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
                 HK_HocKy = chiTiet_CTDT.HK_HocKy,
                 HK_NamHoc = chiTiet_CTDT.HK_NamHoc,
                 ID_ChuongTrinhDaoTao = chiTiet_CTDT.ID_ChuongTrinhDaoTao,
-                ID_MonHoc = chiTiet_CTDT.ID_MonHoc
-
+                ID_MonHoc = chiTiet_CTDT.ID_MonHoc,
+                MonHoc = monHoc,
             };
             return hocKyNamHocViewModel;
         }
