@@ -106,7 +106,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
                     Id_Khoa = chuongTrinhDaoTao.Id_Khoa,
                     Nam = chuongTrinhDaoTao.Nam,
                     TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh,                   
-
+                    
                 };
                 return View(monHocViewModel);
             }
