@@ -106,24 +106,28 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
             var CTDTs = _context.ChuongTrinhDaoTaos;
             var ChiTiet_CTDTs = _context.ChiTiet_ChuongTrinhDaoTao_MonHocs;
             var MonHocs = _context.MonHocs;
-            var chiTiet_ChuongTrinhDaoTao = from ctdt in CTDTs
-                                            join ct_ctdt in ChiTiet_CTDTs on ctdt.ID equals ct_ctdt.ID_ChuongTrinhDaoTao
-                                            join mh in MonHocs on ct_ctdt.ID_MonHoc equals mh.ID
-                                            where ctdt.ID == id
-                                            select ct_ctdt;
+            //var chiTiet_ChuongTrinhDaoTao = from ctdt in CTDTs
+            //                                join ct_ctdt in ChiTiet_CTDTs on ctdt.ID equals ct_ctdt.ID_ChuongTrinhDaoTao
+            //                                join mh in MonHocs on ct_ctdt.ID_MonHoc equals mh.ID
+            //                                where ctdt.ID == id
+            //                                select ct_ctdt;
 
-            var listCTDT = chiTiet_ChuongTrinhDaoTao.ToList();
+            //var listChiTietCTDT = chiTiet_ChuongTrinhDaoTao.ToList();
 
-            var sinhVienViewModel = new ChuongTrinhDaoTaoViewModel()
+            var listChiTietCTDT = _context.ChiTiet_ChuongTrinhDaoTao_MonHocs
+                                            .Where(x => x.ID_ChuongTrinhDaoTao == id)
+                                            .ToList();
+
+            var chuongTrinhDaoTaoViewModel = new ChuongTrinhDaoTaoViewModel()
             {
                 ID = chuongTrinhDaoTao.ID,
                 SoThuTu = chuongTrinhDaoTao.SoThuTu,
                 TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh,
                 Nam = chuongTrinhDaoTao.Nam,
                 Id_Khoa = chuongTrinhDaoTao.Id_Khoa,   
-                ChiTiet_ChuongTrinhDaoTao_MonHocs = listCTDT
+                ChiTiet_ChuongTrinhDaoTao_MonHocs = listChiTietCTDT
             };
-            return sinhVienViewModel;
+            return chuongTrinhDaoTaoViewModel;
         }
 
         public async Task<int> Update(string id, ChuongTrinhDaoTaoUpdateRequest request)
