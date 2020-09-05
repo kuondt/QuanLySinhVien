@@ -1,0 +1,36 @@
+﻿@model QuanLySinhVien.ViewModel.Catalog.ChuongTrinhDaoTaos.ChuongTrinhDaoTaoCreateRequest
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="TenChuongTrinh" class="control-label"></label>
+                    <input asp-for="TenChuongTrinh" class="form-control" />
+                    <span asp-validation-for="TenChuongTrinh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nam" class="control-label"></label>
+                    <input asp-for="Nam" value="@DateTime.Now.Year" class="form-control" />
+                    <span asp-validation-for="Nam" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Id_Khoa" class="control-label"></label>
+                    <input asp-for="Id_Khoa" value="CNTT" class="form-control" readonly />
+                    <span asp-validation-for="Id_Khoa" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

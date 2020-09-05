@@ -47,5 +47,22 @@ namespace QuanLySinhVien.AdminApp.Controllers
             ViewBag.lopBienChes = khoa;
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromForm] ChuongTrinhDaoTaoCreateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View(request);
+
+            var result = await _chuongTrinhDaoTaoApiClient.Create(request);
+            if (result)
+            {
+                TempData["result"] = "Thêm mới thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Thêm mới thất bại");
+            return View(request);
+        }
     }
 }
