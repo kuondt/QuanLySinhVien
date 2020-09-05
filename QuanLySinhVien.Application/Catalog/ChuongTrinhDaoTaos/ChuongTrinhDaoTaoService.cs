@@ -75,7 +75,8 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
                     ID = x.ctdt.ID,
                     SoThuTu = x.ctdt.SoThuTu,                
                     Nam = x.ctdt.Nam,
-                    TenChuongTrinh = x.ctdt.TenChuongTrinh
+                    TenChuongTrinh = x.ctdt.TenChuongTrinh,
+                    Id_Khoa = x.ctdt.Id_Khoa                   
 
                 }).ToListAsync();
 
