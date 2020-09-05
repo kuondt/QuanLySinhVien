@@ -7,13 +7,13 @@ using QuanLySinhVien.ViewModel.Common;
 
 namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
 {
-    public interface IChiTietChuongTrinhDaoTaoApiService
+    public interface IChiTietChuongTrinhDaoTaoApiClient
     {
         Task<bool> Create(ChiTietChuongTrinhDaoTaoCreateRequest request);
 
-        Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(int hocky, int namhoc);
+        Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_CTDT, string id_MonHoc, int hocKy, int namHoc);
 
-        Task<bool> Update(int hocky, int namhoc, ChiTietChuongTrinhDaoTaoUpdateRequest request);
+        Task<bool> Update(string id_CTDT, string id_MonHoc, int hocKy, int namHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request);
 
         Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAllPaging(ChiTietChuongTrinhDaoTaoPagingRequest request);
     }
