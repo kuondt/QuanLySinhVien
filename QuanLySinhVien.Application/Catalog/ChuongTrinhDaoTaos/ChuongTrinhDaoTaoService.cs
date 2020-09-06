@@ -9,16 +9,20 @@ using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.ViewModel.Common;
 using Microsoft.EntityFrameworkCore;
 using QuanLySinhVien.ViewModel.Exceptions;
+using QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos;
+using QuanLySinhVien.ViewModel.Catalog.ChiTietChuongTrinhDaoTaos;
 
 namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
 {
     public class ChuongTrinhDaoTaoService : IChuongTrinhDaoTaoService
     {
         private readonly QLSV_DBContext _context;
+        private readonly IChiTietChuongTrinhDaoTaoService _chiTietCTDT;
 
-        public ChuongTrinhDaoTaoService(QLSV_DBContext context)
+        public ChuongTrinhDaoTaoService(QLSV_DBContext context, IChiTietChuongTrinhDaoTaoService chiTietCTDT)
         {
             _context = context;
+            _chiTietCTDT = chiTietCTDT;
         }
 
         public async Task<string> Create(ChuongTrinhDaoTaoCreateRequest request)
@@ -42,11 +46,11 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
             var chuongTrinhDaoTao = new ChuongTrinhDaoTao()
             {
                 ID = Id,
-                SoThuTu = soThuTu,               
+                SoThuTu = soThuTu,
                 Nam = request.Nam,
                 Id_Khoa = request.Id_Khoa ?? "CNTT",
                 TenChuongTrinh = request.TenChuongTrinh
-                
+
             };
 
             _context.ChuongTrinhDaoTaos.Add(chuongTrinhDaoTao);
@@ -73,10 +77,10 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
                 .Select(x => new ChuongTrinhDaoTaoViewModel()
                 {
                     ID = x.ctdt.ID,
-                    SoThuTu = x.ctdt.SoThuTu,                
+                    SoThuTu = x.ctdt.SoThuTu,
                     Nam = x.ctdt.Nam,
                     TenChuongTrinh = x.ctdt.TenChuongTrinh,
-                    Id_Khoa = x.ctdt.Id_Khoa                   
+                    Id_Khoa = x.ctdt.Id_Khoa
 
                 }).ToListAsync();
 
@@ -118,13 +122,14 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
                                             .Where(x => x.ID_ChuongTrinhDaoTao == id)
                                             .ToList();
 
+
             var chuongTrinhDaoTaoViewModel = new ChuongTrinhDaoTaoViewModel()
             {
                 ID = chuongTrinhDaoTao.ID,
                 SoThuTu = chuongTrinhDaoTao.SoThuTu,
                 TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh,
                 Nam = chuongTrinhDaoTao.Nam,
-                Id_Khoa = chuongTrinhDaoTao.Id_Khoa,   
+                Id_Khoa = chuongTrinhDaoTao.Id_Khoa,
                 ChiTiet_ChuongTrinhDaoTao_MonHocs = listChiTietCTDT
             };
             return chuongTrinhDaoTaoViewModel;
@@ -139,7 +144,7 @@ namespace QuanLySinhVien.Service.Catalog.ChuongTrinhDaoTaos
                 throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
             }
 
-            ctdt.TenChuongTrinh = request.TenChuongTrinh;          
+            ctdt.TenChuongTrinh = request.TenChuongTrinh;
 
             return await _context.SaveChangesAsync();
         }

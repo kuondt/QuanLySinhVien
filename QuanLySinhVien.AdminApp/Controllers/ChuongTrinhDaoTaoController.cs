@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao;
 using QuanLySinhVien.AdminApp.Services.ChuongTrinhDaoTao;
+using QuanLySinhVien.AdminApp.Services.MonHoc;
+using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.ViewModel.Catalog.ChiTietChuongTrinhDaoTaos;
 using QuanLySinhVien.ViewModel.Catalog.ChuongTrinhDaoTaos;
 
@@ -16,12 +18,15 @@ namespace QuanLySinhVien.AdminApp.Controllers
         private readonly IConfiguration _configuration;
         private readonly IChuongTrinhDaoTaoApiClient _chuongTrinhDaoTao;
         private readonly IChiTietChuongTrinhDaoTaoApiClient _chiTietCTDT;
+        private readonly IMonHocApiClient _monHocApiClient;
 
-        public ChuongTrinhDaoTaoController(IConfiguration configuration, IChuongTrinhDaoTaoApiClient chuongTrinhDaoTaoApiClient, IChiTietChuongTrinhDaoTaoApiClient chiTietChuongTrinhDaoTaoApiClient)
+        public ChuongTrinhDaoTaoController(IConfiguration configuration, IChuongTrinhDaoTaoApiClient chuongTrinhDaoTaoApiClient, IChiTietChuongTrinhDaoTaoApiClient chiTietChuongTrinhDaoTaoApiClient,
+            IMonHocApiClient monHocApiClient)
         {
             _configuration = configuration;
             _chuongTrinhDaoTao = chuongTrinhDaoTaoApiClient;
             _chiTietCTDT = chiTietChuongTrinhDaoTaoApiClient;
+            _monHocApiClient = monHocApiClient;
         }
 
         public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 3)
@@ -120,9 +125,10 @@ namespace QuanLySinhVien.AdminApp.Controllers
                     Id_Khoa = chuongTrinhDaoTao.Id_Khoa,
                     Nam = chuongTrinhDaoTao.Nam,
                     TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh,                   
-                    ChiTiet_ChuongTrinhDaoTao_MonHocs = chuongTrinhDaoTao.ChiTiet_ChuongTrinhDaoTao_MonHocs
+                    ChiTiet_ChuongTrinhDaoTao_MonHocs = chuongTrinhDaoTao.ChiTiet_ChuongTrinhDaoTao_MonHocs                  
                     
                 };
+
                 return View(monHocViewModel);
             }
             return RedirectToAction("Error", "Home");
