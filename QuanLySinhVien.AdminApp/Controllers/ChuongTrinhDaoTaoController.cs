@@ -106,18 +106,16 @@ namespace QuanLySinhVien.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
+            ////Lấy chi tiết CTDT
+            //var request = new ChiTietChuongTrinhDaoTaoPagingRequest()
+            //{
+            //    Keyword = id,
+            //    PageIndex = 1,
+            //    PageSize = 100
+            //};
+            //var data = await _chiTietCTDT.GetAllPaging(request);
+
             var chuongTrinhDaoTao = await _chuongTrinhDaoTao.GetById(id);
-
-            //Lấy danh sách môn học
-            var requestChiTietCTDT = new ChiTietChuongTrinhDaoTaoPagingRequest()
-            {    
-                Keyword = id,
-                PageIndex = 1,
-                PageSize = 100
-            };
-            var listChiTietCTDT = await _chiTietCTDT.GetAllPaging(requestChiTietCTDT);
-
-            var lst = listChiTietCTDT.Items.ToList();
 
             if (chuongTrinhDaoTao != null)
             {
@@ -126,9 +124,9 @@ namespace QuanLySinhVien.AdminApp.Controllers
                     ID = chuongTrinhDaoTao.ID,
                     Id_Khoa = chuongTrinhDaoTao.Id_Khoa,
                     Nam = chuongTrinhDaoTao.Nam,
-                    TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh,                   
-                    ChiTiet_ChuongTrinhDaoTao_MonHocs = chuongTrinhDaoTao.ChiTiet_ChuongTrinhDaoTao_MonHocs                  
-                    
+                    TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh,
+                    ChiTiet_ChuongTrinhDaoTao_MonHocs = chuongTrinhDaoTao.ChiTiet_ChuongTrinhDaoTao_MonHocs
+
                 };
 
                 return View(monHocViewModel);
