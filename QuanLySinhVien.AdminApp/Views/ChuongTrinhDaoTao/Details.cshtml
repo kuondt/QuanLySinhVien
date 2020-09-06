@@ -1,59 +1,83 @@
-﻿@model QuanLySinhVien.ViewModel.Catalog.ChuongTrinhDaoTaos.ChuongTrinhDaoTaoViewModel
+﻿@model QuanLySinhVien.ViewModel.Common.PagedResult<QuanLySinhVien.ViewModel.Catalog.ChiTietChuongTrinhDaoTaos.ChiTietChuongTrinhDaoTaoViewModel>
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="container-fluid">
-    <h4>ChuongTrinhDaoTaoViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            ID
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ID)
-        </dd>
-        <dt class="col-sm-2">
-            Tên chương trình
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TenChuongTrinh)
-        </dd>
-        <dt class="col-sm-2">
-            Năm
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nam)
-        </dd>
-        <dt class="col-sm-2">
-            Khoa
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Id_Khoa)
-        </dd>
 
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Danh sách</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="user-topbar">
+                <div class="float-left">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <a class="btn btn-success" asp-action="Create" asp-controller="ChiTietChuongTrinhDaoTao">Tạo mới</a>
+                    </h6>
+                </div>
+                <div class=" float-lg-right">
+                    <form asp-action="Index" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100">
+                        <div class="input-group">
+                            <input value="@ViewBag.keyword" type="text" name="keyword" class="form-control bg-white" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            @if (ViewBag.SuccessMessage != null)
+            {
+                <div id="msgAlert" class="alert alert-success" role="alert">
+                    @ViewBag.SuccessMessage
+                </div>
+            }
         <table class="table">
             <thead>
-            <th>ID</th>
-            <th>Tên</th>
+                <tr>
+                    <th>STT</th>
+                    <th>
+                        Hoc kỳ
+                    </th>
+                    <th>
+                        Môn học
+                    </th>
+                </tr>
             </thead>
             <tbody>
-                @foreach (var monHoc in Model.ChiTiet_ChuongTrinhDaoTao_MonHocs)
+                @{ int stt = 1;}
+                @foreach (var item in Model.Items)
                 {
                     <tr>
                         <td>
-
-                            @monHoc.ID_MonHoc
+                            @stt
+                            @{ stt++;}
                         </td>
                         <td>
-                            
+                            @Html.DisplayFor(modelItem => item.HK_HocKy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID_MonHoc)
+                            @Html.DisplayFor(modelItem => item.MonHoc.TenMonHoc)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-    </dl>
+            @await Component.InvokeAsync("Pager", Model)
+        </div>
+    </div>
 </div>
 

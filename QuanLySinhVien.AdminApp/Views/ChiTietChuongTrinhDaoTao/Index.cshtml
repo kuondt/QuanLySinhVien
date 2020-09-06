@@ -39,52 +39,52 @@
                     @ViewBag.SuccessMessage
                 </div>
             }
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Chương trình đào tạo
-                    </th>
-                    <th>
-                        Học kỳ
-                    </th>
-                    <th>
-                        Năm
-                    </th>
-                    <th>
-                        Môn học
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Items)
-                {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ID_ChuongTrinhDaoTao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HK_HocKy)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HK_NamHoc)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ID_MonHoc)
-                    @Html.DisplayFor(modelItem => item.MonHoc.TenMonHoc)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Chương trình đào tạo
+                        </th>
+                        <th>
+                            Học kỳ
+                        </th>
+                        <th>
+                            Năm
+                        </th>
+                        <th>
+                            Môn học
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID_ChuongTrinhDaoTao)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HK_HocKy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HK_NamHoc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID_MonHoc)
+                                @Html.DisplayFor(modelItem => item.MonHoc.TenMonHoc)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            </td>
 
 
-                </tr>
-                }
-            </tbody>
-        </table>
+                        </tr>
+                    }
+                </tbody>
+            </table>
             @await Component.InvokeAsync("Pager", Model)
         </div>
     </div>

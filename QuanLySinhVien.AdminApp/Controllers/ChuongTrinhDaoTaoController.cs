@@ -106,30 +106,19 @@ namespace QuanLySinhVien.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
-            ////Lấy chi tiết CTDT
-            //var request = new ChiTietChuongTrinhDaoTaoPagingRequest()
-            //{
-            //    Keyword = id,
-            //    PageIndex = 1,
-            //    PageSize = 100
-            //};
-            //var data = await _chiTietCTDT.GetAllPaging(request);
 
-            var chuongTrinhDaoTao = await _chuongTrinhDaoTao.GetById(id);
-
-            if (chuongTrinhDaoTao != null)
+            var requestChiTietCTDT = new ChiTietChuongTrinhDaoTaoPagingRequest()
             {
-                var monHocViewModel = new ChuongTrinhDaoTaoViewModel()
-                {
-                    ID = chuongTrinhDaoTao.ID,
-                    Id_Khoa = chuongTrinhDaoTao.Id_Khoa,
-                    Nam = chuongTrinhDaoTao.Nam,
-                    TenChuongTrinh = chuongTrinhDaoTao.TenChuongTrinh,
-                    ChiTiet_ChuongTrinhDaoTao_MonHocs = chuongTrinhDaoTao.ChiTiet_ChuongTrinhDaoTao_MonHocs
+                Keyword = id,
+                PageIndex = 1,
+                PageSize = 100
+            };
 
-                };
+            var chiTietCTDT = await _chiTietCTDT.GetAllByIdChuongTrinhDaoTao(requestChiTietCTDT);
 
-                return View(monHocViewModel);
+            if (chiTietCTDT != null)
+            {
+                return View(chiTietCTDT);
             }
             return RedirectToAction("Error", "Home");
         }
