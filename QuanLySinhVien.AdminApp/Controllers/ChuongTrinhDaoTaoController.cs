@@ -117,6 +117,8 @@ namespace QuanLySinhVien.AdminApp.Controllers
             };
             var listChiTietCTDT = await _chiTietCTDT.GetAllPaging(requestChiTietCTDT);
 
+            var lst = listChiTietCTDT.Items.ToList();
+
             if (chuongTrinhDaoTao != null)
             {
                 var monHocViewModel = new ChuongTrinhDaoTaoViewModel()

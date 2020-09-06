@@ -62,10 +62,7 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
             if (!string.IsNullOrEmpty(request.Keyword))
             {
                 query = query.Where(x =>
-                    x.ct_ctdt.HK_NamHoc.ToString().Contains(request.Keyword)
-                || x.ct_ctdt.HK_HocKy.ToString().Contains(request.Keyword)
-                || x.ct_ctdt.ID_MonHoc.ToString().Contains(request.Keyword)
-                || x.ct_ctdt.ID_ChuongTrinhDaoTao.ToString().Contains(request.Keyword));
+                    x.ct_ctdt.ID_MonHoc.Contains(request.Keyword) || x.ct_ctdt.ID_ChuongTrinhDaoTao.Contains(request.Keyword));
             }
 
             int totalRow = await query.CountAsync();
