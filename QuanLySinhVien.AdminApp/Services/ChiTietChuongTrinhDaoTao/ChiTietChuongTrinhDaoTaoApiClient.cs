@@ -58,7 +58,7 @@ namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
             var response = await client.GetAsync(
-                $"/api/hockynamhocs/paging?pageIndex={request.PageIndex}" +
+                $"/api/chitietchuongtrinhdaotaos/paging?pageIndex={request.PageIndex}" +
                 $"&pageSize={request.PageSize}" +
                 $"&keyword={request.Keyword}"
                 );
@@ -81,7 +81,7 @@ namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
             var response = await client.GetAsync(
-                $"/api/hockynamhocs/{id_CTDT}/{id_MonHoc}/{hocKy}/{namHoc}"
+                $"/api/chitietchuongtrinhdaotaos/{id_CTDT}/{id_MonHoc}/{hocKy}/{namHoc}"
                 );
 
             var body = await response.Content.ReadAsStringAsync();
@@ -101,7 +101,7 @@ namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
             var json = JsonConvert.SerializeObject(request);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PutAsync($"/api/hockynamhocs/{id_CTDT}/{id_MonHoc}/{hocKy}/{namHoc}", httpContent);
+            var response = await client.PutAsync($"/api/chitietchuongtrinhdaotaos/{id_CTDT}/{id_MonHoc}/{hocKy}/{namHoc}", httpContent);
 
             return response.IsSuccessStatusCode;
         }
