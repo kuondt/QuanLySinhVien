@@ -106,7 +106,6 @@ namespace QuanLySinhVien.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
-
             var requestChiTietCTDT = new ChiTietChuongTrinhDaoTaoPagingRequest()
             {
                 Keyword = id,
@@ -118,6 +117,8 @@ namespace QuanLySinhVien.AdminApp.Controllers
 
             if (chiTietCTDT != null)
             {
+                ViewBag.ID_CTDT = id;
+
                 return View(chiTietCTDT);
             }
             return RedirectToAction("Error", "Home");

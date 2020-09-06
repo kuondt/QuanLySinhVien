@@ -15,7 +15,9 @@
             <div class="user-topbar">
                 <div class="float-left">
                     <h6 class="m-0 font-weight-bold text-primary">
-                        <a class="btn btn-success" asp-action="Create" asp-controller="ChiTietChuongTrinhDaoTao">Tạo mới</a>
+                        <div class="btn btn-success">
+                        @Html.ActionLink("Tạo mới", "Create", "ChiTietChuongTrinhDaoTao", new { id= ViewBag.ID_CTDT })
+                        </div>
                     </h6>
                 </div>
                 <div class=" float-lg-right">
