@@ -46,7 +46,7 @@ namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAllPaging(ChiTietChuongTrinhDaoTaoPagingRequest request)
+        public async Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAllByIdChuongTrinhDaoTao(ChiTietChuongTrinhDaoTaoPagingRequest request)
         {
             var sessions = _httpContextAccessor
                              .HttpContext

@@ -9,6 +9,7 @@ using QuanLySinhVien.ViewModel.Common;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using QuanLySinhVien.ViewModel.Exceptions;
+using QuanLySinhVien.ViewModel.Catalog.MonHocs;
 
 namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
 {
@@ -52,20 +53,21 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
 
         }
 
-        public async Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAllPaging(ChiTietChuongTrinhDaoTaoPagingRequest request)
+        public async Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAllByIdChuongTrinhDaoTao(ChiTietChuongTrinhDaoTaoPagingRequest request)
         {
-            var query = from ct_ctdt
-                        in _context.ChiTiet_ChuongTrinhDaoTao_MonHocs
+            var query = from ct_ctdt in _context.ChiTiet_ChuongTrinhDaoTao_MonHocs
+                        join mh in _context.MonHocs on ct_ctdt.ID_MonHoc equals mh.ID
                         orderby ct_ctdt.HK_NamHoc, ct_ctdt.HK_HocKy
-                        select new { ct_ctdt };
+                        select new { ct_ctdt , mh };
 
             if (!string.IsNullOrEmpty(request.Keyword))
             {
-                query = query.Where(x =>
-                    x.ct_ctdt.ID_MonHoc.Contains(request.Keyword) || x.ct_ctdt.ID_ChuongTrinhDaoTao.Contains(request.Keyword));
+                query = query.Where(x => x.ct_ctdt.ID_ChuongTrinhDaoTao.Contains(request.Keyword));
             }
 
             int totalRow = await query.CountAsync();
+
+            var chuongTrinhDaoTao = await _context.ChuongTrinhDaoTaos.FindAsync(request.Keyword);
 
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
@@ -74,7 +76,9 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
                     HK_HocKy = x.ct_ctdt.HK_HocKy,
                     HK_NamHoc = x.ct_ctdt.HK_NamHoc,
                     ID_ChuongTrinhDaoTao = x.ct_ctdt.ID_ChuongTrinhDaoTao,
-                    ID_MonHoc = x.ct_ctdt.ID_MonHoc
+                    ID_MonHoc = x.ct_ctdt.ID_MonHoc,
+                    ChuongTrinhDaoTao = chuongTrinhDaoTao,
+                    MonHoc = x.mh
 
                 }).ToListAsync();
 
@@ -109,7 +113,7 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
                 ID_MonHoc = chiTiet_CTDT.ID_MonHoc,
                 MonHoc = monHoc,
                 ChuongTrinhDaoTao = chuongTrinhDaoTao,
-                
+
             };
             return hocKyNamHocViewModel;
         }

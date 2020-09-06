@@ -15,7 +15,7 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
 
         Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_CTDT, string id_MonHoc, int hocKy, int namHoc);
 
-        Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAllPaging(ChiTietChuongTrinhDaoTaoPagingRequest request);
+        Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAllByIdChuongTrinhDaoTao(ChiTietChuongTrinhDaoTaoPagingRequest request);
 
         Task<int> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc);
     }

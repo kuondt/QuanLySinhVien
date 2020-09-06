@@ -21,9 +21,9 @@ namespace QuanLySinhVien.BackendApi.Controllers
         }
 
         [HttpGet("paging")]
-        public async Task<IActionResult> GetAllPaging([FromQuery] ChiTietChuongTrinhDaoTaoPagingRequest request)
+        public async Task<IActionResult> GetAllByIdChuongTrinhDaoTao([FromQuery] ChiTietChuongTrinhDaoTaoPagingRequest request)
         {
-            var chuongTrinhDaoTao = await _chiTietChuongTrinhDaoTaoService.GetAllPaging(request);
+            var chuongTrinhDaoTao = await _chiTietChuongTrinhDaoTaoService.GetAllByIdChuongTrinhDaoTao(request);
             return Ok(chuongTrinhDaoTao);
         }
 
