@@ -122,6 +122,11 @@ namespace QuanLySinhVien.AdminApp.Controllers
 
             if (chiTietCTDT != null)
             {
+                if (TempData["result"] != null)
+                {
+                    ViewBag.SuccessMessage = TempData["result"];
+                }
+
                 ViewBag.ID_CTDT = id;
 
                 return View(chiTietCTDT);
@@ -150,10 +155,29 @@ namespace QuanLySinhVien.AdminApp.Controllers
             };
 
             var hocKys = await _hocKyNamHocApiClient.GetAllPaging(requestHocKy);
-            ViewBag.hocKys = hocKys.Items;
+            ViewBag.hocKyNamHocs = hocKys.Items;
 
             ViewBag.ID_CTDT = id;
+
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateDetail(string id, ChiTietChuongTrinhDaoTaoCreateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View(request);
+
+            var result = await _chiTietCTDT.Create(request);
+            if (result)
+            {
+                TempData["result"] = "Thêm mới thành công";
+
+                return RedirectToAction("Details");
+            }
+
+            ModelState.AddModelError("", "Thêm mới thất bại");
+            return View(request);
         }
     }
 }
