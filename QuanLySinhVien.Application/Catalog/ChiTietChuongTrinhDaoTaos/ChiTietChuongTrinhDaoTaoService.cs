@@ -97,6 +97,7 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
 
             var monHoc = await _context.MonHocs.FindAsync(id_MonHoc);
 
+            var chuongTrinhDaoTao = await _context.ChuongTrinhDaoTaos.FindAsync(id_CTDT);
 
             if (chiTiet_CTDT == null)
             {
@@ -110,6 +111,8 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
                 ID_ChuongTrinhDaoTao = chiTiet_CTDT.ID_ChuongTrinhDaoTao,
                 ID_MonHoc = chiTiet_CTDT.ID_MonHoc,
                 MonHoc = monHoc,
+                ChuongTrinhDaoTao = chuongTrinhDaoTao,
+                
             };
             return hocKyNamHocViewModel;
         }

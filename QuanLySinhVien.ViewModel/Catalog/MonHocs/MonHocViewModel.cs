@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using QuanLySinhVien.Data.Entities;
 
 namespace QuanLySinhVien.ViewModel.Catalog.MonHocs
 {
@@ -12,5 +13,8 @@ namespace QuanLySinhVien.ViewModel.Catalog.MonHocs
         public int SoTiet { get; set; }
         public int SoTinChi { get; set; }
         public string ID_Khoa { get; set; }
+        public List<ChiTiet_ChuongTrinhDaoTao_MonHoc> ChiTiet_ChuongTrinhDaoTao_MonHocs { get; set; }
+        public List<LopHocPhan> LopHocPhans { get; set; }
+        public Khoa Khoa { get; set; }
     }
 }
