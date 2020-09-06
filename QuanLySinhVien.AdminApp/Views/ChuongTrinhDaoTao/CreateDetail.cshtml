@@ -1,0 +1,62 @@
+﻿@model QuanLySinhVien.ViewModel.Catalog.ChiTietChuongTrinhDaoTaos.ChiTietChuongTrinhDaoTaoCreateRequest
+
+@{
+    ViewData["Title"] = "CreateDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateDetail">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ID_ChuongTrinhDaoTao" class="control-label"></label>
+                    <input asp-for="ID_ChuongTrinhDaoTao" value="@ViewBag.ID_CTDT" class="form-control" />
+                    <span asp-validation-for="ID_ChuongTrinhDaoTao" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HK_HocKy" class="control-label"></label>
+                    <select asp-for="HK_HocKy" class="form-control">
+                        <option value="1">Học kỳ 1</option>
+                        <option value="2">Học kỳ 2</option>
+                        <option value="3">Học kỳ 3</option>
+                    </select>
+                    <span asp-validation-for="HK_HocKy" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HK_NamHoc" class="control-label"></label>
+                    <select id="listNamHoc" class="form-control">
+                        @if (ViewBag.hocKys != null)
+                        {
+                            @foreach (var namHoc in ViewBag.hocKys)
+                            {
+                                <option value="@namHoc.NamHoc">@namHoc.NamHoc</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="HK_NamHoc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ID_MonHoc" class="control-label"></label>
+                    <input asp-for="ID_MonHoc" class="form-control" list="listMonHoc" placeholder="Môn học..." />
+                    <datalist id="listMonHoc">
+                        <option value="">Giảng viên</option>
+                        @if (ViewBag.monHocs != null)
+                        {
+                            @foreach (var monHoc in ViewBag.monHocs)
+                            {
+                                <option value="@monHoc.ID">@monHoc.ID @monHoc.TenMonHoc</option>
+                            }
+                        }
+                    </datalist>
+                    <span asp-validation-for="ID_MonHoc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+

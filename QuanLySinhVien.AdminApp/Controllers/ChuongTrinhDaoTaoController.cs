@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao;
 using QuanLySinhVien.AdminApp.Services.ChuongTrinhDaoTao;
+using QuanLySinhVien.AdminApp.Services.HocKyNamHoc;
 using QuanLySinhVien.AdminApp.Services.MonHoc;
 using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.ViewModel.Catalog.ChiTietChuongTrinhDaoTaos;
 using QuanLySinhVien.ViewModel.Catalog.ChuongTrinhDaoTaos;
+using QuanLySinhVien.ViewModel.Catalog.HocKyNamHocs;
+using QuanLySinhVien.ViewModel.Catalog.MonHocs;
 
 namespace QuanLySinhVien.AdminApp.Controllers
 {
@@ -19,14 +22,16 @@ namespace QuanLySinhVien.AdminApp.Controllers
         private readonly IChuongTrinhDaoTaoApiClient _chuongTrinhDaoTao;
         private readonly IChiTietChuongTrinhDaoTaoApiClient _chiTietCTDT;
         private readonly IMonHocApiClient _monHocApiClient;
+        private readonly IHocKyNamHocApiClient _hocKyNamHocApiClient;
 
         public ChuongTrinhDaoTaoController(IConfiguration configuration, IChuongTrinhDaoTaoApiClient chuongTrinhDaoTaoApiClient, IChiTietChuongTrinhDaoTaoApiClient chiTietChuongTrinhDaoTaoApiClient,
-            IMonHocApiClient monHocApiClient)
+            IMonHocApiClient monHocApiClient, IHocKyNamHocApiClient hocKyNamHocApiClient)
         {
             _configuration = configuration;
             _chuongTrinhDaoTao = chuongTrinhDaoTaoApiClient;
             _chiTietCTDT = chiTietChuongTrinhDaoTaoApiClient;
             _monHocApiClient = monHocApiClient;
+            _hocKyNamHocApiClient = hocKyNamHocApiClient;
         }
 
         public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 3)
@@ -122,6 +127,33 @@ namespace QuanLySinhVien.AdminApp.Controllers
                 return View(chiTietCTDT);
             }
             return RedirectToAction("Error", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateDetail(string id)
+        {
+            //Lấy danh sách môn học để show thành list
+            var requestMonHoc = new MonHocManagePagingRequest()
+            {
+                PageIndex = 1,
+                PageSize = 1000
+            };
+            var monHocs = await _monHocApiClient.GetAllPaging(requestMonHoc);
+            ViewBag.monHocs = monHocs.Items;
+
+            //Lấy danh sách học kỳ để show thành list
+            var requestHocKy = new HocKyNamHocManagePagingRequest()
+            {
+
+                PageIndex = 1,
+                PageSize = 1000
+            };
+
+            var hocKys = await _hocKyNamHocApiClient.GetAllPaging(requestHocKy);
+            ViewBag.hocKys = hocKys.Items;
+
+            ViewBag.ID_CTDT = id;
+            return View();
         }
     }
 }
