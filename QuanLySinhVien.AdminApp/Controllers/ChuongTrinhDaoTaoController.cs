@@ -179,5 +179,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             ModelState.AddModelError("", "Thêm mới thất bại");
             return View(request);
         }
+
+
     }
 }

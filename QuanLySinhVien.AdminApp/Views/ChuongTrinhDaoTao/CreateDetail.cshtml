@@ -21,7 +21,7 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="ID_ChuongTrinhDaoTao" class="control-label"></label>
-                    <input asp-for="ID_ChuongTrinhDaoTao" value="@ViewBag.ID_CTDT" class="form-control" />
+                    <input asp-for="ID_ChuongTrinhDaoTao" value="@ViewBag.ID_CTDT" class="form-control" readonly/>
                     <span asp-validation-for="ID_ChuongTrinhDaoTao" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -40,7 +40,10 @@
                         {
                             @foreach (var namHoc in ViewBag.hocKyNamHocs)
                             {
+                                @if(namHoc.HocKy == 1)
+                                {
                                 <option value="@namHoc.NamHoc">@namHoc.NamHoc</option>
+                                }
                             }
                         }
                     </select>

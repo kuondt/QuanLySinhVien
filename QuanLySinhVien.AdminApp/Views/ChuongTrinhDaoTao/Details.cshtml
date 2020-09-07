@@ -15,8 +15,8 @@
             <div class="user-topbar">
                 <div class="float-left">
                     <h6 class="m-0 font-weight-bold text-primary">
-                        <div class="btn btn-success">
-                        @Html.ActionLink("Tạo mới", "CreateDetail", "ChuongTrinhDaoTao", new { id= ViewBag.ID_CTDT })
+                        <div class="btn btn-success text-white">
+                        @(Html.ActionLink("Tạo mới", "CreateDetail", "ChuongTrinhDaoTao", new { id= ViewBag.ID_CTDT }, new { @class = "text-white" }))
                         </div>
                     </h6>
                 </div>

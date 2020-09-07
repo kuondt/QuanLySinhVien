@@ -46,6 +46,19 @@ namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
             return response.IsSuccessStatusCode;
         }
 
+        public async Task<bool> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.DeleteAsync($"/api/chitietchuongtrinhdaotaos/{id_CTDT}/{id_MonHoc}/{hocKy}/{namHoc}");
+
+            return response.IsSuccessStatusCode;
+        }
+
         public async Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAllByIdChuongTrinhDaoTao(ChiTietChuongTrinhDaoTaoPagingRequest request)
         {
             var sessions = _httpContextAccessor

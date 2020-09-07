@@ -16,5 +16,7 @@ namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
         Task<bool> Update(string id_CTDT, string id_MonHoc, int hocKy, int namHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request);
 
         Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAllByIdChuongTrinhDaoTao(ChiTietChuongTrinhDaoTaoPagingRequest request);
+
+        Task<bool> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc);
     }
 }
