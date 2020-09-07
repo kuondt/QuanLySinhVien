@@ -180,6 +180,37 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return View(request);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc)
+        {
+            var chiTietCTDT = await _chiTietCTDT.GetById(id_CTDT, id_MonHoc, hocKy, namHoc);
 
+            if (chiTietCTDT != null)
+            {
+                var updateRequest = new ChiTietChuongTrinhDaoTaoUpdateRequest()
+                {
+                    ID_MonHoc = chiTietCTDT.ID_MonHoc
+                };
+                return View(updateRequest);
+            }
+            return RedirectToAction("Error", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _chiTietCTDT.Delete(id_CTDT, id_MonHoc, hocKy, namHoc);
+            if (result)
+            {
+                TempData["result"] = "Xóa thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Xóa không thành công");
+            return View(request);
+        }
     }
 }
