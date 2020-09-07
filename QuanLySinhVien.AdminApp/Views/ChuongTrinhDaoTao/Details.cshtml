@@ -72,7 +72,7 @@
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            @Html.ActionLink("Delete", "Delete", new { id_CTDT = item.ID_ChuongTrinhDaoTao, monHoc = item.ID_MonHoc, hocKy = item.HK_HocKy, namHoc = item.HK_NamHoc }, null) |                      
                         </td>
                     </tr>
                 }
