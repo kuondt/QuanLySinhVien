@@ -31,6 +31,7 @@ namespace QuanLySinhVien.Data.EF
             modelBuilder.ApplyConfiguration(new LopHocPhan_Configuaration());
             modelBuilder.ApplyConfiguration(new Phong_Configuaration());
             modelBuilder.ApplyConfiguration(new SinhVien_Configuaration());
+            modelBuilder.ApplyConfiguration(new ChuyenMon_Configuaration());
 
             //Config Identity
             modelBuilder.ApplyConfiguration(new AppUserConfiguaration());
@@ -67,5 +68,6 @@ namespace QuanLySinhVien.Data.EF
 
         public DbSet<SinhVien> SinhViens { get; set; }
 
+        public DbSet<ChuyenMon> ChuyenMons { get; set; }
     }
 }

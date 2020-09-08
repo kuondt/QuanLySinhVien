@@ -26,5 +26,7 @@ namespace QuanLySinhVien.Data.Entities
         public List<LopBienChe> LopBienChes { get; set; }
         [JsonIgnore]
         public List<LopHocPhan> LopHocPhans { get; set; }
+        [JsonIgnore]
+        public List<ChuyenMon> ChuyenMons { get; set; }
     }
 }
