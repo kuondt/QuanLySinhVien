@@ -15,10 +15,11 @@ namespace QuanLySinhVien.Data.Entities
         public int HK_NamHoc { get; set; }
         public string ID_MonHoc { get; set; }
         public string ID_Phong { get; set; }
+        public string ID_GiangVien { get; set; }
         public BuoiHoc BuoiHoc { get; set; }
         public NgayHoc NgayHoc { get; set; }
         public Status IsActive { get; set; }
-        public PhanCong PhanCong { get; set; }
+        public GiangVien GiangVien { get; set; }
         [JsonIgnore]
         public List<DanhSach_SinhVien_LopHocPhan> ChiTiet_SinhVien_LopHocPhans { get; set; }
         public HocKy_NamHoc HocKy_NamHoc { get; set; }
