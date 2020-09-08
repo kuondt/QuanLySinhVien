@@ -63,7 +63,7 @@ namespace QuanLySinhVien.Data.Extensions
                 });
 
             modelBuilder.Entity<Khoa>().HasData(
-                new Khoa() { ID = "CNTT", TenKhoa = "Kỹ thuật công nghệ" });
+                new Khoa() { ID = "CNTT", TenKhoa = "Công nghệ thông tin" });
 
             modelBuilder.Entity<ChuongTrinhDaoTao>().HasData(
                 new ChuongTrinhDaoTao() { ID = "2016CNTT01", TenChuongTrinh = "Hệ thống thông tin", Nam = 2016, Id_Khoa = "CNTT", SoThuTu = 1 });
@@ -210,6 +210,13 @@ namespace QuanLySinhVien.Data.Extensions
                     HocKyDuKien = 1,
                     Nam = 2016,
                     ID_MonHoc = "INT006"
+                });
+
+            modelBuilder.Entity<ChuyenMon>().HasData(
+                new ChuyenMon()
+                {
+                    ID_GiangVien = "GV001",
+                    ID_MonHoc = "INT001",
                 });
 
             modelBuilder.Entity<LopHocPhan>().HasData(
