@@ -262,27 +262,6 @@ namespace QuanLySinhVien.Data.Extensions
                     IsActive = Status.Active
                 });
 
-            modelBuilder.Entity<PhanCong>().HasData(new PhanCong()
-            {
-                ID_LopHocPhan = "161INT001",
-                ID_GiangVien = "GV001"
-            },
-            new PhanCong()
-            {
-                ID_LopHocPhan = "161INT002",
-                ID_GiangVien = "GV001"
-            },
-            new PhanCong()
-            {
-                ID_LopHocPhan = "161INT003",
-                ID_GiangVien = "GV002"
-            },
-            new PhanCong()
-            {
-                ID_LopHocPhan = "161INT004",
-                ID_GiangVien = "GV002"
-            });
-
             modelBuilder.Entity<DanhSach_SinhVien_LopHocPhan>().HasData(new DanhSach_SinhVien_LopHocPhan()
             {
                 ID_LopHocPhan = "161INT001",
