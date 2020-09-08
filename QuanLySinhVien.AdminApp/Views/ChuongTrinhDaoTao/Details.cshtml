@@ -16,7 +16,7 @@
                 <div class="float-left">
                     <h6 class="m-0 font-weight-bold text-primary">
                         <div class="btn btn-success text-white">
-                        @(Html.ActionLink("Tạo mới", "CreateDetail", "ChuongTrinhDaoTao", new { id= ViewBag.ID_CTDT }, new { @class = "text-white" }))
+                            @(Html.ActionLink("Tạo mới", "CreateChiTietCTDT", "ChuongTrinhDaoTao", new { id= ViewBag.ID_CTDT }, new { @class = "text-white" }))
                         </div>
                     </h6>
                 </div>
@@ -41,43 +41,43 @@
                     @ViewBag.SuccessMessage
                 </div>
             }
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>
-                        Hoc kỳ
-                    </th>
-                    <th>
-                        Môn học
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @{ int stt = 1;}
-                @foreach (var item in Model.Items)
-                {
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>
-                            @stt
-                            @{ stt++;}
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HK_HocKy)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ID_MonHoc)
-                            @Html.DisplayFor(modelItem => item.MonHoc.TenMonHoc)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { id_CTDT = item.ID_ChuongTrinhDaoTao, monHoc = item.ID_MonHoc, hocKy = item.HK_HocKy, namHoc = item.HK_NamHoc }, null) |                      
-                        </td>
+                        <th>STT</th>
+                        <th>
+                            Hoc kỳ
+                        </th>
+                        <th>
+                            Môn học
+                        </th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @{ int stt = 1;}
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                @stt
+                                @{ stt++;}
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HK_HocKy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID_MonHoc)
+                                @Html.DisplayFor(modelItem => item.MonHoc.TenMonHoc)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { @id_CTDT = item.ID_ChuongTrinhDaoTao, @monHoc = item.ID_MonHoc, @hocKy = item.HK_HocKy, @namHoc = item.HK_NamHoc }, null) |                    
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
             @await Component.InvokeAsync("Pager", Model)
         </div>
     </div>

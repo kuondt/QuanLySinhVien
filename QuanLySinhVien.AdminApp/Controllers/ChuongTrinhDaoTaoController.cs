@@ -135,7 +135,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateDetail(string id)
+        public async Task<IActionResult> CreateChiTietCTDT(string id)
         {
             //Lấy danh sách môn học để show thành list
             var requestMonHoc = new MonHocManagePagingRequest()
@@ -163,7 +163,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDetail(string id, ChiTietChuongTrinhDaoTaoCreateRequest request)
+        public async Task<IActionResult> CreateChiTietCTDT(string id, ChiTietChuongTrinhDaoTaoCreateRequest request)
         {
             if (!ModelState.IsValid)
                 return View(request);
@@ -180,7 +180,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return View(request);
         }
 
-        [HttpGet("ChuongTrinhDaoTao/Delete/{id_CTDT}/{id_MonHoc}/{hocKy}/{namHoc}")]
+        [HttpGet]
         public async Task<IActionResult> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc)
         {
             var chiTietCTDT = await _chiTietCTDT.GetById(id_CTDT, id_MonHoc, hocKy, namHoc);
@@ -196,7 +196,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return RedirectToAction("Error", "Home");
         }
 
-        [HttpPost("ChuongTrinhDaoTao/Delete/{id_CTDT}/{id_MonHoc}/{hocKy}/{namHoc}")]
+        [HttpPost]
         public async Task<IActionResult> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request)
         {
             if (!ModelState.IsValid)
