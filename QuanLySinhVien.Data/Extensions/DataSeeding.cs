@@ -194,21 +194,21 @@ namespace QuanLySinhVien.Data.Extensions
                 new ChiTiet_ChuongTrinhDaoTao_MonHoc()
                 {
                     ID_ChuongTrinhDaoTao = "2016CNTT01",
-                    HK_HocKy = 1,
-                    HK_NamHoc = 2016,
+                    HocKyDuKien = 1,
+                    Nam = 2016,
                     ID_MonHoc = "INT001"
                 }, new ChiTiet_ChuongTrinhDaoTao_MonHoc()
                 {
                     ID_ChuongTrinhDaoTao = "2016CNTT01",
-                    HK_HocKy = 1,
-                    HK_NamHoc = 2016,
+                    HocKyDuKien = 1,
+                    Nam = 2016,
                     ID_MonHoc = "INT005"
                 },
                 new ChiTiet_ChuongTrinhDaoTao_MonHoc()
                 {
                     ID_ChuongTrinhDaoTao = "2016CNTT01",
-                    HK_HocKy = 1,
-                    HK_NamHoc = 2016,
+                    HocKyDuKien = 1,
+                    Nam = 2016,
                     ID_MonHoc = "INT006"
                 });
 
