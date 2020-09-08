@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace QuanLySinhVien.Data.Migrations
 {
-    public partial class Add_SoThuTu_field : Migration
+    public partial class Add_chuyen_mon_table : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -178,6 +178,7 @@ namespace QuanLySinhVien.Data.Migrations
                 {
                     ID = table.Column<string>(maxLength: 10, nullable: false),
                     TenChuongTrinh = table.Column<string>(maxLength: 200, nullable: true),
+                    SoThuTu = table.Column<int>(nullable: false),
                     Nam = table.Column<int>(nullable: false),
                     Id_Khoa = table.Column<string>(nullable: true)
                 },
@@ -198,9 +199,9 @@ namespace QuanLySinhVien.Data.Migrations
                 {
                     ID = table.Column<string>(maxLength: 10, nullable: false),
                     SoThuTu = table.Column<int>(nullable: false),
-                    Ho = table.Column<string>(maxLength: 50, nullable: true),
-                    Ten = table.Column<string>(maxLength: 50, nullable: true),
-                    HoTen = table.Column<string>(maxLength: 100, nullable: true),
+                    Ho = table.Column<string>(maxLength: 50, nullable: false),
+                    Ten = table.Column<string>(maxLength: 50, nullable: false),
+                    HoTen = table.Column<string>(maxLength: 100, nullable: false),
                     NgaySinh = table.Column<DateTime>(nullable: false),
                     GioiTinh = table.Column<int>(nullable: false),
                     SoDienThoai = table.Column<string>(nullable: true),
@@ -275,13 +276,13 @@ namespace QuanLySinhVien.Data.Migrations
                 columns: table => new
                 {
                     ID_ChuongTrinhDaoTao = table.Column<string>(nullable: false),
-                    HK_HocKy = table.Column<int>(nullable: false),
-                    HK_NamHoc = table.Column<int>(nullable: false),
-                    ID_MonHoc = table.Column<string>(nullable: false)
+                    ID_MonHoc = table.Column<string>(nullable: false),
+                    HocKyDuKien = table.Column<int>(nullable: false),
+                    Nam = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ChiTiet_ChuongTrinhDaoTao_MonHocs", x => new { x.ID_ChuongTrinhDaoTao, x.ID_MonHoc, x.HK_HocKy, x.HK_NamHoc });
+                    table.PrimaryKey("PK_ChiTiet_ChuongTrinhDaoTao_MonHocs", x => new { x.ID_ChuongTrinhDaoTao, x.ID_MonHoc });
                     table.ForeignKey(
                         name: "FK_ChiTiet_ChuongTrinhDaoTao_MonHocs_ChuongTrinhDaoTaos_ID_ChuongTrinhDaoTao",
                         column: x => x.ID_ChuongTrinhDaoTao,
@@ -294,11 +295,29 @@ namespace QuanLySinhVien.Data.Migrations
                         principalTable: "MonHocs",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChuyenMons",
+                columns: table => new
+                {
+                    ID_GiangVien = table.Column<string>(nullable: false),
+                    ID_MonHoc = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChuyenMons", x => new { x.ID_GiangVien, x.ID_MonHoc });
                     table.ForeignKey(
-                        name: "FK_ChiTiet_ChuongTrinhDaoTao_MonHocs_HocKy_NamHocs_HK_HocKy_HK_NamHoc",
-                        columns: x => new { x.HK_HocKy, x.HK_NamHoc },
-                        principalTable: "HocKy_NamHocs",
-                        principalColumns: new[] { "HocKy", "NamHoc" },
+                        name: "FK_ChuyenMons_GiangViens_ID_GiangVien",
+                        column: x => x.ID_GiangVien,
+                        principalTable: "GiangViens",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ChuyenMons_MonHocs_ID_MonHoc",
+                        column: x => x.ID_MonHoc,
+                        principalTable: "MonHocs",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -312,6 +331,7 @@ namespace QuanLySinhVien.Data.Migrations
                     HK_NamHoc = table.Column<int>(nullable: false),
                     ID_MonHoc = table.Column<string>(nullable: true),
                     ID_Phong = table.Column<string>(nullable: true),
+                    ID_GiangVien = table.Column<string>(nullable: true),
                     BuoiHoc = table.Column<int>(nullable: false),
                     NgayHoc = table.Column<int>(nullable: false),
                     IsActive = table.Column<int>(nullable: false, defaultValue: 1)
@@ -319,6 +339,12 @@ namespace QuanLySinhVien.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LopHocPhans", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_LopHocPhans_GiangViens_ID_GiangVien",
+                        column: x => x.ID_GiangVien,
+                        principalTable: "GiangViens",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_LopHocPhans_MonHocs_ID_MonHoc",
                         column: x => x.ID_MonHoc,
@@ -346,9 +372,9 @@ namespace QuanLySinhVien.Data.Migrations
                     ID = table.Column<string>(maxLength: 10, nullable: false),
                     SoThuTu = table.Column<int>(nullable: false),
                     Nam = table.Column<int>(nullable: false),
-                    Ho = table.Column<string>(maxLength: 50, nullable: true),
-                    Ten = table.Column<string>(maxLength: 50, nullable: true),
-                    HoTen = table.Column<string>(maxLength: 100, nullable: true),
+                    Ho = table.Column<string>(maxLength: 50, nullable: false),
+                    Ten = table.Column<string>(maxLength: 50, nullable: false),
+                    HoTen = table.Column<string>(maxLength: 100, nullable: false),
                     NgaySinh = table.Column<DateTime>(nullable: false),
                     GioiTinh = table.Column<int>(nullable: false),
                     SoDienThoai = table.Column<string>(nullable: true),
@@ -369,30 +395,6 @@ namespace QuanLySinhVien.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PhanCongs",
-                columns: table => new
-                {
-                    ID_GiangVien = table.Column<string>(nullable: false),
-                    ID_LopHocPhan = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PhanCongs", x => new { x.ID_LopHocPhan, x.ID_GiangVien });
-                    table.ForeignKey(
-                        name: "FK_PhanCongs_GiangViens_ID_GiangVien",
-                        column: x => x.ID_GiangVien,
-                        principalTable: "GiangViens",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PhanCongs_LopHocPhans_ID_LopHocPhan",
-                        column: x => x.ID_LopHocPhan,
-                        principalTable: "LopHocPhans",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DanhSach_SinhVien_LopHocPhans",
                 columns: table => new
                 {
@@ -403,7 +405,7 @@ namespace QuanLySinhVien.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DanhSach_SinhVien_LopHocPhans", x => new { x.ID_SinhVien, x.ID_LopHocPhan });
+                    table.PrimaryKey("PK_DanhSach_SinhVien_LopHocPhans", x => new { x.ID_LopHocPhan, x.ID_SinhVien });
                     table.CheckConstraint("CK_Diem_Duoi_10", "Diem <= 10");
                     table.ForeignKey(
                         name: "FK_DanhSach_SinhVien_LopHocPhans_LopHocPhans_ID_LopHocPhan",
@@ -434,8 +436,8 @@ namespace QuanLySinhVien.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("7e2de1ee-b97b-4698-abe4-c22a0332b2c9"), "fac01151-eea0-4539-b405-959c3b3a018a", "Administrator role", "admin", "admin" },
-                    { new Guid("ddcfd40f-0c20-4bbd-afbf-5936032ddde5"), "6303cdb4-2bea-4d93-be09-ed2159772945", "Nhân viên", "nhanvien", "nhanvien" }
+                    { new Guid("7e2de1ee-b97b-4698-abe4-c22a0332b2c9"), "cfde6648-f3f0-408e-ab12-2b3b85c73b4c", "Administrator role", "admin", "admin" },
+                    { new Guid("ddcfd40f-0c20-4bbd-afbf-5936032ddde5"), "334acdf9-0c3d-4947-b3eb-f20eeab60665", "Nhân viên", "nhanvien", "nhanvien" }
                 });
 
             migrationBuilder.InsertData(
@@ -446,7 +448,7 @@ namespace QuanLySinhVien.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AppUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "Ho", "HoTen", "LockoutEnabled", "LockoutEnd", "NgaySinh", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Ten", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("8dd4e4e7-cbb1-4db8-8cd8-3024401afc74"), 0, "2d531b35-f083-4c09-8546-e3190c05d00d", "cuong.263@gmail.com", true, "Dao", "Dao Cuong", false, null, new DateTime(1998, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "cuong.263@gmail.com", "admin", "AQAAAAEAACcQAAAAEBckQSCmcH2ZFL+YA50YH9LEG4dddb4brFRQ4eEjKmDtW+n0oPsHjVDgKbcb8JZSPA==", null, false, "", "Cuong", false, "admin" });
+                values: new object[] { new Guid("8dd4e4e7-cbb1-4db8-8cd8-3024401afc74"), 0, "98deba71-381b-49da-be57-f89a701c532a", "cuong.263@gmail.com", true, "Dao", "Dao Cuong", false, null, new DateTime(1998, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "cuong.263@gmail.com", "admin", "AQAAAAEAACcQAAAAEMd/+frAr1gc8mVZv9LsZN3sbh2xIiD6q66dzdReZtDwl4NpYFDXR7UdbLm/t3Y5Fw==", null, false, "", "Cuong", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "HocKy_NamHocs",
@@ -461,30 +463,30 @@ namespace QuanLySinhVien.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Khoas",
                 columns: new[] { "ID", "TenKhoa" },
-                values: new object[] { "KTCN", "Kỹ thuật công nghệ" });
+                values: new object[] { "CNTT", "Công nghệ thông tin" });
 
             migrationBuilder.InsertData(
                 table: "Phongs",
                 columns: new[] { "ID", "SoThuTu", "TenCoSo" },
                 values: new object[,]
                 {
-                    { "BPH001", 1, "624 Âu Cơ" },
-                    { "BPH002", 2, "624 Âu Cơ" },
-                    { "BPH003", 3, "624 Âu Cơ" }
+                    { "PH001", 1, "624 Âu Cơ" },
+                    { "PH002", 2, "624 Âu Cơ" },
+                    { "PH003", 3, "624 Âu Cơ" }
                 });
 
             migrationBuilder.InsertData(
                 table: "ChuongTrinhDaoTaos",
-                columns: new[] { "ID", "Id_Khoa", "Nam", "TenChuongTrinh" },
-                values: new object[] { "HTTT2016", "KTCN", 2016, "HTTT" });
+                columns: new[] { "ID", "Id_Khoa", "Nam", "SoThuTu", "TenChuongTrinh" },
+                values: new object[] { "2016CNTT01", "CNTT", 2016, 1, "Hệ thống thông tin" });
 
             migrationBuilder.InsertData(
                 table: "GiangViens",
                 columns: new[] { "ID", "DiaChi", "Email", "GioiTinh", "Ho", "HoTen", "ID_Khoa", "IsActive", "NgaySinh", "SoDienThoai", "SoThuTu", "Ten" },
                 values: new object[,]
                 {
-                    { "GV001", "624 Âu Cơ", "nva@vhu.edu.vn", 1, "Nguyễn Văn", "Nguyễn Văn A", "KTCN", 1, new DateTime(1975, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "0987654321", 1, "A" },
-                    { "GV002", "642 Âu Cơ", "pvb@vhu.edu.vn", 1, "Phạm Văn", "Phạm Văn B", "KTCN", 1, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "012332123", 2, "B" }
+                    { "GV001", "624 Âu Cơ", "nva@vhu.edu.vn", 1, "Nguyễn Văn", "Nguyễn Văn A", "CNTT", 1, new DateTime(1975, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "0987654321", 1, "A" },
+                    { "GV002", "642 Âu Cơ", "pvb@vhu.edu.vn", 1, "Phạm Văn", "Phạm Văn B", "CNTT", 1, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "012332123", 2, "B" }
                 });
 
             migrationBuilder.InsertData(
@@ -492,70 +494,69 @@ namespace QuanLySinhVien.Data.Migrations
                 columns: new[] { "ID", "ID_Khoa", "SoThuTu", "SoTiet", "SoTinChi", "TenMonHoc" },
                 values: new object[,]
                 {
-                    { "INT001", "KTCN", 1, 30, 2, "Kỹ thuật lập trình" },
-                    { "INT002", "KTCN", 2, 30, 2, "Cấu trúc dữ liệu và giải thuật" },
-                    { "INT003", "KTCN", 3, 45, 3, "Cơ sở dữ liệu" },
-                    { "INT004", "KTCN", 4, 45, 3, "Hệ điều hành	" },
-                    { "INT005", "KTCN", 5, 45, 3, "Vật lý đại cương" },
-                    { "INT006", "KTCN", 6, 30, 2, "Toán cao cấp" }
+                    { "INT001", "CNTT", 1, 30, 2, "Kỹ thuật lập trình" },
+                    { "INT002", "CNTT", 2, 30, 2, "Cấu trúc dữ liệu và giải thuật" },
+                    { "INT003", "CNTT", 3, 45, 3, "Cơ sở dữ liệu" },
+                    { "INT004", "CNTT", 4, 45, 3, "Hệ điều hành	" },
+                    { "INT005", "CNTT", 5, 45, 3, "Vật lý đại cương" },
+                    { "INT006", "CNTT", 6, 30, 2, "Toán cao cấp" }
                 });
 
             migrationBuilder.InsertData(
                 table: "ChiTiet_ChuongTrinhDaoTao_MonHocs",
-                columns: new[] { "ID_ChuongTrinhDaoTao", "ID_MonHoc", "HK_HocKy", "HK_NamHoc" },
+                columns: new[] { "ID_ChuongTrinhDaoTao", "ID_MonHoc", "HocKyDuKien", "Nam" },
                 values: new object[,]
                 {
-                    { "HTTT2016", "INT001", 1, 2016 },
-                    { "HTTT2016", "INT005", 1, 2016 },
-                    { "HTTT2016", "INT006", 1, 2016 }
+                    { "2016CNTT01", "INT001", 1, 2016 },
+                    { "2016CNTT01", "INT005", 1, 2016 },
+                    { "2016CNTT01", "INT006", 1, 2016 }
                 });
+
+            migrationBuilder.InsertData(
+                table: "ChuyenMons",
+                columns: new[] { "ID_GiangVien", "ID_MonHoc" },
+                values: new object[] { "GV001", "INT001" });
 
             migrationBuilder.InsertData(
                 table: "LopBienChes",
                 columns: new[] { "ID", "ID_GiangVien", "ID_Khoa", "NamBatDau", "NamKetThuc", "SoThuTu" },
-                values: new object[] { "161A0101", "GV001", "KTCN", 2016, 2020, 1 });
+                values: new object[] { "161A0101", "GV001", "CNTT", 2016, 2020, 1 });
 
             migrationBuilder.InsertData(
                 table: "LopHocPhans",
-                columns: new[] { "ID", "BuoiHoc", "HK_HocKy", "HK_NamHoc", "ID_MonHoc", "ID_Phong", "IsActive", "NgayHoc", "SoThuTu" },
+                columns: new[] { "ID", "BuoiHoc", "HK_HocKy", "HK_NamHoc", "ID_GiangVien", "ID_MonHoc", "ID_Phong", "IsActive", "NgayHoc", "SoThuTu" },
                 values: new object[,]
                 {
-                    { "161INT001", 1, 1, 2016, "INT001", "BPH001", 1, 2, 1 },
-                    { "161INT002", 2, 1, 2016, "INT001", "BPH002", 1, 2, 2 },
-                    { "161INT003", 3, 1, 2016, "INT005", "BPH003", 1, 3, 3 },
-                    { "161INT004", 1, 1, 2016, "INT006", "BPH002", 1, 4, 4 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "PhanCongs",
-                columns: new[] { "ID_LopHocPhan", "ID_GiangVien" },
-                values: new object[,]
-                {
-                    { "161INT001", "GV001" },
-                    { "161INT002", "GV001" },
-                    { "161INT003", "GV002" },
-                    { "161INT004", "GV002" }
+                    { "161INT001", 1, 1, 2016, null, "INT001", "PH001", 1, 2, 1 },
+                    { "161INT002", 2, 1, 2016, null, "INT001", "PH002", 1, 2, 2 },
+                    { "161INT003", 3, 1, 2016, null, "INT005", "PH003", 1, 3, 3 },
+                    { "161INT004", 1, 1, 2016, null, "INT006", "PH002", 1, 4, 4 }
                 });
 
             migrationBuilder.InsertData(
                 table: "SinhViens",
                 columns: new[] { "ID", "DiaChi", "Email", "GioiTinh", "Ho", "HoTen", "ID_LopBienChe", "IsActive", "Nam", "NgaySinh", "SoDienThoai", "SoThuTu", "Ten" },
-                values: new object[,]
-                {
-                    { "161A010001", "TPHCM", "ntc@gmail.com", 0, "Nguyễn Thị", "Nguyễn Thị C", "161A0101", 1, 2016, new DateTime(1998, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "0123456789", 1, "C" },
-                    { "161A010002", "Hóc Môn", "nvd@gmail.com", 1, "Nguyễn Văn", "Nguyễn Văn D", "161A0101", 1, 2016, new DateTime(1998, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "0321456987", 2, "D" },
-                    { "161A010003", "5/9A Hóc Môn", "cuong.263@gmail.com", 1, "Đào Tuấn", "Đào Tuấn Cường", "161A0101", 1, 2016, new DateTime(1998, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "0904590481", 3, "Cường" }
-                });
+                values: new object[] { "161A010001", "TPHCM", "ntc@gmail.com", 0, "Nguyễn Thị", "Nguyễn Thị C", "161A0101", 1, 2016, new DateTime(1998, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "0123456789", 1, "C" });
+
+            migrationBuilder.InsertData(
+                table: "SinhViens",
+                columns: new[] { "ID", "DiaChi", "Email", "GioiTinh", "Ho", "HoTen", "ID_LopBienChe", "IsActive", "Nam", "NgaySinh", "SoDienThoai", "SoThuTu", "Ten" },
+                values: new object[] { "161A010002", "Hóc Môn", "nvd@gmail.com", 1, "Nguyễn Văn", "Nguyễn Văn D", "161A0101", 1, 2016, new DateTime(1998, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "0321456987", 2, "D" });
+
+            migrationBuilder.InsertData(
+                table: "SinhViens",
+                columns: new[] { "ID", "DiaChi", "Email", "GioiTinh", "Ho", "HoTen", "ID_LopBienChe", "IsActive", "Nam", "NgaySinh", "SoDienThoai", "SoThuTu", "Ten" },
+                values: new object[] { "161A010003", "5/9A Hóc Môn", "cuong.263@gmail.com", 1, "Đào Tuấn", "Đào Tuấn Cường", "161A0101", 1, 2016, new DateTime(1998, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "0904590481", 3, "Cường" });
 
             migrationBuilder.InsertData(
                 table: "DanhSach_SinhVien_LopHocPhans",
-                columns: new[] { "ID_SinhVien", "ID_LopHocPhan", "Diem", "LanThi" },
+                columns: new[] { "ID_LopHocPhan", "ID_SinhVien", "Diem", "LanThi" },
                 values: new object[,]
                 {
-                    { "161A010001", "161INT001", 8.5f, 1 },
-                    { "161A010001", "161INT002", 10f, 1 },
-                    { "161A010002", "161INT001", 7f, 1 },
-                    { "161A010003", "161INT001", 7f, 1 }
+                    { "161INT001", "161A010001", 8.5f, 1 },
+                    { "161INT002", "161A010001", 10f, 1 },
+                    { "161INT001", "161A010002", 7f, 1 },
+                    { "161INT001", "161A010003", 7f, 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -564,19 +565,19 @@ namespace QuanLySinhVien.Data.Migrations
                 column: "ID_MonHoc");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChiTiet_ChuongTrinhDaoTao_MonHocs_HK_HocKy_HK_NamHoc",
-                table: "ChiTiet_ChuongTrinhDaoTao_MonHocs",
-                columns: new[] { "HK_HocKy", "HK_NamHoc" });
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ChuongTrinhDaoTaos_Id_Khoa",
                 table: "ChuongTrinhDaoTaos",
                 column: "Id_Khoa");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DanhSach_SinhVien_LopHocPhans_ID_LopHocPhan",
+                name: "IX_ChuyenMons_ID_MonHoc",
+                table: "ChuyenMons",
+                column: "ID_MonHoc");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DanhSach_SinhVien_LopHocPhans_ID_SinhVien",
                 table: "DanhSach_SinhVien_LopHocPhans",
-                column: "ID_LopHocPhan");
+                column: "ID_SinhVien");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GiangViens_ID_Khoa",
@@ -592,6 +593,11 @@ namespace QuanLySinhVien.Data.Migrations
                 name: "IX_LopBienChes_ID_Khoa",
                 table: "LopBienChes",
                 column: "ID_Khoa");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LopHocPhans_ID_GiangVien",
+                table: "LopHocPhans",
+                column: "ID_GiangVien");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LopHocPhans_ID_MonHoc",
@@ -612,17 +618,6 @@ namespace QuanLySinhVien.Data.Migrations
                 name: "IX_MonHocs_ID_Khoa",
                 table: "MonHocs",
                 column: "ID_Khoa");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PhanCongs_ID_GiangVien",
-                table: "PhanCongs",
-                column: "ID_GiangVien");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PhanCongs_ID_LopHocPhan",
-                table: "PhanCongs",
-                column: "ID_LopHocPhan",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_SinhViens_ID_LopBienChe",
@@ -660,22 +655,19 @@ namespace QuanLySinhVien.Data.Migrations
                 name: "ChiTiet_ChuongTrinhDaoTao_MonHocs");
 
             migrationBuilder.DropTable(
-                name: "DanhSach_SinhVien_LopHocPhans");
+                name: "ChuyenMons");
 
             migrationBuilder.DropTable(
-                name: "PhanCongs");
+                name: "DanhSach_SinhVien_LopHocPhans");
 
             migrationBuilder.DropTable(
                 name: "ChuongTrinhDaoTaos");
 
             migrationBuilder.DropTable(
-                name: "SinhViens");
-
-            migrationBuilder.DropTable(
                 name: "LopHocPhans");
 
             migrationBuilder.DropTable(
-                name: "LopBienChes");
+                name: "SinhViens");
 
             migrationBuilder.DropTable(
                 name: "MonHocs");
@@ -685,6 +677,9 @@ namespace QuanLySinhVien.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "HocKy_NamHocs");
+
+            migrationBuilder.DropTable(
+                name: "LopBienChes");
 
             migrationBuilder.DropTable(
                 name: "GiangViens");
