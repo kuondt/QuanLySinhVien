@@ -9,14 +9,14 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
 {
     public interface IChiTietChuongTrinhDaoTaoService
     {
-        Task<Tuple<string, string, int, int>> Create(ChiTietChuongTrinhDaoTaoCreateRequest request);
+        Task<Tuple<string, string>> Create(ChiTietChuongTrinhDaoTaoCreateRequest request);
 
-        Task<int> Update(string id_CTDT, string id_MonHoc, int hocKy, int namHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request);
+        Task<int> Update(string id_CTDT, string id_MonHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request);
 
-        Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_CTDT, string id_MonHoc, int hocKy, int namHoc);
+        Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_CTDT, string id_MonHoc);
 
         Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAllByIdChuongTrinhDaoTao(ChiTietChuongTrinhDaoTaoPagingRequest request);
 
-        Task<int> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc);
+        Task<int> Delete(string id_CTDT, string id_MonHoc);
     }
 }

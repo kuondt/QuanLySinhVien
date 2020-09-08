@@ -13,9 +13,7 @@ namespace QuanLySinhVien.Data.Configurations
         {
             builder.ToTable("DanhSach_SinhVien_LopHocPhans");
 
-            builder.HasKey(x => x.ID);
-
-            builder.Property(x => x.ID).HasMaxLength(10);
+            builder.HasKey(x => new { x.ID_LopHocPhan, x.ID_SinhVien });
 
             builder.Property(x => x.LanThi);
 

@@ -29,7 +29,6 @@ namespace QuanLySinhVien.Data.EF
             modelBuilder.ApplyConfiguration(new MonHoc_Configuaration());
             modelBuilder.ApplyConfiguration(new LopBienChe_Configuaration());
             modelBuilder.ApplyConfiguration(new LopHocPhan_Configuaration());
-            modelBuilder.ApplyConfiguration(new PhanCong_Configuaration());
             modelBuilder.ApplyConfiguration(new Phong_Configuaration());
             modelBuilder.ApplyConfiguration(new SinhVien_Configuaration());
 
@@ -63,8 +62,6 @@ namespace QuanLySinhVien.Data.EF
         public DbSet<LopHocPhan> LopHocPhans { get; set; }
 
         public DbSet<MonHoc> MonHocs { get; set; }
-
-        public DbSet<PhanCong> PhanCongs { get; set; }
 
         public DbSet<Phong> Phongs { get; set; }
 

@@ -6,7 +6,6 @@ namespace QuanLySinhVien.Data.Entities
 {
     public class DanhSach_SinhVien_LopHocPhan
     {
-        public string ID { get; set; }
         public string ID_SinhVien { get; set; }
         public string ID_LopHocPhan { get; set; }
         public int LanThi { get; set; }

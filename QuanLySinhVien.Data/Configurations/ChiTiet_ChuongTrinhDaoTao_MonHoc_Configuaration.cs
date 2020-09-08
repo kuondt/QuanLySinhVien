@@ -13,9 +13,7 @@ namespace QuanLySinhVien.Data.Configurations
         {
             builder.ToTable("ChiTiet_ChuongTrinhDaoTao_MonHocs");
 
-            builder.HasKey(x => x.ID);
-
-            builder.Property(x => x.ID).HasMaxLength(10);
+            builder.HasKey(x => new {  x.ID_ChuongTrinhDaoTao, x.ID_MonHoc});
 
             builder.HasOne(x => x.ChuongTrinhDaoTao).WithMany(x => x.ChiTiet_ChuongTrinhDaoTao_MonHocs).HasForeignKey(x => x.ID_ChuongTrinhDaoTao);
 

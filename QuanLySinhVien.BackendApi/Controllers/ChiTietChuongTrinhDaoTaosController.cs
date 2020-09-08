@@ -27,10 +27,10 @@ namespace QuanLySinhVien.BackendApi.Controllers
             return Ok(chuongTrinhDaoTao);
         }
 
-        [HttpGet("{id_CTDT}/{id_MonHoc}/{hocKy}/{namHoc}")]
-        public async Task<IActionResult> GetById(string id_CTDT, string id_MonHoc, int hocKy, int namHoc)
+        [HttpGet("{id_CTDT}/{id_MonHoc}")]
+        public async Task<IActionResult> GetById(string id_CTDT, string id_MonHoc)
         {
-            var ctdt = await _chiTietChuongTrinhDaoTaoService.GetById(id_CTDT, id_MonHoc, hocKy, namHoc);
+            var ctdt = await _chiTietChuongTrinhDaoTaoService.GetById(id_CTDT, id_MonHoc);
             if (ctdt == null)
                 return BadRequest("Not found");
             return Ok(ctdt);
@@ -47,9 +47,9 @@ namespace QuanLySinhVien.BackendApi.Controllers
             if (ID_ChuongTrinhDaoTao == null)
                 return BadRequest();
 
-            var chuongTrinhDaoTao = await _chiTietChuongTrinhDaoTaoService.GetById(ID_ChuongTrinhDaoTao.Item1, ID_ChuongTrinhDaoTao.Item2, ID_ChuongTrinhDaoTao.Item3, ID_ChuongTrinhDaoTao.Item4);
+            var chuongTrinhDaoTao = await _chiTietChuongTrinhDaoTaoService.GetById(ID_ChuongTrinhDaoTao.Item1, ID_ChuongTrinhDaoTao.Item2);
 
-            return CreatedAtAction(nameof(GetById), new { id_CTDT = ID_ChuongTrinhDaoTao.Item1, id_MonHoc = ID_ChuongTrinhDaoTao.Item2, hocky = ID_ChuongTrinhDaoTao.Item3, namhoc = ID_ChuongTrinhDaoTao.Item4 }, chuongTrinhDaoTao);
+            return CreatedAtAction(nameof(GetById), new { id_CTDT = ID_ChuongTrinhDaoTao.Item1, id_MonHoc = ID_ChuongTrinhDaoTao.Item2}, chuongTrinhDaoTao);
         }
 
         //[HttpPut("{id_CTDT}/{id_MonHoc}/{hocKy}/{namHoc}")]
@@ -65,13 +65,13 @@ namespace QuanLySinhVien.BackendApi.Controllers
 
         //}
 
-        [HttpDelete("{id_CTDT}/{id_MonHoc}/{hocKy}/{namHoc}")]
-        public async Task<IActionResult> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc)
+        [HttpDelete("{id_CTDT}/{id_MonHoc}")]
+        public async Task<IActionResult> Delete(string id_CTDT, string id_MonHoc)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var affectedResult = await _chiTietChuongTrinhDaoTaoService.Delete(id_CTDT, id_MonHoc, hocKy, namHoc);
+            var affectedResult = await _chiTietChuongTrinhDaoTaoService.Delete(id_CTDT, id_MonHoc);
             if (affectedResult == 0)
                 return BadRequest();
             return Ok();
