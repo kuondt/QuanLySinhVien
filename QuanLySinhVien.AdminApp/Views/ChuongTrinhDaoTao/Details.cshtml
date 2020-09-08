@@ -15,9 +15,9 @@
             <div class="user-topbar">
                 <div class="float-left">
                     <h6 class="m-0 font-weight-bold text-primary">
-                        <div class="btn btn-success text-white">
+                        <span class="btn btn-success text-white">
                             @(Html.ActionLink("Tạo mới", "CreateChiTietCTDT", "ChuongTrinhDaoTao", new { id= ViewBag.ID_CTDT }, new { @class = "text-white" }))
-                        </div>
+                        </span>
                     </h6>
                 </div>
                 <div class=" float-lg-right">
@@ -63,7 +63,7 @@
                                 @{ stt++;}
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.HK_HocKy)
+                                @Html.DisplayFor(modelItem => item.HocKyDuKien)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ID_MonHoc)

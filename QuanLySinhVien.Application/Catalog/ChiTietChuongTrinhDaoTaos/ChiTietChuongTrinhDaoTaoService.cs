@@ -27,7 +27,9 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
             var chiTiet_CTDT = new ChiTiet_ChuongTrinhDaoTao_MonHoc()
             {
                 ID_ChuongTrinhDaoTao = request.ID_ChuongTrinhDaoTao,
-                ID_MonHoc = request.ID_MonHoc
+                ID_MonHoc = request.ID_MonHoc,
+                HocKyDuKien = request.HocKyDuKien,
+                Nam = request.Nam
             };
 
             _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.Add(chiTiet_CTDT);
@@ -55,7 +57,8 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
         {
             var query = from ct_ctdt in _context.ChiTiet_ChuongTrinhDaoTao_MonHocs
                         join mh in _context.MonHocs on ct_ctdt.ID_MonHoc equals mh.ID
-                        select new { ct_ctdt , mh };
+                        orderby ct_ctdt.HocKyDuKien
+                        select new { ct_ctdt, mh };
 
             if (!string.IsNullOrEmpty(request.Keyword))
             {
@@ -73,8 +76,9 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
                     ID_ChuongTrinhDaoTao = x.ct_ctdt.ID_ChuongTrinhDaoTao,
                     ID_MonHoc = x.ct_ctdt.ID_MonHoc,
                     ChuongTrinhDaoTao = chuongTrinhDaoTao,
-                    MonHoc = x.mh
-
+                    MonHoc = x.mh,
+                    HocKyDuKien = x.ct_ctdt.HocKyDuKien,
+                    Nam = x.ct_ctdt.Nam
                 }).ToListAsync();
 
             var pagedResult = new PagedResult<ChiTietChuongTrinhDaoTaoViewModel>()
@@ -102,17 +106,18 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
 
             var hocKyNamHocViewModel = new ChiTietChuongTrinhDaoTaoViewModel()
             {
-                
+
                 ID_ChuongTrinhDaoTao = chiTiet_CTDT.ID_ChuongTrinhDaoTao,
                 ID_MonHoc = chiTiet_CTDT.ID_MonHoc,
                 MonHoc = monHoc,
                 ChuongTrinhDaoTao = chuongTrinhDaoTao,
-
+                HocKyDuKien = chiTiet_CTDT.HocKyDuKien,
+                Nam = chiTiet_CTDT.Nam
             };
             return hocKyNamHocViewModel;
         }
 
-        public async Task<int> Update(string id_CTDT, string id_MonHoc,ChiTietChuongTrinhDaoTaoUpdateRequest request)
+        public async Task<int> Update(string id_CTDT, string id_MonHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request)
         {
             var chiTiet_CTDT = await _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.FindAsync(id_MonHoc, id_CTDT);
 

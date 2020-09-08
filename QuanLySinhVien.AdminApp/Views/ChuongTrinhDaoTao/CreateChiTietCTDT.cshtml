@@ -21,33 +21,24 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="ID_ChuongTrinhDaoTao" class="control-label"></label>
-                    <input asp-for="ID_ChuongTrinhDaoTao" value="@ViewBag.ID_CTDT" class="form-control" readonly/>
+                    <input asp-for="ID_ChuongTrinhDaoTao" value="@ViewBag.ID_CTDT" class="form-control" readonly />
                     <span asp-validation-for="ID_ChuongTrinhDaoTao" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="HK_HocKy" class="control-label"></label>
-                    <select asp-for="HK_HocKy" class="form-control">
-                        <option value="1">Học kỳ 1</option>
-                        <option value="2">Học kỳ 2</option>
-                        <option value="3">Học kỳ 3</option>
-                    </select>
-                    <span asp-validation-for="HK_HocKy" class="text-danger"></span>
+                    <label asp-for="Nam" class="control-label">Năm áp dụng</label>
+                    <input asp-for="Nam" id="listNamHoc" value="@ViewBag.Nam" class="form-control" readonly />
+                    <span asp-validation-for="Nam" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="HK_NamHoc" class="control-label"></label>
-                    <select asp-for="HK_NamHoc" id="listNamHoc" class="form-control">
-                        @if (ViewBag.hocKyNamHocs != null)
+                    <label asp-for="HocKyDuKien" class="control-label"></label>
+                    <select asp-for="HocKyDuKien" class="form-control">
+                        @for (int i = 1; i <= 12; i++)
                         {
-                            @foreach (var namHoc in ViewBag.hocKyNamHocs)
-                            {
-                                @if(namHoc.HocKy == 1)
-                                {
-                                <option value="@namHoc.NamHoc">@namHoc.NamHoc</option>
-                                }
-                            }
+                            <option value="@i">Học kỳ @i</option>
                         }
+
                     </select>
-                    <span asp-validation-for="HK_NamHoc" class="text-danger"></span>
+                    <span asp-validation-for="HocKyDuKien" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="ID_MonHoc" class="control-label"></label>

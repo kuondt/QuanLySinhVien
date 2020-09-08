@@ -137,6 +137,10 @@ namespace QuanLySinhVien.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateChiTietCTDT(string id)
         {
+            var namApDung = await _chuongTrinhDaoTao.GetById(id);
+            var nam = namApDung.Nam;
+            ViewBag.Nam = nam;
+
             //Lấy danh sách môn học để show thành list
             var requestMonHoc = new MonHocManagePagingRequest()
             {
@@ -154,9 +158,6 @@ namespace QuanLySinhVien.AdminApp.Controllers
                 PageSize = 1000
             };
 
-            var hocKys = await _hocKyNamHocApiClient.GetAllPaging(requestHocKy);
-            ViewBag.hocKyNamHocs = hocKys.Items;
-
             ViewBag.ID_CTDT = id;
 
             return View();
@@ -173,7 +174,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             {
                 TempData["result"] = "Thêm mới thành công";
 
-                return RedirectToAction("Details");
+                return RedirectToAction("Details", new { id = id });
             }
 
             ModelState.AddModelError("", "Thêm mới thất bại");
@@ -206,7 +207,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             if (result)
             {
                 TempData["result"] = "Xóa thành công";
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = idctdt });
             }
 
             ModelState.AddModelError("", "Xóa không thành công");
