@@ -46,7 +46,7 @@ namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc)
+        public async Task<bool> Delete(string idctdt, string idmonhoc)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
@@ -54,7 +54,7 @@ namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
-            var response = await client.DeleteAsync($"/api/chitietchuongtrinhdaotaos/{id_CTDT}/{id_MonHoc}/{hocKy}/{namHoc}");
+            var response = await client.DeleteAsync($"/api/chitietchuongtrinhdaotaos/{idctdt}/{idmonhoc}");
 
             return response.IsSuccessStatusCode;
         }
@@ -82,7 +82,7 @@ namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
             return chiTiet_CTDT;
         }
 
-        public async Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_CTDT, string id_MonHoc, int hocKy, int namHoc)
+        public async Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string idctdt, string idmonhoc)
         {
             var sessions = _httpContextAccessor
                             .HttpContext
@@ -94,7 +94,7 @@ namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
             var response = await client.GetAsync(
-                $"/api/chitietchuongtrinhdaotaos/{id_CTDT}/{id_MonHoc}/{hocKy}/{namHoc}"
+                $"/api/chitietchuongtrinhdaotaos/{idctdt}/{idmonhoc}/"
                 );
 
             var body = await response.Content.ReadAsStringAsync();
@@ -103,7 +103,7 @@ namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
             return chiTiet_CTDT;
         }
 
-        public async Task<bool> Update(string id_CTDT, string id_MonHoc, int hocKy, int namHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request)
+        public async Task<bool> Update(string idctdt, string idmonhoc, ChiTietChuongTrinhDaoTaoUpdateRequest request)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
@@ -114,7 +114,7 @@ namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
             var json = JsonConvert.SerializeObject(request);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PutAsync($"/api/chitietchuongtrinhdaotaos/{id_CTDT}/{id_MonHoc}/{hocKy}/{namHoc}", httpContent);
+            var response = await client.PutAsync($"/api/chitietchuongtrinhdaotaos/{idctdt}/{idmonhoc}", httpContent);
 
             return response.IsSuccessStatusCode;
         }

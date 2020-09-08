@@ -180,10 +180,10 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return View(request);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc)
+        [HttpGet("{idctdt}/{idmonhoc}")]
+        public async Task<IActionResult> Delete(string idctdt, string idmonhoc)
         {
-            var chiTietCTDT = await _chiTietCTDT.GetById(id_CTDT, id_MonHoc, hocKy, namHoc);
+            var chiTietCTDT = await _chiTietCTDT.GetById(idctdt, idmonhoc);
 
             if (chiTietCTDT != null)
             {
@@ -196,13 +196,13 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return RedirectToAction("Error", "Home");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request)
+        [HttpPost("{idctdt}/{idmonhoc}")]
+        public async Task<IActionResult> Delete(string idctdt, string idmonhoc, ChiTietChuongTrinhDaoTaoUpdateRequest request)
         {
             if (!ModelState.IsValid)
                 return View();
 
-            var result = await _chiTietCTDT.Delete(id_CTDT, id_MonHoc, hocKy, namHoc);
+            var result = await _chiTietCTDT.Delete(idctdt, idmonhoc);
             if (result)
             {
                 TempData["result"] = "Xóa thành công";

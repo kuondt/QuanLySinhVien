@@ -27,9 +27,7 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
             var chiTiet_CTDT = new ChiTiet_ChuongTrinhDaoTao_MonHoc()
             {
                 ID_ChuongTrinhDaoTao = request.ID_ChuongTrinhDaoTao,
-                ID_MonHoc = request.ID_MonHoc,
-                HK_HocKy = request.HK_HocKy,
-                HK_NamHoc = request.HK_NamHoc
+                ID_MonHoc = request.ID_MonHoc
             };
 
             _context.ChiTiet_ChuongTrinhDaoTao_MonHocs.Add(chiTiet_CTDT);
@@ -72,8 +70,6 @@ namespace QuanLySinhVien.Service.Catalog.ChiTietChuongTrinhDaoTaos
                 .Take(request.PageSize)
                 .Select(x => new ChiTietChuongTrinhDaoTaoViewModel()
                 {
-                    HK_HocKy = x.ct_ctdt.HK_HocKy,
-                    HK_NamHoc = x.ct_ctdt.HK_NamHoc,
                     ID_ChuongTrinhDaoTao = x.ct_ctdt.ID_ChuongTrinhDaoTao,
                     ID_MonHoc = x.ct_ctdt.ID_MonHoc,
                     ChuongTrinhDaoTao = chuongTrinhDaoTao,

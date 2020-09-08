@@ -11,12 +11,12 @@ namespace QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao
     {
         Task<bool> Create(ChiTietChuongTrinhDaoTaoCreateRequest request);
 
-        Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_CTDT, string id_MonHoc, int hocKy, int namHoc);
+        Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string ctdt, string monhoc);
 
-        Task<bool> Update(string id_CTDT, string id_MonHoc, int hocKy, int namHoc, ChiTietChuongTrinhDaoTaoUpdateRequest request);
+        Task<bool> Update(string ctdt, string monhoc, ChiTietChuongTrinhDaoTaoUpdateRequest request);
 
         Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAllByIdChuongTrinhDaoTao(ChiTietChuongTrinhDaoTaoPagingRequest request);
 
-        Task<bool> Delete(string id_CTDT, string id_MonHoc, int hocKy, int namHoc);
+        Task<bool> Delete(string ctdt, string monhoc);
     }
 }
