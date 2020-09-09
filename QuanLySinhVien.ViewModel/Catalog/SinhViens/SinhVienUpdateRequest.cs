@@ -25,5 +25,8 @@ namespace QuanLySinhVien.ViewModel.Catalog.SinhViens
         public Status IsActive { get; set; }
         public LopBienChe LopBienChe { get; set; }
         public List<DanhSach_SinhVien_LopHocPhan> ChiTiet_SinhVien_LopHocPhans { get; set; }
+        public string ID_ChuongTrinhDaoTao { get; set; }
+        public ChuongTrinhDaoTao ChuongTrinhDaoTao { get; set; }
+
     }
 }
