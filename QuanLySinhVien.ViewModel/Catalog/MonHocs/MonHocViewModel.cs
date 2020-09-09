@@ -16,5 +16,6 @@ namespace QuanLySinhVien.ViewModel.Catalog.MonHocs
         public List<ChiTiet_ChuongTrinhDaoTao_MonHoc> ChiTiet_ChuongTrinhDaoTao_MonHocs { get; set; }
         public List<LopHocPhan> LopHocPhans { get; set; }
         public Khoa Khoa { get; set; }
+        public List<ChuyenMon> ChuyenMons { get; set; }
     }
 }

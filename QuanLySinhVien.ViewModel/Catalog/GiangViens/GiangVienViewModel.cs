@@ -22,5 +22,9 @@ namespace QuanLySinhVien.ViewModel.Catalog.GiangViens
         public string DiaChi { get; set; }
         public string ID_Khoa { get; set; }
         public Status IsActive { get; set; }
+        public List<ChuyenMon> ChuyenMons { get; set; }
+        public List<LopBienChe> LopBienChes { get; set; }
+        public List<LopHocPhan> LopHocPhans { get; set; }
+
     }
 }
