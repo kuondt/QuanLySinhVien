@@ -21,8 +21,10 @@ namespace QuanLySinhVien.Data.Entities
         public string Email { get; set; }
         public string DiaChi { get; set; }
         public string ID_LopBienChe { get; set; }
+        public string ID_ChuongTrinhDaoTao { get; set; }
         public Status IsActive { get; set; }
         public LopBienChe LopBienChe { get; set; }
+        public ChuongTrinhDaoTao ChuongTrinhDaoTao { get; set; }
         [JsonIgnore]
         public List<DanhSach_SinhVien_LopHocPhan> ChiTiet_SinhVien_LopHocPhans { get; set; }
     }

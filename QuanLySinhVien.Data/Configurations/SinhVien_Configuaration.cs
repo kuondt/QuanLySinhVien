@@ -42,6 +42,7 @@ namespace QuanLySinhVien.Data.Configurations
 
             builder.HasOne(x => x.LopBienChe).WithMany(x => x.SinhViens).HasForeignKey(x => x.ID_LopBienChe);
 
+            builder.HasOne(x => x.ChuongTrinhDaoTao).WithMany(x => x.SinhViens).HasForeignKey(x => x.ID_ChuongTrinhDaoTao);
         }
     }
 }

@@ -16,5 +16,7 @@ namespace QuanLySinhVien.Data.Entities
         public Khoa Khoa { get; set; }
         [JsonIgnore]
         public List<ChiTiet_ChuongTrinhDaoTao_MonHoc> ChiTiet_ChuongTrinhDaoTao_MonHocs { get; set; }
+        [JsonIgnore]
+        public List<SinhVien> SinhViens { get; set; }
     }
 }
