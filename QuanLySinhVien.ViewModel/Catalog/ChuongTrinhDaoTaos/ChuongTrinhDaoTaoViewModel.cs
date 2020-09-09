@@ -14,5 +14,6 @@ namespace QuanLySinhVien.ViewModel.Catalog.ChuongTrinhDaoTaos
         public string Id_Khoa { get; set; }
         public Khoa Khoa { get; set; }
         public List<ChiTiet_ChuongTrinhDaoTao_MonHoc> ChiTiet_ChuongTrinhDaoTao_MonHocs { get; set; }
+        public List<SinhVien> SinhViens { get; set; }
     }
 }
