@@ -7,7 +7,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Danh sách</h1>
+    <h1 class="h3 mb-2 text-gray-800">Danh sách môn học trong chương trình đào tạo</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -19,18 +19,6 @@
                             @(Html.ActionLink("Tạo mới", "CreateChiTietCTDT", "ChuongTrinhDaoTao", new { id= ViewBag.ID_CTDT }, new { @class = "text-white" }))
                         </span>
                     </h6>
-                </div>
-                <div class=" float-lg-right">
-                    <form asp-action="Index" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100">
-                        <div class="input-group">
-                            <input value="@ViewBag.keyword" type="text" name="keyword" class="form-control bg-white" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -51,6 +39,9 @@
                         <th>
                             Môn học
                         </th>
+                        <th>
+                            Số tín chỉ
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,9 +61,11 @@
                                 @Html.DisplayFor(modelItem => item.MonHoc.TenMonHoc)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Delete", "Delete", "ChuongTrinhDaoTao", new { idctdt = item.ID_ChuongTrinhDaoTao, idmonhoc = item.ID_MonHoc}, null) |                    
+                                @Html.DisplayFor(modelItem => item.MonHoc.SoTinChi)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "MonHoc" ,new { id = item.ID_MonHoc }) |
+                                @Html.ActionLink("Delete", "Delete", "ChuongTrinhDaoTao", new { idctdt = item.ID_ChuongTrinhDaoTao, idmonhoc = item.ID_MonHoc}, null)                 
                             </td>
                         </tr>
                     }

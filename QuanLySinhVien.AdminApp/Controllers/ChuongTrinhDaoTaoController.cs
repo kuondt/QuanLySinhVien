@@ -177,7 +177,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
                 return RedirectToAction("Details", new { id = id });
             }
 
-            ModelState.AddModelError("", "Thêm mới thất bại");
+            ModelState.AddModelError("", "Môn học đã tồn tại trong chương trình");
             return View(request);
         }
 
