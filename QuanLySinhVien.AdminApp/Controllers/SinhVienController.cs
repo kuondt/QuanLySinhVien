@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using QuanLySinhVien.AdminApp.Services.ChuongTrinhDaoTao;
 using QuanLySinhVien.AdminApp.Services.LopBienChe;
 using QuanLySinhVien.AdminApp.Services.SinhVien;
+using QuanLySinhVien.ViewModel.Catalog.ChuongTrinhDaoTaos;
 using QuanLySinhVien.ViewModel.Catalog.LopBienChes;
 using QuanLySinhVien.ViewModel.Catalog.SinhViens;
 
@@ -16,12 +18,14 @@ namespace QuanLySinhVien.AdminApp.Controllers
         private readonly IConfiguration _configuration;
         private readonly ISinhVienApiClient _sinhVienApiClient;
         private readonly ILopBienCheApiClient _lopBienCheApiClient;
+        private readonly IChuongTrinhDaoTaoApiClient _chuongTrinhDaoTaoApiClient;
 
-        public SinhVienController(IConfiguration configuration, ISinhVienApiClient sinhVienApiClient, ILopBienCheApiClient lopBienCheApiClient)
+        public SinhVienController(IConfiguration configuration, ISinhVienApiClient sinhVienApiClient, ILopBienCheApiClient lopBienCheApiClient, IChuongTrinhDaoTaoApiClient chuongTrinhDaoTaoApiClient)
         {
             _sinhVienApiClient = sinhVienApiClient;
             _configuration = configuration;
             _lopBienCheApiClient = lopBienCheApiClient;
+            _chuongTrinhDaoTaoApiClient = chuongTrinhDaoTaoApiClient;
         }
 
         public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 3)
@@ -45,7 +49,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateAsync()
+        public async Task<IActionResult> Create()
         {
             //Lấy năm hiện tại
             string year = DateTime.Now.Year.ToString();
@@ -62,6 +66,16 @@ namespace QuanLySinhVien.AdminApp.Controllers
 
             var lopBienChes = await _lopBienCheApiClient.GetAllPaging(requestLopBienChe);
             ViewBag.lopBienChes = lopBienChes.Items;
+
+
+            var requestCTDT = new ChuongTrinhDaoTaoPagingRequest()
+            {
+                Keyword = year,
+                PageIndex = 1,
+                PageSize = 100
+            };
+            var chuonTrinhDaoTaos = await _chuongTrinhDaoTaoApiClient.GetAllPaging(requestCTDT);
+            ViewBag.chuongTrinhDaoTaos = chuonTrinhDaoTaos.Items;
 
             return View();
         }

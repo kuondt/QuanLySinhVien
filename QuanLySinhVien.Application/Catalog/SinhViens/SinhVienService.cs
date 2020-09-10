@@ -56,7 +56,7 @@ namespace QuanLySinhVien.Service.Catalog.SinhViens
                 NgaySinh = request.NgaySinh,
                 IsActive = Status.Active,
                 Nam = request.Nam,
-
+                ID_ChuongTrinhDaoTao = request.ID_ChuongTrinhDaoTao
             };
 
             _context.SinhViens.Add(sinhVien);
