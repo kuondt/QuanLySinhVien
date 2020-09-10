@@ -67,7 +67,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             var lopBienChes = await _lopBienCheApiClient.GetAllPaging(requestLopBienChe);
             ViewBag.lopBienChes = lopBienChes.Items;
 
-
+            //Lấy danh sách ctdt trùng với khóa của sinh viên
             var requestCTDT = new ChuongTrinhDaoTaoPagingRequest()
             {
                 Keyword = year,
@@ -107,7 +107,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             //Lấy 2 số cuối của năm
             string lastTwoDigitsOfYear = year.Substring(year.Length - 2);
 
-            //Get list giang vien
+            //Lấy danh sách lớp biên chế
             var requestLopBienChe = new LopBienCheManagePagingRequest()
             {
                 Keyword = lastTwoDigitsOfYear,
@@ -117,6 +117,17 @@ namespace QuanLySinhVien.AdminApp.Controllers
 
             var lopBienChes = await _lopBienCheApiClient.GetAllPaging(requestLopBienChe);
             ViewBag.lopBienChes = lopBienChes.Items;
+
+            //Lấy danh sách ctdt trùng với khóa của sinh viên
+            var requestCTDT = new ChuongTrinhDaoTaoPagingRequest()
+            {
+                Keyword = year,
+                PageIndex = 1,
+                PageSize = 100
+            };
+            var chuonTrinhDaoTaos = await _chuongTrinhDaoTaoApiClient.GetAllPaging(requestCTDT);
+            ViewBag.chuongTrinhDaoTaos = chuonTrinhDaoTaos.Items;
+
 
             if (sinhVien != null)
             {
@@ -130,7 +141,8 @@ namespace QuanLySinhVien.AdminApp.Controllers
                     GioiTinh = sinhVien.GioiTinh,
                     NgaySinh = sinhVien.NgaySinh,
                     IsActive = sinhVien.IsActive,
-                    ID_LopBienChe = sinhVien.ID_LopBienChe,        
+                    ID_LopBienChe = sinhVien.ID_LopBienChe, 
+                    ID_ChuongTrinhDaoTao = sinhVien.ID_ChuongTrinhDaoTao
                 };
                 return View(updateRequest);
             }
