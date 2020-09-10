@@ -137,8 +137,9 @@ namespace QuanLySinhVien.Service.Catalog.SinhViens
                 NgaySinh = sinhVien.NgaySinh,
                 IsActive = sinhVien.IsActive,
                 ID_LopBienChe = sinhVien.ID_LopBienChe,
+                LopBienChe = lopBienChe,
                 Nam = sinhVien.Nam,
-                LopBienChe = lopBienChe
+                ID_ChuongTrinhDaoTao = sinhVien.ID_ChuongTrinhDaoTao,
             };
             return sinhVienViewModel;
         }
@@ -161,6 +162,7 @@ namespace QuanLySinhVien.Service.Catalog.SinhViens
             sinhVien.NgaySinh = request.NgaySinh;
             sinhVien.IsActive = request.IsActive;
             sinhVien.ID_LopBienChe = request.ID_LopBienChe;
+            sinhVien.ID_ChuongTrinhDaoTao = request.ID_LopBienChe;
 
 
             if (request.IsActive == Status.InActive)
