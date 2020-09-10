@@ -186,7 +186,8 @@ namespace QuanLySinhVien.AdminApp.Controllers
                     IsActive = sinhVien.IsActive,
                     ID_LopBienChe = sinhVien.ID_LopBienChe,
                     Nam = sinhVien.Nam,
-                    
+                    ID_ChuongTrinhDaoTao = sinhVien.ID_ChuongTrinhDaoTao,
+                    ChuongTrinhDaoTao = sinhVien.ChuongTrinhDaoTao
                 };
                 return View(monHocViewModel);
             }
