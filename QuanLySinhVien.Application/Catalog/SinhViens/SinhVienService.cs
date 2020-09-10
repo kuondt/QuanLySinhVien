@@ -121,7 +121,9 @@ namespace QuanLySinhVien.Service.Catalog.SinhViens
                                     .Where(x => x.ID.Contains(sinhVien.ID_LopBienChe))
                                     .FirstOrDefault();
 
-
+            var chuonTrinhDaoTao = _context.ChuongTrinhDaoTaos
+                                    .Where(x => x.ID.Contains(sinhVien.ID_ChuongTrinhDaoTao))
+                                    .FirstOrDefault();
 
             var sinhVienViewModel = new SinhVienViewModel()
             {
@@ -140,6 +142,7 @@ namespace QuanLySinhVien.Service.Catalog.SinhViens
                 LopBienChe = lopBienChe,
                 Nam = sinhVien.Nam,
                 ID_ChuongTrinhDaoTao = sinhVien.ID_ChuongTrinhDaoTao,
+                ChuongTrinhDaoTao = chuonTrinhDaoTao
             };
             return sinhVienViewModel;
         }
@@ -162,7 +165,7 @@ namespace QuanLySinhVien.Service.Catalog.SinhViens
             sinhVien.NgaySinh = request.NgaySinh;
             sinhVien.IsActive = request.IsActive;
             sinhVien.ID_LopBienChe = request.ID_LopBienChe;
-            sinhVien.ID_ChuongTrinhDaoTao = request.ID_LopBienChe;
+            sinhVien.ID_ChuongTrinhDaoTao = request.ID_ChuongTrinhDaoTao;
 
 
             if (request.IsActive == Status.InActive)
