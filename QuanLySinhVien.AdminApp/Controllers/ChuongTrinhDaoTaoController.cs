@@ -181,8 +181,8 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return View(request);
         }
 
-        [HttpGet("{idctdt}/{idmonhoc}")]
-        public async Task<IActionResult> Delete(string idctdt, string idmonhoc)
+        [HttpGet("ChuongTrinhDaoTao/{idctdt}/{idmonhoc}")]
+        public async Task<IActionResult> DeleteChiTietCTDT(string idctdt, string idmonhoc)
         {
             var chiTietCTDT = await _chiTietCTDT.GetById(idctdt, idmonhoc);
 
@@ -197,8 +197,8 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return RedirectToAction("Error", "Home");
         }
 
-        [HttpPost("{idctdt}/{idmonhoc}")]
-        public async Task<IActionResult> Delete(string idctdt, string idmonhoc, ChiTietChuongTrinhDaoTaoUpdateRequest request)
+        [HttpPost("ChuongTrinhDaoTao/{idctdt}/{idmonhoc}")]
+        public async Task<IActionResult> DeleteChiTietCTDT(string idctdt, string idmonhoc, ChiTietChuongTrinhDaoTaoUpdateRequest request)
         {
             if (!ModelState.IsValid)
                 return View();

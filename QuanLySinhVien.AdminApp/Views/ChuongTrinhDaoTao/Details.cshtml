@@ -65,7 +65,7 @@
                             </td>
                             <td>
                                 @Html.ActionLink("Details", "Details", "MonHoc" ,new { id = item.ID_MonHoc }) |
-                                @Html.ActionLink("Delete", "Delete", "ChuongTrinhDaoTao", new { idctdt = item.ID_ChuongTrinhDaoTao, idmonhoc = item.ID_MonHoc}, null)                 
+                                @Html.ActionLink("Remove", "DeleteChiTietCTDT", "ChuongTrinhDaoTao", new { idctdt = item.ID_ChuongTrinhDaoTao, idmonhoc = item.ID_MonHoc}, null)                 
                             </td>
                         </tr>
                     }

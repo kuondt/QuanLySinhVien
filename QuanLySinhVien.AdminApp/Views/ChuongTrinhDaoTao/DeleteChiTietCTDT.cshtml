@@ -6,6 +6,7 @@
 }
 
 <div class="container-fluid">
+    <p>Xác nhận loại bỏ môn học khỏi chương trình</p>
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ID_MonHoc)
@@ -15,7 +16,7 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="DeleteChiTietCTDT">
         <input type="submit" value="Delete" class="btn btn-danger" />
     </form>
 </div>
