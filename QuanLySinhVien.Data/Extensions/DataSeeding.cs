@@ -128,7 +128,8 @@ namespace QuanLySinhVien.Data.Extensions
                     GioiTinh = GioiTinh.Nu,
                     IsActive = Status.Active,
                     NgaySinh = new DateTime(1998, 01, 01),
-                    ID_LopBienChe = "161A0101"
+                    ID_LopBienChe = "161A0101",
+                    ID_ChuongTrinhDaoTao = "2016CNTT01"
                 },
                 new SinhVien()
                 {
@@ -144,7 +145,8 @@ namespace QuanLySinhVien.Data.Extensions
                     GioiTinh = GioiTinh.Nam,
                     IsActive = Status.Active,
                     NgaySinh = new DateTime(1998, 07, 15),
-                    ID_LopBienChe = "161A0101"
+                    ID_LopBienChe = "161A0101",
+                    ID_ChuongTrinhDaoTao = "2016CNTT01"
                 },
                 new SinhVien()
                 {
@@ -161,6 +163,7 @@ namespace QuanLySinhVien.Data.Extensions
                     IsActive = Status.Active,
                     NgaySinh = new DateTime(1998, 03, 26),
                     ID_LopBienChe = "161A0101",
+                    ID_ChuongTrinhDaoTao = "2016CNTT01"
                 }
             );
 
@@ -217,6 +220,26 @@ namespace QuanLySinhVien.Data.Extensions
                 {
                     ID_GiangVien = "GV001",
                     ID_MonHoc = "INT001",
+                },
+                new ChuyenMon()
+                {
+                    ID_GiangVien = "GV001",
+                    ID_MonHoc = "INT002",
+                },
+                new ChuyenMon()
+                {
+                    ID_GiangVien = "GV001",
+                    ID_MonHoc = "INT003",
+                },
+                new ChuyenMon()
+                {
+                    ID_GiangVien = "GV002",
+                    ID_MonHoc = "INT003",
+                },
+                new ChuyenMon()
+                {
+                    ID_GiangVien = "GV001",
+                    ID_MonHoc = "INT004",
                 });
 
             modelBuilder.Entity<LopHocPhan>().HasData(
