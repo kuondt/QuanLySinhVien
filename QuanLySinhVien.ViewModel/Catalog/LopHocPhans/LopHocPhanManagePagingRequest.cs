@@ -5,7 +5,7 @@ using QuanLySinhVien.ViewModel.Common;
 
 namespace QuanLySinhVien.ViewModel.Catalog.LopHocPhans
 {
-    class LopHocPhanManagePagingRequest : PagingRequestBase
+    public class LopHocPhanManagePagingRequest : PagingRequestBase
     {
         public string Keyword { get; set; }
     }
