@@ -19,6 +19,22 @@ namespace QuanLySinhVien.BackendApi.Controllers
             _lopHocPhanService = lopHocPhanService;
         }
 
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging([FromQuery] LopHocPhanManagePagingRequest request)
+        {
+            var lopHocPhan = await _lopHocPhanService.GetAllPaging(request);
+            return Ok(lopHocPhan);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var lopHocPhan = await _lopHocPhanService.GetById(id);
+            if (lopHocPhan == null)
+                return BadRequest("Not found");
+            return Ok(lopHocPhan);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]LopHocPhanCreateRequest request)
         {
@@ -33,6 +49,19 @@ namespace QuanLySinhVien.BackendApi.Controllers
             var lopHocPhan = await _lopHocPhanService.GetById(ID_LopHocPhan);
 
             return CreatedAtAction(nameof(GetById), new { id = ID_LopHocPhan }, lopHocPhan);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(string id, [FromBody] LopHocPhanUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var affectedResult = await _lopHocPhanService.Update(id, request);
+            if (affectedResult == 0)
+                return BadRequest();
+            return Ok();
+
         }
     }
 }
