@@ -245,7 +245,7 @@ namespace QuanLySinhVien.Data.Extensions
             modelBuilder.Entity<LopHocPhan>().HasData(
                 new LopHocPhan()
                 {
-                    ID = "161INT001",
+                    ID = "161INT00101",
                     SoThuTu = 1,
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
@@ -257,8 +257,20 @@ namespace QuanLySinhVien.Data.Extensions
                 },
                 new LopHocPhan()
                 {
-                    ID = "161INT002",
+                    ID = "161INT00102",
                     SoThuTu = 2,
+                    HK_HocKy = 1,
+                    HK_NamHoc = 2016,
+                    ID_MonHoc = "INT001",
+                    ID_Phong = "PH002",
+                    BuoiHoc = BuoiHoc.Chieu,
+                    NgayHoc = NgayHoc.Thu7,
+                    IsActive = Status.Active
+                },
+                new LopHocPhan()
+                {
+                    ID = "161INT00201",
+                    SoThuTu = 1,
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT001",
@@ -269,8 +281,8 @@ namespace QuanLySinhVien.Data.Extensions
                 },
                 new LopHocPhan()
                 {
-                    ID = "161INT003",
-                    SoThuTu = 3,
+                    ID = "161INT00301",
+                    SoThuTu = 1,
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT005",
@@ -281,8 +293,8 @@ namespace QuanLySinhVien.Data.Extensions
                 },
                 new LopHocPhan()
                 {
-                    ID = "161INT004",
-                    SoThuTu = 4,
+                    ID = "161INT00401",
+                    SoThuTu = 1,
                     HK_HocKy = 1,
                     HK_NamHoc = 2016,
                     ID_MonHoc = "INT006",
@@ -294,28 +306,28 @@ namespace QuanLySinhVien.Data.Extensions
 
             modelBuilder.Entity<DanhSach_SinhVien_LopHocPhan>().HasData(new DanhSach_SinhVien_LopHocPhan()
             {
-                ID_LopHocPhan = "161INT001",
+                ID_LopHocPhan = "161INT00101",
                 ID_SinhVien = "161A010001",
                 LanThi = 1,
                 Diem = 8.5f
             },
             new DanhSach_SinhVien_LopHocPhan()
             {
-                ID_LopHocPhan = "161INT002",
+                ID_LopHocPhan = "161INT00201",
                 ID_SinhVien = "161A010001",
                 LanThi = 1,
                 Diem = 10f
             },
             new DanhSach_SinhVien_LopHocPhan()
             {
-                ID_LopHocPhan = "161INT001",
+                ID_LopHocPhan = "161INT00101",
                 ID_SinhVien = "161A010002",
                 LanThi = 1,
                 Diem = 7.0f
             },
             new DanhSach_SinhVien_LopHocPhan()
             {
-                ID_LopHocPhan = "161INT001",
+                ID_LopHocPhan = "161INT00101",
                 ID_SinhVien = "161A010003",
                 LanThi = 1,
                 Diem = 7.0f
