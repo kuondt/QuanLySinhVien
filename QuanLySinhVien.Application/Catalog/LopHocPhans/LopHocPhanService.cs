@@ -8,6 +8,7 @@ using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.Data.Enums;
 using QuanLySinhVien.ViewModel.Catalog.LopHocPhans;
 using QuanLySinhVien.ViewModel.Common;
+using QuanLySinhVien.ViewModel.Exceptions;
 
 namespace QuanLySinhVien.Service.Catalog.LopHocPhans
 {
@@ -83,9 +84,22 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             throw new NotImplementedException();
         }
 
-        public Task<int> Update(string id, LopHocPhanUpdateRequest request)
+        public async Task<int> Update(string id, LopHocPhanUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var lopHocPhan = await _context.LopHocPhans.FindAsync(id);
+
+            if (lopHocPhan == null)
+            {
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
+            }
+
+            lopHocPhan.BuoiHoc = request.BuoiHoc;
+            lopHocPhan.NgayHoc = request.NgayHoc;
+            lopHocPhan.ID_Phong = request.ID_Phong;
+            lopHocPhan.ID_GiangVien = request.ID_GiangVien;
+
+
+            return await _context.SaveChangesAsync();
         }
     }
 }
