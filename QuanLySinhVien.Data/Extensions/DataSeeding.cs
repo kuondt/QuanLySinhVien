@@ -66,7 +66,9 @@ namespace QuanLySinhVien.Data.Extensions
                 new Khoa() { ID = "CNTT", TenKhoa = "Công nghệ thông tin" });
 
             modelBuilder.Entity<ChuongTrinhDaoTao>().HasData(
-                new ChuongTrinhDaoTao() { ID = "2016CNTT01", TenChuongTrinh = "Hệ thống thông tin", Nam = 2016, Id_Khoa = "CNTT", SoThuTu = 1 });
+                new ChuongTrinhDaoTao() { ID = "2016CNTT01", TenChuongTrinh = "Hệ thống thông tin", Nam = 2016, Id_Khoa = "CNTT", SoThuTu = 1 },
+                new ChuongTrinhDaoTao() { ID = "2020CNTT01", TenChuongTrinh = "Hệ thống thông tin", Nam = 2020, Id_Khoa = "CNTT", SoThuTu = 1 },
+                new ChuongTrinhDaoTao() { ID = "2020CNTT02", TenChuongTrinh = "Kỹ thuật phần mềm", Nam = 2020, Id_Khoa = "CNTT", SoThuTu = 2 });
 
             modelBuilder.Entity<MonHoc>().HasData(
                 new MonHoc() { ID = "INT001", SoThuTu = 1, TenMonHoc = "Kỹ thuật lập trình", SoTiet = 30, SoTinChi = 2, ID_Khoa = "CNTT" },
@@ -107,6 +109,21 @@ namespace QuanLySinhVien.Data.Extensions
                     ID_Khoa = "CNTT",
                     IsActive = Status.Active,
                     NgaySinh = new DateTime(1990, 01, 01)
+                }, 
+                new GiangVien()
+                {
+                    ID = "GV003",
+                    SoThuTu = 3,
+                    Ho = "Nguyễn Thị",
+                    Ten = "T",
+                    HoTen = "Nguyễn Thị T",
+                    DiaChi = "642 Âu Cơ",
+                    SoDienThoai = "012332123",
+                    Email = "pvb@vhu.edu.vn",
+                    GioiTinh = GioiTinh.Nu,
+                    ID_Khoa = "CNTT",
+                    IsActive = Status.Active,
+                    NgaySinh = new DateTime(1985, 01, 01)
                 });
 
             modelBuilder.Entity<LopBienChe>().HasData(
@@ -238,8 +255,18 @@ namespace QuanLySinhVien.Data.Extensions
                 },
                 new ChuyenMon()
                 {
-                    ID_GiangVien = "GV001",
+                    ID_GiangVien = "GV002",
                     ID_MonHoc = "INT004",
+                },
+                new ChuyenMon()
+                {
+                    ID_GiangVien = "GV003",
+                    ID_MonHoc = "INT004",
+                },
+                new ChuyenMon()
+                {
+                    ID_GiangVien = "GV003",
+                    ID_MonHoc = "INT005",
                 });
 
             modelBuilder.Entity<LopHocPhan>().HasData(
