@@ -79,9 +79,28 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             throw new NotImplementedException();
         }
 
-        public Task<LopHocPhanViewModel> GetById(string id)
+        public async Task<LopHocPhanViewModel> GetById(string id)
         {
-            throw new NotImplementedException();
+            var lopHocPhan = await _context.LopHocPhans.FindAsync(id);
+
+            if (lopHocPhan == null)
+            {
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
+            }
+
+            var lopHocPhanViewModel = new LopHocPhanViewModel()
+            {
+                ID = lopHocPhan.ID,
+                BuoiHoc = lopHocPhan.BuoiHoc,
+                NgayHoc = lopHocPhan.NgayHoc,
+                ID_GiangVien = lopHocPhan.ID_GiangVien,
+                ID_MonHoc = lopHocPhan.ID_MonHoc,
+                ID_Phong = lopHocPhan.ID_Phong,
+                HK_HocKy = lopHocPhan.HK_HocKy,
+                HK_NamHoc = lopHocPhan.HK_NamHoc,
+                
+            };
+            return lopHocPhanViewModel;
         }
 
         public async Task<int> Update(string id, LopHocPhanUpdateRequest request)
