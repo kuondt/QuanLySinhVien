@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using QuanLySinhVien.Data.EF;
 using QuanLySinhVien.Data.Entities;
 using QuanLySinhVien.Data.Enums;
@@ -74,9 +75,45 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             throw new NotImplementedException();
         }
 
-        public Task<PagedResult<LopHocPhanViewModel>> GetAllPaging(LopHocPhanManagePagingRequest request)
+        public async Task<PagedResult<LopHocPhanViewModel>> GetAllPaging(LopHocPhanManagePagingRequest request)
         {
-            throw new NotImplementedException();
+            var query = from lhp
+                        in _context.LopHocPhans
+                        select new { lhp };
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(
+                    x => x.lhp.ID_GiangVien.Contains(request.Keyword) 
+                    || x.lhp.ID.Contains(request.Keyword) 
+                    || x.lhp.ID_MonHoc.Contains(request.Keyword));
+            }
+
+            int totalRow = await query.CountAsync();
+
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(x => new LopHocPhanViewModel()
+                {
+                    ID = x.lhp.ID,
+                    BuoiHoc = x.lhp.BuoiHoc,
+                    NgayHoc = x.lhp.NgayHoc,
+                    ID_GiangVien = x.lhp.ID_GiangVien,
+                    ID_MonHoc = x.lhp.ID_MonHoc,
+                    ID_Phong = x.lhp.ID_Phong,
+                    HK_HocKy = x.lhp.HK_HocKy,
+                    HK_NamHoc = x.lhp.HK_NamHoc,
+
+                }).ToListAsync();
+
+            var pagedResult = new PagedResult<LopHocPhanViewModel>()
+            {
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = data
+            };
+            return pagedResult;
         }
 
         public async Task<LopHocPhanViewModel> GetById(string id)
