@@ -178,7 +178,7 @@ namespace QuanLySinhVien.Data.Migrations
                         new
                         {
                             Id = new Guid("7e2de1ee-b97b-4698-abe4-c22a0332b2c9"),
-                            ConcurrencyStamp = "fece5e83-8ab0-47cd-968c-49836f178c53",
+                            ConcurrencyStamp = "06ba06a2-3cf0-4ebf-96a6-1f8d6fe74fe5",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -186,7 +186,7 @@ namespace QuanLySinhVien.Data.Migrations
                         new
                         {
                             Id = new Guid("ddcfd40f-0c20-4bbd-afbf-5936032ddde5"),
-                            ConcurrencyStamp = "2fc4510e-caa2-4238-a519-87d55e14ca7c",
+                            ConcurrencyStamp = "8044b1f1-adb7-44ec-9d5f-2774406d364f",
                             Description = "Nhân viên",
                             Name = "nhanvien",
                             NormalizedName = "nhanvien"
@@ -268,7 +268,7 @@ namespace QuanLySinhVien.Data.Migrations
                         {
                             Id = new Guid("8dd4e4e7-cbb1-4db8-8cd8-3024401afc74"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cb3fbc89-417d-4997-a282-4490f3bbd33b",
+                            ConcurrencyStamp = "d1b4f6dc-602f-49aa-9189-26f87824fc2a",
                             Email = "cuong.263@gmail.com",
                             EmailConfirmed = true,
                             Ho = "Dao",
@@ -277,7 +277,7 @@ namespace QuanLySinhVien.Data.Migrations
                             NgaySinh = new DateTime(1998, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NormalizedEmail = "cuong.263@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF2a5kHOwg9JdgJ6o4zjvoZR1GHlm1EYgxGGEMFFW+2hNueAazizNGoTdSZYCIMchQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAED6x+B88vpvP58msB4HdKRrICYgQ54xA7uGb5SO27STvGESig0wr86+viXkTTCVETA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             Ten = "Cuong",
@@ -363,6 +363,22 @@ namespace QuanLySinhVien.Data.Migrations
                             Nam = 2016,
                             SoThuTu = 1,
                             TenChuongTrinh = "Hệ thống thông tin"
+                        },
+                        new
+                        {
+                            ID = "2020CNTT01",
+                            Id_Khoa = "CNTT",
+                            Nam = 2020,
+                            SoThuTu = 1,
+                            TenChuongTrinh = "Hệ thống thông tin"
+                        },
+                        new
+                        {
+                            ID = "2020CNTT02",
+                            Id_Khoa = "CNTT",
+                            Nam = 2020,
+                            SoThuTu = 2,
+                            TenChuongTrinh = "Kỹ thuật phần mềm"
                         });
                 });
 
@@ -403,15 +419,25 @@ namespace QuanLySinhVien.Data.Migrations
                         },
                         new
                         {
-                            ID_GiangVien = "GV001",
+                            ID_GiangVien = "GV002",
                             ID_MonHoc = "INT004"
+                        },
+                        new
+                        {
+                            ID_GiangVien = "GV003",
+                            ID_MonHoc = "INT004"
+                        },
+                        new
+                        {
+                            ID_GiangVien = "GV003",
+                            ID_MonHoc = "INT005"
                         });
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.DanhSach_SinhVien_LopHocPhan", b =>
                 {
                     b.Property<string>("ID_LopHocPhan")
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(12)");
 
                     b.Property<string>("ID_SinhVien")
                         .HasColumnType("nvarchar(10)");
@@ -433,28 +459,28 @@ namespace QuanLySinhVien.Data.Migrations
                     b.HasData(
                         new
                         {
-                            ID_LopHocPhan = "161INT001",
+                            ID_LopHocPhan = "161INT00101",
                             ID_SinhVien = "161A010001",
                             Diem = 8.5f,
                             LanThi = 1
                         },
                         new
                         {
-                            ID_LopHocPhan = "161INT002",
+                            ID_LopHocPhan = "161INT00201",
                             ID_SinhVien = "161A010001",
                             Diem = 10f,
                             LanThi = 1
                         },
                         new
                         {
-                            ID_LopHocPhan = "161INT001",
+                            ID_LopHocPhan = "161INT00101",
                             ID_SinhVien = "161A010002",
                             Diem = 7f,
                             LanThi = 1
                         },
                         new
                         {
-                            ID_LopHocPhan = "161INT001",
+                            ID_LopHocPhan = "161INT00101",
                             ID_SinhVien = "161A010003",
                             Diem = 7f,
                             LanThi = 1
@@ -546,6 +572,21 @@ namespace QuanLySinhVien.Data.Migrations
                             SoDienThoai = "012332123",
                             SoThuTu = 2,
                             Ten = "B"
+                        },
+                        new
+                        {
+                            ID = "GV003",
+                            DiaChi = "642 Âu Cơ",
+                            Email = "pvb@vhu.edu.vn",
+                            GioiTinh = 0,
+                            Ho = "Nguyễn Thị",
+                            HoTen = "Nguyễn Thị T",
+                            ID_Khoa = "CNTT",
+                            IsActive = 1,
+                            NgaySinh = new DateTime(1985, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SoDienThoai = "012332123",
+                            SoThuTu = 3,
+                            Ten = "T"
                         });
                 });
 
@@ -658,8 +699,8 @@ namespace QuanLySinhVien.Data.Migrations
             modelBuilder.Entity("QuanLySinhVien.Data.Entities.LopHocPhan", b =>
                 {
                     b.Property<string>("ID")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasColumnType("nvarchar(12)")
+                        .HasMaxLength(12);
 
                     b.Property<int>("BuoiHoc")
                         .HasColumnType("int");
@@ -705,7 +746,7 @@ namespace QuanLySinhVien.Data.Migrations
                     b.HasData(
                         new
                         {
-                            ID = "161INT001",
+                            ID = "161INT00101",
                             BuoiHoc = 1,
                             HK_HocKy = 1,
                             HK_NamHoc = 2016,
@@ -717,7 +758,19 @@ namespace QuanLySinhVien.Data.Migrations
                         },
                         new
                         {
-                            ID = "161INT002",
+                            ID = "161INT00102",
+                            BuoiHoc = 2,
+                            HK_HocKy = 1,
+                            HK_NamHoc = 2016,
+                            ID_MonHoc = "INT001",
+                            ID_Phong = "PH002",
+                            IsActive = 1,
+                            NgayHoc = 7,
+                            SoThuTu = 2
+                        },
+                        new
+                        {
+                            ID = "161INT00201",
                             BuoiHoc = 2,
                             HK_HocKy = 1,
                             HK_NamHoc = 2016,
@@ -725,11 +778,11 @@ namespace QuanLySinhVien.Data.Migrations
                             ID_Phong = "PH002",
                             IsActive = 1,
                             NgayHoc = 2,
-                            SoThuTu = 2
+                            SoThuTu = 1
                         },
                         new
                         {
-                            ID = "161INT003",
+                            ID = "161INT00301",
                             BuoiHoc = 3,
                             HK_HocKy = 1,
                             HK_NamHoc = 2016,
@@ -737,11 +790,11 @@ namespace QuanLySinhVien.Data.Migrations
                             ID_Phong = "PH003",
                             IsActive = 1,
                             NgayHoc = 3,
-                            SoThuTu = 3
+                            SoThuTu = 1
                         },
                         new
                         {
-                            ID = "161INT004",
+                            ID = "161INT00401",
                             BuoiHoc = 1,
                             HK_HocKy = 1,
                             HK_NamHoc = 2016,
@@ -749,7 +802,7 @@ namespace QuanLySinhVien.Data.Migrations
                             ID_Phong = "PH002",
                             IsActive = 1,
                             NgayHoc = 4,
-                            SoThuTu = 4
+                            SoThuTu = 1
                         });
                 });
 
