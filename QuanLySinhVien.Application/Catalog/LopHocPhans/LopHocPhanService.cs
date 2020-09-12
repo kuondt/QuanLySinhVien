@@ -50,7 +50,7 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             string Id_MonHoc = request.ID_MonHoc;
 
             //Ghép chuỗi tạo ID => 201INT00101
-            string ID_LopHocPhan = namHoc_2SoCuoi + hocKy +"INT" + Id_MonHoc + soThuTu;
+            string ID_LopHocPhan = namHoc_2SoCuoi + hocKy + "INT" + Id_MonHoc + soThuTu;
 
             var lopHocPhan = new LopHocPhan()
             {
@@ -61,7 +61,7 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                 IsActive = Status.Active,
                 HK_HocKy = request.HK_HocKy,
                 HK_NamHoc = request.HK_NamHoc,
-                
+
             };
 
             _context.LopHocPhans.Add(lopHocPhan);
@@ -70,9 +70,17 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             return lopHocPhan.ID;
         }
 
-        public Task<int> Delete(string id)
+        public async Task<int> Delete(string id)
         {
-            throw new NotImplementedException();
+            var lopHocPhan = await _context.LopHocPhans.FindAsync(id);
+
+            if (lopHocPhan == null)
+            {
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
+            }
+
+            _context.LopHocPhans.Remove(lopHocPhan);
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<PagedResult<LopHocPhanViewModel>> GetAllPaging(LopHocPhanManagePagingRequest request)
@@ -84,8 +92,8 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             if (!string.IsNullOrEmpty(request.Keyword))
             {
                 query = query.Where(
-                    x => x.lhp.ID_GiangVien.Contains(request.Keyword) 
-                    || x.lhp.ID.Contains(request.Keyword) 
+                    x => x.lhp.ID_GiangVien.Contains(request.Keyword)
+                    || x.lhp.ID.Contains(request.Keyword)
                     || x.lhp.ID_MonHoc.Contains(request.Keyword));
             }
 
@@ -135,7 +143,7 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                 ID_Phong = lopHocPhan.ID_Phong,
                 HK_HocKy = lopHocPhan.HK_HocKy,
                 HK_NamHoc = lopHocPhan.HK_NamHoc,
-                
+
             };
             return lopHocPhanViewModel;
         }
