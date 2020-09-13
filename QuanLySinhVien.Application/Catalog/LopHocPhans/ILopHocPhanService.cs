@@ -18,5 +18,7 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
         Task<PagedResult<LopHocPhanViewModel>> GetAllPaging(LopHocPhanManagePagingRequest request);
 
         Task<int> Delete(string id);
+
+        Task<PagedResult<LopHocPhanViewModel>> Schedule(int hocky, int namhoc, LopHocPhanManagePagingRequest request);
     }
 }

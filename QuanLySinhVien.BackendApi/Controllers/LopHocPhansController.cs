@@ -14,6 +14,7 @@ namespace QuanLySinhVien.BackendApi.Controllers
     public class LopHocPhansController : ControllerBase
     {
         private readonly ILopHocPhanService _lopHocPhanService;
+
         public LopHocPhansController(ILopHocPhanService lopHocPhanService)
         {
             _lopHocPhanService = lopHocPhanService;
@@ -36,7 +37,7 @@ namespace QuanLySinhVien.BackendApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]LopHocPhanCreateRequest request)
+        public async Task<IActionResult> Create([FromBody] LopHocPhanCreateRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -62,6 +63,13 @@ namespace QuanLySinhVien.BackendApi.Controllers
                 return BadRequest();
             return Ok();
 
+        }
+
+        [HttpPost("schedule/{hocky}/{namhoc}")]
+        public async Task<IActionResult> Schedule(int hocky, int namhoc, [FromBody] LopHocPhanManagePagingRequest request)
+        {
+            var lopHocPhan = await _lopHocPhanService.Schedule(hocky, namhoc, request);
+            return Ok(lopHocPhan);
         }
     }
 }

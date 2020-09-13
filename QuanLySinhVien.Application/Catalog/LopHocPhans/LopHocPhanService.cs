@@ -148,6 +148,44 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             return lopHocPhanViewModel;
         }
 
+        public async Task<PagedResult<LopHocPhanViewModel>> Schedule(int hocky, int namhoc, LopHocPhanManagePagingRequest request)
+        {
+            var query = from lhp
+                        in _context.LopHocPhans
+                        select new { lhp };
+
+
+            query = query.Where(
+                x => x.lhp.HK_HocKy.Equals(hocky)
+                && x.lhp.HK_NamHoc.Equals(namhoc));
+  
+
+            int totalRow = await query.CountAsync();
+
+            var data = await query
+                .Select(x => new LopHocPhanViewModel()
+                {
+                    ID = x.lhp.ID,
+                    BuoiHoc = x.lhp.BuoiHoc,
+                    NgayHoc = x.lhp.NgayHoc,
+                    ID_GiangVien = x.lhp.ID_GiangVien,
+                    ID_MonHoc = x.lhp.ID_MonHoc,
+                    ID_Phong = x.lhp.ID_Phong,
+                    HK_HocKy = x.lhp.HK_HocKy,
+                    HK_NamHoc = x.lhp.HK_NamHoc,
+
+                }).ToListAsync();
+
+            var pagedResult = new PagedResult<LopHocPhanViewModel>()
+            {
+                TotalRecords = totalRow,
+                PageIndex = 1,
+                PageSize = 1000,
+                Items = data
+            };
+            return pagedResult;
+        }
+
         public async Task<int> Update(string id, LopHocPhanUpdateRequest request)
         {
             var lopHocPhan = await _context.LopHocPhans.FindAsync(id);
