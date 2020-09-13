@@ -65,11 +65,23 @@ namespace QuanLySinhVien.BackendApi.Controllers
 
         }
 
-        [HttpPost("schedule/{hocky}/{namhoc}")]
-        public async Task<IActionResult> Schedule(int hocky, int namhoc, [FromBody] LopHocPhanManagePagingRequest request)
+        [HttpGet("getschedule/{hocky}/{namhoc}")]
+        public async Task<IActionResult> GetSchedule(int hocky, int namhoc)
         {
-            var lopHocPhan = await _lopHocPhanService.Schedule(hocky, namhoc, request);
+            var lopHocPhan = await _lopHocPhanService.GetSchedule(hocky, namhoc);
             return Ok(lopHocPhan);
+        }
+
+        [HttpPut("schedule/{hocky}/{namhoc}")]
+        public async Task<IActionResult> Schedule(int hocky, int namhoc)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var affectedResult = await _lopHocPhanService.Schedule(hocky, namhoc);
+            if (affectedResult == 0)
+                return BadRequest();
+            return Ok();
         }
     }
 }

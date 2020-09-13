@@ -30,6 +30,7 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             var sttCuoiCung = _context.LopHocPhans
                                     .Where(x => x.HK_NamHoc == request.HK_NamHoc)
                                     .Where(x => x.HK_HocKy == request.HK_HocKy)
+                                    .Where(x => x.ID_MonHoc == request.ID_MonHoc)
                                     .Select(x => x.SoThuTu)
                                     .ToArray()
                                     .LastOrDefault();
@@ -44,13 +45,13 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             string hocKy = request.HK_HocKy.ToString();
 
             //Lấy số thứ tự 
-            soThuTu.ToString().PadLeft(3, '0');
+            string stt = soThuTu.ToString().PadLeft(2, '0');
 
             //Lấy ID môn học
             string Id_MonHoc = request.ID_MonHoc;
 
             //Ghép chuỗi tạo ID => 201INT00101
-            string ID_LopHocPhan = namHoc_2SoCuoi + hocKy + "INT" + Id_MonHoc + soThuTu;
+            string ID_LopHocPhan = namHoc_2SoCuoi + hocKy + Id_MonHoc + stt;
 
             var lopHocPhan = new LopHocPhan()
             {
@@ -148,7 +149,7 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             return lopHocPhanViewModel;
         }
 
-        public async Task<PagedResult<LopHocPhanViewModel>> Schedule(int hocky, int namhoc, LopHocPhanManagePagingRequest request)
+        public async Task<PagedResult<LopHocPhanViewModel>> GetSchedule(int hocky, int namhoc)
         {
             var query = from lhp
                         in _context.LopHocPhans
@@ -158,11 +159,11 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             query = query.Where(
                 x => x.lhp.HK_HocKy.Equals(hocky)
                 && x.lhp.HK_NamHoc.Equals(namhoc));
-  
+
 
             int totalRow = await query.CountAsync();
 
-            var data = await query
+            var lopHocPhans = await query
                 .Select(x => new LopHocPhanViewModel()
                 {
                     ID = x.lhp.ID,
@@ -181,9 +182,96 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                 TotalRecords = totalRow,
                 PageIndex = 1,
                 PageSize = 1000,
-                Items = data
+                Items = lopHocPhans
             };
             return pagedResult;
+        }
+
+        public async Task<int> Schedule(int hocky, int namhoc)
+        {
+            var query = from lhp
+                        in _context.LopHocPhans
+                        select new { lhp };
+
+
+            query = query.Where(
+                x => x.lhp.HK_HocKy.Equals(hocky)
+                && x.lhp.HK_NamHoc.Equals(namhoc));
+  
+
+            int totalRow = await query.CountAsync();
+
+            var lopHocPhans = await query
+                .Select(x => new LopHocPhanViewModel()
+                {
+                    ID = x.lhp.ID,
+                    BuoiHoc = x.lhp.BuoiHoc,
+                    NgayHoc = x.lhp.NgayHoc,
+                    ID_GiangVien = x.lhp.ID_GiangVien,
+                    ID_MonHoc = x.lhp.ID_MonHoc,
+                    ID_Phong = x.lhp.ID_Phong,
+                    HK_HocKy = x.lhp.HK_HocKy,
+                    HK_NamHoc = x.lhp.HK_NamHoc,
+
+                }).ToListAsync();
+
+            Random random = new Random();
+
+            int randomBuoiHoc = random.Next(1, 3);
+            switch (randomBuoiHoc)
+            {
+                case 1:
+                    lopHocPhans[0].BuoiHoc = BuoiHoc.Sang;
+                    break;
+                case 2:
+                    lopHocPhans[0].BuoiHoc = BuoiHoc.Chieu;
+                    break;
+                case 3:
+                    lopHocPhans[0].BuoiHoc = BuoiHoc.Toi;
+                    break;
+            }
+
+            int randomNgayHoc = random.Next(2, 8);
+            switch (randomNgayHoc)
+            {
+                case 2:
+                    lopHocPhans[0].NgayHoc = NgayHoc.Thu2;
+                    break;
+                case 3:
+                    lopHocPhans[0].NgayHoc = NgayHoc.Thu3;
+                    break;
+                case 4:
+                    lopHocPhans[0].NgayHoc = NgayHoc.Thu4;
+                    break;
+                case 5:
+                    lopHocPhans[0].NgayHoc = NgayHoc.Thu5;
+                    break;
+                case 6:
+                    lopHocPhans[0].NgayHoc = NgayHoc.Thu6;
+                    break;
+                case 7:
+                    lopHocPhans[0].NgayHoc = NgayHoc.Thu7;
+                    break;
+                case 8:
+                    lopHocPhans[0].NgayHoc = NgayHoc.ChuNhat;
+                    break;
+            }
+            lopHocPhans[0].BuoiHoc = BuoiHoc.Toi;
+            Console.WriteLine(lopHocPhans[0].NgayHoc);
+            Console.WriteLine(lopHocPhans[0].BuoiHoc);
+
+            return await _context.SaveChangesAsync();
+
+            //for ( int i = 1; i < lopHocPhans.Count(); i++)
+            //{
+            //    if( lopHocPhans[i].BuoiHoc  && lopHocPhans[i].NgayHoc)
+            //    {
+
+            //    }
+
+
+            //}
+
         }
 
         public async Task<int> Update(string id, LopHocPhanUpdateRequest request)
