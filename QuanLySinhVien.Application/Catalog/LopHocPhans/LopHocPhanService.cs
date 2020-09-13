@@ -194,26 +194,13 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                         select new { lhp };
 
 
-            query = query.Where(
+            var lopHocPhans = query.Where(
                 x => x.lhp.HK_HocKy.Equals(hocky)
-                && x.lhp.HK_NamHoc.Equals(namhoc));
+                && x.lhp.HK_NamHoc.Equals(namhoc)).ToList();
   
 
             int totalRow = await query.CountAsync();
 
-            var lopHocPhans = await query
-                .Select(x => new LopHocPhanViewModel()
-                {
-                    ID = x.lhp.ID,
-                    BuoiHoc = x.lhp.BuoiHoc,
-                    NgayHoc = x.lhp.NgayHoc,
-                    ID_GiangVien = x.lhp.ID_GiangVien,
-                    ID_MonHoc = x.lhp.ID_MonHoc,
-                    ID_Phong = x.lhp.ID_Phong,
-                    HK_HocKy = x.lhp.HK_HocKy,
-                    HK_NamHoc = x.lhp.HK_NamHoc,
-
-                }).ToListAsync();
 
             Random random = new Random();
 
@@ -221,13 +208,13 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             switch (randomBuoiHoc)
             {
                 case 1:
-                    lopHocPhans[0].BuoiHoc = BuoiHoc.Sang;
+                    lopHocPhans[0].lhp.BuoiHoc = BuoiHoc.Sang;
                     break;
                 case 2:
-                    lopHocPhans[0].BuoiHoc = BuoiHoc.Chieu;
+                    lopHocPhans[0].lhp.BuoiHoc = BuoiHoc.Chieu;
                     break;
                 case 3:
-                    lopHocPhans[0].BuoiHoc = BuoiHoc.Toi;
+                    lopHocPhans[0].lhp.BuoiHoc = BuoiHoc.Toi;
                     break;
             }
 
@@ -235,30 +222,29 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             switch (randomNgayHoc)
             {
                 case 2:
-                    lopHocPhans[0].NgayHoc = NgayHoc.Thu2;
+                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.Thu2;
                     break;
                 case 3:
-                    lopHocPhans[0].NgayHoc = NgayHoc.Thu3;
+                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.Thu3;
                     break;
                 case 4:
-                    lopHocPhans[0].NgayHoc = NgayHoc.Thu4;
+                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.Thu4;
                     break;
                 case 5:
-                    lopHocPhans[0].NgayHoc = NgayHoc.Thu5;
+                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.Thu5;
                     break;
                 case 6:
-                    lopHocPhans[0].NgayHoc = NgayHoc.Thu6;
+                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.Thu6;
                     break;
                 case 7:
-                    lopHocPhans[0].NgayHoc = NgayHoc.Thu7;
+                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.Thu7;
                     break;
                 case 8:
-                    lopHocPhans[0].NgayHoc = NgayHoc.ChuNhat;
+                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.ChuNhat;
                     break;
             }
-            lopHocPhans[0].BuoiHoc = BuoiHoc.Toi;
-            Console.WriteLine(lopHocPhans[0].NgayHoc);
-            Console.WriteLine(lopHocPhans[0].BuoiHoc);
+            Console.WriteLine(lopHocPhans[0].lhp.NgayHoc);
+            Console.WriteLine(lopHocPhans[0].lhp.BuoiHoc);
 
             return await _context.SaveChangesAsync();
 
