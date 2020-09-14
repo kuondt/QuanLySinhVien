@@ -189,75 +189,90 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
 
         public async Task<int> Schedule(int hocky, int namhoc)
         {
-            var query = from lhp
-                        in _context.LopHocPhans
-                        select new { lhp };
+
+            var lopHocPhans = _context.LopHocPhans.Where(
+                x => x.HK_HocKy.Equals(hocky)
+                && x.HK_NamHoc.Equals(namhoc)).ToList();
 
 
-            var lopHocPhans = query.Where(
-                x => x.lhp.HK_HocKy.Equals(hocky)
-                && x.lhp.HK_NamHoc.Equals(namhoc)).ToList();
-  
-
-            int totalRow = await query.CountAsync();
+            int totalRow = lopHocPhans.Count();
 
 
             Random random = new Random();
 
             int randomBuoiHoc = random.Next(1, 3);
+            lopHocPhans[0].BuoiHoc = RandomBuoiHoc(randomBuoiHoc);
+
+            int randomNgayHoc = random.Next(2, 8);
+            lopHocPhans[0].NgayHoc = RandomNgayHoc(randomNgayHoc);
+
+            var listLopHocPhan = new List<LopHocPhan>();
+            listLopHocPhan.Add(lopHocPhans[0]);
+            Console.WriteLine(listLopHocPhan[0].BuoiHoc + "+" + listLopHocPhan[0].NgayHoc);
+
+            //for (int current = 1; current < lopHocPhans.Count(); current++)
+            //{
+            //    for (int point = 0; point < current - point; point++)
+            //    {
+            //        if (lopHocPhans[current].lhp.BuoiHoc == lopHocPhans[point].lhp.BuoiHoc 
+            //            && lopHocPhans[current].lhp.NgayHoc == lopHocPhans[point].lhp.NgayHoc 
+            //            && lopHocPhans[current].lhp.ID_GiangVien == lopHocPhans[point].lhp.ID_GiangVien)
+            //        {
+            //            lopHocPhans[current].lhp.BuoiHoc = RandomBuoiHoc(randomBuoiHoc);
+            //        }
+            //    }
+            //}
+
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public BuoiHoc RandomBuoiHoc(int randomBuoiHoc)
+        {
+            BuoiHoc buoiHoc = BuoiHoc.Sang;
             switch (randomBuoiHoc)
             {
                 case 1:
-                    lopHocPhans[0].lhp.BuoiHoc = BuoiHoc.Sang;
+                    buoiHoc = BuoiHoc.Sang;
                     break;
                 case 2:
-                    lopHocPhans[0].lhp.BuoiHoc = BuoiHoc.Chieu;
+                    buoiHoc = BuoiHoc.Chieu;
                     break;
                 case 3:
-                    lopHocPhans[0].lhp.BuoiHoc = BuoiHoc.Toi;
+                    buoiHoc = BuoiHoc.Toi;
                     break;
             }
+            return buoiHoc;
+        }
 
-            int randomNgayHoc = random.Next(2, 8);
+        public NgayHoc RandomNgayHoc(int randomNgayHoc)
+        {
+            NgayHoc ngayHoc = NgayHoc.Thu2;
             switch (randomNgayHoc)
             {
                 case 2:
-                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.Thu2;
+                    ngayHoc = NgayHoc.Thu2;
                     break;
                 case 3:
-                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.Thu3;
+                    ngayHoc = NgayHoc.Thu3;
                     break;
                 case 4:
-                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.Thu4;
+                    ngayHoc = NgayHoc.Thu4;
                     break;
                 case 5:
-                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.Thu5;
+                    ngayHoc = NgayHoc.Thu5;
                     break;
                 case 6:
-                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.Thu6;
+                    ngayHoc = NgayHoc.Thu6;
                     break;
                 case 7:
-                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.Thu7;
+                    ngayHoc = NgayHoc.Thu7;
                     break;
                 case 8:
-                    lopHocPhans[0].lhp.NgayHoc = NgayHoc.ChuNhat;
-                    break;
+                    ngayHoc = NgayHoc.ChuNhat;
+                    break;             
             }
-            Console.WriteLine(lopHocPhans[0].lhp.NgayHoc);
-            Console.WriteLine(lopHocPhans[0].lhp.BuoiHoc);
-
-            return await _context.SaveChangesAsync();
-
-            //for ( int i = 1; i < lopHocPhans.Count(); i++)
-            //{
-            //    if( lopHocPhans[i].BuoiHoc  && lopHocPhans[i].NgayHoc)
-            //    {
-
-            //    }
-
-
-            //}
-
+            return ngayHoc;
         }
 
         public async Task<int> Update(string id, LopHocPhanUpdateRequest request)
