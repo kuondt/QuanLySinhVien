@@ -73,12 +73,12 @@ namespace QuanLySinhVien.BackendApi.Controllers
         }
 
         [HttpPut("schedule/{hocky}/{namhoc}")]
-        public async Task<IActionResult> Schedule(int hocky, int namhoc)
+        public async Task<IActionResult> Schedule(int hocky, int namhoc, [FromBody] ScheduleCreateRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var affectedResult = await _lopHocPhanService.Schedule(hocky, namhoc);
+            var affectedResult = await _lopHocPhanService.Schedule(hocky, namhoc, request);
             if (affectedResult == 0)
                 return BadRequest();
             return Ok();

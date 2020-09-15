@@ -187,7 +187,7 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             return pagedResult;
         }
 
-        public async Task<int> Schedule(int hocky, int namhoc)
+        public async Task<int> Schedule(int hocky, int namhoc, ScheduleCreateRequest request)
         {
             //Lấy toàn bộ những lớp học phần theo học kỳ & năm học
             var lopHocPhans = _context.LopHocPhans.Where(
@@ -238,7 +238,7 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                 {
                     //Random phòng mới cho ngày học và buổi học của row hiện tại
                     var listPhong = _context.Phongs.ToList();
-                    var randomPhong = random.Next(listPhong.Count());
+                    var randomPhong = random.Next(request.RoomCount);
                     lopHocPhans[current].ID_Phong = listPhong[randomPhong].ID;
 
                     //Kiểm tra phòng học tại row hiện tại có tồn tại trong list đã sắp xếp chưa, và kiểm tra phòng đã có lớp khác sự dụng không
