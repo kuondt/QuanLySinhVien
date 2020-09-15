@@ -194,12 +194,11 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                 x => x.HK_HocKy.Equals(hocky)
                 && x.HK_NamHoc.Equals(namhoc)).ToList();
 
-
             int totalRow = lopHocPhans.Count();
-
 
             Random random = new Random();
 
+            //Random ngày học và buổi học của lớp đầu tiên
             int randomBuoiHoc = random.Next(1, 3);
             lopHocPhans[0].BuoiHoc = RandomBuoiHoc(randomBuoiHoc);
 
@@ -208,7 +207,42 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
 
             var listLopHocPhan = new List<LopHocPhan>();
             listLopHocPhan.Add(lopHocPhans[0]);
-            Console.WriteLine(listLopHocPhan[0].BuoiHoc + "+" + listLopHocPhan[0].NgayHoc);
+
+            for (int current = 1; current < lopHocPhans.Count(); current++)
+            {
+
+                int randomBuoi1 = random.Next(1, 3);
+                lopHocPhans[current].BuoiHoc = RandomBuoiHoc(randomBuoi1);
+
+                int randomNgay1 = random.Next(2, 8);
+                lopHocPhans[current].NgayHoc = RandomNgayHoc(randomNgay1);
+
+                //Kiểm tra giảng viên tại row hiện tại có tồn tại trong listLopHocPhan chưa, và kiểm tra gv có bận buổi dạy đó chưa 
+                bool existLopHocPhan = listLopHocPhan.Any(
+                    x => x.ID_GiangVien == lopHocPhans[current].ID_GiangVien
+                    && x.BuoiHoc == lopHocPhans[current].BuoiHoc
+                    && x.NgayHoc == lopHocPhans[current].NgayHoc);
+
+                while (existLopHocPhan)
+                {
+                    //Random ngày học và buổi học
+                    int randomBuoi = random.Next(1, 3);
+                    lopHocPhans[current].BuoiHoc = RandomBuoiHoc(randomBuoi);
+
+                    int randomNgay = random.Next(2, 8);
+                    lopHocPhans[current].NgayHoc = RandomNgayHoc(randomNgay);
+
+                    existLopHocPhan = listLopHocPhan.Any(
+                    x => x.ID_GiangVien == lopHocPhans[current].ID_GiangVien
+                    && x.BuoiHoc == lopHocPhans[current].BuoiHoc
+                    && x.NgayHoc == lopHocPhans[current].NgayHoc);
+
+                    Console.WriteLine(lopHocPhans[current].ID + "+" + lopHocPhans[current].BuoiHoc + "+" + lopHocPhans[current].NgayHoc);
+                }
+
+                //Thêm lớp học phần vào list cần check
+                listLopHocPhan.Add(lopHocPhans[current]);
+            }
 
             //for (int current = 1; current < lopHocPhans.Count(); current++)
             //{
@@ -270,7 +304,7 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                     break;
                 case 8:
                     ngayHoc = NgayHoc.ChuNhat;
-                    break;             
+                    break;
             }
             return ngayHoc;
         }
