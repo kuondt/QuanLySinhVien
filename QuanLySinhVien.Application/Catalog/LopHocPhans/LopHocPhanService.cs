@@ -189,74 +189,52 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
 
         public async Task<int> Schedule(int hocky, int namhoc)
         {
-
+            //Lấy toàn bộ những lớp học phần theo học kỳ & năm học
             var lopHocPhans = _context.LopHocPhans.Where(
                 x => x.HK_HocKy.Equals(hocky)
-                && x.HK_NamHoc.Equals(namhoc)).ToList();
+                && x.HK_NamHoc.Equals(namhoc))
+                .ToList();
 
-            int totalRow = lopHocPhans.Count();
-
+            //Tạo biến random để random buổi & ngày học
             Random random = new Random();
 
             //Random ngày học và buổi học của lớp đầu tiên
             int randomBuoiHoc = random.Next(1, 3);
             lopHocPhans[0].BuoiHoc = RandomBuoiHoc(randomBuoiHoc);
-
             int randomNgayHoc = random.Next(2, 8);
             lopHocPhans[0].NgayHoc = RandomNgayHoc(randomNgayHoc);
 
-            var listLopHocPhan = new List<LopHocPhan>();
-            listLopHocPhan.Add(lopHocPhans[0]);
+            //Tạo danh sách lớp học phần đã tạo lịch thành công
+            var scheduledLopHocPhan = new List<LopHocPhan>();
+            scheduledLopHocPhan.Add(lopHocPhans[0]);
 
             for (int current = 1; current < lopHocPhans.Count(); current++)
             {
+                //Kiểm tra giảng viên tại row hiện tại có tồn tại trong list đã sắp xếp chưa, và kiểm tra gv có bận buổi dạy đó chưa
+                bool checkGiangVien = scheduledLopHocPhan.Any(
+                            x => x.ID_GiangVien == lopHocPhans[current].ID_GiangVien
+                            && x.BuoiHoc == lopHocPhans[current].BuoiHoc
+                            && x.NgayHoc == lopHocPhans[current].NgayHoc);
 
-                int randomBuoi1 = random.Next(1, 3);
-                lopHocPhans[current].BuoiHoc = RandomBuoiHoc(randomBuoi1);
-
-                int randomNgay1 = random.Next(2, 8);
-                lopHocPhans[current].NgayHoc = RandomNgayHoc(randomNgay1);
-
-                //Kiểm tra giảng viên tại row hiện tại có tồn tại trong listLopHocPhan chưa, và kiểm tra gv có bận buổi dạy đó chưa 
-                bool existLopHocPhan = listLopHocPhan.Any(
-                    x => x.ID_GiangVien == lopHocPhans[current].ID_GiangVien
-                    && x.BuoiHoc == lopHocPhans[current].BuoiHoc
-                    && x.NgayHoc == lopHocPhans[current].NgayHoc);
-
-                while (existLopHocPhan)
+                //Nếu giảng viên tại row hiện tại đã bận, random 1 buổi khác
+                while (checkGiangVien)
                 {
-                    //Random ngày học và buổi học
+                    //Random ngày học và buổi học cho row hiện tại
                     int randomBuoi = random.Next(1, 3);
                     lopHocPhans[current].BuoiHoc = RandomBuoiHoc(randomBuoi);
-
                     int randomNgay = random.Next(2, 8);
                     lopHocPhans[current].NgayHoc = RandomNgayHoc(randomNgay);
 
-                    existLopHocPhan = listLopHocPhan.Any(
-                    x => x.ID_GiangVien == lopHocPhans[current].ID_GiangVien
-                    && x.BuoiHoc == lopHocPhans[current].BuoiHoc
-                    && x.NgayHoc == lopHocPhans[current].NgayHoc);
-
-                    Console.WriteLine(lopHocPhans[current].ID + "+" + lopHocPhans[current].BuoiHoc + "+" + lopHocPhans[current].NgayHoc);
+                    //Kiểm tra giảng viên tại row hiện tại có tồn tại trong list đã sắp xếp chưa, và kiểm tra gv có bận buổi dạy đó chưa
+                    checkGiangVien = scheduledLopHocPhan.Any(
+                            x => x.ID_GiangVien == lopHocPhans[current].ID_GiangVien
+                            && x.BuoiHoc == lopHocPhans[current].BuoiHoc
+                            && x.NgayHoc == lopHocPhans[current].NgayHoc);
                 }
 
                 //Thêm lớp học phần vào list cần check
-                listLopHocPhan.Add(lopHocPhans[current]);
+                scheduledLopHocPhan.Add(lopHocPhans[current]);
             }
-
-            //for (int current = 1; current < lopHocPhans.Count(); current++)
-            //{
-            //    for (int point = 0; point < current - point; point++)
-            //    {
-            //        if (lopHocPhans[current].lhp.BuoiHoc == lopHocPhans[point].lhp.BuoiHoc 
-            //            && lopHocPhans[current].lhp.NgayHoc == lopHocPhans[point].lhp.NgayHoc 
-            //            && lopHocPhans[current].lhp.ID_GiangVien == lopHocPhans[point].lhp.ID_GiangVien)
-            //        {
-            //            lopHocPhans[current].lhp.BuoiHoc = RandomBuoiHoc(randomBuoiHoc);
-            //        }
-            //    }
-            //}
-
 
             return await _context.SaveChangesAsync();
         }
