@@ -119,9 +119,25 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
             return response.IsSuccessStatusCode;
         }
 
-        public Task<PagedResult<LopHocPhanViewModel>> GetSchedule(int hocky, int namhoc)
+        public async Task<PagedResult<LopHocPhanViewModel>> GetSchedule(int hocky, int namhoc)
         {
-            throw new NotImplementedException();
+            var sessions = _httpContextAccessor
+                            .HttpContext
+                            .Session
+                            .GetString(SystemConstants.AppSettings.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.GetAsync(
+                $"/api/lophocphans/getschedule"
+                );
+
+            var body = await response.Content.ReadAsStringAsync();
+            var lopHocPhan = JsonConvert.DeserializeObject<PagedResult<LopHocPhanViewModel>>(body);
+
+            return lopHocPhan;
         }
 
         public Task<bool> Schedule(int hocky, int namhoc, ScheduleCreateRequest request)
