@@ -13,7 +13,7 @@ using QuanLySinhVien.ViewModel.Exceptions;
 
 namespace QuanLySinhVien.Service.Catalog.LopHocPhans
 {
-    public class LopHocPhanService : ILopHocPhanService
+    public class LopHocPhanService : ILopHocPhanService, IScheduleService
     {
         private readonly QLSV_DBContext _context;
 
@@ -147,6 +147,24 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
 
             };
             return lopHocPhanViewModel;
+        }
+
+        public async Task<int> Update(string id, LopHocPhanUpdateRequest request)
+        {
+            var lopHocPhan = await _context.LopHocPhans.FindAsync(id);
+
+            if (lopHocPhan == null)
+            {
+                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
+            }
+
+            lopHocPhan.BuoiHoc = request.BuoiHoc;
+            lopHocPhan.NgayHoc = request.NgayHoc;
+            lopHocPhan.ID_Phong = request.ID_Phong;
+            lopHocPhan.ID_GiangVien = request.ID_GiangVien;
+
+
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<PagedResult<LopHocPhanViewModel>> GetSchedule(int hocky, int namhoc)
@@ -301,24 +319,6 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                     break;
             }
             return ngayHoc;
-        }
-
-        public async Task<int> Update(string id, LopHocPhanUpdateRequest request)
-        {
-            var lopHocPhan = await _context.LopHocPhans.FindAsync(id);
-
-            if (lopHocPhan == null)
-            {
-                throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
-            }
-
-            lopHocPhan.BuoiHoc = request.BuoiHoc;
-            lopHocPhan.NgayHoc = request.NgayHoc;
-            lopHocPhan.ID_Phong = request.ID_Phong;
-            lopHocPhan.ID_GiangVien = request.ID_GiangVien;
-
-
-            return await _context.SaveChangesAsync();
         }
     }
 }
