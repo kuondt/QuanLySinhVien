@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using QuanLySinhVien.AdminApp.Services.LopHocPhan;
+using QuanLySinhVien.ViewModel.Catalog.LopHocPhans;
 
 namespace QuanLySinhVien.AdminApp.Controllers
 {
@@ -19,9 +20,24 @@ namespace QuanLySinhVien.AdminApp.Controllers
             _lopHocPhanApiClient = lopHocPhanApiClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 3)
         {
-            return View();
+            var request = new LopHocPhanManagePagingRequest()
+            {
+                Keyword = keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            };
+            var data = await _lopHocPhanApiClient.GetAllPaging(request);
+
+            ViewBag.Keyword = keyword;
+
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["result"];
+            }
+
+            return View(data);
         }
     }
 }
