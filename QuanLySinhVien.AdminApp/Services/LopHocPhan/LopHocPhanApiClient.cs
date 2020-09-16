@@ -82,9 +82,41 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
             return lopHocPhan;
         }
 
-        public Task<LopHocPhanViewModel> GetById(string id)
+        public async Task<LopHocPhanViewModel> GetById(string id)
         {
-            throw new NotImplementedException();
+            var sessions = _httpContextAccessor
+                            .HttpContext
+                            .Session
+                            .GetString(SystemConstants.AppSettings.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.GetAsync(
+                $"/api/lophocphans/{id}"
+                );
+
+            var body = await response.Content.ReadAsStringAsync();
+            var lopHocPhan = JsonConvert.DeserializeObject<LopHocPhanViewModel>(body);
+
+            return lopHocPhan;
+        }
+
+        public async Task<bool> Update(string id, LopHocPhanUpdateRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync($"/api/lophocphans/{id}", httpContent);
+
+            return response.IsSuccessStatusCode;
         }
 
         public Task<PagedResult<LopHocPhanViewModel>> GetSchedule(int hocky, int namhoc)
@@ -97,9 +129,6 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
             throw new NotImplementedException();
         }
 
-        public Task<bool> Update(string id, LopHocPhanUpdateRequest request)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
