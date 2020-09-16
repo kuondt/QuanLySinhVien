@@ -59,9 +59,27 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
             return response.IsSuccessStatusCode;
         }
 
-        public Task<PagedResult<LopHocPhanViewModel>> GetAllPaging(LopHocPhanManagePagingRequest request)
+        public async Task<PagedResult<LopHocPhanViewModel>> GetAllPaging(LopHocPhanManagePagingRequest request)
         {
-            throw new NotImplementedException();
+            var sessions = _httpContextAccessor
+                            .HttpContext
+                            .Session
+                            .GetString(SystemConstants.AppSettings.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.GetAsync(
+                $"/api/lophocphans/paging?pageIndex={request.PageIndex}" +
+                $"&pageSize={request.PageSize}" +
+                $"&keyword={request.Keyword}"
+                );
+
+            var body = await response.Content.ReadAsStringAsync();
+            var lopHocPhan = JsonConvert.DeserializeObject<PagedResult<LopHocPhanViewModel>>(body);
+
+            return lopHocPhan;
         }
 
         public Task<LopHocPhanViewModel> GetById(string id)
