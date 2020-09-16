@@ -140,9 +140,20 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
             return lopHocPhan;
         }
 
-        public Task<bool> Schedule(int hocky, int namhoc, ScheduleCreateRequest request)
+        public async Task<bool> Schedule(int hocky, int namhoc, ScheduleCreateRequest request)
         {
-            throw new NotImplementedException();
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync($"/api/lophocphans/schedule/{hocky}/{namhoc}", httpContent);
+
+            return response.IsSuccessStatusCode;
         }
 
        
