@@ -18,8 +18,8 @@
                     <form asp-action="index" method="get">
                         <div class="form-row">
                             <div class="col-md-4">
-                                <label for="formHocKy">Học kỳ</label>
-                                <select name="HocKy" type="text" class="form-control" id="formHocKy">
+                                <label for="frmGetHocKy">Học kỳ</label>
+                                <select name="HocKy" type="text" class="form-control" id="frmGetHocKy">
                                     @for (int i = 1; i <= 3; i++)
                                     {
                                         @if (ViewBag.HocKy == i)
@@ -34,11 +34,19 @@
                                 </select>
                             </div>
                             <div class="col-md-4 ">
-                                <label for="formNamHoc">Năm học</label>
-                                <select name="NamHoc" class="form-control d-sm-inline-block" id="formNamHoc">
-                                    <option value="2016">2016</option>
-                                    <option value="2017">2017</option>
-                                    <option value="2018">2018</option>
+                                <label for="frmGetNamHoc">Năm học</label>
+                                <select name="NamHoc" class="form-control d-sm-inline-block" id="frmGetNamHoc">
+                                    @for (int i = 2016; i <= 2025; i++)
+                                    {
+                                        @if (ViewBag.NamHoc == i)
+                                        {
+                                            <option value=@i selected>@i</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@i>@i</option>
+                                        }
+                                    }
                                 </select>
                             </div>
                             <div class="col-md-4">
