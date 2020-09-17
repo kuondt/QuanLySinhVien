@@ -65,10 +65,10 @@ namespace QuanLySinhVien.BackendApi.Controllers
 
         }
 
-        [HttpGet("getschedule/{hocky}/{namhoc}")]
-        public async Task<IActionResult> GetSchedule(int hocky, int namhoc)
+        [HttpGet("getschedule")]
+        public async Task<IActionResult> GetSchedule([FromQuery] LopHocPhanManagePagingRequest request)
         {
-            var lopHocPhan = await _lopHocPhanService.GetSchedule(hocky, namhoc);
+            var lopHocPhan = await _lopHocPhanService.GetSchedule(request);
             return Ok(lopHocPhan);
         }
 
