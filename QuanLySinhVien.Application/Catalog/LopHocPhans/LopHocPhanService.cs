@@ -167,7 +167,7 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<PagedResult<LopHocPhanViewModel>> GetSchedule(int hocky, int namhoc)
+        public async Task<PagedResult<LopHocPhanViewModel>> GetSchedule(LopHocPhanManagePagingRequest request)
         {
             var query = from lhp
                         in _context.LopHocPhans
@@ -175,8 +175,8 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
 
 
             query = query.Where(
-                x => x.lhp.HK_HocKy.Equals(hocky)
-                && x.lhp.HK_NamHoc.Equals(namhoc));
+                x => x.lhp.HK_HocKy.Equals(request.HocKy)
+                && x.lhp.HK_NamHoc.Equals(request.NamHoc));
 
 
             int totalRow = await query.CountAsync();
