@@ -119,7 +119,7 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<PagedResult<LopHocPhanViewModel>> GetSchedule(int hocky, int namhoc)
+        public async Task<PagedResult<LopHocPhanViewModel>> GetSchedule(LopHocPhanManagePagingRequest request)
         {
             var sessions = _httpContextAccessor
                             .HttpContext
@@ -131,7 +131,8 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
             var response = await client.GetAsync(
-                $"/api/lophocphans/getschedule"
+                $"/api/lophocphans/getschedule?hocky={request.HocKy}" +
+                $"&namhoc={request.NamHoc}"
                 );
 
             var body = await response.Content.ReadAsStringAsync();

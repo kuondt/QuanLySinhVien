@@ -19,7 +19,7 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
 
         Task<bool> Delete(string id);
 
-        Task<PagedResult<LopHocPhanViewModel>> GetSchedule(int hocky, int namhoc);
+        Task<PagedResult<LopHocPhanViewModel>> GetSchedule(LopHocPhanManagePagingRequest request);
 
         Task<bool> Schedule(int hocky, int namhoc, ScheduleCreateRequest request);
     }
