@@ -20,17 +20,19 @@ namespace QuanLySinhVien.AdminApp.Controllers
             _lopHocPhanApiClient = lopHocPhanApiClient;
         }
 
-        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 3)
+        public async Task<IActionResult> Index(int hocKy, int namHoc, int pageIndex = 1, int pageSize = 100)
         {
             var request = new LopHocPhanManagePagingRequest()
             {
-                Keyword = keyword,
+                HocKy = hocKy,
+                NamHoc = namHoc,
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
-            var data = await _lopHocPhanApiClient.GetAllPaging(request);
+            var data = await _lopHocPhanApiClient.GetSchedule(request);
 
-            ViewBag.Keyword = keyword;
+            ViewBag.HocKy = hocKy;
+            ViewBag.NamHoc = namHoc;
 
             if (TempData["result"] != null)
             {

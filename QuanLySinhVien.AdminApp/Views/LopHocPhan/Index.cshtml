@@ -15,6 +15,23 @@
         <div class="card-header py-3">
             <div class="user-topbar">
                 <div class="float-left">
+                    <div class="input-group">
+                        <form asp-action="index" method="get">
+                            <select name="HocKy" class="form-control">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+
+                            <select name="NamHoc" class="form-control">
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                            </select>
+
+                            <button type="submit" class="btn btn-info">Xem</button>
+                        </form>
+                    </div>
                     <h6 class="m-0 font-weight-bold text-primary">
                         <a class="btn btn-success" asp-action="Create" asp-controller="LopHocPhan">Tạo mới</a>
                     </h6>
