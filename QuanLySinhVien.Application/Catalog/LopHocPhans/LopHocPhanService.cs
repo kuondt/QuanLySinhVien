@@ -171,9 +171,11 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
 
         public async Task<PagedResult<LopHocPhanViewModel>> GetSchedule(LopHocPhanManagePagingRequest request)
         {
-            var query = from lhp
-                        in _context.LopHocPhans
-                        select new { lhp };
+            var query = from lhp in _context.LopHocPhans
+                        join mh in _context.MonHocs on lhp.ID_MonHoc equals mh.ID
+                        join gv in _context.GiangViens on lhp.ID_GiangVien equals gv.ID
+                        orderby lhp.ID
+                        select new { lhp, mh, gv };
 
 
             query = query.Where(
@@ -194,7 +196,8 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                     ID_Phong = x.lhp.ID_Phong,
                     HK_HocKy = x.lhp.HK_HocKy,
                     HK_NamHoc = x.lhp.HK_NamHoc,
-
+                    MonHoc = x.mh,
+                    GiangVien = x.gv
                 }).ToListAsync();
 
             var pagedResult = new PagedResult<LopHocPhanViewModel>()
