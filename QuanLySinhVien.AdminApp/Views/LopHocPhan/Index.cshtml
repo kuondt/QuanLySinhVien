@@ -132,19 +132,13 @@
                             ID
                         </th>
                         <th>
-                            Học kỳ
+                            Môn học
                         </th>
                         <th>
-                            Năm học
-                        </th>
-                        <th>
-                            ID Môn học
+                            Giảng viên
                         </th>
                         <th>
                             Phòng
-                        </th>
-                        <th>
-                            ID Giảng viên
                         </th>
                         <th>
                             Buổi học
@@ -158,16 +152,31 @@
                 <tbody>
                     @{
                         //Xuất ra giảng viên bị trùng lịch
-                        var duplicate = Model.Items.GroupBy(x => new { x.BuoiHoc, x.NgayHoc, x.ID_GiangVien })
+                        var duplicateGV = Model.Items.GroupBy(x => new { x.BuoiHoc, x.NgayHoc, x.ID_GiangVien })
                                                   .Where(g => g.Count() > 1)
                                                   .Select(y => y.Key)
                                                   .ToList();
-                        if (duplicate != null)
+                        if (duplicateGV != null)
                         {
-                            @foreach (var dup in duplicate)
+                            @foreach (var dup in duplicateGV)
                             {
-                                <div id="msgTrungLich" class="alert alert-danger" role="alert">
+                                <div id="msgTrungLichGV" class="alert alert-danger" role="alert">
                                     @dup.ID_GiangVien trùng lịch @dup.BuoiHoc @dup.NgayHoc
+                                </div>
+                            }
+                        }
+
+                        //Xuất ra phòng bị trùng lịch
+                        var duplicateRoom = Model.Items.GroupBy(x => new { x.BuoiHoc, x.NgayHoc, x.ID_Phong })
+                                                  .Where(g => g.Count() > 1)
+                                                  .Select(y => y.Key)
+                                                  .ToList();
+                        if (duplicateRoom != null)
+                        {
+                            @foreach (var dup in duplicateRoom)
+                            {
+                                <div id="msgTrungLichPhong" class="alert alert-warning" role="alert">
+                                    @dup.ID_Phong trùng lịch @dup.BuoiHoc @dup.NgayHoc
                                 </div>
                             }
                         }
@@ -184,19 +193,29 @@
                                 @Html.DisplayFor(modelItem => item.ID)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.HK_HocKy)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.HK_NamHoc)
-                            </td>
-                            <td>
                                 @Html.DisplayFor(modelItem => item.ID_MonHoc)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ID_Phong)
+                                @item.MonHoc.TenMonHoc
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ID_GiangVien)
+                                @item.GiangVien.HoTen
+                                @foreach (var dup in duplicateGV)
+                                {
+                                    @if (dup.BuoiHoc == item.BuoiHoc && dup.NgayHoc == item.NgayHoc)
+                                    {
+                                        <span class="bg-danger text-white">Trùng lịch</span>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID_Phong)
+                                @foreach (var dup in duplicateRoom)
+                                {
+                                    @if (dup.BuoiHoc == item.BuoiHoc && dup.NgayHoc == item.NgayHoc)
+                                    {
+                                        <span class="bg-danger text-white">Trùng lịch</span>
+                                    }
+                                }
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.BuoiHoc)
@@ -205,14 +224,8 @@
                                 @Html.DisplayFor(modelItem => item.NgayHoc)
                             </td>
                             <td>
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                                @foreach (var dup in duplicate)
-                                {
-                                    @if (dup.BuoiHoc == item.BuoiHoc && dup.NgayHoc == item.NgayHoc)
-                                    {
-                                        <div class="bg-danger text-white">Trùng lịch</div>
-                                    }
-                                }
+                                @Html.ActionLink("Sửa", "Edit", new { id = item.ID }) ||
+                                @Html.ActionLink("Xóa", "Delete", new { id = item.ID })
                             </td>
                         </tr>
                     }
