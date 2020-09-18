@@ -205,7 +205,7 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             return pagedResult;
         }
 
-        public async Task<int> Schedule(ScheduleCreateRequest request)
+        public async Task<int> Schedule(ScheduleRequest request)
         {
             //Lấy toàn bộ những lớp học phần theo học kỳ & năm học
             var lopHocPhans = _context.LopHocPhans.Where(

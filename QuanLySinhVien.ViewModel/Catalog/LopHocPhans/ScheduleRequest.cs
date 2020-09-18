@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QuanLySinhVien.ViewModel.Catalog.LopHocPhans
 {
-    public class ScheduleCreateRequest
+    public class ScheduleRequest
     {
         public int HocKy { get; set; }
         public int NamHoc { get; set; }

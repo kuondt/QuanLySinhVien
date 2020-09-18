@@ -64,5 +64,22 @@ namespace QuanLySinhVien.AdminApp.Controllers
             ModelState.AddModelError("", "Thêm mới thất bại");
             return View(request);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ScheduleRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _lopHocPhanApiClient.Schedule(request);
+            if (result)
+            {
+                TempData["result"] = "Cập nhật thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Cập nhật không thành công");
+            return View(request);
+        }
     }
 }

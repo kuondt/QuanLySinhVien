@@ -141,7 +141,7 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
             return lopHocPhan;
         }
 
-        public async Task<bool> Schedule(ScheduleCreateRequest request)
+        public async Task<bool> Schedule(ScheduleRequest request)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
