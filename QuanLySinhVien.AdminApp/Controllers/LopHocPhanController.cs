@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using QuanLySinhVien.AdminApp.Services.LopHocPhan;
+using QuanLySinhVien.AdminApp.Services.MonHoc;
 using QuanLySinhVien.AdminApp.Services.Phong;
 using QuanLySinhVien.ViewModel.Catalog.LopHocPhans;
+using QuanLySinhVien.ViewModel.Catalog.MonHocs;
 using QuanLySinhVien.ViewModel.Catalog.Phongs;
 
 namespace QuanLySinhVien.AdminApp.Controllers
@@ -16,12 +18,14 @@ namespace QuanLySinhVien.AdminApp.Controllers
         private readonly IConfiguration _configuration;
         private readonly ILopHocPhanApiClient _lopHocPhanApiClient;
         private readonly IPhongApiClient _phongApiClient;
+        private readonly IMonHocApiClient _monHocApiClient;
 
-        public LopHocPhanController(IConfiguration configuration, ILopHocPhanApiClient lopHocPhanApiClient, IPhongApiClient phongApiClient)
+        public LopHocPhanController(IConfiguration configuration, ILopHocPhanApiClient lopHocPhanApiClient, IPhongApiClient phongApiClient, IMonHocApiClient monHocApiClient)
         {
             _configuration = configuration;
             _lopHocPhanApiClient = lopHocPhanApiClient;
             _phongApiClient = phongApiClient;
+            _monHocApiClient = monHocApiClient;
         }
 
         public async Task<IActionResult> Index(int hocKy, int namHoc, int pageIndex = 1, int pageSize = 1000)
