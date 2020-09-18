@@ -5,6 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
+@section Scripts{
+    <script type="text/javascript">
+        setTimeout(function () {
+            $("#msgAlert").fadeOut('slow');
+        }, 2000);
+    </script>
+}
+
 <div class="container-fluid">
 
     <!-- Page Heading -->
@@ -14,71 +24,94 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="user-topbar">
-                <div class="float-left">
-                    <form asp-action="index" method="get">
-                        <div class="form-row">
-                            <div class="col-md-4">
-                                <label for="frmGetHocKy">Học kỳ</label>
-                                <select name="HocKy" type="text" class="form-control" id="frmGetHocKy">
-                                    @for (int i = 1; i <= 3; i++)
-                                    {
-                                        @if (ViewBag.HocKy == i)
+                <div class="row">
+                    <div class="col-md-4">
+                        <form asp-action="index" method="get">
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <label for="frmGetHocKy">Học kỳ</label>
+                                    <select name="HocKy" type="text" class="form-control" id="frmGetHocKy">
+                                        @for (int i = 1; i <= 3; i++)
                                         {
-                                            <option value=@i selected>@i</option>
+                                            @if (ViewBag.HocKy == i)
+                                            {
+                                                <option value=@i selected>@i</option>
+                                            }
+                                            else
+                                            {
+                                                <option value=@i>@i</option>
+                                            }
                                         }
-                                        else
+                                    </select>
+                                </div>
+                                <div class="col-md-4 ">
+                                    <label for="frmGetNamHoc">Năm học</label>
+                                    <select name="NamHoc" class="form-control d-sm-inline-block" id="frmGetNamHoc">
+                                        @for (int i = 2016; i <= 2025; i++)
                                         {
-                                            <option value=@i>@i</option>
+                                            @if (ViewBag.NamHoc == i)
+                                            {
+                                                <option value=@i selected>@i</option>
+                                            }
+                                            else
+                                            {
+                                                <option value=@i>@i</option>
+                                            }
                                         }
-                                    }
-                                </select>
-                            </div>
-                            <div class="col-md-4 ">
-                                <label for="frmGetNamHoc">Năm học</label>
-                                <select name="NamHoc" class="form-control d-sm-inline-block" id="frmGetNamHoc">
-                                    @for (int i = 2016; i <= 2025; i++)
-                                    {
-                                        @if (ViewBag.NamHoc == i)
-                                        {
-                                            <option value=@i selected>@i</option>
-                                        }
-                                        else
-                                        {
-                                            <option value=@i>@i</option>
-                                        }
-                                    }
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for=""></label>
-                                <button type="submit" class="btn btn-info form-control mt-2">Xem</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class=" float-lg-right">
-                    <label></label>
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        <a class="btn btn-success" asp-action="Create" asp-controller="LopHocPhan">Tạo mới</a>
-                    </h6>
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        <form asp-action="Schedule" asp-controller="LopHocPhan" method="post" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100">
-                            <div class="input-group">
-                                @if (ViewBag.NamHoc != null)
-                                {
-
-                                    <input type="number" value="@ViewBag.HocKy" name="HocKy" class="form-control bg-white" hidden>
-                                    <input type="number" value="@ViewBag.NamHoc" name="NamHoc" class="form-control bg-white" hidden>
-                                    <input type="number" value="3" min="3" name="RoomCount" class="form-control bg-white">
-                                }
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        Lập lịch ngẫu nhiên
-                                    </button>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for=""></label>
+                                    <button type="submit" class="btn btn-info form-control mt-2">Xem</button>
                                 </div>
                             </div>
                         </form>
-                    </h6>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label for=""></label>
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            <a class="btn btn-success" asp-action="Create" asp-controller="LopHocPhan">Thêm mới</a>
+                        </h6>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="frmRoomCount" class="">Số lượng phòng</label>
+                        <form asp-action="Schedule" asp-controller="LopHocPhan" method="post">
+                            <div class="form-group form-row">
+                                <input type="number" value="@ViewBag.HocKy" name="HocKy" class="form-control bg-white" hidden>
+                                <input type="number" value="@ViewBag.NamHoc" name="NamHoc" class="form-control bg-white" hidden>
+                                <div class="col-md-6">
+                                    <input type="number" value="3" min="1" max="@ViewBag.RoomCount" name="RoomCount" id="frmRoomCount" class="form-control bg-white">
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary ml-2" data-toggle="modal" data-target="#scheduleConfirm">
+                                        Sắp lịch ngẫu nhiên
+                                    </button>
+                                </div>
+
+                                <!-- Schedule confirm modal-->
+                                <div class="modal fade" id="scheduleConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Xác nhận lập lịch</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Xác nhận tiếp tục sắp xếp lịch học ngẫu nhiên cho lớp học phần</p>
+                                                <p><span class="text-danger">Học kỳ @ViewBag.HocKy - Năm học @ViewBag.NamHoc</span> ?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                                <button type="submit" class="btn btn-primary">Đồng ý</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+</form>
+                    </div>
                 </div>
             </div>
         </div>
