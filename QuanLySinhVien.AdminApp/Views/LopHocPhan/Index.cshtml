@@ -61,6 +61,24 @@
                     <h6 class="m-0 font-weight-bold text-primary">
                         <a class="btn btn-success" asp-action="Create" asp-controller="LopHocPhan">Tạo mới</a>
                     </h6>
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <form asp-action="Schedule" asp-controller="LopHocPhan" method="post" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100">
+                            <div class="input-group">
+                                @if (ViewBag.NamHoc != null)
+                                {
+
+                                    <input type="number" value="@ViewBag.HocKy" name="HocKy" class="form-control bg-white" hidden>
+                                    <input type="number" value="@ViewBag.NamHoc" name="NamHoc" class="form-control bg-white" hidden>
+                                    <input type="number" value="3" min="3" name="RoomCount" class="form-control bg-white">
+                                }
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        Lập lịch ngẫu nhiên
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </h6>
                 </div>
             </div>
         </div>

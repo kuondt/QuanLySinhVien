@@ -73,7 +73,7 @@ namespace QuanLySinhVien.BackendApi.Controllers
         }
 
         [HttpPut("schedule")]
-        public async Task<IActionResult> Schedule([FromBody] ScheduleCreateRequest request)
+        public async Task<IActionResult> Schedule([FromBody] ScheduleRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

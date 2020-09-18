@@ -66,7 +66,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(ScheduleRequest request)
+        public async Task<IActionResult> Schedule(ScheduleRequest request)
         {
             if (!ModelState.IsValid)
                 return View();
