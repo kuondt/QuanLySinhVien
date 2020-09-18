@@ -71,7 +71,8 @@ namespace QuanLySinhVien.AdminApp.Controllers
             if (result)
             {
                 TempData["result"] = "Thêm mới thành công";
-                return RedirectToAction("Index");
+                ViewBag.SuccessMessage = TempData["result"];
+                return RedirectToAction("Index", new { HocKy = request.HK_HocKy, NamHoc = request.HK_NamHoc });
             }
 
             ModelState.AddModelError("", "Thêm mới thất bại");

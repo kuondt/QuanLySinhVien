@@ -233,8 +233,11 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                 //Kiểm tra giảng viên tại row hiện tại có tồn tại trong list đã sắp xếp chưa, và kiểm tra gv có bận buổi dạy đó chưa
                 bool checkGiangVien = true;
 
+                //Điều kiện ngừng nếu gv có hơn 22 buổi dạy
+                int loopCountGV = 1;
+
                 //Nếu giảng viên tại row hiện tại đã bận, random 1 buổi khác
-                while (checkGiangVien)
+                while (checkGiangVien && loopCountGV <= 21)
                 {
                     //Random ngày học và buổi học cho row hiện tại
                     int randomBuoi = random.Next(1, 4);
@@ -247,14 +250,19 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                             x => x.ID_GiangVien == lopHocPhans[current].ID_GiangVien
                             && x.BuoiHoc == lopHocPhans[current].BuoiHoc
                             && x.NgayHoc == lopHocPhans[current].NgayHoc);
+
+                    loopCountGV++;
                 }
 
 
                 //Kiểm tra phòng học tại row hiện tại có tồn tại trong list đã sắp xếp chưa, và kiểm tra phòng đã có lớp khác sự dụng không
                 bool checkPhong = true;
 
+                //Điều kiện ngừng nếu gv có hơn 22 buổi dạy
+                int loopCountPhong = 1;
+
                 //Nếu phòng tại row hiện tại đã bận, random 1 buổi khác
-                while (checkPhong)
+                while (checkPhong && loopCountPhong <= 21)
                 {
                     //Random phòng mới cho ngày học và buổi học của row hiện tại
                     var listPhong = _context.Phongs.ToList();
@@ -266,6 +274,8 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                             x => x.ID_Phong == lopHocPhans[current].ID_Phong
                             && x.BuoiHoc == lopHocPhans[current].BuoiHoc
                             && x.NgayHoc == lopHocPhans[current].NgayHoc);
+
+                    loopCountPhong++;
                 }
 
                 //Thêm lớp học phần vào list cần check

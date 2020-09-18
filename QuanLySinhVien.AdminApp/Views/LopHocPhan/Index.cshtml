@@ -70,7 +70,7 @@
                     <div class="col-md-4 mt-2">
                         <label for=""></label>
                         <h6 class="m-0 font-weight-bold text-primary">
-                            <a class="btn btn-success"  href="@Url.Action("Create", "LopHocPhan", new { hocky = ViewBag.HocKy, namhoc = ViewBag.NamHoc })">Thêm mới</a>
+                            <a class="btn btn-success" href="@Url.Action("Create", "LopHocPhan", new { hocky = ViewBag.HocKy, namhoc = ViewBag.NamHoc })">Thêm mới</a>
                         </h6>
                     </div>
                     <div class="col-md-4">
@@ -110,7 +110,7 @@
                                     </div>
                                 </div>
                             </div>
-</form>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -125,6 +125,9 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>
+                            STT
+                        </th>
                         <th>
                             ID
                         </th>
@@ -153,9 +156,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @{ int stt = 1;}
                     @foreach (var item in Model.Items)
                     {
                         <tr>
+                            <td>
+                                @stt
+                                @{ stt++;}
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ID)
                             </td>
