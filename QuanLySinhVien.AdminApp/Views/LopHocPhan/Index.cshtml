@@ -70,7 +70,7 @@
                     <div class="col-md-4 mt-2">
                         <label for=""></label>
                         <h6 class="m-0 font-weight-bold text-primary">
-                            <a class="btn btn-success" asp-action="Create" asp-controller="LopHocPhan">Thêm mới</a>
+                            <a class="btn btn-success"  href="@Url.Action("Create", "LopHocPhan", new { hocky = ViewBag.HocKy, namhoc = ViewBag.NamHoc })">Thêm mới</a>
                         </h6>
                     </div>
                     <div class="col-md-4">

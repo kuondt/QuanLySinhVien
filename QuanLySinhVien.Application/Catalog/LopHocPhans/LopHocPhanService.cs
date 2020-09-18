@@ -62,7 +62,9 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                 IsActive = Status.Active,
                 HK_HocKy = request.HK_HocKy,
                 HK_NamHoc = request.HK_NamHoc,
-
+                ID_Phong = request.ID_Phong,
+                BuoiHoc = request.BuoiHoc,
+                NgayHoc = request.NgayHoc
             };
 
             _context.LopHocPhans.Add(lopHocPhan);

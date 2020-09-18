@@ -19,7 +19,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
 
         public LopHocPhanController(IConfiguration configuration, ILopHocPhanApiClient lopHocPhanApiClient, IPhongApiClient phongApiClient)
         {
-            _configuration = configuration;           
+            _configuration = configuration;
             _lopHocPhanApiClient = lopHocPhanApiClient;
             _phongApiClient = phongApiClient;
         }
@@ -51,9 +51,14 @@ namespace QuanLySinhVien.AdminApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int hocky, int namhoc)
         {
-            return View();
+            var lopHocPhanCreateRequest = new LopHocPhanCreateRequest()
+            {
+                HK_HocKy = hocky,
+                HK_NamHoc = namhoc
+            };
+            return View(lopHocPhanCreateRequest);
         }
 
         [HttpPost]
@@ -83,12 +88,12 @@ namespace QuanLySinhVien.AdminApp.Controllers
             if (result)
             {
                 TempData["result"] = "Cập nhật thành công";
-                return RedirectToAction("Index", new { HocKy = request.HocKy, NamHoc = request.NamHoc});
+                return RedirectToAction("Index", new { HocKy = request.HocKy, NamHoc = request.NamHoc });
             }
 
             ModelState.AddModelError("", "Cập nhật không thành công");
 
-            return RedirectToAction("Index", new { HocKy = request.HocKy, NamHoc = request.NamHoc});
+            return RedirectToAction("Index", new { HocKy = request.HocKy, NamHoc = request.NamHoc });
         }
     }
 }
