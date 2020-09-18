@@ -21,6 +21,6 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
 
         Task<PagedResult<LopHocPhanViewModel>> GetSchedule(LopHocPhanManagePagingRequest request);
 
-        Task<bool> Schedule(int hocky, int namhoc, ScheduleCreateRequest request);
+        Task<bool> Schedule(ScheduleCreateRequest request);
     }
 }

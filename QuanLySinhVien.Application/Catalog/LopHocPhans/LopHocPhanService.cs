@@ -205,12 +205,12 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             return pagedResult;
         }
 
-        public async Task<int> Schedule(int hocky, int namhoc, ScheduleCreateRequest request)
+        public async Task<int> Schedule(ScheduleCreateRequest request)
         {
             //Lấy toàn bộ những lớp học phần theo học kỳ & năm học
             var lopHocPhans = _context.LopHocPhans.Where(
-                x => x.HK_HocKy.Equals(hocky)
-                && x.HK_NamHoc.Equals(namhoc))
+                x => x.HK_HocKy.Equals(request.HocKy)
+                && x.HK_NamHoc.Equals(request.NamHoc))
                 .ToList();
 
             //Tạo biến random để random buổi & ngày học

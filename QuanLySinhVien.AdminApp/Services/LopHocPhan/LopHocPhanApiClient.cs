@@ -141,7 +141,7 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
             return lopHocPhan;
         }
 
-        public async Task<bool> Schedule(int hocky, int namhoc, ScheduleCreateRequest request)
+        public async Task<bool> Schedule(ScheduleCreateRequest request)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
@@ -152,7 +152,7 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
             var json = JsonConvert.SerializeObject(request);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PutAsync($"/api/lophocphans/schedule/{hocky}/{namhoc}", httpContent);
+            var response = await client.PutAsync($"/api/lophocphans/schedule", httpContent);
 
             return response.IsSuccessStatusCode;
         }
