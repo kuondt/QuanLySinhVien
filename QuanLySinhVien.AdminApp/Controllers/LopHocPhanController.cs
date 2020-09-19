@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using QuanLySinhVien.AdminApp.Services.GiangVien;
 using QuanLySinhVien.AdminApp.Services.LopHocPhan;
 using QuanLySinhVien.AdminApp.Services.MonHoc;
 using QuanLySinhVien.AdminApp.Services.Phong;
+using QuanLySinhVien.ViewModel.Catalog.GiangViens;
 using QuanLySinhVien.ViewModel.Catalog.LopHocPhans;
 using QuanLySinhVien.ViewModel.Catalog.MonHocs;
 using QuanLySinhVien.ViewModel.Catalog.Phongs;
@@ -19,13 +21,15 @@ namespace QuanLySinhVien.AdminApp.Controllers
         private readonly ILopHocPhanApiClient _lopHocPhanApiClient;
         private readonly IPhongApiClient _phongApiClient;
         private readonly IMonHocApiClient _monHocApiClient;
+        private readonly IGiangVienApiClient _giangVienApiClient;
 
-        public LopHocPhanController(IConfiguration configuration, ILopHocPhanApiClient lopHocPhanApiClient, IPhongApiClient phongApiClient, IMonHocApiClient monHocApiClient)
+        public LopHocPhanController(IConfiguration configuration, ILopHocPhanApiClient lopHocPhanApiClient, IPhongApiClient phongApiClient, IMonHocApiClient monHocApiClient, IGiangVienApiClient giangVienApiClient)
         {
             _configuration = configuration;
             _lopHocPhanApiClient = lopHocPhanApiClient;
             _phongApiClient = phongApiClient;
             _monHocApiClient = monHocApiClient;
+            _giangVienApiClient = giangVienApiClient;
         }
 
         public async Task<IActionResult> Index(int hocKy, int namHoc, int pageIndex = 1, int pageSize = 1000)
@@ -62,6 +66,34 @@ namespace QuanLySinhVien.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Create(int hocky, int namhoc)
         {
+            //Lấy danh sách môn học để show thành list
+            var requestMonHoc = new MonHocManagePagingRequest()
+            {
+                PageIndex = 1,
+                PageSize = 1000
+            };
+            var monHocs = await _monHocApiClient.GetAllPaging(requestMonHoc);
+            ViewBag.monHocs = monHocs.Items;
+
+            //Lấy danh sách giảng viên để show thành list
+            var requestGiangVien = new GiangVienManagePagingRequest()
+            {
+                PageIndex = 1,
+                PageSize = 1000
+            };
+            var giangViens = await _giangVienApiClient.GetAllPaging(requestGiangVien);
+            ViewBag.GiangViens = giangViens.Items;
+
+            // Lấy danh sách giảng viên để show thành list
+            var requestPhong = new PhongManagePagingRequest()
+            {
+                PageIndex = 1,
+                PageSize = 1000
+            };
+            var phongs = await _phongApiClient.GetAllPaging(requestPhong);
+            ViewBag.Phongs = phongs.Items;
+
+            //Lấy hk nam học
             var lopHocPhanCreateRequest = new LopHocPhanCreateRequest()
             {
                 HK_HocKy = hocky,
