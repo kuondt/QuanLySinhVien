@@ -140,8 +140,35 @@ namespace QuanLySinhVien.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            var lopHocPhan = await _lopHocPhanApiClient.GetById(id);
+            //Lấy danh sách môn học để show thành list
+            var requestMonHoc = new MonHocManagePagingRequest()
+            {
+                PageIndex = 1,
+                PageSize = 1000
+            };
+            var monHocs = await _monHocApiClient.GetAllPaging(requestMonHoc);
+            ViewBag.monHocs = monHocs.Items;
 
+            //Lấy danh sách giảng viên để show thành list
+            var requestGiangVien = new GiangVienManagePagingRequest()
+            {
+                PageIndex = 1,
+                PageSize = 1000
+            };
+            var giangViens = await _giangVienApiClient.GetAllPaging(requestGiangVien);
+            ViewBag.GiangViens = giangViens.Items;
+
+            // Lấy danh sách giảng viên để show thành list
+            var requestPhong = new PhongManagePagingRequest()
+            {
+                PageIndex = 1,
+                PageSize = 1000
+            };
+            var phongs = await _phongApiClient.GetAllPaging(requestPhong);
+            ViewBag.Phongs = phongs.Items;
+
+            //Lấy thông tin lớp học phần cần cập nhật
+            var lopHocPhan = await _lopHocPhanApiClient.GetById(id);
             var updateRequest = new LopHocPhanUpdateRequest()
             {
                 HK_HocKy = lopHocPhan.HK_HocKy,
@@ -150,8 +177,9 @@ namespace QuanLySinhVien.AdminApp.Controllers
                 ID_MonHoc = lopHocPhan.ID_MonHoc,
                 ID_Phong = lopHocPhan.ID_Phong,
                 BuoiHoc = lopHocPhan.BuoiHoc,
-                NgayHoc = lopHocPhan.NgayHoc                
+                NgayHoc = lopHocPhan.NgayHoc              
             };
+
             return View(updateRequest);
         }
 

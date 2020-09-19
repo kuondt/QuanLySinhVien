@@ -1,5 +1,6 @@
 ﻿@model QuanLySinhVien.ViewModel.Catalog.LopHocPhans.LopHocPhanCreateRequest
 @using QuanLySinhVien.Data.Enums
+
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -36,7 +37,7 @@
                     <span asp-validation-for="ID_MonHoc" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ID_Phong" class="control-label">Phòng</label>
+                    <label asp-for="ID_MonHoc" class="control-label">Phòng</label>
                     <input asp-for="ID_MonHoc" class="form-control" list="listPhong" placeholder="Phòng..." />
                     <datalist id="listPhong">
                         @if (ViewBag.Phongs != null)
@@ -50,7 +51,7 @@
                     <span asp-validation-for="ID_Phong" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ID_Phong" class="control-label">Giảng viên</label>
+                    <label asp-for="ID_GiangVien" class="control-label">Giảng viên</label>
                     <input asp-for="ID_GiangVien" class="form-control" list="listGiangVien" placeholder="Giảng viên..." />
                     <datalist id="listGiangVien">
                         @if (ViewBag.GiangViens != null)
@@ -73,15 +74,15 @@
                     <span asp-validation-for="BuoiHoc" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="BuoiHoc" class="control-label">Ngày học</label>
+                    <label asp-for="NgayHoc" class="control-label">Ngày học</label>
                     <select asp-for="NgayHoc" name="NgayHoc" class="custom-select">
                         <option value="@NgayHoc.Thu2">Thứ 2</option>
                         <option value="@NgayHoc.Thu3">Thứ 3</option>
                         <option value="@NgayHoc.Thu4">Thứ 4</option>
                         <option value="@NgayHoc.Thu5">Thứ 5</option>
-                        <option value="@NgayHoc.Thu2">Thứ 6</option>
-                        <option value="@NgayHoc.Thu3">Thứ 7</option>
-                        <option value="@NgayHoc.Thu4">Chủ nhật</option>
+                        <option value="@NgayHoc.Thu6">Thứ 6</option>
+                        <option value="@NgayHoc.Thu7">Thứ 7</option>
+                        <option value="@NgayHoc.ChuNhat">Chủ nhật</option>
                     </select>
                     <span asp-validation-for="NgayHoc" class="text-danger"></span>
                 </div>
