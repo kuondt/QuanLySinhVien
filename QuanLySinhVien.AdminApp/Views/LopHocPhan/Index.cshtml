@@ -225,15 +225,18 @@
                                 @Html.DisplayFor(modelItem => item.NgayHoc)
                             </td>
                             <td>
-                                @Html.ActionLink("Sửa", "Edit", new { id = item.ID }); ||
-
-                                @*Xóa lớp học phần*@
-                                <form asp-action="Delete" asp-controller="LopHocPhan" method="post">
-                                    <input asp-for="@item.HK_HocKy" value="@item.HK_HocKy" name="HocKy" hidden />
-                                    <input asp-for="@item.HK_NamHoc" value="@item.HK_NamHoc" name="NamHoc" hidden />
-                                    <input asp-for="@item.ID" value="@item.ID" name="ID" hidden />
-                                    <button type="submit" class="btn btn-danger form-control mt-2">Xóa</button>
-                                </form>
+                                <div class="btn-group">
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-warning" })
+                                    @*Xóa lớp học phần*@
+                                    <div class="btn btn-danger btn-sm pt-0">
+                                        <form asp-action="Delete" asp-controller="LopHocPhan" method="post">
+                                            <input asp-for="@item.HK_HocKy" value="@item.HK_HocKy" name="HocKy" hidden />
+                                            <input asp-for="@item.HK_NamHoc" value="@item.HK_NamHoc" name="NamHoc" hidden />
+                                            <input asp-for="@item.ID" value="@item.ID" name="ID" hidden />
+                                            <button onclick="return confirm('Xác nhận xóa lớp @item.ID')" type="submit" class="btn btn-danger  btn-sm">Xóa</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     }
