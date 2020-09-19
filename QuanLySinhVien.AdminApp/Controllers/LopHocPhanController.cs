@@ -30,6 +30,11 @@ namespace QuanLySinhVien.AdminApp.Controllers
 
         public async Task<IActionResult> Index(int hocKy, int namHoc, int pageIndex = 1, int pageSize = 1000)
         {
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["result"];
+            }
+
             var request = new LopHocPhanManagePagingRequest()
             {
                 HocKy = hocKy,
@@ -75,7 +80,6 @@ namespace QuanLySinhVien.AdminApp.Controllers
             if (result)
             {
                 TempData["result"] = "Thêm mới thành công";
-                ViewBag.SuccessMessage = TempData["result"];
                 return RedirectToAction("Index", new { HocKy = request.HK_HocKy, NamHoc = request.HK_NamHoc });
             }
 
@@ -98,6 +102,58 @@ namespace QuanLySinhVien.AdminApp.Controllers
 
             ModelState.AddModelError("", "Cập nhật không thành công");
 
+            return RedirectToAction("Index", new { HocKy = request.HocKy, NamHoc = request.NamHoc });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            var lopHocPhan = await _lopHocPhanApiClient.GetById(id);
+
+            var updateRequest = new LopHocPhanUpdateRequest()
+            {
+                HK_HocKy = lopHocPhan.HK_HocKy,
+                HK_NamHoc = lopHocPhan.HK_NamHoc,
+                ID_GiangVien = lopHocPhan.ID_GiangVien,
+                ID_MonHoc = lopHocPhan.ID_MonHoc,
+                ID_Phong = lopHocPhan.ID_Phong,
+                BuoiHoc = lopHocPhan.BuoiHoc,
+                NgayHoc = lopHocPhan.NgayHoc                
+            };
+            return View(updateRequest);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, LopHocPhanUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _lopHocPhanApiClient.Update(id, request);
+            if (result)
+            {
+                TempData["result"] = "Cập nhật thành công";
+                return RedirectToAction("Index", new { HocKy = request.HK_HocKy, NamHoc = request.HK_NamHoc });
+            }
+
+            ModelState.AddModelError("", "Cập nhật không thành công");
+            return View(request);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id, LopHocPhanDeleteRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _lopHocPhanApiClient.Delete(id);
+            if (result)
+            {
+                TempData["result"] = $"Xóa thành công lớp {id}";
+                return RedirectToAction("Index", new { HocKy = request.HocKy, NamHoc = request.NamHoc });
+            }
+
+            ModelState.AddModelError("", "Xóa không thành công lớp {id}");
             return RedirectToAction("Index", new { HocKy = request.HocKy, NamHoc = request.NamHoc });
         }
     }

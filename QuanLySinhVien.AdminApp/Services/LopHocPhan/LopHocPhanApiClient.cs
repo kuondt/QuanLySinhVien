@@ -46,19 +46,6 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> Delete(string id)
-        {
-            var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
-            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-
-            var response = await client.DeleteAsync($"/api/lophocphans/{id}");
-
-            return response.IsSuccessStatusCode;
-        }
-
         public async Task<PagedResult<LopHocPhanViewModel>> GetAllPaging(LopHocPhanManagePagingRequest request)
         {
             var sessions = _httpContextAccessor
@@ -115,6 +102,19 @@ namespace QuanLySinhVien.AdminApp.Services.LopHocPhan
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await client.PutAsync($"/api/lophocphans/{id}", httpContent);
+
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> Delete(string id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.DeleteAsync($"/api/lophocphans/{id}");
 
             return response.IsSuccessStatusCode;
         }

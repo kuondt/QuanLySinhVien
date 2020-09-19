@@ -65,6 +65,19 @@ namespace QuanLySinhVien.BackendApi.Controllers
 
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var affectedResult = await _lopHocPhanService.Delete(id);
+            if (affectedResult == 0)
+                return BadRequest();
+            return Ok();
+
+        }
+
         [HttpGet("getschedule")]
         public async Task<IActionResult> GetSchedule([FromQuery] LopHocPhanManagePagingRequest request)
         {
