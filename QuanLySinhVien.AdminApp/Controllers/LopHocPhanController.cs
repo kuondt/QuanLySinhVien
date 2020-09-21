@@ -58,6 +58,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             };
             var rooms = await _phongApiClient.GetAllPaging(requestRoom);
             int RoomCount = rooms.Items.Count();
+            ViewBag.Rooms = rooms.Items;
             ViewBag.RoomCount = RoomCount;
 
             return View(data);
