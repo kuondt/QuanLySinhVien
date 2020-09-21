@@ -117,6 +117,67 @@
                 </div>
             </div>
         </div>
+        <table class="table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Thứ</th>
+                    <th scope="col" colspan="3">Thứ 2</th>
+                    <th scope="col" colspan="3">Thứ 3</th>
+                    <th scope="col" colspan="3">Thứ 4</th>
+                    <th scope="col" colspan="3">Thứ 5</th>
+                    <th scope="col" colspan="3">Thứ 6</th>
+                    <th scope="col" colspan="3">Thứ 7</th>
+                    <th scope="col" colspan="3">Chủ nhật</th>
+                </tr>
+                <tr>
+                    <th scope="col">Buổi</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">3</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">3</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">3</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">3</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">3</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">3</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">3</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var room in ViewBag.Rooms)
+                {
+                    <tr>
+                        <th scope="row">
+                            @room.ID
+                        </th>
+
+                        @foreach (var item in Model.Items)
+                        {
+                            @if (@room.ID == item.ID_Phong)
+                            {
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID_MonHoc, new { @class = "text-danger" })
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+
+        </table>
         @*Body table*@
         <div class="card-body">
             @if (ViewBag.SuccessMessage != null)
@@ -244,32 +305,7 @@
                     }
                 </tbody>
             </table>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Thứ 2</th>
-                        <th scope="col">Thứ 3</th>
-                        <th scope="col">Thứ 4</th>
-                        <th scope="col">Thứ 5</th>
-                        <th scope="col">Thứ 6</th>
-                        <th scope="col">Thứ 7</th>
-                        <th scope="col">Chủ nhật</th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                    @foreach (var room in ViewBag.Rooms)
-                    {
-                        <tr>
-                            <th scope="row">
-                                @room.ID
-                            </th>
-                        </tr>
-                    }
-                </tbody>
-
-            </table>
             @await Component.InvokeAsync("Pager", Model)
         </div>
     </div>
