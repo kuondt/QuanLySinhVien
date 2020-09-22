@@ -1,4 +1,5 @@
 ﻿@model QuanLySinhVien.ViewModel.Common.PagedResult<QuanLySinhVien.ViewModel.Catalog.LopHocPhans.LopHocPhanViewModel>
+@using QuanLySinhVien.Data.Enums
 
 @{
     ViewData["Title"] = "Index";
@@ -117,67 +118,149 @@
                 </div>
             </div>
         </div>
-        <table class="table-sm table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Thứ</th>
-                    <th scope="col" colspan="3">Thứ 2</th>
-                    <th scope="col" colspan="3">Thứ 3</th>
-                    <th scope="col" colspan="3">Thứ 4</th>
-                    <th scope="col" colspan="3">Thứ 5</th>
-                    <th scope="col" colspan="3">Thứ 6</th>
-                    <th scope="col" colspan="3">Thứ 7</th>
-                    <th scope="col" colspan="3">Chủ nhật</th>
-                </tr>
-                <tr>
-                    <th scope="col">Buổi</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                @foreach (var room in ViewBag.Rooms)
+        @{
+            //Xuất ra giảng viên bị trùng lịch
+            var duplicateGV = Model.Items.GroupBy(x => new { x.BuoiHoc, x.NgayHoc, x.ID_GiangVien })
+                                      .Where(g => g.Count() > 1)
+                                      .Select(y => y.Key)
+                                      .ToList();
+            if (duplicateGV != null)
+            {
+                @foreach (var dup in duplicateGV)
                 {
-                    <tr>
-                        <th scope="row">
-                            @room.ID
-                        </th>
-
-                        @foreach (var item in Model.Items)
-                        {
-                            @if (@room.ID == item.ID_Phong)
-                            {
-
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ID_MonHoc, new { @class = "text-danger" })
-                                </td>
-                            }
-                        }
-                    </tr>
+                    <div id="msgTrungLichGV" class="alert alert-danger" role="alert">
+                        @dup.ID_GiangVien trùng lịch @dup.BuoiHoc @dup.NgayHoc
+                    </div>
                 }
-            </tbody>
+            }
 
-        </table>
+            //Xuất ra phòng bị trùng lịch
+            var duplicateRoom = Model.Items.GroupBy(x => new { x.BuoiHoc, x.NgayHoc, x.ID_Phong })
+                                      .Where(g => g.Count() > 1)
+                                      .Select(y => y.Key)
+                                      .ToList();
+            if (duplicateRoom != null)
+            {
+                @foreach (var dup in duplicateRoom)
+                {
+                    <div id="msgTrungLichPhong" class="alert alert-warning" role="alert">
+                        @dup.ID_Phong trùng lịch @dup.BuoiHoc @dup.NgayHoc
+                    </div>
+                }
+            }
+        }
+        <div style="overflow-x:auto;">
+            <table class="table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Thứ</th>
+                        <th scope="col" colspan="3" class="text-center">Thứ 2</th>
+                        <th scope="col" colspan="3" class="text-center">Thứ 3</th>
+                        <th scope="col" colspan="3" class="text-center">Thứ 4</th>
+                        <th scope="col" colspan="3" class="text-center">Thứ 5</th>
+                        <th scope="col" colspan="3" class="text-center">Thứ 6</th>
+                        <th scope="col" colspan="3" class="text-center">Thứ 7</th>
+                        <th scope="col" colspan="3" class="text-center">Chủ nhật</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Buổi</th>
+                        <th scope="col">Sáng</th>
+                        <th scope="col">Chiều</th>
+                        <th scope="col">Tối</th>
+                        <th scope="col">Sáng</th>
+                        <th scope="col">Chiều</th>
+                        <th scope="col">Tối</th>
+                        <th scope="col">Sáng</th>
+                        <th scope="col">Chiều</th>
+                        <th scope="col">Tối</th>
+                        <th scope="col">Sáng</th>
+                        <th scope="col">Chiều</th>
+                        <th scope="col">Tối</th>
+                        <th scope="col">Sáng</th>
+                        <th scope="col">Chiều</th>
+                        <th scope="col">Tối</th>
+                        <th scope="col">Sáng</th>
+                        <th scope="col">Chiều</th>
+                        <th scope="col">Tối</th>
+                        <th scope="col">Sáng</th>
+                        <th scope="col">Chiều</th>
+                        <th scope="col">Tối</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*@foreach (var room in ViewBag.Rooms)
+                        {
+
+                            <tr>
+                                <th scope="row">
+                                    @room.ID
+                                </th>
+
+                                @foreach (var lopHocPhan in Model.Items)
+                                {
+                                    @if (room.ID == lopHocPhan.ID_Phong)
+                                    {
+                                        <td>
+                                            @Html.DisplayFor(modelItem => lopHocPhan.ID, new { @class = "text-danger" })
+                                        </td>
+                                    }
+
+                                }
+                            </tr>
+                        }*@
+
+
+                    @foreach (var room in ViewBag.Rooms)
+                    {
+                        <tr>
+                            <th scope="row">
+                                @room.ID
+                            </th>
+                            @foreach (var ngayHoc in (NgayHoc[])Enum.GetValues(typeof(NgayHoc)))
+                            {
+                                @foreach (var buoiHoc in (BuoiHoc[])Enum.GetValues(typeof(BuoiHoc)))
+                                {
+                                    <td>
+                                        @foreach (var lopHocPhan in Model.Items)
+                                        {
+                                            @if (buoiHoc == lopHocPhan.BuoiHoc)
+                                            {
+                                                @if (ngayHoc == lopHocPhan.NgayHoc)
+                                                {
+                                                    @if (room.ID == lopHocPhan.ID_Phong)
+                                                    {
+                                                        <small>
+                                                            @lopHocPhan.ID - @lopHocPhan.MonHoc.TenMonHoc - @lopHocPhan.GiangVien.HoTen
+                                                        </small>
+                                                        //Kiểm tra trùng lịch phòng học
+                                                        @foreach (var dup in duplicateRoom)
+                                                        {
+                                                            @if (dup.BuoiHoc == lopHocPhan.BuoiHoc && dup.NgayHoc == lopHocPhan.NgayHoc)
+                                                            {
+                                                                <span class="bg-danger text-white">Trùng lịch</span>
+                                                            }
+                                                        }
+                                                        //Kiểm tra trùng lịch giảng viên
+                                                        @foreach (var dup in duplicateGV)
+                                                        {
+                                                            @if (dup.BuoiHoc == lopHocPhan.BuoiHoc && dup.NgayHoc == lopHocPhan.NgayHoc)
+                                                            {
+                                                                <span class="bg-danger text-white">Trùng lịch</span>
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
         @*Body table*@
         <div class="card-body">
             @if (ViewBag.SuccessMessage != null)
@@ -214,37 +297,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{
-                        //Xuất ra giảng viên bị trùng lịch
-                        var duplicateGV = Model.Items.GroupBy(x => new { x.BuoiHoc, x.NgayHoc, x.ID_GiangVien })
-                                                  .Where(g => g.Count() > 1)
-                                                  .Select(y => y.Key)
-                                                  .ToList();
-                        if (duplicateGV != null)
-                        {
-                            @foreach (var dup in duplicateGV)
-                            {
-                                <div id="msgTrungLichGV" class="alert alert-danger" role="alert">
-                                    @dup.ID_GiangVien trùng lịch @dup.BuoiHoc @dup.NgayHoc
-                                </div>
-                            }
-                        }
 
-                        //Xuất ra phòng bị trùng lịch
-                        var duplicateRoom = Model.Items.GroupBy(x => new { x.BuoiHoc, x.NgayHoc, x.ID_Phong })
-                                                  .Where(g => g.Count() > 1)
-                                                  .Select(y => y.Key)
-                                                  .ToList();
-                        if (duplicateRoom != null)
-                        {
-                            @foreach (var dup in duplicateRoom)
-                            {
-                                <div id="msgTrungLichPhong" class="alert alert-warning" role="alert">
-                                    @dup.ID_Phong trùng lịch @dup.BuoiHoc @dup.NgayHoc
-                                </div>
-                            }
-                        }
-                    }
                     @{ int stt = 1;}
                     @foreach (var item in Model.Items)
                     {

@@ -261,7 +261,7 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                 //Kiểm tra phòng học tại row hiện tại có tồn tại trong list đã sắp xếp chưa, và kiểm tra phòng đã có lớp khác sự dụng không
                 bool checkPhong = true;
 
-                //Điều kiện ngừng nếu gv có hơn 22 buổi dạy
+                //Điều kiện ngừng nếu phòng có hơn 22 buổi
                 int loopCountPhong = 1;
 
                 //Nếu phòng tại row hiện tại đã bận, random 1 buổi khác
