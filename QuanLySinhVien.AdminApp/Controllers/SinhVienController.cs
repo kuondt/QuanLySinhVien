@@ -28,7 +28,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             _chuongTrinhDaoTaoApiClient = chuongTrinhDaoTaoApiClient;
         }
 
-        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 3)
+        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
         {
             var request = new SinhVienManagePagingRequest()
             {

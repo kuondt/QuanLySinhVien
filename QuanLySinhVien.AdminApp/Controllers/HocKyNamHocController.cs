@@ -21,7 +21,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             _hocKyNamHocApiClient = hocKyNamHocApiClient;
         }
 
-        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 3)
+        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 9)
         {
             var request = new HocKyNamHocManagePagingRequest()
             {
