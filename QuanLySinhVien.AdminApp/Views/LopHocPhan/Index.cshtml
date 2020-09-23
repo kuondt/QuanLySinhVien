@@ -118,6 +118,12 @@
                 </div>
             </div>
         </div>
+        @if (ViewBag.SuccessMessage != null)
+        {
+            <div id="msgAlert" class="alert alert-success" role="alert">
+                @ViewBag.SuccessMessage
+            </div>
+        }
         @{
             //Xuất ra giảng viên bị trùng lịch
             var duplicateGV = Model.Items.GroupBy(x => new { x.BuoiHoc, x.NgayHoc, x.ID_GiangVien })
@@ -189,25 +195,25 @@
                 </thead>
                 <tbody>
                     @*@foreach (var room in ViewBag.Rooms)
-                        {
+                    {
 
-                            <tr>
-                                <th scope="row">
-                                    @room.ID
-                                </th>
+                        <tr>
+                            <th scope="row">
+                                @room.ID
+                            </th>
 
-                                @foreach (var lopHocPhan in Model.Items)
+                            @foreach (var lopHocPhan in Model.Items)
+                            {
+                                @if (room.ID == lopHocPhan.ID_Phong)
                                 {
-                                    @if (room.ID == lopHocPhan.ID_Phong)
-                                    {
-                                        <td>
-                                            @Html.DisplayFor(modelItem => lopHocPhan.ID, new { @class = "text-danger" })
-                                        </td>
-                                    }
-
+                                    <td>
+                                        @Html.DisplayFor(modelItem => lopHocPhan.ID, new { @class = "text-danger" })
+                                    </td>
                                 }
-                            </tr>
-                        }*@
+
+                            }
+                        </tr>
+                    }*@
 
 
                     @foreach (var room in ViewBag.Rooms)
@@ -230,7 +236,9 @@
                                                     @if (room.ID == lopHocPhan.ID_Phong)
                                                     {
                                                         <small>
-                                                            @lopHocPhan.ID - @lopHocPhan.MonHoc.TenMonHoc - @lopHocPhan.GiangVien.HoTen
+                                                            <a href="@Url.Action("Edit", new { id = lopHocPhan.ID })">
+                                                                @lopHocPhan.ID - @lopHocPhan.MonHoc.TenMonHoc - @lopHocPhan.GiangVien.HoTen
+                                                            </a>
                                                         </small>
                                                         //Kiểm tra trùng lịch phòng học
                                                         @foreach (var dup in duplicateRoom)
@@ -263,12 +271,6 @@
 
         @*Body table*@
         <div class="card-body">
-            @if (ViewBag.SuccessMessage != null)
-            {
-                <div id="msgAlert" class="alert alert-success" role="alert">
-                    @ViewBag.SuccessMessage
-                </div>
-            }
             <table class="table">
                 <thead>
                     <tr>
