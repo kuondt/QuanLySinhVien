@@ -83,7 +83,11 @@
                                 <input type="number" value="@ViewBag.HocKy" name="HocKy" class="form-control bg-white" hidden>
                                 <input type="number" value="@ViewBag.NamHoc" name="NamHoc" class="form-control bg-white" hidden>
                                 <div class="col-md-6">
-                                    <input type="number" value="3" min="1" max="@ViewBag.RoomCount" name="RoomCount" id="frmRoomCount" class="form-control bg-white">
+                                    <input type="number" value="@Math.Ceiling((Model.Items.Count()/21.0))" min="@Math.Floor((Model.Items.Count()/21.0))" max="@ViewBag.RoomCount" name="RoomCount" id="frmRoomCount" class="form-control bg-white">
+
+                                    @Math.Ceiling((Model.Items.Count()/21.0))
+                                    @(Model.Items.Count() / 21.0)
+                                    @Model.Items.Count()
                                 </div>
                                 <div class="col-md-6">
                                     <button type="button" class="btn btn-primary ml-2" data-toggle="modal" data-target="#scheduleConfirm">
@@ -119,11 +123,12 @@
             </div>
         </div>
         @if (ViewBag.SuccessMessage != null)
-        {
+                                            {
             <div id="msgAlert" class="alert alert-success" role="alert">
                 @ViewBag.SuccessMessage
             </div>
-        }
+                                        }
+
         @{
             //Xuất ra giảng viên bị trùng lịch
             var duplicateGV = Model.Items.GroupBy(x => new { x.BuoiHoc, x.NgayHoc, x.ID_GiangVien })
@@ -133,7 +138,7 @@
             if (duplicateGV != null)
             {
                 @foreach (var dup in duplicateGV)
-                {
+                                        {
                     <div id="msgTrungLichGV" class="alert alert-danger" role="alert">
                         @dup.ID_GiangVien trùng lịch @dup.BuoiHoc @dup.NgayHoc
                     </div>
@@ -145,10 +150,10 @@
                                       .Where(g => g.Count() > 1)
                                       .Select(y => y.Key)
                                       .ToList();
-            if (duplicateRoom != null)
-            {
-                @foreach (var dup in duplicateRoom)
-                {
+                                    if (duplicateRoom != null)
+                                    {
+                                        @foreach (var dup in duplicateRoom)
+                                        {
                     <div id="msgTrungLichPhong" class="alert alert-warning" role="alert">
                         @dup.ID_Phong trùng lịch @dup.BuoiHoc @dup.NgayHoc
                     </div>
@@ -245,7 +250,7 @@
                                                         {
                                                             @if (dup.BuoiHoc == lopHocPhan.BuoiHoc && dup.NgayHoc == lopHocPhan.NgayHoc)
                                                             {
-                                                                <span class="bg-danger text-white">Trùng lịch</span>
+                                                                <span class="bg-danger text-white">Phòng trùng lịch</span>
                                                             }
                                                         }
                                                         //Kiểm tra trùng lịch giảng viên
@@ -253,7 +258,7 @@
                                                         {
                                                             @if (dup.BuoiHoc == lopHocPhan.BuoiHoc && dup.NgayHoc == lopHocPhan.NgayHoc)
                                                             {
-                                                                <span class="bg-danger text-white">Trùng lịch</span>
+                                                                <span class="bg-danger text-white">Giảng viên trùng lịch</span>
                                                             }
                                                         }
                                                     }

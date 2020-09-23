@@ -234,17 +234,18 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
             for (int current = 1; current < lopHocPhans.Count(); current++)
             {
                 //Kiểm tra giảng viên tại row hiện tại có tồn tại trong list đã sắp xếp chưa, và kiểm tra gv có bận buổi dạy đó chưa
+                //true là đã bận
                 bool checkGiangVien = true;
 
-
                 //Kiểm tra phòng học tại row hiện tại có tồn tại trong list đã sắp xếp chưa, và kiểm tra phòng đã có lớp khác sự dụng không
+                //true là đã bận
                 bool checkPhong = true;
 
-
-                //Điều kiện ngừng nếu gv có hơn 22 buổi dạy
+                //Điều kiện ngừng lặp
                 int loopCount = 1;
 
-                //Nếu giảng viên tại row hiện tại đã bận, random 1 buổi khác
+                //Nếu giảng viên hoặc phòng học tại row hiện tại đã bận, random 1 buổi khác
+                //loopCount = lặp qua số lượng phòng được request * 21 buổi để tìm buổi trống
                 while ((checkGiangVien || checkPhong) && loopCount <= request.RoomCount*21)
                 {
                     //Random ngày học và buổi học cho row hiện tại
@@ -252,10 +253,6 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                     lopHocPhans[current].BuoiHoc = RandomBuoiHoc(randomBuoi);
                     int randomNgay = random.Next(2, 9);
                     lopHocPhans[current].NgayHoc = RandomNgayHoc(randomNgay);
-                    //Random phòng mới cho ngày học và buổi học của row hiện tại
-                    var listPhong = _context.Phongs.ToList();
-                    var randomPhong = random.Next(request.RoomCount);
-                    lopHocPhans[current].ID_Phong = listPhong[randomPhong].ID;
 
                     //Kiểm tra giảng viên tại row hiện tại có tồn tại trong list đã sắp xếp chưa, và kiểm tra gv có bận buổi dạy đó chưa
                     checkGiangVien = scheduledLopHocPhan.Any(
@@ -263,6 +260,10 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                             && x.BuoiHoc == lopHocPhans[current].BuoiHoc
                             && x.NgayHoc == lopHocPhans[current].NgayHoc);
 
+                    //Random phòng mới cho ngày học của row hiện tại
+                    var listPhong = _context.Phongs.ToList();
+                    var randomPhong = random.Next(request.RoomCount);
+                    lopHocPhans[current].ID_Phong = listPhong[randomPhong].ID;
 
                     //Kiểm tra phòng học tại row hiện tại có tồn tại trong list đã sắp xếp chưa, và kiểm tra phòng đã có lớp khác sự dụng không
                     checkPhong = scheduledLopHocPhan.Any(
