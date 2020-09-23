@@ -84,10 +84,6 @@
                                 <input type="number" value="@ViewBag.NamHoc" name="NamHoc" class="form-control bg-white" hidden>
                                 <div class="col-md-6">
                                     <input type="number" value="@Math.Ceiling((Model.Items.Count()/21.0))" min="@Math.Floor((Model.Items.Count()/21.0))" max="@ViewBag.RoomCount" name="RoomCount" id="frmRoomCount" class="form-control bg-white">
-
-                                    @Math.Ceiling((Model.Items.Count()/21.0))
-                                    @(Model.Items.Count() / 21.0)
-                                    @Model.Items.Count()
                                 </div>
                                 <div class="col-md-6">
                                     <button type="button" class="btn btn-primary ml-2" data-toggle="modal" data-target="#scheduleConfirm">
@@ -123,11 +119,11 @@
             </div>
         </div>
         @if (ViewBag.SuccessMessage != null)
-                                            {
+        {
             <div id="msgAlert" class="alert alert-success" role="alert">
                 @ViewBag.SuccessMessage
             </div>
-                                        }
+        }
 
         @{
             //Xuất ra giảng viên bị trùng lịch
@@ -138,7 +134,7 @@
             if (duplicateGV != null)
             {
                 @foreach (var dup in duplicateGV)
-                                        {
+                {
                     <div id="msgTrungLichGV" class="alert alert-danger" role="alert">
                         @dup.ID_GiangVien trùng lịch @dup.BuoiHoc @dup.NgayHoc
                     </div>
@@ -150,10 +146,10 @@
                                       .Where(g => g.Count() > 1)
                                       .Select(y => y.Key)
                                       .ToList();
-                                    if (duplicateRoom != null)
-                                    {
-                                        @foreach (var dup in duplicateRoom)
-                                        {
+            if (duplicateRoom != null)
+            {
+                @foreach (var dup in duplicateRoom)
+                {
                     <div id="msgTrungLichPhong" class="alert alert-warning" role="alert">
                         @dup.ID_Phong trùng lịch @dup.BuoiHoc @dup.NgayHoc
                     </div>
@@ -200,25 +196,25 @@
                 </thead>
                 <tbody>
                     @*@foreach (var room in ViewBag.Rooms)
-                    {
+                        {
 
-                        <tr>
-                            <th scope="row">
-                                @room.ID
-                            </th>
+                            <tr>
+                                <th scope="row">
+                                    @room.ID
+                                </th>
 
-                            @foreach (var lopHocPhan in Model.Items)
-                            {
-                                @if (room.ID == lopHocPhan.ID_Phong)
+                                @foreach (var lopHocPhan in Model.Items)
                                 {
-                                    <td>
-                                        @Html.DisplayFor(modelItem => lopHocPhan.ID, new { @class = "text-danger" })
-                                    </td>
-                                }
+                                    @if (room.ID == lopHocPhan.ID_Phong)
+                                    {
+                                        <td>
+                                            @Html.DisplayFor(modelItem => lopHocPhan.ID, new { @class = "text-danger" })
+                                        </td>
+                                    }
 
-                            }
-                        </tr>
-                    }*@
+                                }
+                            </tr>
+                        }*@
 
 
                     @foreach (var room in ViewBag.Rooms)
