@@ -73,7 +73,7 @@ namespace QuanLySinhVien.Service.Catalog.SinhViens
 
             if (!string.IsNullOrEmpty(request.Keyword))
             {
-                query = query.Where(x => x.sv.HoTen.Contains(request.Keyword) || x.sv.ID.Contains(request.Keyword));
+                query = query.Where(x => x.sv.HoTen.Contains(request.Keyword) || x.sv.ID.Contains(request.Keyword) || x.sv.ID_LopBienChe.Contains(request.Keyword));
             }
 
             int totalRow = await query.CountAsync();

@@ -7,10 +7,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $("#msgAlert").fadeOut('slow');
+        }, 2000);
+    </script>
+}
+
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Danh sách</h1>
+    <h1 class="h3 mb-2 text-gray-800">Danh sách sinh viên</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -42,7 +51,7 @@
                     @ViewBag.SuccessMessage
                 </div>
             }
-            <table class="table table-sm">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>
@@ -102,7 +111,7 @@
                             </td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ID }) 
+                                @Html.ActionLink("Details", "Details", new { id = item.ID })
                             </td>
                         </tr>
                     }

@@ -1,14 +1,22 @@
 ﻿@model QuanLySinhVien.ViewModel.Common.PagedResult<QuanLySinhVien.ViewModel.Catalog.HocKyNamHocs.HocKyNamHocViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Hoc ky - Năm học";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $("#msgAlert").fadeOut('slow');
+        }, 2000);
+    </script>
 }
 
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Danh sách</h1>
+    <h1 class="h3 mb-2 text-gray-800">Danh sách học kỳ - năm học</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -40,7 +48,7 @@
                     @ViewBag.SuccessMessage
                 </div>
             }
-            <table class="table">
+            <table class="table table-sm">
                 <thead>
                     <tr>
                         <th>

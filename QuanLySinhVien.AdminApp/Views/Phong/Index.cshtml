@@ -7,6 +7,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $("#msgAlert").fadeOut('slow');
+        }, 2000);
+    </script>
+}
 <div class="container-fluid">
 
     <!-- Page Heading -->
