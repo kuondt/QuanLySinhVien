@@ -23,8 +23,8 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="ID_MonHoc" class="control-label">Môn học</label>
-                    <input asp-for="ID_MonHoc" class="form-control" list="listMonHoc" placeholder="Môn học..." />
-                    <datalist id="listMonHoc">
+                    <input asp-for="ID_MonHoc" class="form-control" list="listMonHoc" placeholder="Môn học..." readonly/>
+                    @*<datalist id="listMonHoc">
                         @if (ViewBag.MonHocs != null)
                         {
                             @foreach (var monHoc in ViewBag.MonHocs)
@@ -32,7 +32,7 @@
                                 <option value="@monHoc.ID">@monHoc.ID @monHoc.TenMonHoc</option>
                             }
                         }
-                    </datalist>
+                    </datalist>*@
                     <span asp-validation-for="ID_MonHoc" class="text-danger"></span>
                 </div>
                 <div class="form-group">

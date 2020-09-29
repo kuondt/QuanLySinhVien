@@ -54,7 +54,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
 
             var authProperties = new AuthenticationProperties
             {
-                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                ExpiresUtc = DateTimeOffset.UtcNow.AddHours(12),
                 IsPersistent = false
             };
             HttpContext.Session.SetString("Token", result.ResultObj);
