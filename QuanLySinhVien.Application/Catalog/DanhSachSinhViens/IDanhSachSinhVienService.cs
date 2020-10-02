@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using QuanLySinhVien.ViewModel.Catalog.DanhSachSinhViens;
+using QuanLySinhVien.ViewModel.Common;
 
 namespace QuanLySinhVien.Service.Catalog.DanhSachSinhViens
 {
@@ -9,10 +11,10 @@ namespace QuanLySinhVien.Service.Catalog.DanhSachSinhViens
     {
         Task<Tuple<string, string>> Create(DanhSachSinhVienCreateRequest request);
 
-        Task<ChiTietChuongTrinhDaoTaoViewModel> GetById(string id_CTDT, string id_MonHoc);
+        Task<DanhSachSinhVienViewModel> GetById(string id_LopHocPhan, string id_SinhVien);
 
-        Task<PagedResult<ChiTietChuongTrinhDaoTaoViewModel>> GetAll(ChiTietChuongTrinhDaoTaoPagingRequest request);
+        Task<PagedResult<DanhSachSinhVienViewModel>> GetAll(DanhSachSinhVienPagingRequest request);
 
-        Task<int> Delete(string id_CTDT, string id_MonHoc);
+        Task<int> Delete(string id_LopHocPhan, string id_SinhVien);
     }
 }
