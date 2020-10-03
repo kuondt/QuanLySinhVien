@@ -4,47 +4,63 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Danh sách môn học trong chương trình đào tạo</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="user-topbar">
+                <div class="float-left">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <span class="btn btn-success text-white">
+                            @(Html.ActionLink("Thêm sinh viên", "AddStudent", "DanhSachSinhVien", new { id= ViewBag.ID_CTDT }, new { @class = "text-white" }))
+                        </span>
+                    </h6>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            @if (ViewBag.SuccessMessage != null)
+            {
+                <div id="msgAlert" class="alert alert-success" role="alert">
+                    @ViewBag.SuccessMessage
+                </div>
+            }
+        <table class="table table-sm table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        ID Sinh Viên
+                    </th>
+                    <th>
+                        ID Lớp Học Phần
+                    </th>
+                
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID_SinhVien)
+                            @Html.DisplayFor(modelItem => item.SinhVien.HoTen)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+            @await Component.InvokeAsync("Pager", Model)
+        </div>
+    </div>
+</div>
+
+    
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ID_SinhVien)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ID_LopHocPhan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LanThi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Diem)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID_SinhVien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID_LopHocPhan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LanThi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Diem)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
