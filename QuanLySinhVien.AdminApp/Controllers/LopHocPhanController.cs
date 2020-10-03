@@ -9,11 +9,13 @@ using QuanLySinhVien.AdminApp.Services.GiangVien;
 using QuanLySinhVien.AdminApp.Services.LopHocPhan;
 using QuanLySinhVien.AdminApp.Services.MonHoc;
 using QuanLySinhVien.AdminApp.Services.Phong;
+using QuanLySinhVien.AdminApp.Services.SinhVien;
 using QuanLySinhVien.ViewModel.Catalog.DanhSachSinhViens;
 using QuanLySinhVien.ViewModel.Catalog.GiangViens;
 using QuanLySinhVien.ViewModel.Catalog.LopHocPhans;
 using QuanLySinhVien.ViewModel.Catalog.MonHocs;
 using QuanLySinhVien.ViewModel.Catalog.Phongs;
+using QuanLySinhVien.ViewModel.Catalog.SinhViens;
 
 namespace QuanLySinhVien.AdminApp.Controllers
 {
@@ -25,8 +27,9 @@ namespace QuanLySinhVien.AdminApp.Controllers
         private readonly IMonHocApiClient _monHocApiClient;
         private readonly IGiangVienApiClient _giangVienApiClient;
         private readonly IDanhSachSinhVienApiClient _danhSachSinhVienApiClient;
+        private readonly ISinhVienApiClient _sinhVienApiClient;
 
-        public LopHocPhanController(IConfiguration configuration, ILopHocPhanApiClient lopHocPhanApiClient, IPhongApiClient phongApiClient, IMonHocApiClient monHocApiClient, IGiangVienApiClient giangVienApiClient, IDanhSachSinhVienApiClient danhSachSinhVienApiClient)
+        public LopHocPhanController(IConfiguration configuration, ILopHocPhanApiClient lopHocPhanApiClient, IPhongApiClient phongApiClient, IMonHocApiClient monHocApiClient, IGiangVienApiClient giangVienApiClient, IDanhSachSinhVienApiClient danhSachSinhVienApiClient, ISinhVienApiClient sinhVienApiClient)
         {
             _configuration = configuration;
             _lopHocPhanApiClient = lopHocPhanApiClient;
@@ -34,6 +37,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             _monHocApiClient = monHocApiClient;
             _giangVienApiClient = giangVienApiClient;
             _danhSachSinhVienApiClient = danhSachSinhVienApiClient;
+            _sinhVienApiClient = sinhVienApiClient;
         }
 
         public async Task<IActionResult> Index(int hocKy, int namHoc, int pageIndex = 1, int pageSize = 1000)
@@ -246,6 +250,43 @@ namespace QuanLySinhVien.AdminApp.Controllers
                 return View(danhSachSinhVien);
             }
             return RedirectToAction("Error", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddStudentToClass(string id)
+        {
+
+            //Lấy danh sách sinh viên để show thành list
+            var requestSinhVien = new SinhVienManagePagingRequest()
+            {
+                PageIndex = 1,
+                PageSize = 1000
+            };
+            var sinhViens = await _sinhVienApiClient.GetAllPaging(requestSinhVien);
+            ViewBag.monHocs = sinhViens.Items;
+
+
+            ViewBag.ID_LopHocPhan = id;
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddStudentToClass(string id, DanhSachSinhVienCreateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View(request);
+
+            var result = await _danhSachSinhVienApiClient.Create(request);
+            if (result)
+            {
+                TempData["result"] = "Thêm mới thành công";
+
+                return RedirectToAction("Details", new { id = id });
+            }
+
+            ModelState.AddModelError("", "Sinh viên đã tồn tại trong lớp học phần");
+            return View(request);
         }
 
         [HttpGet("LopHocPhan/Delete/{lophocphan}/{sinhvien}")]
