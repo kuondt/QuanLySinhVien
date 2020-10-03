@@ -263,7 +263,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
                 PageSize = 1000
             };
             var sinhViens = await _sinhVienApiClient.GetAllPaging(requestSinhVien);
-            ViewBag.monHocs = sinhViens.Items;
+            ViewBag.sinhViens = sinhViens.Items;
 
 
             ViewBag.ID_LopHocPhan = id;
@@ -281,7 +281,6 @@ namespace QuanLySinhVien.AdminApp.Controllers
             if (result)
             {
                 TempData["result"] = "Thêm mới thành công";
-
                 return RedirectToAction("Details", new { id = id });
             }
 

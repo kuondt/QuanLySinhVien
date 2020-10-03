@@ -5,7 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $("#msgAlert").fadeOut('slow');
+        }, 2000);
+    </script>
+}
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
@@ -13,12 +19,21 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="ID_SinhVien" class="control-label"></label>
-                    <input asp-for="ID_SinhVien" class="form-control" />
+                    <input asp-for="ID_SinhVien" class="form-control" list="listSinhVien" placeholder="Sinh viên..." />
+                    <datalist id="listSinhVien">
+                        @if (ViewBag.sinhViens != null)
+                        {
+                            @foreach (var sinhVien in ViewBag.sinhViens)
+                            {
+                                <option value="@sinhVien.ID">@sinhVien.ID @sinhVien.Ho @sinhVien.Ten</option>
+                            }
+                        }
+                    </datalist>
                     <span asp-validation-for="ID_SinhVien" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="ID_LopHocPhan" class="control-label"></label>
-                    <input asp-for="ID_LopHocPhan" value="@ViewBag.ID_LopHocPhan" class="form-control" readonly/>
+                    <input asp-for="ID_LopHocPhan" value="@ViewBag.ID_LopHocPhan" class="form-control" readonly />
                     <span asp-validation-for="ID_LopHocPhan" class="text-danger"></span>
                 </div>
                 <div class="form-group">
