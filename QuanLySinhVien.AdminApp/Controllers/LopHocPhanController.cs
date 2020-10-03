@@ -247,5 +247,22 @@ namespace QuanLySinhVien.AdminApp.Controllers
             }
             return RedirectToAction("Error", "Home");
         }
+
+        [HttpPost("LopHocPhan/{lophocphan}/{sinhvien}")]
+        public async Task<IActionResult> DeleteChiTietCTDT(string lophocphan, string sinhvien, DanhSachSinhVienUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _danhSachSinhVienApiClient.Delete(lophocphan, sinhvien);
+            if (result)
+            {
+                TempData["result"] = "Xóa thành công";
+                return RedirectToAction("Details", new { id = lophocphan });
+            }
+
+            ModelState.AddModelError("", "Xóa không thành công");
+            return View(request);
+        }
     }
 }

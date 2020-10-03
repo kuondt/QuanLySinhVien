@@ -50,7 +50,13 @@
                             @Html.DisplayFor(modelItem => item.SinhVien.HoTen)
                         </td>
                         <td>
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            <div class="">
+                                <form asp-action="Delete" asp-controller="LopHocPhan" method="post">
+                                    <input asp-for="@item.ID_LopHocPhan" value="@item.ID_LopHocPhan" name="LopHocPhan" hidden />
+                                    <input asp-for="@item.ID_SinhVien" value="@item.ID_SinhVien" name="SinhVien" hidden />
+                                    <button onclick="return confirm('Xác nhận xóa sinh viên @item.ID_SinhVien @item.SinhVien.HoTen')" type="submit" class="btn btn-danger">Xóa</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 }
