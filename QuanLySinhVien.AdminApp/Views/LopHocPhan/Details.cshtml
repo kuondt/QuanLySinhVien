@@ -29,44 +29,51 @@
                     @ViewBag.SuccessMessage
                 </div>
             }
-        <table class="table table-sm table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>
-                        ID Sinh Viên
-                    </th>
-                    <th>
-                        ID Lớp Học Phần
-                    </th>
-                
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Items)
-                {
+            <table class="table table-sm table-striped table-bordered">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ID_SinhVien)
-                            @Html.DisplayFor(modelItem => item.SinhVien.HoTen)
-                        </td>
-                        <td>
-                            <div class="">
-                                <form asp-action="Delete" asp-controller="LopHocPhan" method="post">
-                                    <input asp-for="@item.ID_LopHocPhan" value="@item.ID_LopHocPhan" name="LopHocPhan" hidden />
-                                    <input asp-for="@item.ID_SinhVien" value="@item.ID_SinhVien" name="SinhVien" hidden />
-                                    <button onclick="return confirm('Xác nhận xóa sinh viên @item.ID_SinhVien @item.SinhVien.HoTen')" type="submit" class="btn btn-danger">Xóa</button>
-                                </form>
-                            </div>
-                        </td>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            ID Sinh Viên
+                        </th>
+                        <th>
+                            Họ tên
+                        </th>
+                        <th>
+                            ID Lớp Học Phần
+                        </th>
+
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @{ int stt = 1;}
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                @stt
+                                @{ stt++;}
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID_SinhVien)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SinhVien.HoTen)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Xóa", "DeleteStudent", "LopHocPhan", new { lophocphan = item.ID_LopHocPhan, sinhvien = item.ID_SinhVien })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
             @await Component.InvokeAsync("Pager", Model)
         </div>
     </div>
 </div>
 
-    
+
 
 

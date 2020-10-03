@@ -1,0 +1,23 @@
+﻿@model QuanLySinhVien.ViewModel.Catalog.DanhSachSinhViens.DanhSachSinhVienUpdateRequest
+
+@{
+    ViewData["Title"] = "DeleteStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <h1>Xác nhận xóa sinh viên khỏi lớp học phần</h1>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Sinh viên
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ID_SinhVien)
+        </dd>
+    </dl>
+
+    <form asp-action="DeleteStudent">
+        <button onclick="return confirm('Xác nhận xóa sinh viên khỏi lớp học phần')" type="submit" value="Delete" class="btn btn-danger" >Xóa</button>
+    </form>
+</div>

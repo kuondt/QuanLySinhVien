@@ -248,8 +248,26 @@ namespace QuanLySinhVien.AdminApp.Controllers
             return RedirectToAction("Error", "Home");
         }
 
-        [HttpPost("LopHocPhan/{lophocphan}/{sinhvien}")]
-        public async Task<IActionResult> DeleteChiTietCTDT(string lophocphan, string sinhvien, DanhSachSinhVienUpdateRequest request)
+        [HttpGet("LopHocPhan/Delete/{lophocphan}/{sinhvien}")]
+        public async Task<IActionResult> DeleteStudent(string lophocphan, string sinhvien)
+        {
+            var sinhVien = await _danhSachSinhVienApiClient.GetById(lophocphan, sinhvien);
+            var lopHocPhan = await _lopHocPhanApiClient.GetById(lophocphan);
+
+            if (sinhVien != null)
+            {
+                var updateRequest = new DanhSachSinhVienUpdateRequest()
+                {
+                    ID_SinhVien = sinhVien.ID_SinhVien
+                };
+                ViewBag.LopHocPhan = lopHocPhan;
+                return View(updateRequest);
+            }
+            return RedirectToAction("Error", "Home");
+        }
+
+        [HttpPost("LopHocPhan/Delete/{lophocphan}/{sinhvien}")]
+        public async Task<IActionResult> DeleteStudent(string lophocphan, string sinhvien, DanhSachSinhVienUpdateRequest request)
         {
             if (!ModelState.IsValid)
                 return View();
