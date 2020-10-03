@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using QuanLySinhVien.AdminApp.Services;
 using QuanLySinhVien.AdminApp.Services.ChiTietChuongTrinhDaoTao;
 using QuanLySinhVien.AdminApp.Services.ChuongTrinhDaoTao;
+using QuanLySinhVien.AdminApp.Services.DanhSachSinhVien;
 using QuanLySinhVien.AdminApp.Services.GiangVien;
 using QuanLySinhVien.AdminApp.Services.HocKyNamHoc;
 using QuanLySinhVien.AdminApp.Services.LopBienChe;
@@ -65,6 +66,7 @@ namespace QuanLySinhVien.AdminApp
             services.AddTransient<IChuongTrinhDaoTaoApiClient, ChuongTrinhDaoTaoApiClient>(); 
             services.AddTransient<IChiTietChuongTrinhDaoTaoApiClient, ChiTietChuongTrinhDaoTaoApiClient>();
             services.AddTransient<ILopHocPhanApiClient, LopHocPhanApiClient>();
+            services.AddTransient<IDanhSachSinhVienApiClient, DanhSachSinhVienApiClient>();
 
             IMvcBuilder builder = services.AddRazorPages();
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
