@@ -1,0 +1,41 @@
+﻿@model QuanLySinhVien.ViewModel.Catalog.DanhSachSinhViens.DanhSachSinhVienCreateRequest
+
+@{
+    ViewData["Title"] = "AddStudentToClass";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="AddStudentToClass">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ID_SinhVien" class="control-label"></label>
+                    <input asp-for="ID_SinhVien" class="form-control" />
+                    <span asp-validation-for="ID_SinhVien" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ID_LopHocPhan" class="control-label"></label>
+                    <input asp-for="ID_LopHocPhan" value="@ViewBag.ID_LopHocPhan" class="form-control" readonly/>
+                    <span asp-validation-for="ID_LopHocPhan" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="LanThi" class="form-control" value="0" hidden />
+                    <span asp-validation-for="LanThi" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Diem" class="form-control" value="0" hidden />
+                    <span asp-validation-for="Diem" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

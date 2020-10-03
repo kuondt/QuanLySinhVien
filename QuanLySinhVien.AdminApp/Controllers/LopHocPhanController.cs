@@ -245,7 +245,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
                     ViewBag.SuccessMessage = TempData["result"];
                 }
 
-                ViewBag.ID_CTDT = id;
+                ViewBag.ID_LopHocPhan = id;
 
                 return View(danhSachSinhVien);
             }
@@ -286,6 +286,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
             }
 
             ModelState.AddModelError("", "Sinh viên đã tồn tại trong lớp học phần");
+            ViewBag.ID_LopHocPhan = id;
             return View(request);
         }
 
