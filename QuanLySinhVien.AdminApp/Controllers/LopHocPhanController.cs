@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using QuanLySinhVien.AdminApp.Services.DanhSachSinhVien;
 using QuanLySinhVien.AdminApp.Services.GiangVien;
 using QuanLySinhVien.AdminApp.Services.LopHocPhan;
 using QuanLySinhVien.AdminApp.Services.MonHoc;
 using QuanLySinhVien.AdminApp.Services.Phong;
+using QuanLySinhVien.ViewModel.Catalog.DanhSachSinhViens;
 using QuanLySinhVien.ViewModel.Catalog.GiangViens;
 using QuanLySinhVien.ViewModel.Catalog.LopHocPhans;
 using QuanLySinhVien.ViewModel.Catalog.MonHocs;
@@ -22,14 +24,16 @@ namespace QuanLySinhVien.AdminApp.Controllers
         private readonly IPhongApiClient _phongApiClient;
         private readonly IMonHocApiClient _monHocApiClient;
         private readonly IGiangVienApiClient _giangVienApiClient;
+        private readonly IDanhSachSinhVienApiClient _danhSachSinhVienApiClient;
 
-        public LopHocPhanController(IConfiguration configuration, ILopHocPhanApiClient lopHocPhanApiClient, IPhongApiClient phongApiClient, IMonHocApiClient monHocApiClient, IGiangVienApiClient giangVienApiClient)
+        public LopHocPhanController(IConfiguration configuration, ILopHocPhanApiClient lopHocPhanApiClient, IPhongApiClient phongApiClient, IMonHocApiClient monHocApiClient, IGiangVienApiClient giangVienApiClient, IDanhSachSinhVienApiClient danhSachSinhVienApiClient)
         {
             _configuration = configuration;
             _lopHocPhanApiClient = lopHocPhanApiClient;
             _phongApiClient = phongApiClient;
             _monHocApiClient = monHocApiClient;
             _giangVienApiClient = giangVienApiClient;
+            _danhSachSinhVienApiClient = danhSachSinhVienApiClient;
         }
 
         public async Task<IActionResult> Index(int hocKy, int namHoc, int pageIndex = 1, int pageSize = 1000)
@@ -214,8 +218,34 @@ namespace QuanLySinhVien.AdminApp.Controllers
                 return RedirectToAction("Index", new { HocKy = request.HocKy, NamHoc = request.NamHoc });
             }
 
-            ModelState.AddModelError("", "Xóa không thành công lớp {id}");
+            ModelState.AddModelError("", $"Xóa không thành công lớp {id}");
             return RedirectToAction("Index", new { HocKy = request.HocKy, NamHoc = request.NamHoc });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            var requestDanhSachSinhVien = new DanhSachSinhVienPagingRequest()
+            {
+                Keyword = id,
+                PageIndex = 1,
+                PageSize = 1000
+            };
+
+            var danhSachSinhVien = await _danhSachSinhVienApiClient.GetAllByIdLopHocPhan(requestDanhSachSinhVien);
+
+            if (danhSachSinhVien != null)
+            {
+                if (TempData["result"] != null)
+                {
+                    ViewBag.SuccessMessage = TempData["result"];
+                }
+
+                ViewBag.ID_CTDT = id;
+
+                return View(danhSachSinhVien);
+            }
+            return RedirectToAction("Error", "Home");
         }
     }
 }

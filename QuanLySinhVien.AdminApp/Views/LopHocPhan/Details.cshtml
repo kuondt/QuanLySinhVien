@@ -1,0 +1,50 @@
+﻿@model QuanLySinhVien.ViewModel.Common.PagedResult<QuanLySinhVien.ViewModel.Catalog.DanhSachSinhViens.DanhSachSinhVienViewModel>
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID_SinhVien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ID_LopHocPhan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LanThi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diem)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_SinhVien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_LopHocPhan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LanThi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diem)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

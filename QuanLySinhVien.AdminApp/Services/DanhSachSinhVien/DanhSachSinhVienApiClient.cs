@@ -59,7 +59,7 @@ namespace QuanLySinhVien.AdminApp.Services.DanhSachSinhVien
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<PagedResult<DanhSachSinhVienViewModel>> GetAllByIdChuongTrinhDaoTao(DanhSachSinhVienPagingRequest request)
+        public async Task<PagedResult<DanhSachSinhVienViewModel>> GetAllByIdLopHocPhan(DanhSachSinhVienPagingRequest request)
         {
             var sessions = _httpContextAccessor
                              .HttpContext

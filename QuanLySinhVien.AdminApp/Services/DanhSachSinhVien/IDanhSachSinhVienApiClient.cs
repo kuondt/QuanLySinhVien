@@ -15,7 +15,7 @@ namespace QuanLySinhVien.AdminApp.Services.DanhSachSinhVien
 
         Task<bool> Update(string lophocphan, string sinhvien, DanhSachSinhVienUpdateRequest request);
 
-        Task<PagedResult<DanhSachSinhVienViewModel>> GetAllByIdChuongTrinhDaoTao(DanhSachSinhVienPagingRequest request);
+        Task<PagedResult<DanhSachSinhVienViewModel>> GetAllByIdLopHocPhan(DanhSachSinhVienPagingRequest request);
 
         Task<bool> Delete(string lophocphan, string sinhvien);
     }
