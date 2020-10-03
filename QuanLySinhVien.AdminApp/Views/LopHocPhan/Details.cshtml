@@ -7,8 +7,19 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Danh sách sinh viên trong lớp học phần</h1>
-
+    <h1 class="h3 mb-2 text-gray-800">Lớp học phần</h1>
+    <table class="table table-sm table-bordered">
+        <tr>
+            <td>Mã lớp học phần: @ViewBag.infoLopHocPhan.ID</td>
+            <td>Ngày học: @ViewBag.infoLopHocPhan.NgayHoc</td>
+            <td>Buổi học: @ViewBag.infoLopHocPhan.BuoiHoc</td>
+        </tr>
+        <tr>
+            <td>Giảng viên: @ViewBag.infoLopHocPhan.GiangVien.HoTen</td>
+            <td>Học kỳ: @ViewBag.infoLopHocPhan.HK_HocKy</td>
+            <td>Năm học: @ViewBag.infoLopHocPhan.HK_NamHoc</td>
+        </tr>
+    </table>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -29,7 +40,7 @@
                     @ViewBag.SuccessMessage
                 </div>
             }
-            <table class="table table-sm table-striped table-bordered">
+            <table class="table table-sm table-striped table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>

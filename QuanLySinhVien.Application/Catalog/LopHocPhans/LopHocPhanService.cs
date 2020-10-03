@@ -136,6 +136,8 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                 throw new QuanLySinhVien_Exceptions($"Không thể tìm thấy: {id}");
             }
 
+            var giangVien =  _context.GiangViens.Where(x => x.ID == lopHocPhan.ID_GiangVien).FirstOrDefault();
+
             var lopHocPhanViewModel = new LopHocPhanViewModel()
             {
                 ID = lopHocPhan.ID,
@@ -146,7 +148,7 @@ namespace QuanLySinhVien.Service.Catalog.LopHocPhans
                 ID_Phong = lopHocPhan.ID_Phong,
                 HK_HocKy = lopHocPhan.HK_HocKy,
                 HK_NamHoc = lopHocPhan.HK_NamHoc,
-
+                GiangVien = giangVien
             };
             return lopHocPhanViewModel;
         }

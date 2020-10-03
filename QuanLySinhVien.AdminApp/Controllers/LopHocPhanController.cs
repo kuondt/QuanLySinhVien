@@ -236,6 +236,8 @@ namespace QuanLySinhVien.AdminApp.Controllers
                 PageSize = 1000
             };
 
+            var infoLopHocPhan = await _lopHocPhanApiClient.GetById(id);
+
             var danhSachSinhVien = await _danhSachSinhVienApiClient.GetAllByIdLopHocPhan(requestDanhSachSinhVien);
 
             if (danhSachSinhVien != null)
@@ -244,7 +246,7 @@ namespace QuanLySinhVien.AdminApp.Controllers
                 {
                     ViewBag.SuccessMessage = TempData["result"];
                 }
-
+                ViewBag.infoLopHocPhan = infoLopHocPhan;
                 ViewBag.ID_LopHocPhan = id;
 
                 return View(danhSachSinhVien);
